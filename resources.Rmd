@@ -1,0 +1,57 @@
+---
+title: "Resources"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+rm(list=objects()) # start with a clean workspace
+source("knitr_setup.R")
+```
+
+---
+
+# Getting Help
+
+```{r child = here::here('syllabus', 'getting-help.Rmd')}
+```
+
+---
+
+# Doing stuff in `R`
+
+You will inevitably run into problems; things won't work the way you expect, and you'll get lots of confusing error messages. When this happens, many people turn to the following problem-solving approaches:
+
+![](images/oreilly_googling.jpg){ width=250 }
+![](images/oreilly_trying_stuff.jpeg){ width=250 }
+![](images/oreilly_changing_stuff.jpg){ width=250 }
+
+While these can be useful, there are also lots of excellent and **free** resources available - here are a few:
+
+```{r child = here::here('syllabus', 'texts.Rmd')}
+```
+
+---
+
+# Datasets
+
+- The [`dslabs` R package](https://github.com/rafalab/dslabs) contains many excellent datasets.
+- [Past "Tidy Tuesday" challenges](https://github.com/rfordatascience/tidytuesday)
+- [Past "Makeover Monday" challenges](http://www.makeovermonday.co.uk/data/)
+- [Kaggle](https://www.kaggle.com/datasets)
+- [Google Dataset Search](https://toolbox.google.com/datasetsearch)
+- [Tableau Community Forumss](https://community.tableau.com/docs/DOC-10635)
+- [The "data is beautiful" reddit feed](https://www.reddit.com/r/dataisbeautiful/)
+
+---
+
+# Helpful Tutorials
+
+- [RStudio Primers](https://rstudio.cloud/learn/primers)
+- [Tidyverse in R](https://www.datacamp.com/community/tutorials/tidyverse-tutorial-r)
+- [Transitioning from Excel to R](https://trendct.org/2015/06/12/r-for-beginners-how-to-transition-from-excel-to-r/)
+
+---
+
+# Inspiration
+
+- [The Links Between Open Science and Star Wars](https://medium.com/read-write-participate/open-science-and-star-wars-2577b8081e8f)

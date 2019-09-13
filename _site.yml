@@ -1,18 +1,65 @@
-name: "Exploratory Data Analysis - Spring 2020"
-output_dir: "."
+name: "EMSE ####: Exploratory Data Analysis - Spring 2020"
+output_dir: _site
+exclude:
+- DESCRIPTION
+- LICENSE
+new_session: true
 navbar:
-  type: inverse
+  title: "EMSEEDA: Spring 2020"
   left:
-    - text: "Syllabus"
+    - text: "Home"
       href: index.html
+    - text: Syllabus
+      icon: fa-map-ok
+      href: syllabus.html
+    - text: "Schedule"
+      href: schedule.html
     - text: "Lessons"
       menu:
-        - text: "Lesson 1"
-          href: lesson-1.html
+        - text: "Week 1.1: Course Introduction"
+          href: L1.1-course-introduction.html
     - text: "Assignments"
       menu:
-        - text: "Assignment 1"
-          href: assignment-1.html
+        - text: "HW 1 - Programming Basics"
+          href: hw1-programming-basics.html
+    - text: "Resources"
+      href: resources.html
+    - text: "About"
+      menu:
+        - text: About
+          icon: fa-info
+          href: about.html
+        - text: License
+          icon: fa-gavel
+          href: LICENSE.html
+    - text: Slack
+      icon: fa-slack
+      href: https://emseeeda.slack.com/
+  right:
+  - icon: fa-bars
+    menu:
+    - text: Contact
+      icon: fa-envelope
+      href: mailto:jph@gwu.edu
+    - text: GitHub
+      icon: fa-github
+      href: https://github.com/emse-eda-gwu/2020-Spring
+
 output:
   html_document:
+    toc: yes
+    toc_depth: 4
+    toc_float:
+      collapsed: no
+      smooth_scroll: no
+    lib_dir: site_libs
+    self_contained: no
+    include:
+      in_header:
+      - _includes/header.html
+      - _includes/style.html
+      after_body: _includes/footer.html
     theme: cosmo
+    highlight: textmate
+    number_sections: true
+
