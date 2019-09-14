@@ -18,5 +18,17 @@ source("knitr_setup.R")
 
 **Department**: Engineering Management and Systems Engineering
 
-**Prerequisites**: EMSE 6574: Programming for Analytics (undergraduate section)
+**Description**:
 
+```{r child = here::here('syllabus', 'description.Rmd')}
+```
+
+**Learning Objectives**:
+
+```{r child = here::here('syllabus', 'learning-objectives.Rmd')}
+```
+
+**Prerequisites**:
+
+```{r child = here::here('syllabus', 'prerequisites.Rmd')}
+```

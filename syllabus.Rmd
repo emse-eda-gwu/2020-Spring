@@ -35,7 +35,8 @@ Introduction to exploratory data analysis using the [R programming language](htt
 
 ## Prerequisites
 
-Students should have taken EMSE 6574: Programming for Analytics or have experience with at least one programming language
+```{r child = here::here('syllabus', 'prerequisites.Rmd')}
+```
 
 ---
 
