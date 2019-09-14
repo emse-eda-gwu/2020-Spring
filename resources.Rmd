@@ -54,4 +54,13 @@ While these can be useful, there are also lots of excellent and **free** resourc
 
 # Inspiration
 
+- [An Incomplete List of Females in Data Visualization](https://stephanieevergreen.com/females-in-dataviz/), by Stephanie Evergreen
 - [The Links Between Open Science and Star Wars](https://medium.com/read-write-participate/open-science-and-star-wars-2577b8081e8f)
+
+---
+
+
+# Examples of EDA in practice:
+
+- [Death: Reality vs Reported](https://owenshen24.github.io/charting-death/), by Owen Shen
+- [Is Usain Bolt really the fastest man on earth?](https://www.r-bloggers.com/fun-with-statistics-is-usain-bolt-really-the-fastest-man-on-earth/amp/), by Anindya Mozumdar
