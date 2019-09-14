@@ -17,16 +17,3 @@ other courses and workshops, including:
 Name | Author | Links
 --------- | --------- | ---
 STAT 545 | U. of British Columbia | [course](http://stat545.com/); [github](https://github.com/STAT545-UBC)
-R for Data Science | Garrett Grolemund & Hadley Wickham | [book](https://r4ds.had.co.nz/); [github](https://github.com/hadley/r4ds)
-Handling Strings with R | Gaston Sanchez | [book](https://www.gastonsanchez.com/r4strings/); [github](https://github.com/gastonstat/r4strings)
-EEB313: Quantitative Methods in R for Biology | [U of T Coders](https://uoftcoders.github.io/studyGroup/) | [course](https://uoftcoders.github.io/rcourse/index.html); [github](https://github.com/uoftcoders/rcourse)
-Modern Dive | Chester Ismay & Albert Y. Kim | [course](https://moderndive.netlify.com/); [github](https://github.com/moderndive/moderndive_book)
-Learning statistics with R | Danielle Navarro | [course](https://djnavarro.github.io/tidylsrbook/); [github](https://github.com/djnavarro/rbook)
-R for Psychological Science | Danielle Navarro | [course](https://psyr.org/index.html); [github](https://github.com/djnavarro/psyr)
-What They Forgot to Teach You About R | Jennifer Bryan & Jim Hester | [course](https://whattheyforgot.org/); [github](https://github.com/jennybc/what-they-forgot)
-Software Carpentry | [software-carpentry.org](https://software-carpentry.org/) | [lessons](https://software-carpentry.org/lessons/)
-Data Analysis and Visualization in R for Ecologists | François Michonneau & Auriel Fournier | [course](https://datacarpentry.org/R-ecology-lesson/); [github](https://github.com/datacarpentry/R-ecology-lesson)
-Data Analysis and Visualization in R _alpha_ | Data Carpentry contributors | [course](https://datacarpentry.org/R-genomics/index.html); [github](https://github.com/datacarpentry/R-genomics)
-CMU 15-112: Fundamentals of Programming | [David Kosbie](http://www.kosbie.net/cmu/) & [Kelly Rivers](https://hcii.cmu.edu/people/kelly-rivers)| [Spring 2017 Course](http://www.kosbie.net/cmu/spring-17/15-112/)
-R for Reproducible Research | Anna Krystalli | [course](https://annakrystalli.me/rrresearch/); [github](https://github.com/annakrystalli/rrresearch)
-Remaster the Tidyverse | Garrett Grolemund | [github](https://github.com/rstudio-education/remaster-the-tidyverse)

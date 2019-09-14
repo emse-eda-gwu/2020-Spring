@@ -35,7 +35,7 @@ Introduction to exploratory data analysis using the [R programming language](htt
 
 ## Prerequisites
 
-This course assumes students have taken EMSE 6574: Programming for Analytics as a prerequisite.
+Students should have taken EMSE 6574: Programming for Analytics or have experience with at least one programming language
 
 ---
 
@@ -50,7 +50,7 @@ This course assumes students have taken EMSE 6574: Programming for Analytics as 
 
 # Pep Talk!
 
-Learning R can be challenging - it's like learning a new language. Hadley Wickham - the chief data scientist at RStudio and the author of some amazing R packages you'll be using like `ggplot2` - [made this wise observation](https://r-posts.com/advice-to-young-and-old-programmers-a-conversation-with-hadley-wickham/):
+Working in R (or any programming language) can be challenging - it's like learning a new language. Hadley Wickham - the chief data scientist at RStudio and the author of some amazing R packages you'll be using like **ggplot2** - [made this wise observation](https://r-posts.com/advice-to-young-and-old-programmers-a-conversation-with-hadley-wickham/):
 
 > It's easy when you start out programming to get really frustrated and think, "Oh it's me, I'm really stupid," or, "I'm not made out to program." But, that is absolutely not the case. Everyone gets frustrated. I still get frustrated occasionally when writing R code. It's just a natural part of programming. So, it happens to everyone and gets less and less over time. Don't blame yourself. Just take a break, do something fun, and then come back and try again later.
 
@@ -73,7 +73,7 @@ Go to the course ["Getting Started"](L1.2-getting-started.html) page for install
 
 ## Texts / Other Useful Resources
 
-This course does not require any textbooks. All learning materials and resources are freely available on the web. See the course [resources page](https://emse6574-gwu.github.io/2019-Fall/resources.html) for a list of useful resources.
+This course does not require any textbooks. All texts, learning materials, and resources are freely available on the web. See the course [resources page](resources.html) for a list of useful resources.
 
 ---
 
@@ -120,10 +120,11 @@ Final grades will be calculated as follows:
 <div class="tableMedium">
 Course Component  | Weight | Notes
 ------------------|-----|-----------------------------------
-Homeworks (6)     | 30% | Lowest homework grade is dropped
-Quizzes (5)       | 15% | Lowest quiz grade is dropped
-Midterm Exams (2) | 30% | Lowest midterm grade is half-weighted
+Homeworks (5)     | 25% | Lowest homework grade is dropped
+Quizzes (4)       | 10% | Lowest quiz grade is dropped
+Midterm Exams (2) | 20% | Lowest midterm grade is half-weighted
 Final Exam        | 20% |
+Term Project      | 20% |
 Attendance & Participation | 5% |
 </div>
 
@@ -136,11 +137,11 @@ You can't "sign up" for AMG grading. Every student will be considered both for S
 <div class="tableSmall">
 Course Component   | Weight
 -------------------|----
-Best 5 Homeworks   | 20%
-Best 4 Quizzes     | 15%
+Best 4 Homeworks   | 15%
+Best 4 Quizzes     | 10%
 Best Midterm Exam  | 20%
 Final Exam         | 40%
-Attendance & Participation | 5%
+Term Project       | 15%
 </div>
 
 Unlike the Standard Grade, effort is heavily factored into your AMG score. To qualify for AMG you must put forth sustained effort, which means meeting the following requirements:
@@ -302,6 +303,6 @@ In addition to the formal code of academic integrity, the instructor expects tha
 
 # Cute Animals
 
-Once you have read this entire syllabus and the [course schedule](#schedule.html), please [click here](mailto:jph@gwu.edu) and e-mail me a picture of a cute non-feline, non-canine animal. For real. Brownie points if it's animated.
+Once you have read this entire syllabus and the [course schedule](#schedule.html), please send me a picture of a cute non-feline, non-canine animal in a direct message on Slack. For real. Brownie points if it's animated.
 
 ![](images/cute_hedgehog.gif){ width=250 }

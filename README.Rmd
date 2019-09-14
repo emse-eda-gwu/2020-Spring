@@ -1,0 +1,20 @@
+---
+output: github_document
+---
+
+## EMSE ####: Exploratory Data Analysis - Spring 2020
+
+[![Build Status](https://travis-ci.org/emse-eda-gwu/2020-Spring.svg?branch=master)](https://travis-ci.org/emse-eda-gwu/2020-Spring)
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+### Description
+
+```{r child = here::here('syllabus', 'description.Rmd')}
+```
+
+For more details, please see the [course website](https://emse-eda-gwu.github.io/2020-Spring/).
+
+### Acknowledgements
+
+This course was inspired by many other courses / resources that cover similar material - see the course [about page](https://emse-eda-gwu.github.io/2020-Spring/about.html) for more details.
