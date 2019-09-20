@@ -59,8 +59,20 @@ While these can be useful, there are also lots of excellent and **free** resourc
 
 ---
 
-
-# Examples of EDA in practice:
+# Examples of Exploratory Data Analysis
 
 - [Death: Reality vs Reported](https://owenshen24.github.io/charting-death/), by Owen Shen
 - [Is Usain Bolt really the fastest man on earth?](https://www.r-bloggers.com/fun-with-statistics-is-usain-bolt-really-the-fastest-man-on-earth/amp/), by Anindya Mozumdar
+
+---
+
+# Music
+
+I find having some background music helpful for coding. My favorite channel for coding is [Chillhop Lofi Hip Hop](https://chillhop.com/live/lofihiphop/)
+
+---
+
+# Other
+
+- I **highly** recommend watching [this video](https://youtu.be/fSgEeI2Xpdc) on how humans see data, by John Rauser. It's one of the best overviews I've seen on how to exploit the psychology of how our brains interpret images to make effective visualizations.
+- You'll all have to give talks one day - make sure you start it right: ["How to start a speech"](https://www.youtube.com/watch?v=w82a1FT5o88)
