@@ -13,17 +13,23 @@ source("knitr_setup.R")
 
 Here's your roadmap for the semester!
 
+**Overview**:
+
+- PART I (Weeks 1-4): R, Git, and Data Management
+- PART II (Weeks 5-9): Exploratory data analysis & data visualization
+- PART III (Weeks 10-14): Reproducibility with RMarkdown
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(knitr)
 library(here)
-library(readr)
+library(gsheet)
 options(knitr.kable.NA = '')
-schedule <- read_csv('schedule.csv')
+schedule <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1GkCv6FGzn7kNU4yC5QyCVAt2OnfS3yK1UVNeG2u0z4g/edit?usp=sharing')
 # Define the first and last of class and finals start date
-start  <- as.Date("2019/08/26")
-end    <- as.Date("2019/12/09")
-makeup <- as.Date("2019/12/11")
-finals <- as.Date("2019/12/12")
+start  <- as.Date("2020/01/13")
+end    <- as.Date("2020/04/27")
+makeup <- as.Date("2020/04/28")
+finals <- as.Date("2020/05/04")
 # Format the dates
 dates <- format(seq(start, end, by = "week"), format="%m/%d")
 dates <- c(dates, format(c(makeup, finals), format="%m/%d"))
@@ -31,7 +37,7 @@ dates <- c(dates, format(c(makeup, finals), format="%m/%d"))
 schedule$Date <- dates
 # Define the week
 schedule$Week <- c(seq(1:(length(dates)-1)), (length(dates)-1))
-schedule <- schedule[c('Week', 'Date', 'Event/Topics', 'Class Notes', 'Quizzes/Practice', 'Assignments')]
+schedule <- schedule[c('Week', 'Date', 'Topics', 'Class Notes', 'Readings', 'Assignments')]
 # Render the schedule as markdown
 kable(schedule, format='markdown')
 ```
