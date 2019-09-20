@@ -13,11 +13,15 @@ source("knitr_setup.R")
 
 Here's your roadmap for the semester!
 
-**Overview**:
+Readings legend:
 
-- PART I (Weeks 1-4): R, Git, and Data Management
-- PART II (Weeks 5-9): Exploratory data analysis & data visualization
-- PART III (Weeks 10-14): Reproducibility with RMarkdown
+- Healy == Healy, Kieran. "Data Visualization: A practical introduction" [[free online](http://socviz.co/)], [[buy on amazon](https://www.amazon.com/Data-Visualization-Introduction-Kieran-Healy/dp/0691181624)]
+- R4DS == Grolemund, Garrett and Wickham, Hadley. "R for Data Science" [[free online](https://r4ds.had.co.nz/)], [[buy on amazon](https://www.amazon.com/Data-Science-Transform-Visualize-Model/dp/1491910399)]
+- Wilke == Wilke, Claus O. "Fundamentals of Data Visualization" [[free online](https://serialmentor.com/dataviz/)], [[buy on amazon](https://www.amazon.com/Fundamentals-Data-Visualization-Informative-Compelling/dp/1492031089)]
+
+
+
+
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(knitr)
