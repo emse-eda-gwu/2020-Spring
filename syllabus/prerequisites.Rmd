@@ -1,1 +1,1 @@
-Students should have taken EMSE 6574: Programming for Analytics or have experience with at least one programming language
+Students should have taken EMSE 6574: Programming for Analytics or have experience with at least one programming language. Experience with R is preferred but not essential.
