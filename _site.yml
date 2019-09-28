@@ -20,8 +20,8 @@ navbar:
           href: L1.1-course-introduction.html
     - text: "Assignments"
       menu:
-        - text: "HW 1 - Programming Basics"
-          href: hw1-programming-basics.html
+        - text: "HW 1"
+          href: hw1.html
     - text: "Resources"
       href: resources.html
     - text: "About"

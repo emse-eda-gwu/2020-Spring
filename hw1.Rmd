@@ -1,0 +1,7 @@
+---
+title: "Homework 1"
+output:
+  html_document:
+    number_sections: false
+    toc: no
+---
