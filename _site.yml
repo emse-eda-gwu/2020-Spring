@@ -1,4 +1,4 @@
-name: "EMSE ####: Exploratory Data Analysis - Spring 2020"
+name: "EMSE 4197: Exploratory Data Analysis - Spring 2020"
 output_dir: _site
 exclude:
 - DESCRIPTION

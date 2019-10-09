@@ -19,10 +19,6 @@ Readings legend:
 - R4DS == Grolemund, Garrett and Wickham, Hadley. "R for Data Science" [[free online](https://r4ds.had.co.nz/)], [[buy on amazon](https://www.amazon.com/Data-Science-Transform-Visualize-Model/dp/1491910399)]
 - Wilke == Wilke, Claus O. "Fundamentals of Data Visualization" [[free online](https://serialmentor.com/dataviz/)], [[buy on amazon](https://www.amazon.com/Fundamentals-Data-Visualization-Informative-Compelling/dp/1492031089)]
 
-
-
-
-
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(knitr)
 library(here)
