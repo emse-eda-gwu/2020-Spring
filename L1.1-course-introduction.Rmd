@@ -63,7 +63,7 @@ rmarkdown::render('L1.1-course-introduction.Rmd')
 
 # Communication & Help
 
-All course communication will be managed through [Slack](https://4197-s20.slack.com/) - Sign up [**HERE**](www.slack.com)
+All course communication will be managed through [Slack](https://4197-s20.slack.com/) - Sign up [**HERE**](https://join.slack.com/t/4197-s20/shared_invite/enQtODA3NTM3NDYyMjkzLTAyNDM5NDkwNTAxMzgyZGY4YzJmNDA0NDdhNWU4YTQ2YTkzN2ZmY2UyNWE1OGExMGYwMDg0ZjhiMThjOWM0NWU)
 
 **Please don't email the instructors** - just use Slack.
 
