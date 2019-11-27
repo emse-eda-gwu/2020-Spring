@@ -4,8 +4,7 @@ author: "John Paul Helveston"
 date: Month 00, 2020
 output:
   xaringan::moon_reader:
-    css: "https://emse-eda-gwu.github.io/2020-Spring/classNotes/classNotes.css"
-    lib_dir: libs
+    css: ['default', 'https://emse6574-gwu.github.io/2019-Fall/classNotes/classNotes.css']
     nature:
       highlightStyle: github
       highlightLines: true
