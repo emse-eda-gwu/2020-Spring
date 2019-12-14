@@ -26,10 +26,10 @@ library(gsheet)
 options(knitr.kable.NA = '')
 schedule <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1GkCv6FGzn7kNU4yC5QyCVAt2OnfS3yK1UVNeG2u0z4g/edit?usp=sharing')
 # Define the first and last of class and finals start date
-start  <- as.Date("2020/01/13")
-end    <- as.Date("2020/04/27")
+start  <- as.Date("2020/01/15")
+end    <- as.Date("2020/04/22")
 makeup <- as.Date("2020/04/28")
-finals <- as.Date("2020/05/04")
+finals <- as.Date("2020/05/06")
 # Format the dates
 dates <- format(seq(start, end, by = "week"), format="%m/%d")
 dates <- c(dates, format(c(makeup, finals), format="%m/%d"))
