@@ -1,6 +1,6 @@
 ## Slack
 
-All course communication will be managed through [Slack](https://4197-s20.slack.com/) - Sign up [**HERE**](https://join.slack.com/)
+All course communication will be managed through [Slack](https://emse-eda-s20.slack.com) - Sign up [**HERE**](https://join.slack.com/)
 
 Watch this 2-minute video to see what Slack is all about:
 
