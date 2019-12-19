@@ -1,11 +1,11 @@
-name: "EMSE 4197: Exploratory Data Analysis - Spring 2020"
+name: "Exploratory Data Analysis - Spring 2020"
 output_dir: _site
 exclude:
 - DESCRIPTION
 - LICENSE
 new_session: true
 navbar:
-  title: "EMSEEDA: Spring 2020"
+  title: "EDA - Spring 2020"
   left:
     - text: "Home"
       href: index.html

@@ -11,12 +11,17 @@ rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
 
-### The George Washington University
-### Spring 2020
+<div class = "row">
+
+<div class = "col-md-3">
+<img src="https://emse-eda-gwu.github.io/images/eda_hex_sticker.png" width="200">
+</div>
+
+<div class = "col-md-9">
+
+**Department**: [Engineering Management and Systems Engineering](https://www.emse.seas.gwu.edu/) @ [GWU](https://www.gwu.edu/)
 
 **Credits**: 3
-
-**Department**: Engineering Management and Systems Engineering
 
 **Description**:
 
@@ -32,3 +37,5 @@ source("knitr_setup.R")
 
 ```{r child = here::here('syllabus', 'prerequisites.Rmd')}
 ```
+</div>
+</div>
