@@ -24,17 +24,21 @@ Background:
 - 2015 MS in Engineering & Public Policy at Carnegie Mellon University
 - 2010 BS in Engineering Science & Mechanics at Virginia Tech
 
-## Meet your classmates!
+## Meet your tutors!
 
-Get to know your neighbor! Choose someone to go first. In [2 minutes](https://www.youtube.com/watch?v=48z7nQaehWI), share:
+Lingmei Zhao, Masters student in Statistics
 
-- Your name
-- Your program
-- Something notable you did over the summer
+![](images/lingmei.jpg){ width=250 }
 
-Then switch for another two minutes.
+---
 
-Afterwards: let's here from a few of you - tell us something you learned!
+# What's new?
+
+Most students taking this course should have already taken [Programming for Analytics](https://emse-p4a-gwu.github.io/). While this course follows a similar structure, there will be several key distinctions:
+
+1. It will require a greater deal of individual judgment to apply concepts to data problems.
+2. Whereas in P4A we worked with nice, tidy data sets, in this course we will be working more with messy, "raw" data that often needs to be pre-processed before using it to answer questions or create visualizations.
+3. This course will center around individual course projects that will make up a considerable portion of your final grade.
 
 ---
 
@@ -48,12 +52,15 @@ Let's go over the [syllabus](syllabus.html) and the course assignments.
 
 Here are some philosophies that will get you far in data analytic work. We will be revisiting these over and over again.
 
-- Embrace plain text (as opposed to rich text).
-- Everything you do should be reproducible.
+**1) Embrace plain text**
 
-**Example**: RMarkdown -> HTML. This webpage was generated from [this markdown source file](https://raw.githubusercontent.com/emse6574-gwu/2019-Fall/master/L1.1-course-introduction.Rmd) on GitHub.
+You will write code to produce rich outputs that include text and graphics. While your output may have lots of different formatting, your code will be written in **plain text**.
 
-If you want to generate the HTML page, download the `.Rmd` file and run the following code in R:
+**2) Embrace reproducibility**
+
+Everything you produce in this course will be a reproducible output. That is, you should be able to reproduce your output from the raw data and code. For example, This webpage was generated from [this markdown source file](https://raw.githubusercontent.com/emse-eda-gwu/2020-Spring/master/L1.1-course-introduction.Rmd) on GitHub.
+
+If you want to generate this very HTML page, download the `.Rmd` file and run the following code in R:
 
 ```{r eval=FALSE}
 rmarkdown::render('L1.1-course-introduction.Rmd')
@@ -63,7 +70,7 @@ rmarkdown::render('L1.1-course-introduction.Rmd')
 
 # Communication & Help
 
-All course communication will be managed through [Slack](https://4197-s20.slack.com/) - Sign up [**HERE**](https://join.slack.com/t/4197-s20/shared_invite/enQtODA3NTM3NDYyMjkzLTAyNDM5NDkwNTAxMzgyZGY4YzJmNDA0NDdhNWU4YTQ2YTkzN2ZmY2UyNWE1OGExMGYwMDg0ZjhiMThjOWM0NWU)
+All course communication will be managed through [Slack](https://6574-s11-f19.slack.com/).
 
 **Please don't email the instructors** - just use Slack.
 
