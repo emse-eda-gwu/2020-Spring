@@ -12,8 +12,18 @@ and the course code is licensed under a [MIT License](LICENSE-MIT.html)
 by [John Helveston](https://www.jhelvy.com).
 
 In addition to my own developed material, I have also modified material from
-other courses and workshops, including:
+other courses, workshops, and textbooks. Below are a list of resources I have used.
 
-Name | Author | Links
+### Courses / workshops
+
+Name | Author(s) | Links
 --------- | --------- | ---
-STAT 545 | U. of British Columbia | [course](http://stat545.com/); [github](https://github.com/STAT545-UBC)
+STAT 545 | U. of British Columbia | [course](http://stat545.com/); [GitHub](https://github.com/STAT545-UBC)
+
+### Books
+
+Name | Author(s) | Links
+--------- | --------- | ---
+R for Data Science | Garrett Grolemund & Hadley Wickham | [online book](https://r4ds.had.co.nz/); [GitHub](https://github.com/hadley/r4ds); [purchase](https://www.amazon.com/Data-Science-Transform-Visualize-Model/dp/1491910399)
+Data Visualization: A practical introduction | Kieran Healy | [online book](http://socviz.co/); [GitHub](https://github.com/kjhealy/dataviz); [purchase](https://www.amazon.com/Data-Visualization-Introduction-Kieran-Healy/dp/0691181624)
+Fundamentals of Data Visualization | Claus O. Wilke | [online book](https://serialmentor.com/dataviz/); [purchase](https://www.amazon.com/Fundamentals-Data-Visualization-Informative-Compelling/dp/1492031089)
