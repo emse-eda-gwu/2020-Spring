@@ -34,7 +34,7 @@ navbar:
           href: LICENSE.html
     - text: Slack
       icon: fa-slack
-      href: https://4197-s20.slack.com/
+      href: https://emse-eda-s20.slack.com
   right:
   - icon: fa-bars
     menu:
