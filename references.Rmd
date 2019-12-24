@@ -1,0 +1,162 @@
+---
+title: "Books, Guides, Data, Oh My!"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+rm(list=objects()) # start with a clean workspace
+source("knitr_setup.R")
+```
+
+Here you will find a long list of links to helpful references.
+
+---
+
+# Doing stuff in R
+
+## Programming in R
+
+- Grolemund, Garrett. "Hands-On Programming with R"
+[[free online](https://rstudio-education.github.io/hopr/)],
+[[buy on amazon](https://www.amazon.com/gp/product/1449359019/)]
+- Peng, Roger D. "R Programming for Data Science"
+[[online - pay what you want](https://leanpub.com/rprogramming)]
+
+## Data Analysis in R
+
+- Grolemund, Garrett and Wickham, Hadley. "R for Data Science"
+[[free online](https://r4ds.had.co.nz/)],
+[[buy on amazon](https://www.amazon.com/Data-Science-Transform-Visualize-Model/dp/1491910399)]
+- Peng, Roger D. "Exploratory Data Analysis with R"
+[[online - pay what you want](https://leanpub.com/exdata)]
+
+## RMarkdown
+
+- [60 second markdown guide](https://commonmark.org/help/)
+- [10 minute markdown tutorial](https://commonmark.org/help/tutorial/)
+- [Markdown It](https://markdown-it.github.io): Quickly demo Markdown code.
+- [Table generator](http://www.tablesgenerator.com/): Create tables and get export code for multiple formats.
+- [CMU RMarkdown guide (detailed)](http://www.stat.cmu.edu/~cshalizi/rmarkdown/)
+
+## RStudio "Cheatsheets"
+
+- [All cheatsheets](https://www.rstudio.com/resources/cheatsheets/)
+- [Data wrangling with the `dplyr` library](https://resources.rstudio.com/the-essentials-of-data-science/data-transformation)
+- [Data visualization with the `ggplot2` library](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
+- [RMarkdown](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
+
+---
+
+# Data Visualization
+
+## Principles of Data Visualization
+
+- Healy, Kieran. "Data Visualization: A practical introduction"
+[[free online](http://socviz.co/)],
+[[buy on amazon](https://www.amazon.com/Data-Visualization-Introduction-Kieran-Healy/dp/0691181624)]
+- Wilke, Claus O. "Fundamentals of Data Visualization"
+[[free online](https://serialmentor.com/dataviz/)],
+[[buy on amazon](https://www.amazon.com/Fundamentals-Data-Visualization-Informative-Compelling/dp/1492031089)]
+- Video: [How Humans See Data](https://youtu.be/fSgEeI2Xpdc), by John Rauser. This is probably the best overviews I've seen on how to exploit the psychology of how our brains interpret images to make effective visualizations.
+
+## Data Visualization Guides
+
+Beautiful, interactive guides for making effective information visualizations:
+
+- [Data-to-Viz](https://www.data-to-viz.com/)
+- [R Graph Gallery](http://r-graph-gallery.com/)
+- [Visual Vocabulary](https://gramener.github.io/visual-vocabulary-vega/#)
+
+## Plotting guides with `ggplot2`
+
+- [R Cookbook for `ggplot2`](http://www.cookbook-r.com/Graphs/)
+- [Top 50 `ggplot2` visualizations](http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html)
+- [RStudio `ggplot2` Cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
+- [Tidyverse `ggplot2` reference guide](https://ggplot2.tidyverse.org/reference/)
+- [ggThemeAssist](https://github.com/calligross/ggthemeassist): Package for customizing plot themes and layout
+
+---
+
+# Datasets
+
+## Packages
+
+Many packages contain interesting datasets. [Here](https://vincentarelbundock.github.io/Rdatasets/datasets.html) is a table of lots of packages that contain multiple dataset. Some of my favorites are:
+
+- [`dslabs`](https://github.com/rafalab/dslabs)
+- [`DAAG`](https://cran.r-project.org/web/packages/DAAG/index.html)
+- [`MASS`](https://cran.r-project.org/web/packages/MASS/index.html)
+
+In addition, some packages exclusively just contain datasets, such as:
+
+- [gapminder](https://www.rdocumentation.org/packages/gapminder/)
+- [babynames](https://github.com/hadley/babynames)
+- [nycflights13](https://github.com/hadley/nycflights13)
+- [fueleconomy](https://github.com/hadley/fueleconomy)
+- [nasaweather](https://github.com/hadley/nasaweather)
+- [usdanutrients](https://github.com/hadley/usdanutrients)
+
+## Websites
+
+A collection of various websites that have lots of interesting datasets:
+
+- ["Tidy Tuesday" challenges](https://github.com/rfordatascience/tidytuesday): Wide variety of datasets for data visualization practice. See many of the visualizations others have created [here](https://nsgrantham.shinyapps.io/tidytuesdayrocks/).
+- ["Makeover Monday" challenges](http://www.makeovermonday.co.uk/data/): Wide variety of datasets for data visualization practice.
+- [Tableau Community Forums](https://community.tableau.com/docs/DOC-10635): Sometimes you'll find some interesting datasets in here.
+- ["Data is Beautiful" subreddit](https://www.reddit.com/r/dataisbeautiful/): Feed of user-generated data visualizations, though quality varies substantially.
+
+## Large, searchable websites
+
+- [Kaggle](https://www.kaggle.com/datasets)
+- [Google Dataset Search](https://toolbox.google.com/datasetsearch)
+- [Quandl](https://www.quandl.com/): Searchable, over 2 million financial, economic, and social datasets.
+- [Wharton Research Data Services](https://wrds-www.wharton.upenn.edu/): Single-point access to over 200 terabytes of data across multiple disciplines, including Finance, Marketing, and Economics.
+
+## Government-ish sources:
+
+"Government-ish" because while some of these sites host government data, the sites themselves may or may not be affiliated with a government agency:
+
+- [US Open Gov Data](https://www.data.gov/open-gov/): links to federal and non-federal sources in US and abroad
+- [Open Africa](https://africaopendata.org/)
+- [EU Open Data Portal](https://data.europa.eu/euodp/en/home)
+- [China data](https://www.ganghe.net/research/data): Various datasets on China posted by [Gang He](https://www.ganghe.net/).
+
+## Energy data
+
+Since I happen to work with energy data a lot, here's some common go-to sources:
+
+- [China Energy Portal Statistics](https://chinaenergyportal.org/en/category/stats/): Loads of energy statistics from China.
+- [U.S. Energy Information Administration](https://www.eia.gov/): from Wikipedia: the "principal agency of the U.S. Federal Statistical System responsible for collecting, analyzing, and disseminating energy information to promote sound policymaking, efficient markets, and public understanding of energy and its interaction with the economy and the environment. EIA programs cover data on coal, petroleum, natural gas, electric, renewable and nuclear energy. EIA is part of the U.S. Department of Energy."
+- [Environmental Performance Index, Yale University](https://epi.envirocenter.yale.edu/): Ranks 163 countries on 25 performance indicators tracked across ten policy categories covering both environmental public health and ecosystem vitality. These indicators provide a gauge at a national government scale of how close countries are to established environmental policy goals.
+
+---
+
+# Other
+
+## Helpful Tutorials
+
+- [RStudio Primers](https://rstudio.cloud/learn/primers)
+- [Tidyverse in R](https://www.datacamp.com/community/tutorials/tidyverse-tutorial-r)
+- [Transitioning from Excel to R](https://trendct.org/2015/06/12/r-for-beginners-how-to-transition-from-excel-to-r/)
+
+## Examples of Exploratory Data Analysis
+
+- [Death: Reality vs Reported](https://owenshen24.github.io/charting-death/), by Owen Shen
+- [Is Usain Bolt really the fastest man on earth?](https://www.r-bloggers.com/fun-with-statistics-is-usain-bolt-really-the-fastest-man-on-earth/amp/), by Anindya Mozumdar
+
+## Inspiration
+
+- [An Incomplete List of Females in Data Visualization](https://stephanieevergreen.com/females-in-dataviz/), by Stephanie Evergreen
+- [The Links Between Open Science and Star Wars](https://medium.com/read-write-participate/open-science-and-star-wars-2577b8081e8f)
+
+## Giving talks
+
+You will all have to give a presentation at some point - make sure you start it right: ["How to start a speech"](https://www.youtube.com/watch?v=w82a1FT5o88)
+
+## When all else fails...
+
+You will inevitably run into problems; things won't work the way you expect, and you'll get lots of confusing error messages. When this happens, many turn to the following tried and true problem-solving approaches:
+
+![](images/oreilly_googling.jpg){ width=250 }
+![](images/oreilly_trying_stuff.jpeg){ width=250 }
+![](images/oreilly_changing_stuff.jpg){ width=250 }

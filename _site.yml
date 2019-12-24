@@ -25,7 +25,11 @@ navbar:
         - text: "HW 1"
           href: hw1.html
     - text: "Resources"
-      href: resources.html
+      menu:
+        - text: "Getting Help"
+          href: getting-help.html
+        - text: "Books, Guides, Data, Oh My!"
+          href: references.html
     - text: "About"
       menu:
         - text: About
