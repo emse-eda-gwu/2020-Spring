@@ -67,10 +67,10 @@ I promise you can do this.
 
 All required software for this course is freely available on the web. This includes:
 
-- R (version 3.6.0 or later), which can be downloaded from [The Comprehensive R Archive Network (CRAN)]((https://cloud.r-project.org))
-- RStudio (Desktop Version), a free IDE for R, which can be downloaded from [RStudio](https://www.rstudio.com/products/rstudio/download/preview/)
+- R (version 3.6.0 or later), which can be downloaded from [The Comprehensive R Archive Network (CRAN)](https://cloud.r-project.org)
+- RStudio (Desktop Version), a free IDE for R, which can be downloaded from [RStudio](https://rstudio.com/products/rstudio/download/)
 
-Go to the course ["Getting Started"](L1.2-getting-started.html) page for installation instructions.
+Go to the course ["Getting Started"](L1.2-getting-started.html) lesson for installation instructions and details about R and RStudio.
 
 ## Texts / Other Useful Resources
 
