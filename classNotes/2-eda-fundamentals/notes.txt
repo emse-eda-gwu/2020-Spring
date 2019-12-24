@@ -1,0 +1,15 @@
+Fundamentals of EDA:
+- Data type & scales;
+- Numbers worth knowing;
+- plot types.
+-Dummy coding?
+
+"Fundamentals of exploring data": https://rstudio.cloud/learn/primers/3)
+
+Data scales:
+- nominal, ordinal, ratio, interval
+Data types:
+- numerical (discrete vs. continuous)
+- categorical (nominal vs. ordinal).
+
+See this video: https://www.youtube.com/watch?v=zHcQPKP6NpM
