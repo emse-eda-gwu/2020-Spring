@@ -34,17 +34,19 @@ Lingmei Zhao, Masters student in Statistics
 
 # What's new?
 
-Most students taking this course should have already taken [Programming for Analytics](https://emse-p4a-gwu.github.io/). While this course follows a similar structure, there will be several key distinctions:
+Students taking this course should have already taken [Programming for Analytics](https://emse-p4a-gwu.github.io/). If you haven't, I **strongly** recommend you review the lessons and assignments on the [previous semester website](https://emse6574-gwu.github.io/2019-Fall/).
 
-1. It will require a greater deal of individual judgment to apply concepts to data problems.
-2. Whereas in P4A we worked with nice, tidy data sets, in this course we will be working more with messy, "raw" data that often needs to be pre-processed before using it to answer questions or create visualizations.
-3. This course will center around individual course projects that will make up a considerable portion of your final grade.
+While this course follows a similar structure as P4A, there will be several key distinctions:
+
+1. Whereas in P4A we worked with nice, tidy data sets, in this course we will be working more with messy, "raw" data that often needs to be significantly processed before being able to explore it.
+2. Assignments will be more complex and involve more real-world data problems that often have multiple solutions.
+3. This course will center around an individual semester-long project that will make up a considerable portion of your final grade.
 
 ---
 
 # The syllabus
 
-Let's go over the [syllabus](syllabus.html) and the course assignments.
+The [syllabus](syllabus.html) is lengthy, but I do expect you to look through each section. If any changes need to be made, you'll be notified through Slack.
 
 ---
 
@@ -70,26 +72,8 @@ rmarkdown::render('L1.1-course-introduction.Rmd')
 
 # Communication & Help
 
-All course communication will be managed through [Slack](https://6574-s11-f19.slack.com/).
-
-**Please don't email the instructors** - just use Slack.
-
-> [Watch this 2-minute video for a quick summary of Slack](https://youtu.be/9RJZMSsH7-g)
-
-**You can use Slack to**:
-
-- Ask questions.
-- Ask for help with an assignment.
-- Send direct, private messages to each other or the instructors (just like email...but better!)
-
-**Asking for help on Slack**:
-
-Slack can be used to ask quick questions and receive quick responses without attending office hours in person. This also enables other students to see answers to common questions. Questions should be specific and include all needed information. For example, if your code has an error you don't understand, **include the code and the error message** in your question.
-
-**Other Help Resources**:
-
-- **Office Hours**: Office hours let you ask questions to TAs and professors directly, and can help you understand concepts and debug programs that you're struggling with alone.
-- **Library Services**: While the University Library is not a stand in for TAs, you can schedule a consultation for general help with Coding, Programming, Data, Statistical, and GIS. See more at https://academiccommons.gwu.edu/writing-research-help
+```{r child = here::here('syllabus', 'getting-help.Rmd')}
+```
 
 ---
 
