@@ -38,6 +38,9 @@ navbar:
         - text: License
           icon: fa-gavel
           href: LICENSE.html
+        - text: DataCamp
+          icon: fa-graduation-cap
+          href: datacamp.html
     - text: Slack
       icon: fa-slack
       href: https://emse-eda-s20.slack.com

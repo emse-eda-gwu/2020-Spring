@@ -30,19 +30,19 @@ Introduction to exploratory data analysis using the [R programming language](htt
 
 ## Unofficial Description
 
-```{r child = here::here('syllabus', 'description.Rmd')}
+```{r child = '_description.Rmd'}
 ```
 
 ## Prerequisites
 
-```{r child = here::here('syllabus', 'prerequisites.Rmd')}
+```{r child = '_prerequisites.Rmd'}
 ```
 
 ---
 
 # Learning Objectives
 
-```{r child = here::here('syllabus', 'learning-objectives.Rmd')}
+```{r child = '_learning-objectives.Rmd'}
 ```
 
 ---
@@ -170,7 +170,7 @@ The course instructors may choose to change the scales at their discretion. You 
 
 # Getting Help
 
-```{r child = here::here('syllabus', 'getting-help.Rmd')}
+```{r child = '_getting-help.Rmd'}
 ```
 
 ---

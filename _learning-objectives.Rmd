@@ -1,0 +1,10 @@
+Having successfully completed this course, students will be able to:
+
+- Import, manipulate, visualize, and export data in R.
+- Conduct a systematic exploratory data analysis (EDA) of different types of data.
+- Apply fundamental principles of visualizing information for exploratory analysis and communication.
+- Wrangle data from its original format into a fit-for-purpose format.
+- Get data off the web and expose data, code, results on the web.
+- Generate fully reproducible reports that contain code, equations, visualizations, and narrative text.
+
+

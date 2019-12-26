@@ -1,0 +1,1 @@
+Students should have taken [Programming for Analytics](https://emse-p4a-gwu.github.io/) or have experience with at least one programming language. Experience with R is preferred but not essential.

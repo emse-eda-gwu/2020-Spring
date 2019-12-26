@@ -14,7 +14,7 @@ source("knitr_setup.R")
 <div class = "row">
 
 <div class = "col-md-3">
-<img src="https://emse-eda-gwu.github.io/images/eda_hex_sticker.png" width="200">
+<img src="images/eda_hex_sticker.png" width="200">
 </div>
 
 <div class = "col-md-9">
@@ -25,17 +25,22 @@ source("knitr_setup.R")
 
 **Description**:
 
-```{r child = here::here('syllabus', 'description.Rmd')}
+```{r child = '_description.Rmd'}
 ```
 
 **Learning Objectives**:
 
-```{r child = here::here('syllabus', 'learning-objectives.Rmd')}
+```{r child = '_learning-objectives.Rmd'}
 ```
 
 **Prerequisites**:
 
-```{r child = here::here('syllabus', 'prerequisites.Rmd')}
+```{r child = '_prerequisites.Rmd'}
 ```
+
+**DataCamp**:
+
+This class is supported by [DataCamp.com](https://www.datacamp.com/) - learn more [here](datacamp.html). 
+
 </div>
 </div>

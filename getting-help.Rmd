@@ -10,5 +10,5 @@ source("knitr_setup.R")
 
 ---
 
-```{r child = here::here('syllabus', 'getting-help.Rmd')}
+```{r child = '_getting-help.Rmd'}
 ```
