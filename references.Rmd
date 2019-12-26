@@ -1,5 +1,5 @@
 ---
-title: "Books, Guides, Data, Oh My!"
+title: "Books, Guides, Tutorials, Oh My!"
 output: html_document
 ---
 
@@ -8,7 +8,7 @@ rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
 
-Here you will find a long list of links to helpful references.
+Here you will find a long list of links to helpful references, organized by what it is you might be trying to accomplish.
 
 ---
 
@@ -74,60 +74,6 @@ Beautiful, interactive guides for making effective information visualizations:
 - [RStudio `ggplot2` Cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
 - [Tidyverse `ggplot2` reference guide](https://ggplot2.tidyverse.org/reference/)
 - [ggThemeAssist](https://github.com/calligross/ggthemeassist): Package for customizing plot themes and layout
-
----
-
-# Datasets
-
-## Packages
-
-Many packages contain interesting datasets. [Here](https://vincentarelbundock.github.io/Rdatasets/datasets.html) is a table of lots of packages that contain multiple dataset. Some of my favorites are:
-
-- [`dslabs`](https://github.com/rafalab/dslabs)
-- [`DAAG`](https://cran.r-project.org/web/packages/DAAG/index.html)
-- [`MASS`](https://cran.r-project.org/web/packages/MASS/index.html)
-
-In addition, some packages exclusively just contain datasets, such as:
-
-- [gapminder](https://www.rdocumentation.org/packages/gapminder/)
-- [babynames](https://github.com/hadley/babynames)
-- [nycflights13](https://github.com/hadley/nycflights13)
-- [fueleconomy](https://github.com/hadley/fueleconomy)
-- [nasaweather](https://github.com/hadley/nasaweather)
-- [usdanutrients](https://github.com/hadley/usdanutrients)
-
-## Websites
-
-A collection of various websites that have lots of interesting datasets:
-
-- ["Tidy Tuesday" challenges](https://github.com/rfordatascience/tidytuesday): Wide variety of datasets for data visualization practice. See many of the visualizations others have created [here](https://nsgrantham.shinyapps.io/tidytuesdayrocks/).
-- ["Makeover Monday" challenges](http://www.makeovermonday.co.uk/data/): Wide variety of datasets for data visualization practice.
-- [Tableau Community Forums](https://community.tableau.com/docs/DOC-10635): Sometimes you'll find some interesting datasets in here.
-- ["Data is Beautiful" subreddit](https://www.reddit.com/r/dataisbeautiful/): Feed of user-generated data visualizations, though quality varies substantially.
-
-## Large, searchable websites
-
-- [Kaggle](https://www.kaggle.com/datasets)
-- [Google Dataset Search](https://toolbox.google.com/datasetsearch)
-- [Quandl](https://www.quandl.com/): Searchable, over 2 million financial, economic, and social datasets.
-- [Wharton Research Data Services](https://wrds-www.wharton.upenn.edu/): Single-point access to over 200 terabytes of data across multiple disciplines, including Finance, Marketing, and Economics.
-
-## Government-ish sources:
-
-"Government-ish" because while some of these sites host government data, the sites themselves may or may not be affiliated with a government agency:
-
-- [US Open Gov Data](https://www.data.gov/open-gov/): links to federal and non-federal sources in US and abroad
-- [Open Africa](https://africaopendata.org/)
-- [EU Open Data Portal](https://data.europa.eu/euodp/en/home)
-- [China data](https://www.ganghe.net/research/data): Various datasets on China posted by [Gang He](https://www.ganghe.net/).
-
-## Energy data
-
-Since I happen to work with energy data a lot, here's some common go-to sources:
-
-- [China Energy Portal Statistics](https://chinaenergyportal.org/en/category/stats/): Loads of energy statistics from China.
-- [U.S. Energy Information Administration](https://www.eia.gov/): from Wikipedia: the "principal agency of the U.S. Federal Statistical System responsible for collecting, analyzing, and disseminating energy information to promote sound policymaking, efficient markets, and public understanding of energy and its interaction with the economy and the environment. EIA programs cover data on coal, petroleum, natural gas, electric, renewable and nuclear energy. EIA is part of the U.S. Department of Energy."
-- [Environmental Performance Index, Yale University](https://epi.envirocenter.yale.edu/): Ranks 163 countries on 25 performance indicators tracked across ten policy categories covering both environmental public health and ecosystem vitality. These indicators provide a gauge at a national government scale of how close countries are to established environmental policy goals.
 
 ---
 

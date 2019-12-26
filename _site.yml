@@ -28,7 +28,9 @@ navbar:
       menu:
         - text: "Getting Help"
           href: getting-help.html
-        - text: "Books, Guides, Data, Oh My!"
+        - text: "Finding Data"
+          href: finding-data.html
+        - text: "Books, Guides, Tutorials, Oh My!"
           href: references.html
     - text: "About"
       menu:
