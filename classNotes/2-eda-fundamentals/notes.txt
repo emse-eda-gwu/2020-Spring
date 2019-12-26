@@ -13,3 +13,7 @@ Data types:
 - categorical (nominal vs. ordinal).
 
 See this video: https://www.youtube.com/watch?v=zHcQPKP6NpM
+
+See this blog post: https://towardsdatascience.com/data-types-in-statistics-347e152e8bee
+
+This page: https://www.questionpro.com/blog/nominal-ordinal-interval-ratio/
