@@ -38,7 +38,7 @@ You will first need to download and install both R and RStudio (Desktop version)
 
 After you install R and RStudio on your computer, you'll have two new applications you can open. **We will always work in RStudio**. In other words:
 
-<div class="tableMedium">
+<div style="width:550px">
 R: Do not open this          |  RStudio: Open this
 :-------------------------:|:-------------------------:
 ![](images/Rlogo.png){ width=50 }  |  ![](images/RStudio-Ball.png){ width=50 }

@@ -12,6 +12,7 @@ source("knitr_setup.R")
 
 # Course Information
 
+<div style="width:550px">
 Instructor | Course
 ---|---
 <i class="fas fa-user"></i> John Paul Helveston | <i class="far fa-calendar"></i> Wednesdays
@@ -19,14 +20,13 @@ Instructor | Course
 <i class="fas fa-phone"></i> +1 (202) 994-7173 | <i class="far fa-calendar-alt"></i> January 13 - April 27, 2020
 <i class="fas fa-envelope"></i> [jpg@gwu.edu](mailto:jph@gwu.edu) | <i class="far fa-clock"></i> 12:45 - 3:15 PM
 <i class="fab fa-twitter"></i> [\@JohnHelveston](https://twitter.com/JohnHelveston) | <i class="fab fa-slack"></i> [Slack](https://emse-eda-s20.slack.com)
-
----
+</div>
 
 # Course Description
 
 ## Official GW Bulletin Description
 
-Introduction to exploratory data analysis using the [R programming language](https://www.r-project.org/); topics include data visualization, data wrangling, reproducibility, information communication, webscraping, github, and rmarkdown.
+Introduction to exploratory data analysis using the [R programming language](https://www.r-project.org/); data visualization, data cleaning, exploratory analysis, information communication, rmarkdown, reproducibility.
 
 ## Unofficial Description
 
@@ -38,34 +38,26 @@ Introduction to exploratory data analysis using the [R programming language](htt
 ```{r child = '_prerequisites.Rmd'}
 ```
 
----
-
 # Learning Objectives
 
 ```{r child = '_learning-objectives.Rmd'}
 ```
 
----
-
-<!-- This section was modified from https://evalf19.classes.andrewheiss.com/syllabus/#pep-talk -->
-
 # Pep Talk!
 
-Working in R (or any programming language) can be challenging - it's like learning a new language. Hadley Wickham - the chief data scientist at RStudio and the author of some amazing R packages you'll be using like **ggplot2** - [made this wise observation](https://r-posts.com/advice-to-young-and-old-programmers-a-conversation-with-hadley-wickham/):
+Learning a programming language can be as challenging as learning a new spoken language. Hadley Wickham - the chief data scientist at RStudio, and author of many amazing R packages you'll be using - [made this wise observation](https://r-posts.com/advice-to-young-and-old-programmers-a-conversation-with-hadley-wickham/):
 
 > It's easy when you start out programming to get really frustrated and think, "Oh it's me, I'm really stupid," or, "I'm not made out to program." But, that is absolutely not the case. Everyone gets frustrated. I still get frustrated occasionally when writing R code. It's just a natural part of programming. So, it happens to everyone and gets less and less over time. Don't blame yourself. Just take a break, do something fun, and then come back and try again later.
 
 If you're finding yourself taking way too long hitting your head against a wall and not understanding, take a break, talk to classmates, ask questions in Slack, e-mail me, etc.
 
-I promise you can do this.
-
----
+I promise, you can do this.
 
 # Required Texts & Materials
 
-## Software
+All texts and software for this course is freely available on the web. This includes:
 
-All required software for this course is freely available on the web. This includes:
+## Software
 
 - R (version 3.6.0 or later), which can be downloaded from [The Comprehensive R Archive Network (CRAN)](https://cloud.r-project.org)
 - RStudio (Desktop Version), a free IDE for R, which can be downloaded from [RStudio](https://rstudio.com/products/rstudio/download/)
@@ -74,33 +66,13 @@ Go to the course ["Getting Started"](L1.2-getting-started.html) lesson for insta
 
 ## Texts / Other Useful Resources
 
-This course does not require any textbooks. All texts, learning materials, and resources are freely available on the web. See the course [resources page](resources.html) for a list of useful resources.
-
----
+- Healy, Kieran. "Data Visualization: A practical introduction" [[free online](http://socviz.co/)], [[buy on amazon](https://www.amazon.com/Data-Visualization-Introduction-Kieran-Healy/dp/0691181624)]
+- Grolemund, Garrett and Wickham, Hadley. "R for Data Science" [[free online](https://r4ds.had.co.nz/)], [[buy on amazon](https://www.amazon.com/Data-Science-Transform-Visualize-Model/dp/1491910399)]
+- Wilke, Claus O. "Fundamentals of Data Visualization" [[free online](https://serialmentor.com/dataviz/)], [[buy on amazon](https://www.amazon.com/Fundamentals-Data-Visualization-Informative-Compelling/dp/1492031089)]
 
 # Assignments
 
-**Homework Assignments**:
-
-Homework assignments contain a mix of coding exercises and written exercises. They generally assess the material taught the weeks they are assigned, and should take several hours to complete. **Start homeworks early** (Tuesday is best, Thursday at the latest!), and come to office hours & tutoring hours for help.
-
-Read the [Collaboration Policy](#collaboration-policy) about collaborating with fellow students on homeworks. While most problems must be worked on individually, some will be marked as "collaborative"; on these problems (and _only_ these problems), you may work on code with other students.
-
-Homeworks will be graded based on style (modularity, readability, commenting, etc.) and functionality (correctness on all possible test inputs). Your code should be properly annotated with comments that are well-placed, concise, and informative. Your assignments will be graded by your tutors, by automated graders, and at times by your instructor.
-
-**Quizzes**:
-
-There will be five quizzes given about once every two weeks immediately at the beginning of class. Quizzes cover material from the previous weeks and the previous homework assignments. Quizzes are designed to be time-intensive, to test for fluency, and to demonstrate where additional study is needed.
-
-**Midterm Exams**:
-
-There will be two midterm exams given in class, as noted in the course schedule. Each exam will cover only material presented in the preceding weeks (as noted in the [schedule](#schedule.html).
-
-**Final Exam**:
-
-There will be a standard final exam during the final exam period at the end of the semester. This exam will cover material from the entire semester. The final exam is built to allow enough time to attempt all problems.
-
-**Class Participation**:
+**Class Participation**
 
 Regular class attendance is **essential**. Much of the class time will be spent doing exercises and coding. Multiple absences, inappropriate or unprofessional behavior during class (such as monopolizing discussions or being rude or disruptive), not participating in classroom exercises, and not being prepared for class will result in a lower grade for the class participation component. As a rule of thumb, the participation grade will be assigned according to the following rubric:
 
@@ -110,7 +82,34 @@ Low      | Frequently absent | Rude; disruptive; distracting; monopolizes discus
 Moderate | Attended most classes, but often arrived late or left early | Takes notes; attentive; occasionally contributes in class discussion / exercises
 High     | Attends on time and prepared | Takes notes; attentive; regularly contributes in class discussion / exercises; does not dominate conversation; listens and responds thoughtfully to comments made by others
 
----
+**DataCamp Assignments**
+
+DataCamp assignments provide both instructional videos and applied practice writing code. Students should begin assignments prior to the associated lectures to prepare for class and are encouraged to take notes as they work. Assignments are listed on this website and within the course group on datacamp.com. Credit for each assignment will be allocated in proportion to the percentage of the assignment completed by the due date. No more than 2 late days can be used on any one assignment. Below is a summary of the DataCamp assignments (TBD):
+
+<div style="width:500px">
+Number | Assignment Name            | Due Date
+-------|----------------------------|--------
+1      |    | 
+2      |    | 
+3      |    | 
+4      |    | 
+5      |    | 
+6      |    | 
+7      |    | 
+8      |    | 
+</div>
+
+**Quizzes**
+
+There will be five quizzes given about once every two weeks immediately at the beginning of class. Quizzes cover material presented in class and previous assignments from the weeks since the most-recent quiz. Quizzes are designed to be time-intensive, to test for fluency, and to demonstrate where additional study is needed.
+
+**Project Assignments**
+
+Throughout the semester, small projects will be assigned to provide hands-on experience with the material covered in class. While students may work on these assignments in groups, each student must submit their own work.
+
+**Final Project**
+
+Throughout the semester, each student will work towards an individual final project. At the end of the semester, each student will submit a report of their analysis in the form of an html web page and give a 5-minute presentation of their results to the class. To make the overall project more manageable, it will be broken down into several separate "milestone" deliverables due throughout the semester. A 1-2 page project proposal is due at the end of the fourth week of class. A milestone report of 3-4 pages, including summary statistics and plots, is due immediately upon return from spring break. Presentations will take place during the final exam period. **There will be no final exam - the final project is the final exam.**
 
 # Grading
 
@@ -118,42 +117,40 @@ High     | Attends on time and prepared | Takes notes; attentive; regularly cont
 
 Final grades will be calculated as follows:
 
-<div class="tableMedium">
-Course Component  | Weight | Notes
-------------------|-----|-----------------------------------
-Homeworks (5)     | 25% | Lowest homework grade is dropped
-Quizzes (4)       | 10% | Lowest quiz grade is dropped
-Midterm Exams (2) | 20% | Lowest midterm grade is half-weighted
-Final Exam        | 20% |
-Term Project      | 20% |
-Attendance & Participation | 5% |
+<div style="width:500px">
+Course Component           | Weight | Notes
+---------------------------|--------|-----------------------------------------
+Attendance & Participation | 10%    |
+DataCamp Assignments (8)   | 25%    |
+Project Assignments (3)    | 25%    |
+Quizzes (Top 4)            | 20%    | Lowest quiz grade is dropped
+Final Project              | 20%    |
 </div>
 
 ## AMD Grading
 
-This Alternative Minimum Grading (AMG) policy is available to everybody, but is designed specifically for students who struggle in the first part of the course, and then through sustained hard work and dedication manage to elevate their performance in the latter part of the course to a level that merits passing with a C (even if their Standard Grade might be lower than that).
+This Alternative Minimum Grading (AMG) policy is available to everybody, but is designed specifically for students who struggle in the first part of the course, and then through sustained hard work and dedication manage to elevate their performance in the latter part of the course to a level that merits passing with a C (even if their Standard Grade might be lower than that). 
 
-You can't "sign up" for AMG grading. Every student will be considered both for Standard Grading and AMG, and the instructor can choose to assign the AMG grade if a student's effort merits it. To compute your AMG score, first use the following to compute your raw score. If the resulting score is higher than a C, set it back to a C.
-
-<div class="tableSmall">
-Course Component   | Weight
--------------------|----
-Best 4 Homeworks   | 15%
-Best 4 Quizzes     | 10%
-Best Midterm Exam  | 20%
-Final Exam         | 40%
-Term Project       | 15%
-</div>
-
-Unlike the Standard Grade, effort is heavily factored into your AMG score. To qualify for AMG you must put forth sustained effort, which means meeting the following requirements:
+Student cannot "sign up" for AMG grading. Every student will be considered both for Standard Grading and AMG, and the instructor can choose to assign the AMG grade if a student's effort merits it. To qualify for AMG you must put forth sustained effort, which means meeting the following requirements:
 
 - You cannot miss multiple class periods
 - You cannot miss multiple assignments or quizzes
 - You cannot violate the Collaboration Policy
 
+To compute your AMG score, first use the following to compute your raw score. If the resulting score is higher than a C, set it back to a C.
+
+<div style="width:350px">
+Course Component           | Weight 
+---------------------------|--------
+DataCamp Assignments (8)   | 25%    
+Project Assignments (3)    | 20%    
+Quizzes (Top 4)            | 15%    
+Final Project              | 40%    
+</div>
+
 ## Grading Scale
 
-<div class="tableMedium">
+<div style="width:350px">
 Grade  | Range       | Grade | Range
 -------|-------------|-------|------------
 A      | 93 - 100%   | C     | 73 - 76.99%
@@ -166,23 +163,22 @@ C+     | 77 - 79.99% | F     | < 60%
 
 The course instructors may choose to change the scales at their discretion. You are guaranteed that your letter grade will never become worse as a result of changing scales.
 
----
-
 # Getting Help
 
 ```{r child = '_getting-help.Rmd'}
 ```
 
----
-
 # Course Policies
 
 ## [tl;dr](https://whatis.techtarget.com/definition/tldr-TLDR)
 
-- **BE NICE. BE HONEST. DON'T CHEAT.**
-- Write your own code - don't look at others' code & don't let others look at your code.
-- You get **5** late days - use them however you want, no strings attached.
-- You can't use more than **2** late days on any one assignment.
+**BE NICE. BE HONEST. DON'T CHEAT.**
+
+Write your own code - don't look at others' code, and don't let others look at your code.
+
+## Late Policy
+
+Each students is allowed **5** late homework submission days - use them however you want, no questions asked. No more than **2 days** can be applied toward a single assignment. Late days are meant to cover illness, family emergencies, and religious holidays. Assignments submitted more than 2 days after the due date will not be graded. In extreme circumstances, contact the instructor.
 
 ## Collaboration Policy
 
@@ -192,8 +188,6 @@ Learning how to program is like learning how to ride a bicycle - to get better, 
 
 ### Good Collaboration
 
-- Going through test cases and discussing why an input results in a certain output.
-- Figuring out new input/output pairs for the problems.
 - Discussing which general concepts might be useful in solving a problem (conditionals, loops, etc.).
 - Asking questions about how to build an algorithm for the problem.
 - Asking for debugging help with code.
@@ -210,7 +204,6 @@ Over-collaboration results in a warning on the first offense, and a penalty on l
 
 - Building ['psuedocode'](https://en.wikipedia.org/wiki/Pseudocode) algorithms together on a whiteboard that are essentially full programs.
 - Explaining to a friend how to solve a problem in high-level terms by going through your own program line-by-line.
-- Helping a friend debug on a non-collaborative problem.
 - Helping a friend debug on a collaborative problem by suggesting they use your own approach to the problem.
 - Collaborating with a student on a collaborative problem and then not including their name as a collaborator in the assignment writeup.
 - In the case that you have taken this course before, copying your own code from the previous time you took the course.
@@ -229,7 +222,7 @@ Cheating results in a penalty on the first offense, and failing the course on th
 - Getting someone else to write the assignment code for you.
 - Asking questions about the assignments on any online services outside of the course office hours and course Piazza.
 
-Cheating on quizzes, midterms, or the final can include:
+Cheating on quizzes, projects, or the final project can include:
 
 - Referring to any external resources while completing the assessment (phones, notes, etc.).
 - Copying part of an answer off of another student's paper, even if it is very small.
@@ -258,21 +251,15 @@ Your first year of college is a time when you do a lot of learning. Sometimes, y
 
 Sometimes, students panic and copy code right before the deadline, then regret what they did afterwards. Therefore, you may rescind any homework submission for up to 24 hours after the deadline with no questions asked. Simply email the course instructors asking to delete the submission in question, and we will do so. Deleted submissions will not be considered during plagiarism detection, though of course they will also not be graded. However, it will always be better to get a 0 (or partial credit) on an assignment than to get a cheating violation!
 
-## Late Policy
-
-Each students is allowed **5** late homework submission days - use them however you want, no questions asked. No more than **2 days** can be applied toward a single assignment. Late days are meant to cover illness, family emergencies, and religious holidays. Assignments submitted more than 2 days after the due date will not be graded. In extreme circumstances, contact the instructor.
-
 ## Use of Course Materials
 
-All **solutions** to homeworks, quizzes, and exams are proprietary. Don't post them online or try to sell them - this is a violation of the [student code of conduct](https://studentconduct.gwu.edu/code-student-conduct).
+All **solutions** to assignments and quizzes are proprietary. Don't post them online or try to sell them - this is a violation of the [student code of conduct](https://studentconduct.gwu.edu/code-student-conduct).
 
 All other course materials available on the course website are developed open source - you are welcome to post and share them following the licensing guidelines listed in the [license](LICENSE.html) page.
 
 ## What To Do if the Instructor Does Not Arrive
 
 Wait **20 minutes**, after that you're free to leave. One member of the class should be selected to notify the EMSE Department of the Instructor's absence by calling the EMSE Department 202-994-4892 on next business day.
-
----
 
 # University Policies
 
@@ -298,12 +285,30 @@ Academic dishonesty is defined as cheating of any kind, including misrepresentin
 
 In addition to the formal code of academic integrity, the instructor expects that students will treat this course with the level of professionalism required in the workplace. Remember that real firms are sponsoring student projects throughout the semester; in a workplace setting, these firms would be paying clients for the analyses being conducted. This course prepares students to succeed in the workplace, and maintaining a high degree of professionalism is expected.
 
+# Super Heros
+
+<div class = "row">
+
+<div class = "col-md-4">
+<img src="images/prof_x.gif">
+</div>
+
+<div class = "col-md-8">
+
+Once you have read this entire syllabus and viewed the [course schedule](schedule.html), please send me a picture of your favorite super hero in a direct message on Slack. 
+
+For real. 
+
+Brownie points if it's animated.
+
+</div>
+</div>
+
 ---
 
-<!-- Also took this brilliant idea from https://evalf19.classes.andrewheiss.com/syllabus/#cute-animals -->
+**Page sources**:
 
-# Cute Animals
+Some content on this page is inspired by and / or modified from other sources:
 
-Once you have read this entire syllabus and the [course schedule](#schedule.html), please send me a picture of a cute non-feline, non-canine animal in a direct message on Slack. For real. Brownie points if it's animated.
-
-![](images/cute_hedgehog.gif){ width=250 }
+- The "Pep Talk" and "Super Heros" sections are inspired by Andrew Heiss's course [Program Evaluation For Public Service](https://evalf19.classes.andrewheiss.com/syllabus/)
+- The collaboration policy is mostly copied from the course [15-112](http://www.kosbie.net/cmu/fall-19/15-112/) at Carnegie Mellon University
