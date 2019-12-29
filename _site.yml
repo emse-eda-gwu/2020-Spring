@@ -38,7 +38,7 @@ navbar:
     - text: "About"
       menu:
         - text: About
-          icon: fa-info
+          icon: fa-info-circle
           href: about.html
         - text: License
           icon: fa-gavel
