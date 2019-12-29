@@ -72,7 +72,7 @@ rmarkdown::render('L1.1-course-introduction.Rmd')
 
 # Communication & Help
 
-```{r child = here::here('syllabus', 'getting-help.Rmd')}
+```{r child = '_getting-help.Rmd'}
 ```
 
 ---
