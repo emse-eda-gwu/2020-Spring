@@ -32,7 +32,7 @@ Your car needs an engine (R) to run, but having a speedometer and rear view mirr
 You will first need to download and install both R and RStudio (Desktop version) on your computer.
 
 1. [Download and install R](https://cloud.r-project.org).
-2. [Download and install RStudio (Desktop version)](https://www.rstudio.com/products/rstudio/download/preview/).
+2. [Download and install RStudio (Desktop version)](https://rstudio.com/products/rstudio/download/).
 
 ## Using R via RStudio
 
