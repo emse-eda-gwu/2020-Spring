@@ -47,15 +47,18 @@ navbar:
     - text: "Resources"
       menu:
         - text: "Getting Help"
+          icon: fa-question-circle
           href: getting-help.html
         - text: "Finding Data"
+          icon: fa-database
           href: finding-data.html
         - text: "Books, Guides, Tutorials, Oh My!"
+          icon: fa-book
           href: references.html
     - text: "About"
       menu:
         - text: About
-          icon: fa-info
+          icon: fa-info-circle
           href: about.html
         - text: License
           icon: fa-gavel
