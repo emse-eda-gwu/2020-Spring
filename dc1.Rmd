@@ -1,9 +1,10 @@
 ---
-title: "Homework 6: TBD"
+title: "DataCamp 1: Exploring Data"
 output:
   html_document:
     number_sections: false
     toc: no
 ---
 
-**Due**: 05 April, 8:00 pm
+**Due**: 21 January, 10:00 pm
+

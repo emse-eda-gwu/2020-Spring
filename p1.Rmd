@@ -1,9 +1,10 @@
 ---
-title: "Homework 1: Data Visualization I"
+title: "Project Assignment 1"
 output:
   html_document:
     number_sections: false
     toc: no
 ---
 
-**Due**: 26 January, 8:00 pm
+**Due**: 31 January, 10:00 pm
+
