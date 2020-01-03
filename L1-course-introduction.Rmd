@@ -1,0 +1,96 @@
+---
+title: "Course Introduction"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+rm(list=objects()) # start with a clean workspace
+source("knitr_setup.R")
+```
+
+---
+
+# Teaching Team
+
+## Meet your instructor!
+
+Dr. John Helveston, Assistant Professor in Engineering Management & Systems Engineering
+
+![](images/helveston.jpg){ width=250 }
+
+Background:
+
+- 2016 PhD in Engineering & Public Policy at Carnegie Mellon University
+- 2015 MS in Engineering & Public Policy at Carnegie Mellon University
+- 2010 BS in Engineering Science & Mechanics at Virginia Tech
+
+## Meet your tutors!
+
+Lingmei Zhao, Masters student in Statistics
+
+![](images/lingmei.jpg){ width=250 }
+
+# What's new?
+
+Students taking this course should have already taken [Programming for Analytics](https://emse-p4a-gwu.github.io/). If you haven't, I **strongly** recommend you review the lessons and assignments on the [previous semester website](https://emse6574-gwu.github.io/2019-Fall/).
+
+While this course follows a similar structure as P4A, there will be several key distinctions:
+
+1. Whereas in P4A we worked with nice, tidy data sets, in this course we will be working more with messy, "raw" data that often needs to be significantly processed before being able to explore it.
+2. Rather than solve puzzles (e.g. write the function `isPrime()`), assignments will involve more real-world data problems that often have multiple, subjective solutions.
+3. Style and aesthetics will matter - consider your projet assignments to be professional reports that you would want to show future employers.
+
+# Course mantras
+
+Here are some philosophies that will get you far in data analytic work. We will be revisiting these over and over again.
+
+**1) Embrace plain text**
+
+You will write code to produce rich outputs that include text and graphics. While your output may have lots of different formatting, your code will be written in [**plain text**](https://en.wikipedia.org/wiki/Plain_text).
+
+**2) Embrace reproducibility**
+
+Everything you produce in this course will be a [reproducible](https://en.wikipedia.org/wiki/Reproducibility) output. That is, you should be able to reproduce your output from the raw data and code. For example, This webpage was generated from [this markdown source file](https://raw.githubusercontent.com/emse-eda-gwu/2020-Spring/master/L1.1-course-introduction.Rmd) on GitHub.
+
+If you want to generate this very HTML page, download the `.Rmd` file, then open it in RStudio and run the following code:
+
+```{r eval=FALSE}
+rmarkdown::render('L1.1-course-introduction.Rmd')
+```
+
+# The syllabus
+
+The [syllabus](syllabus.html) is lengthy, but I do expect you to look through each section. If any changes need to be made, you'll be notified through Slack.
+
+# The schedule
+
+The course [schedule](schedule.html) is your roadmap for the semester. Visit it often to make sure you are well-prepared for class and aware of upcoming assignment / quiz dates.
+
+# Getting started
+
+To prepare for class, you'll need to do the following:
+
+1. Sign up for [Slack](https://emse-eda-s20.slack.com). A link to sign up for the course slack page can be found on the one (and only) announcement on Blackboard.
+2. Sign up for [DataCamp](https://www.datacamp.com/groups/shared_links/dc8dffcb7204d04728b4a92c5511bac4293fec6b) - you must use your @gwu.edu email for this to work (not the @email.gwu.edu).
+3. [Download and install R](https://cloud.r-project.org).
+4. [Download and install RStudio](https://rstudio.com/products/rstudio/download/) (Desktop version).
+
+After you install R and RStudio on your computer, you'll have two new applications you can open. **We will always work in RStudio**. In other words:
+
+<div style="width:550px">
+Do not open this           | Open this
+:-------------------------:|:-------------------------:
+![](images/Rlogo.png){ width=50 }  |  ![](images/RStudio-Ball.png){ width=50 }
+</div>
+
+# Communication & Help
+
+This can be a challenging class - don't suffer in silence! Look at the ["Getting Help"](getting-help.html) page, come to office hours, send me a message on Slack.
+
+# Healy: "Getting Started"
+
+Now that you've got R and RStudio installed, read the ["Getting Started"](http://socviz.co/gettingstarted.html) lesson in [Healy](http://socviz.co/). We will follow the conventions laid out in this chapter throughout the class, including:
+
+- Using [RStudio Projects](https://r4ds.had.co.nz/workflow-projects.html) to stay organized.
+- Working in plain text.
+- Using RMarkdown to conduct and report on our analyses.

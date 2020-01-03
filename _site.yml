@@ -16,10 +16,8 @@ navbar:
       href: schedule.html
     - text: "Lessons"
       menu:
-        - text: "Week 1.1: Course Introduction"
-          href: L1.1-course-introduction.html
-        - text: "Week 1.2: Getting Started"
-          href: L1.2-getting-started.html
+        - text: "Week 1: Course Introduction"
+          href: L1-course-introduction.html
     - text: "Assignments"
       menu:
         - text: "Data Camp Assignments"

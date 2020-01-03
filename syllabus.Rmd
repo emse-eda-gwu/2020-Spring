@@ -165,8 +165,7 @@ The course instructors may choose to change the scales at their discretion. You 
 
 # Getting Help
 
-```{r child = '_getting-help.Rmd'}
-```
+This can be a challenging class - don't suffer in silence! Look at the ["Getting Help"](getting-help.html) page, come to office hours, send me a message on Slack.
 
 # Course Policies
 
