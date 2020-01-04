@@ -66,21 +66,25 @@ The [syllabus](syllabus.html) is lengthy, but I do expect you to look through ea
 
 The course [schedule](schedule.html) is your roadmap for the semester. Visit it often to make sure you are well-prepared for class and aware of upcoming assignment / quiz dates.
 
-# Getting started
+# Setup
 
-To prepare for class, you'll need to do the following:
+To prepare for class, you'll need to do a few things. First, use your **@gwu.edu** email address to register for the following:
 
-1. Sign up for [Slack](https://emse-eda-s20.slack.com). A link to sign up for the course slack page can be found on the one (and only) announcement on Blackboard.
-2. Sign up for [DataCamp](https://www.datacamp.com/groups/shared_links/dc8dffcb7204d04728b4a92c5511bac4293fec6b) - you must use your @gwu.edu email for this to work (not the @email.gwu.edu).
-3. [Download and install R](https://cloud.r-project.org).
-4. [Download and install RStudio](https://rstudio.com/products/rstudio/download/) (Desktop version).
+- [Slack](https://emse-eda-s20.slack.com) - a link to sign up for the course slack page can be found on the one (and only) announcement on Blackboard.
+- [DataCamp](https://www.datacamp.com/groups/shared_links/dc8dffcb7204d04728b4a92c5511bac4293fec6b) - you must use your @gwu.edu email for this to work (not the @email.gwu.edu).
+- [RStudio Cloud](https://login.rstudio.cloud/register) - we'll use this for some in-class activities and quizzes. 
+
+Next, install R and RStudio: 
+
+- [Download and install R](https://cloud.r-project.org).
+- [Download and install RStudio](https://rstudio.com/products/rstudio/download/) (Desktop version).
 
 After you install R and RStudio on your computer, you'll have two new applications you can open. **We will always work in RStudio**. In other words:
 
-<div style="width:550px">
-Do not open this           | Open this
-:-------------------------:|:-------------------------:
-![](images/Rlogo.png){ width=50 }  |  ![](images/RStudio-Ball.png){ width=50 }
+<div style="width:150px">
+Open this   | Not this
+:----------:|:----------:
+![](images/RStudio-Ball.png){ width=50 }  |  ![](images/Rlogo.png){ width=50 }
 </div>
 
 # Communication & Help
