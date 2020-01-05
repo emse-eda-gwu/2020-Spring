@@ -346,6 +346,19 @@ img {
   display: none;
 }
 
+/* Table Row Highlighting */
+
+.remark-slide table {
+  border-collapse: collapse;
+}
+
+.remark-slide table thead th {
+  border-bottom: 1px solid #666;
+}
+
+.remark-slide thead, .remark-slide tfoot, .remark-slide tr:nth-child(even) { background: #d9d9d9
+}
+
 /* ----- FONTS ----- */
 
 body {
@@ -358,7 +371,7 @@ body {
 
 h1, h2, h3 {
   font-family: 'Exo';
-  font-weight: 600;
+  font-weight: 500;
 }
 
 h2, h3 {
