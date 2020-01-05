@@ -36,11 +36,9 @@ dates <- c(dates, format(c(makeup, finals), format="%m/%d"))
 # Make the schedule data frame
 schedule$Date <- dates
 # Define the week
-schedule$Week <- c(seq(1:(length(dates)-1)), (length(dates)-1))
+schedule$Week <- seq(length(dates))
 schedule <- schedule[c('Week', 'Date', 'Topics / Lessons', 'Readings',
                        'Class Notes', 'Quizzes', 'Assignments')]
 # Render the schedule as markdown
 kable(schedule, format='markdown')
 ```
-NOTE: In accordance with university policy, the final exam will be given during the final exam period and not the last week of the semester.
-

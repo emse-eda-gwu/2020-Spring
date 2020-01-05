@@ -1,0 +1,32 @@
+---
+title: "Assignment 0: Class Prerequisites"
+output:
+  html_document:
+    number_sections: false
+    toc: no
+---
+
+**This assignment is optional**
+
+**Purpose**: The purpose of this assignment is to get you up to speed with the basics of working with datasets and plotting in R. All students are expected to have these skills as prerequisites for this course. Although students who took "Programming for Analytics" the previous semester should already posssess these skills, all students are encouraged to review these exercises for extra practice. 
+
+**Skills**: After completing these exercises, you should be able to:
+ 
+ - Use RStudio to write basic R commands. 
+ - Know the distinctions between different R operators and data types, including numeric, string, and logical data.
+ - Use **tidyverse** functions to wrangle and manipulate data in R. 
+ - Use the **ggplot2** library to create plots in R. 
+
+**Tasks**:
+
+1. Get famliar with R and RStudio by reading through the following lessons from the [previous semester of Programming for Analytics](https://emse6574-gwu.github.io/2019-Fall/index.html):
+
+- ["Getting Started"](https://emse6574-gwu.github.io/2019-Fall/L1.2-getting-started.html): Installing R & RStudio, basic operators, staying organized with RStudio Projects. 
+- ["Programming Basics"](https://emse6574-gwu.github.io/2019-Fall/L2-programming-basics.html): Functions, arguments, objects, data types, packages.
+
+2. If you haven't already, register for [DataCamp](https://www.datacamp.com/groups/shared_links/dc8dffcb7204d04728b4a92c5511bac4293fec6b) using your **@gwu.edu** email address. Then complete the following DataCamp lessons:
+
+- [Introduction to the Tidyverse](https://www.datacamp.com/courses/introduction-to-the-tidyverse): This series covers the basics of data wrangling using functions in the **tidyverse** library.
+- [Introduction to Data Visualization with ggplot2](https://www.datacamp.com/courses/introduction-to-data-visualization-with-ggplot2): This series covers the basics of creating plots using the **ggplot2** library.
+
+3. Finally, it can be very helpful to see these skills applied in practice. Take a look at [this example](https://www.datacamp.com/community/tutorials/tidyverse-tutorial-r) of using Tidyverse tools to explore and visualize data on survivors aboard the Titantic. It's a good example of conducting an Exploratory Data Analysis to gain insights about a data set.

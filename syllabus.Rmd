@@ -72,7 +72,7 @@ Go to the course ["Getting Started"](L1.2-getting-started.html) lesson for insta
 
 # Assignments
 
-**Class Participation**
+## Class Participation
 
 Regular class attendance is **essential**. Much of the class time will be spent doing exercises and coding. Multiple absences, inappropriate or unprofessional behavior during class (such as monopolizing discussions or being rude or disruptive), not participating in classroom exercises, and not being prepared for class will result in a lower grade for the class participation component. As a rule of thumb, the participation grade will be assigned according to the following rubric:
 
@@ -82,34 +82,19 @@ Low      | Frequently absent | Rude; disruptive; distracting; monopolizes discus
 Moderate | Attended most classes, but often arrived late or left early | Takes notes; attentive; occasionally contributes in class discussion / exercises
 High     | Attends on time and prepared | Takes notes; attentive; regularly contributes in class discussion / exercises; does not dominate conversation; listens and responds thoughtfully to comments made by others
 
-**DataCamp Assignments**
+## Quizzes
 
-DataCamp assignments provide both instructional videos and applied practice writing code. Students should begin assignments prior to the associated lectures to prepare for class and are encouraged to take notes as they work. Assignments are listed on this website and within the course group on datacamp.com. Credit for each assignment will be allocated in proportion to the percentage of the assignment completed by the due date. No more than 2 late days can be used on any one assignment. Below is a summary of the DataCamp assignments (TBD):
+There will be five quizzes given about once every two weeks immediately at the beginning of class. Quizzes cover material presented in previous classes and assignments during the weeks since the most-recent quiz. Quizzes are designed to be time-intensive, to test for fluency, and to demonstrate where additional study is needed. **Quizzes are low-stakes** - your top 4 count for just 15% of your final grade and the lowest is dropped. If you do poorly on one, use that as feedback on where you need additional improvement.
 
-<div style="width:500px">
-Number | Assignment Name            | Due Date
--------|----------------------------|--------
-1      |    | 
-2      |    | 
-3      |    | 
-4      |    | 
-5      |    | 
-6      |    | 
-7      |    | 
-8      |    | 
-</div>
+## Assignments
 
-**Quizzes**
+Students will be given a series of assignments throughout the semester. These will involve a combination of exercises and small projects. Exercises are a combination of instructional videos and applied practice writing code, mostly using the [DataCamp](https://www.datacamp.com/home) learning platform. Students should begin these assignments prior to the associated lectures to prepare for class and should take notes as they work. Project assignments provide hands-on experience with the material covered in class. While students may work on these assignments in groups, each student must submit their own work. 
 
-There will be five quizzes given about once every two weeks immediately at the beginning of class. Quizzes cover material presented in class and previous assignments from the weeks since the most-recent quiz. Quizzes are designed to be time-intensive, to test for fluency, and to demonstrate where additional study is needed.
+Credit for each assignment will be allocated according to a rubric provided in the assignment description. No more than 2 late days can be used on any one assignment.
 
-**Project Assignments**
+## Final Project
 
-Throughout the semester, small projects will be assigned to provide hands-on experience with the material covered in class. While students may work on these assignments in groups, each student must submit their own work.
-
-**Final Project**
-
-Throughout the semester, each student will work towards an individual final project. At the end of the semester, each student will submit a report of their analysis in the form of an html web page and give a 5-minute presentation of their results to the class. To make the overall project more manageable, it will be broken down into several separate "milestone" deliverables due throughout the semester. A 1-2 page project proposal is due at the end of the fourth week of class. A milestone report of 3-4 pages, including summary statistics and plots, is due immediately upon return from spring break. Presentations will take place during the final exam period. **There will be no final exam - the final project is the final exam.**
+Throughout the semester, each student will work towards an individual final project. At the end of the semester, each student will submit a report of their analysis in the form of an html web page and give a 5-minute presentation of their results to the class. To make the overall project more manageable, it will be broken down into several separate "milestone" deliverables due throughout the semester, including a proposal, peer review, presentation, and final report. View the [final project assignment](assignment-final.html) for more details. **There will be no final exam - the final project is the final exam.**
 
 # Grading
 
@@ -118,13 +103,20 @@ Throughout the semester, each student will work towards an individual final proj
 Final grades will be calculated as follows:
 
 <div style="width:500px">
-Course Component           | Weight | Notes
----------------------------|--------|-----------------------------------------
-Attendance & Participation | 10%    |
-DataCamp Assignments (8)   | 25%    |
-Project Assignments (3)    | 25%    |
-Quizzes (Top 4)            | 20%    | Lowest quiz grade is dropped
-Final Project              | 20%    |
+Item                          | Weight | Notes
+------------------------------|--------|-------------------------------------
+Attendance & Participation    | 10 %   |
+Quizzes (Top 4)               | 15 %   | Lowest quiz grade is dropped
+Assignment 1                  | 5 %    | 
+Assignment 2                  | 10 %   | 
+Assignment 3                  | 5 %    | 
+Assignment 4                  | 10 %   | 
+Assignment 5                  | 5 %    | 
+Final Project Proposal        | 5 %    |
+Final Project Progress Report | 5 %    |
+Final Project Peer Review     | 5 %    |
+Final Project Presentation    | 10 %   |
+Final Project Report          | 15 %   |
 </div>
 
 ## AMD Grading

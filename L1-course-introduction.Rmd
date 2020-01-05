@@ -32,13 +32,13 @@ Lingmei Zhao, Masters student in Statistics
 
 # What's new?
 
-Students taking this course should have already taken [Programming for Analytics](https://emse-p4a-gwu.github.io/). If you haven't, I **strongly** recommend you review the lessons and assignments on the [previous semester website](https://emse6574-gwu.github.io/2019-Fall/).
+Students taking this course should have already taken [Programming for Analytics](https://emse-p4a-gwu.github.io/). If you haven't, I **strongly** recommend you review the lessons and assignments on the [previous semester website](https://emse6574-gwu.github.io/2019-Fall/). You can also get up to speed by completing [Assignment 0](assignment0.html).
 
 While this course follows a similar structure as P4A, there will be several key distinctions:
 
-1. Whereas in P4A we worked with nice, tidy data sets, in this course we will be working more with messy, "raw" data that often needs to be significantly processed before being able to explore it.
+1. Whereas in P4A we worked with nice, tidy data sets, in this course we will be working more with messier, "raw" data that often needs to be significantly processed before being able to explore it.
 2. Rather than solve puzzles (e.g. write the function `isPrime()`), assignments will involve more real-world data problems that often have multiple, subjective solutions.
-3. Style and aesthetics will matter - consider your projet assignments to be professional reports that you would want to show future employers.
+3. Style and aesthetics will matter - consider your assignments and your final project to be professional data products that you would want to show off to future employers.
 
 # Course mantras
 
@@ -72,9 +72,9 @@ To prepare for class, you'll need to do a few things. First, use your **@gwu.edu
 
 - [Slack](https://emse-eda-s20.slack.com) - a link to sign up for the course slack page can be found on the one (and only) announcement on Blackboard.
 - [DataCamp](https://www.datacamp.com/groups/shared_links/dc8dffcb7204d04728b4a92c5511bac4293fec6b) - you must use your @gwu.edu email for this to work (not the @email.gwu.edu).
-- [RStudio Cloud](https://login.rstudio.cloud/register) - we'll use this for some in-class activities and quizzes. 
+- [RStudio Cloud](https://login.rstudio.cloud/register) - we'll use this for some in-class activities and quizzes.
 
-Next, install R and RStudio: 
+Next, install R and RStudio:
 
 - [Download and install R](https://cloud.r-project.org).
 - [Download and install RStudio](https://rstudio.com/products/rstudio/download/) (Desktop version).

@@ -20,28 +20,10 @@ navbar:
           href: L1-course-introduction.html
     - text: "Assignments"
       menu:
-        - text: "Data Camp Assignments"
-          menu:
-            - text: "DC 1"
-              href: dc1.html
-            - text: "DC 2"
-              href: dc2.html
-            - text: "DC 3"
-              href: dc3.html
-            - text: "DC 4"
-              href: dc4.html
-            - text: "DC 5"
-              href: dc5.html
-        - text: "Project Assignments"
-          menu:
-            - text: "Project 1"
-              href: p1.html
-            - text: "Project 2"
-              href: p2.html
-            - text: "Project 3"
-              href: p3.html
-            - text: "Project 4"
-              href: p4.html
+        - text: "0: Class Prerequisites"
+          href: assignment0.html
+        - text: "1: Exploring Data"
+          href: assignment1.html
     - text: "Resources"
       menu:
         - text: "Getting Help"
