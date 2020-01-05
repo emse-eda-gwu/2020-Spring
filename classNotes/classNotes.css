@@ -212,6 +212,11 @@ img {
   border: 1px solid #000;
 }
 
+.noborder img {
+  display: block;
+  border: 0px solid #000;
+}
+
 .borderthick img {
   display: block;
   border: 5px solid #000;
