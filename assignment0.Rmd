@@ -8,20 +8,20 @@ output:
 
 **This assignment is optional**
 
-**Purpose**: The purpose of this assignment is to get you up to speed with the basics of working with datasets and plotting in R. All students are expected to have these skills as prerequisites for this course. Although students who took "Programming for Analytics" the previous semester should already posssess these skills, all students are encouraged to review these exercises for extra practice. 
+**Purpose**: The purpose of this assignment is to get you up to speed with the basics of working with datasets and plotting in R. All students are expected to have these skills as prerequisites for this course. Although students who took "Programming for Analytics" the previous semester should already possess these skills, all students are encouraged to review these exercises for extra practice.
 
 **Skills**: After completing these exercises, you should be able to:
- 
- - Use RStudio to write basic R commands. 
+
+ - Use RStudio to write basic R commands.
  - Know the distinctions between different R operators and data types, including numeric, string, and logical data.
- - Use **tidyverse** functions to wrangle and manipulate data in R. 
- - Use the **ggplot2** library to create plots in R. 
+ - Use **tidyverse** functions to wrangle and manipulate data in R.
+ - Use the **ggplot2** library to create plots in R.
 
 **Tasks**:
 
-1. Get famliar with R and RStudio by reading through the following lessons from the [previous semester of Programming for Analytics](https://emse6574-gwu.github.io/2019-Fall/index.html):
+1. Get familiar with R and RStudio by reading through the following lessons from the [previous semester of Programming for Analytics](https://emse6574-gwu.github.io/2019-Fall/index.html):
 
-- ["Getting Started"](https://emse6574-gwu.github.io/2019-Fall/L1.2-getting-started.html): Installing R & RStudio, basic operators, staying organized with RStudio Projects. 
+- ["Getting Started"](https://emse6574-gwu.github.io/2019-Fall/L1.2-getting-started.html): Installing R & RStudio, basic operators, staying organized with RStudio Projects.
 - ["Programming Basics"](https://emse6574-gwu.github.io/2019-Fall/L2-programming-basics.html): Functions, arguments, objects, data types, packages.
 
 2. If you haven't already, register for [DataCamp](https://www.datacamp.com/groups/shared_links/dc8dffcb7204d04728b4a92c5511bac4293fec6b) using your **@gwu.edu** email address. Then complete the following DataCamp lessons:
