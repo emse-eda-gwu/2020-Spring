@@ -3,10 +3,10 @@ Default styling found here:
 https://github.com/yihui/xaringan/blob/master/inst/rmarkdown/templates/xaringan/resources/default.css
 */
 
-@import url(https://fonts.googleapis.com/css?family=Lato);
 @import url(https://fonts.googleapis.com/css?family=Lato:bold);
-@import url(https://fonts.googleapis.com/css?family=Exo);
+@import url(https://fonts.googleapis.com/css?family=Lato);
 @import url(https://fonts.googleapis.com/css?family=Exo:bold);
+@import url(https://fonts.googleapis.com/css?family=Exo);
 @import url(https://fonts.googleapis.com/css?family=Muli:600,700,800);
 @import url('https://fonts.googleapis.com/css?family=Inconsolata:400');
 @import url('https://fonts.googleapis.com/css?family=Cormorant+Upright:700');
@@ -205,6 +205,18 @@ div.footer-small span {
   box-shadow: 3px 3px 3px #111;
 }
 
+/* Add image border by default */
+
+img {
+  display: block;
+  border: 1px solid #000;
+}
+
+.borderthick img {
+  display: block;
+  border: 5px solid #000;
+}
+
 .whiteborder img {
   display: block;
   border: 1px solid #fff;
@@ -213,16 +225,6 @@ div.footer-small span {
 .whiteborderthick img {
   display: block;
   border: 5px solid #fff;
-}
-
-.blackborder img {
-  display: block;
-  border: 1px solid #000;
-}
-
-.blackborderthick img {
-  display: block;
-  border: 5px solid #000;
 }
 
 .circle img {
