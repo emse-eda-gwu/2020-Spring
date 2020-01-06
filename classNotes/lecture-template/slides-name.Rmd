@@ -5,6 +5,7 @@ date: Month 00, 2020
 output:
   xaringan::moon_reader:
     css: ['default', 'https://emse-eda-gwu.github.io/2020-Spring/classNotes/classNotes.css']
+    lib_dir: libs
     nature:
       highlightStyle: github
       highlightLines: true
