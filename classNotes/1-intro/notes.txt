@@ -1,8 +1,0 @@
-Course introduction
-- things that are different - no more training wheels
-- project overview;
-  - writing a research question;
-  - data provenance (what does your data SOURCE allow you to say about your question?)
-  - Real quick intro to resources data page - getting data as csv files.
-
-- Construct validity - how do you know what you know? mpg dataset vs. full mpg dataset vs. sales-weighted dataset.
