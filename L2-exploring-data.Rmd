@@ -12,21 +12,20 @@ source("knitr_setup.R")
 
 # Data types & descriptive statistics
 
-This week, we will learn some basic strategies for exploring data sets to gain a greater understanding of the variable types and their relationships. To get started, watch this 20 minute video to learn about some basic data types and descriptive statistics:
+This week, we will learn some strategies for exploring data sets to gain a greater understanding of the variable types and their relationships. To get started, open up a notebook (physical, digital...whatever you take notes in best), and **take notes** while you watch this 20 minute video to learn about some basic data types and descriptive statistics:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/zHcQPKP6NpM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 # Readings!
 
+After watching the above video, read through the following chapters. The R4DS chapter provides some more "hands on" strategies for exploring data using R and the **ggplot2** library. The Wilke chapter shows a quick overview of many common plots and what they are often used for. 
 
+- [R4DS - 7: EDA](https://r4ds.had.co.nz/exploratory-data-analysis.html)
+- [Wilke - 5: Directory of visualizations](https://serialmentor.com/dataviz/directory-of-visualizations.html)
 
-[R4DS - 7: EDA](https://r4ds.had.co.nz/exploratory-data-analysis.html)
+# Data Visualization Guides
 
-[Wilke - 5: Directory of visualizations](https://serialmentor.com/dataviz/directory-of-visualizations.html)
-
-## Data Visualization Guides
-
-Beautiful, interactive guides for making effective information visualizations:
+Not too long ago, people used to have to spend days and weeks coming up with the perfect graph for their data. Fortunately, we live in the future and awesome people have created these wonderful, beautiful interactive guides to help you find the most appropriate graph for your data. These will come in handy when you start working on your class project:
 
 - [Data-to-Viz](https://www.data-to-viz.com/)
 - [R Graph Gallery](http://r-graph-gallery.com/)
