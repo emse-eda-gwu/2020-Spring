@@ -18,12 +18,16 @@ navbar:
       menu:
         - text: "Week 1: Course Introduction"
           href: L1-course-introduction.html
+        - text: "Week 2: Exploring Data"
+          href: L2-exploring-data.html
     - text: "Assignments"
       menu:
         - text: "0: Class Prerequisites"
           href: assignment0.html
         - text: "1: Exploring Data"
           href: assignment1.html
+        - text: "Final Project"
+          href: assignment-project.html
     - text: "Resources"
       menu:
         - text: "Getting Help"

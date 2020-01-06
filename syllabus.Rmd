@@ -94,7 +94,9 @@ Credit for each assignment will be allocated according to a rubric provided in t
 
 ## Final Project
 
-Throughout the semester, each student will work towards an individual final project. At the end of the semester, each student will submit a report of their analysis in the form of an html web page and give a 5-minute presentation of their results to the class. To make the overall project more manageable, it will be broken down into several separate "milestone" deliverables due throughout the semester, including a proposal, peer review, presentation, and final report. View the [final project assignment](assignment-final.html) for more details. **There will be no final exam - the final project is the final exam.**
+Throughout the semester, students will work in teams of 1-3 students towards a final project of an exploratory data analysis. At the end of the semester, each student will submit a report of their analysis in the form of an html web page and give a 5-minute presentation of their results to the class. To make the overall project more manageable, it will be broken down into several separate "milestone" deliverables due throughout the semester, including a proposal, progress report, peer review, presentation, and final report. View the [final project assignment](assignment-final.html) page for more details. 
+
+**There will be no final exam - the final project is the final exam**
 
 # Grading
 

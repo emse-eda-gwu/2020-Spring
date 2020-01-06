@@ -1,0 +1,179 @@
+---
+title: "Final Project"
+output:
+  html_document:
+    number_sections: false
+    toc: yes
+---
+
+---
+
+# Overview
+
+**Due Dates**:
+
+- Proposal: March 13, 10:00 pm
+- Progress report: April 10, 10:00 pm
+- Peer reviews: April 17, 10:00 pm
+- Presentation slides: April 28, 10:00 pm
+- Final report: May 6, 10:00 pm
+
+**Purpose**: The skills covered in this course are rooted in design rules and principles rather than formulas and equations. As such, the _application_ of these principles to a real data problem is one of the best ways to learn and assess mastery of these skills. I guarantee you one day you will need to apply these principles to communicate an idea to colleagues, so let's make sure you have at least one chance to practice before the [stakes are higher](https://emse6574-gwu.github.io/2019-Fall/challengerExplosion.html).
+
+**Skills & Knowledge**: Your final project should illustrate your ability to transform raw data into insights by making the non-visible visible, showing clear trends or patterns, and / or identifying outliers or missing information. The specific skills involved in achieving this goal include all of the course learning objectives listed on the course [home page](index.html).
+
+**Teams**: You may work in teams of 1 to 3 students of your choosing. If you choose to work in a team, you must finalize your team members at the time of submitting your proposal.
+
+---
+
+# Project Tasks
+
+The final project for this course will consist of conducting an exploratory data analysis of one or more sources of data and creating visualizations to effectively communicate the results of your anlaysis of others using the principles of information visualization covered in this course. To make the overall project more manageable, it will be broken down into separate "milestone" deliverables due throughout the semester.
+
+---
+
+## Proposal
+
+**Due**: March 13 by 10:00 pm
+
+**Weight**: This assignment is worth 5% of your final grade.
+
+**Tasks**:
+
+Write a 1-2 page proposal of an exploratory data analysis that you plan to conduct for your final project. Submit your proposal on Blackboard. The instructors will review your proposal and provide feedback upon returning from spring break. If your proposal is approved, you're done and can move on towards the next project task. Otherwise, the instructors may ask you to submit a revised proposal, most likely by focusing / adjusting the proposal scope.
+
+Below is a list of specific items your proposal should include - the % in brackets indicates points towards this assignment grade:
+
+1. [10%] Follow these formatting rules:
+
+    - Be between 1 and 2 pages in length.
+    - 12 point font, 1 inch margins.
+    - Write your project title at the top of the document (e.g. **Title**: <insert title>).
+    - List the name(s) of student(s) involved in the project below the project title (e.g. **Authors**: <insert list of names>). Your team will not be allowed to change after submitting your proposal.
+
+2. [30%] State a clear research question. Follow [these guidelines](https://writingcenter.gmu.edu/guides/how-to-write-a-research-question). Your question should be:
+
+    - **Clear**: it provides enough specifics that your audience can easily understand its purpose without needing additional explanation.
+    - **Focused**: it is narrow enough that it can be addressed thoroughly with the data available and within the limits of the final project report.
+    - **Concise**: it is expressed in the fewest possible words.
+    - **Complex**: it is not answerable with a simple "yes" or "no," but rather requires synthesis and analysis of data.
+    - **Arguable**: its potential answers are open to debate rather than accepted facts.
+
+3. [30%] Discuss the data source(s) you plan to use for your analysis:
+
+    - If you have already identified the source(s), describe them and include urls or references to the sources. If you have not identified a source yet, describe the data you hope to use, and give at least one plausible source that may have the data (regardless of whether the source makes it available or not).
+    - Discuss the validity of the source(s). For each data source, is the data available the _original_ data, or has it been processed? How was the data collected? If you do not yet have a source, discuss what concerns you have about a plausible source that might have the data.
+
+4. [30%] Describe your anticipated results:
+
+    - Describe how you would expect one variable in your data to be distributed (e.g. unimodal, multimodel, tightly-group, widely-spread, etc.), regardless of whether that variable actually exists.
+    - Describe one relationship you expect to find between two or more variables, regardless of whether those variables actually exist.
+    - Describe at least one chart that would help you visualize this relationship that you expect to find.
+
+---
+
+## Progress Report
+
+**Due**: April 10 by 10:00 pm
+
+**Weight**: This assignment is worth 5% of your final grade.
+
+**Tasks**:
+
+Write a 3-4 page report summarizing your progress towards your project thus far, including summary statistics and preliminary charts. Alongside this report, **students working in teams must submit a review of their teammates' contributions** to help ensure that the workload and grading are equitable. The link to the team feedback form is listed on the Blackboard submission page for this assignment.
+
+Below is a list of specific items your progress report should include - the % in brackets indicates points towards this assignment grade:
+
+1. [10%] Follow these formatting rules:
+
+    - Be between 3 and 4 pages in length, including all images.
+    - 12 point font, 1 inch margins.
+    - Write your project title at the top of the document, which can be modified from your previous title (e.g. **Title**: <insert title>).
+    - List the name(s) of student(s) involved in the project below the project title (e.g. **Authors**: <insert list of names>).
+
+2. [XX%] State a clear research question. This can (and probably should) be a revised question from your proposal. Again, follow [these guidelines](https://writingcenter.gmu.edu/guides/how-to-write-a-research-question).
+
+3. [TBD]
+
+---
+
+## Peer Review
+
+**Due**: April 17 by 10:00 pm
+
+**Weight**: This assignment is worth 5% of your final grade.
+
+**Tasks**:
+
+Each student will be randomly assigned to review the progress reports of one of their classmate's projects. This is an **individual assignment**, so students in teams must individually write their own reviews. Students in teams will be assigned different projects to review. The peer reviews will be given to the project teams as further feedback to consider as they revise their analyses and prepare for their final presentation and report.
+
+Below is a list of specific items your peer review should include - the % in brackets indicates points towards this assignment grade:
+
+1. [10%] Follow these formatting rules:
+
+    - Be between 2 and 3 pages in length, including all images.
+    - 12 point font, 1 inch margins.
+    - Write your name as the reviewer at the top of the document (e.g. "**Reviewer:** John Helveston").
+    - Write the title of the project being reviewed below your name (e.g. **Project Being Reviewed**: <insert project title>)
+    
+2. [TBD]
+
+---
+
+## Presentation
+
+**Due**: Slides due by April 28 by 10:00 pm; presentations will be in class on April 29.
+
+**Weight**: This assignment is worth 10% of your final grade.
+
+**Tasks**:
+
+Below is a list of specific items your presentation slides should include - the % in brackets indicates points towards this assignment grade:
+
+1. [10%] Follow these formatting rules:
+
+    - Be between 6 and 8 slides in length.
+    - A title slide that includes the project title, team member names, and the presentation date (April 29, 2020).
+    - All slides should be numbered in the bottom-left or bottom-right corners. 
+
+2. [TBD]
+
+---
+
+## Final Report
+
+**Due**: May 6 by 10:00 pm
+
+**Weight**: This assignment is worth 15% of your final grade.
+
+**Tasks**:
+
+Below is a list of specific items your final report should include - the % in brackets indicates points towards this assignment grade:
+
+1. [10%] Follow these formatting rules:
+
+    - Be between 3 and 4 pages in length, including all images.
+    - In your markdown YAML header, include the project title and the name(s) of student(s) involved in the project.
+
+2. [XX%] State your research question, again following [these guidelines](https://writingcenter.gmu.edu/guides/how-to-write-a-research-question).
+
+3. [TBD]
+
+---
+
+# Examples
+
+Here are some examples of exploratory data analyses:
+
+- [Is Usain Bolt really the fastest man on earth?](https://radmuzom.com/2019/05/18/fun-with-statistics-is-usain-bolt-really-the-fastest-man-on-earth/), by [Anindya Mozumdar](https://radmuzom.com/about/). This analysis uses some statistical modeling (which won't cover), but the use of visualizations alone are effective for addressing the research questions posed.
+- [F1 racing data analysis](https://www.kaggle.com/jonathanbouchet/f1-data-analysis), by Jonathan Bouchet. This is an extensive exploratory data analysis of a variety of data on races, drivers, and constructors across the history of [Formula 1](https://www.formula1.com/) racing. This would probably be overkill for a course project, but sections of it (e.g. section 3 on the races, or sections 4 and 5 together on the drivers and constructors) would make a nice project. It involves mutliple data sets, some not-so-simple data cleaning, and a wide variety of nice visualizations.
+- [Increasing Intensity of Strong Atlantic Hurricanes](http://myweb.fsu.edu/jelsner/stronger-hur.html), by James B. Elsner. This is a short analysis with the goal of validating the predictions of [this study](https://www.nature.com/articles/nature07234) published in Nature in 2008, which predicted that Atlantic tropical cyclones would continue to get stronger on average over time. While this analysis is too short to be considered adequate for a final project, it is still a good example of good data source documentation and one effective visualization. An expanded inquiriy into the questions addressd here would make a good course project.
+
+---
+
+**Page sources**:
+
+Some of the content on this page is inspired by and / or modified from other sources, including:
+
+- Prof. Marti Hearst's Fall 2005 course [SIMS 247: Information Visualization and Presentation](http://courses.ischool.berkeley.edu/i247/f05/assignments/fp.html)
+- The [How to Write a Research Question](https://writingcenter.gmu.edu/guides/how-to-write-a-research-question) article by the GMU writing center.

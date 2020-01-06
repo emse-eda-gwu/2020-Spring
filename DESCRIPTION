@@ -24,4 +24,5 @@ Imports:
     DAAG,
     dslabs,
     gapminder,
-    gsheet
+    gsheet,
+    kableExtra

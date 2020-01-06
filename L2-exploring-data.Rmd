@@ -1,0 +1,33 @@
+---
+title: "Week 2: Exploring Data"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+rm(list=objects()) # start with a clean workspace
+source("knitr_setup.R")
+```
+
+---
+
+# Data types & descriptive statistics
+
+This week, we will learn some basic strategies for exploring data sets to gain a greater understanding of the variable types and their relationships. To get started, watch this 20 minute video to learn about some basic data types and descriptive statistics:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/zHcQPKP6NpM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+# Readings!
+
+
+
+[R4DS - 7: EDA](https://r4ds.had.co.nz/exploratory-data-analysis.html)
+
+[Wilke - 5: Directory of visualizations](https://serialmentor.com/dataviz/directory-of-visualizations.html)
+
+## Data Visualization Guides
+
+Beautiful, interactive guides for making effective information visualizations:
+
+- [Data-to-Viz](https://www.data-to-viz.com/)
+- [R Graph Gallery](http://r-graph-gallery.com/)
+- [Visual Vocabulary](https://gramener.github.io/visual-vocabulary-vega/#)

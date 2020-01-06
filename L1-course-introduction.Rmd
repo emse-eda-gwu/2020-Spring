@@ -1,5 +1,5 @@
 ---
-title: "Course Introduction"
+title: "Week 1: Course Introduction"
 output: html_document
 ---
 
@@ -91,10 +91,14 @@ Open this   | Not this
 
 This can be a challenging class - don't suffer in silence! Look at the ["Getting Help"](getting-help.html) page, come to office hours, send me a message on Slack.
 
-# Healy: "Getting Started"
+# Readings!
 
 Now that you've got R and RStudio installed, read the ["Getting Started"](http://socviz.co/gettingstarted.html) lesson in [Healy](http://socviz.co/). We will follow the conventions laid out in this chapter throughout the class, including:
 
 - Using [RStudio Projects](https://r4ds.had.co.nz/workflow-projects.html) to stay organized.
 - Working in plain text.
 - Using RMarkdown to conduct and report on our analyses.
+
+Also, check out the [**readr**](https://readr.tidyverse.org/articles/readr.html) and [**readxl**](https://readxl.tidyverse.org/) packages - we'll be using these throughout the semester to import data into R. 
+
+Finally, read through [this guide](https://writingcenter.gmu.edu/guides/how-to-write-a-research-question), from GMU on how to write a research question. We'll come back to these ideas again later when you start working on your final projects, but it's a good idea to start thinking about your research question early.

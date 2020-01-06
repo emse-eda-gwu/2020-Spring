@@ -21,14 +21,21 @@ Readings legend:
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(knitr)
-library(here)
+library(kableExtra)
 library(gsheet)
 options(knitr.kable.NA = '')
+html_table_width <- function(kable_output, width){
+  width_html <- paste0(paste0('<col width="', width, '">'), collapse = "\n")
+  width_html <- paste0('<table class="table">\n', width_html)
+  return(sub('<table>', width_html, kable_output))
+}
+
+# Read the schedule from the google sheet
 schedule <- gsheet2tbl('https://docs.google.com/spreadsheets/d/1GkCv6FGzn7kNU4yC5QyCVAt2OnfS3yK1UVNeG2u0z4g/edit?usp=sharing')
 # Define the first and last of class and finals start date
 start  <- as.Date("2020/01/15")
 end    <- as.Date("2020/04/22")
-makeup <- as.Date("2020/04/28")
+makeup <- as.Date("2020/04/29")
 finals <- as.Date("2020/05/06")
 # Format the dates
 dates <- format(seq(start, end, by = "week"), format="%m/%d")
@@ -40,5 +47,8 @@ schedule$Week <- seq(length(dates))
 schedule <- schedule[c('Week', 'Date', 'Topics / Lessons', 'Readings',
                        'Class Notes', 'Quizzes', 'Assignments')]
 # Render the schedule as markdown
-kable(schedule, format='markdown')
+kable(schedule, format = 'html', escape = FALSE, 
+      align = c('c', 'c', 'l', 'l', 'l', 'l', 'l')) %>% 
+    kable_styling(full_width = F) %>% 
+    column_spec(c(4, 7), width = c('14em', '6em'))
 ```
