@@ -3,7 +3,8 @@ title: "Final Project"
 output:
   html_document:
     number_sections: false
-    toc: yes
+    toc: true
+    toc_float: true
 ---
 
 ---
@@ -115,7 +116,7 @@ Below is a list of specific items your peer review should include - the % in bra
     - 12 point font, 1 inch margins.
     - Write your name as the reviewer at the top of the document (e.g. "**Reviewer:** John Helveston").
     - Write the title of the project being reviewed below your name (e.g. **Project Being Reviewed**: <insert project title>)
-    
+
 2. [TBD]
 
 ---
@@ -134,7 +135,7 @@ Below is a list of specific items your presentation slides should include - the 
 
     - Be between 6 and 8 slides in length.
     - A title slide that includes the project title, team member names, and the presentation date (April 29, 2020).
-    - All slides should be numbered in the bottom-left or bottom-right corners. 
+    - All slides should be numbered in the bottom-left or bottom-right corners.
 
 2. [TBD]
 
@@ -168,6 +169,7 @@ Here are some examples of exploratory data analyses:
 - [Is Usain Bolt really the fastest man on earth?](https://radmuzom.com/2019/05/18/fun-with-statistics-is-usain-bolt-really-the-fastest-man-on-earth/), by [Anindya Mozumdar](https://radmuzom.com/about/). This analysis uses some statistical modeling (which won't cover), but the use of visualizations alone are effective for addressing the research questions posed.
 - [F1 racing data analysis](https://www.kaggle.com/jonathanbouchet/f1-data-analysis), by Jonathan Bouchet. This is an extensive exploratory data analysis of a variety of data on races, drivers, and constructors across the history of [Formula 1](https://www.formula1.com/) racing. This would probably be overkill for a course project, but sections of it (e.g. section 3 on the races, or sections 4 and 5 together on the drivers and constructors) would make a nice project. It involves mutliple data sets, some not-so-simple data cleaning, and a wide variety of nice visualizations.
 - [Increasing Intensity of Strong Atlantic Hurricanes](http://myweb.fsu.edu/jelsner/stronger-hur.html), by James B. Elsner. This is a short analysis with the goal of validating the predictions of [this study](https://www.nature.com/articles/nature07234) published in Nature in 2008, which predicted that Atlantic tropical cyclones would continue to get stronger on average over time. While this analysis is too short to be considered adequate for a final project, it is still a good example of good data source documentation and one effective visualization. An expanded inquiriy into the questions addressd here would make a good course project.
+- [Death: Reality vs Reported](https://owenshen24.github.io/charting-death/), by Owen Shen: This is an interesting original analysis in which the author collected the data himself. The analysis compares whether the proportion of actual causes of death is consistent with the proportion of death causes that the media reports. This analysis also uses some interactive graphics so that the reader can view different versions of the same plot, such as scrolling through the plot over time.
 
 ---
 

@@ -1,6 +1,9 @@
 ---
 title: "Syllabus"
-output: html_document
+output:
+  html_document:
+    toc: true
+    toc_float: true
 ---
 
 ```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
@@ -62,8 +65,6 @@ All texts and software for this course is freely available on the web. This incl
 - R (version 3.6.0 or later), which can be downloaded from [The Comprehensive R Archive Network (CRAN)](https://cloud.r-project.org)
 - RStudio (Desktop Version), a free IDE for R, which can be downloaded from [RStudio](https://rstudio.com/products/rstudio/download/)
 
-Go to the course ["Getting Started"](L1.2-getting-started.html) lesson for installation instructions and details about R and RStudio.
-
 ## Texts / Other Useful Resources
 
 - Healy, Kieran. "Data Visualization: A practical introduction" [[free online](http://socviz.co/)], [[buy on amazon](https://www.amazon.com/Data-Visualization-Introduction-Kieran-Healy/dp/0691181624)]
@@ -84,17 +85,17 @@ High     | Attends on time and prepared | Takes notes; attentive; regularly cont
 
 ## Quizzes
 
-There will be five quizzes given about once every two weeks immediately at the beginning of class. Quizzes cover material presented in previous classes and assignments during the weeks since the most-recent quiz. Quizzes are designed to be time-intensive, to test for fluency, and to demonstrate where additional study is needed. **Quizzes are low-stakes** - your top 4 count for just 15% of your final grade and the lowest is dropped. If you do poorly on one, use that as feedback on where you need additional improvement.
+There will be several quizzes given about once every two weeks immediately at the beginning of class. Quizzes cover material presented in previous classes and assignments during the weeks since the most-recent quiz. Quizzes are designed to be time-intensive, to test for fluency, and to demonstrate where additional study is needed. **Quizzes are low-stakes** - your worst one is dropped, and the rest count for just 15% of your final grade. If you do poorly on one, use that as feedback on where you need additional improvement.
+
+> **Why quiz at all?** Research shows that giving small quizzes throughout a class can dramatically help with retention. It's a phenomenon known as the "retrieval effect" - basically, you have to _practice_ remembering things, otherwise your brain won't remember them. The phenomenon and research on it is explained in detail in the book ["Make It Stick: The Science of Successful Learning"](https://www.hup.harvard.edu/catalog.php?isbn=9780674729018), by Brown, Roediger, and McDaniel.
 
 ## Assignments
 
-Students will be given a series of assignments throughout the semester. These will involve a combination of exercises and small projects. Exercises are a combination of instructional videos and applied practice writing code, mostly using the [DataCamp](https://www.datacamp.com/home) learning platform. Students should begin these assignments prior to the associated lectures to prepare for class and should take notes as they work. Project assignments provide hands-on experience with the material covered in class. While students may work on these assignments in groups, each student must submit their own work. 
-
-Credit for each assignment will be allocated according to a rubric provided in the assignment description. No more than 2 late days can be used on any one assignment.
+Students will be given a series of assignments throughout the semester. These will be a combination of exercises and mini projects. Exercises include instructional videos and applied practice writing code, mostly using the [DataCamp](https://www.datacamp.com/home) learning platform. Students should begin these assignments prior to the associated lectures to prepare for class and should take notes as they work. Mini project assignments provide hands-on experience with the material covered in class. While students may work with their peers on these assignments, each student must submit their own work. Credit for each assignment will be allocated according to a rubric provided in the assignment description. **No more than 2 late days can be used on any one assignment.**
 
 ## Final Project
 
-Throughout the semester, students will work in teams of 1-3 students towards a final project of an exploratory data analysis. At the end of the semester, each student will submit a report of their analysis in the form of an html web page and give a 5-minute presentation of their results to the class. To make the overall project more manageable, it will be broken down into several separate "milestone" deliverables due throughout the semester, including a proposal, progress report, peer review, presentation, and final report. View the [final project assignment](assignment-final.html) page for more details. 
+Throughout the semester, students will work in teams of 1-3 students towards a final project of an exploratory data analysis. At the end of the semester, each student will submit a report of their analysis in the form of an html web page and give a 5-minute presentation of their results to the class. To make the overall project more manageable, it will be broken down into several separate "milestone" deliverables due throughout the semester, including a proposal, progress report, peer review, presentation, and final report. View the [final project assignment](assignment-project.html) page for more details.
 
 **There will be no final exam - the final project is the final exam**
 
@@ -108,12 +109,12 @@ Final grades will be calculated as follows:
 Item                          | Weight | Notes
 ------------------------------|--------|-------------------------------------
 Attendance & Participation    | 10 %   |
-Quizzes (Top 4)               | 15 %   | Lowest quiz grade is dropped
-Assignment 1                  | 5 %    | 
-Assignment 2                  | 10 %   | 
-Assignment 3                  | 5 %    | 
-Assignment 4                  | 10 %   | 
-Assignment 5                  | 5 %    | 
+Quizzes                       | 15 %   | Lowest quiz grade is dropped
+Assignment 1                  | 5 %    | Exercises
+Assignment 2                  | 5 %    | Exercises
+Assignment 3                  | 10 %   | Mini Project
+Assignment 4                  | 10 %   | Mini Project
+Assignment 5                  | 5 %    | Exercises
 Final Project Proposal        | 5 %    |
 Final Project Progress Report | 5 %    |
 Final Project Peer Review     | 5 %    |
@@ -123,7 +124,7 @@ Final Project Report          | 15 %   |
 
 ## AMD Grading
 
-This Alternative Minimum Grading (AMG) policy is available to everybody, but is designed specifically for students who struggle in the first part of the course, and then through sustained hard work and dedication manage to elevate their performance in the latter part of the course to a level that merits passing with a C (even if their Standard Grade might be lower than that). 
+This Alternative Minimum Grading (AMG) policy is available to everybody, but is designed specifically for students who struggle in the first part of the course, and then through sustained hard work and dedication manage to elevate their performance in the latter part of the course to a level that merits passing with a C (even if their Standard Grade might be lower than that).
 
 Student cannot "sign up" for AMG grading. Every student will be considered both for Standard Grading and AMG, and the instructor can choose to assign the AMG grade if a student's effort merits it. To qualify for AMG you must put forth sustained effort, which means meeting the following requirements:
 
@@ -134,12 +135,12 @@ Student cannot "sign up" for AMG grading. Every student will be considered both 
 To compute your AMG score, first use the following to compute your raw score. If the resulting score is higher than a C, set it back to a C.
 
 <div style="width:350px">
-Course Component           | Weight 
+Course Component           | Weight
 ---------------------------|--------
-DataCamp Assignments (8)   | 25%    
-Project Assignments (3)    | 20%    
-Quizzes (Top 4)            | 15%    
-Final Project              | 40%    
+DataCamp Assignments (8)   | 25%
+Project Assignments (3)    | 20%
+Quizzes (Top 4)            | 15%
+Final Project              | 40%
 </div>
 
 ## Grading Scale
@@ -171,7 +172,7 @@ Write your own code - don't look at others' code, and don't let others look at y
 
 ## Late Policy
 
-Each students is allowed **5** late homework submission days - use them however you want, no questions asked. No more than **2 days** can be applied toward a single assignment. Late days are meant to cover illness, family emergencies, and religious holidays. Assignments submitted more than 2 days after the due date will not be graded. In extreme circumstances, contact the instructor.
+Each students is allowed **5** late homework submission days - use them however you want, no questions asked. **No more than 2 days can be applied toward a single assignment**. Late days are meant to cover illness, family emergencies, and religious holidays. Assignments submitted more than 2 days after the due date will not be graded. In extreme circumstances, contact the instructor.
 
 ## Collaboration Policy
 
@@ -182,7 +183,6 @@ Learning how to program is like learning how to ride a bicycle - to get better, 
 ### Good Collaboration
 
 - Discussing which general concepts might be useful in solving a problem (conditionals, loops, etc.).
-- Asking questions about how to build an algorithm for the problem.
 - Asking for debugging help with code.
 - Sketch out algorithms on a whiteboard together.
 - To avoid copying the code, you should write up the solution together, discuss it, then erase the solution, wait a few minutes, and write up solutions individually.
@@ -195,29 +195,27 @@ Learning how to program is like learning how to ride a bicycle - to get better, 
 
 Over-collaboration results in a warning on the first offense, and a penalty on later offenses. Examples include:
 
-- Building ['psuedocode'](https://en.wikipedia.org/wiki/Pseudocode) algorithms together on a whiteboard that are essentially full programs.
 - Explaining to a friend how to solve a problem in high-level terms by going through your own program line-by-line.
-- Helping a friend debug on a collaborative problem by suggesting they use your own approach to the problem.
-- Collaborating with a student on a collaborative problem and then not including their name as a collaborator in the assignment writeup.
+- Helping a friend debug code by suggesting they use your own approach to the problem.
+- Collaborating with a student on an assignment and then _not_ including their name as a collaborator in the assignment writeup.
 - In the case that you have taken this course before, copying your own code from the previous time you took the course.
 
 ### Cheating
 
-Cheating results in a penalty on the first offense, and failing the course on the second offense. Cheating on homework assignments can include:
+Cheating results in a penalty on the first offense, and failing the course on the second offense. Cheating on assignments can include:
 
 - Copying or stealing any amount of code from someone currently in the class or someone who has taken the class before.
 - NOTE: Copying is never okay, whether the code is provided electronically, visually, audibly, or on paper.
 - Providing code you have written for an assignment to anyone else in the class.
-- Again: never share your code with others in the class, including electronic sharing, showing someone code on your computer, verbally speaking the code, or writing down the code on paper.
 - Finding code online and using it in the assignment. One exception: you may use code from the course website.
 - Putting code solutions from the course assignments online.
 - Receiving code-level assistance from any person not associated with the course.
 - Getting someone else to write the assignment code for you.
-- Asking questions about the assignments on any online services outside of the course office hours and course Piazza.
+- Asking questions about the assignments on any online services outside of the course office hours / Slack.
 
-Cheating on quizzes, projects, or the final project can include:
+Cheating on quizzes, assignments, or the final project can include:
 
-- Referring to any external resources while completing the assessment (phones, notes, etc.).
+- Referring to any external resources while completing the assignment (phones, notes, etc.).
 - Copying part of an answer off of another student's paper, even if it is very small.
 - Using solutions provided by students who previously took the course.
 
@@ -246,9 +244,9 @@ Sometimes, students panic and copy code right before the deadline, then regret w
 
 ## Use of Course Materials
 
-All **solutions** to assignments and quizzes are proprietary. Don't post them online or try to sell them - this is a violation of the [student code of conduct](https://studentconduct.gwu.edu/code-student-conduct).
+All course materials available on the course website are developed open source - you are welcome to post and share them following the licensing guidelines listed in the [license](LICENSE.html) page.
 
-All other course materials available on the course website are developed open source - you are welcome to post and share them following the licensing guidelines listed in the [license](LICENSE.html) page.
+However, all **solutions** to assignments and quizzes are proprietary. Don't post them online or try to sell them - this is a violation of the [student code of conduct](https://studentconduct.gwu.edu/code-student-conduct).
 
 ## What To Do if the Instructor Does Not Arrive
 
@@ -288,9 +286,9 @@ In addition to the formal code of academic integrity, the instructor expects tha
 
 <div class = "col-md-8">
 
-Once you have read this entire syllabus and viewed the [course schedule](schedule.html), please send me a picture of your favorite super hero in a direct message on Slack. 
+Once you have read this entire syllabus and viewed the [course schedule](schedule.html), please send me a picture of your favorite super hero in a direct message on Slack.
 
-For real. 
+For real.
 
 Brownie points if it's animated.
 
