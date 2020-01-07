@@ -1,0 +1,25 @@
+---
+title: "Assignment 2: Plotting with **ggplot2**"
+output:
+  html_document:
+    number_sections: false
+    toc: no
+---
+
+**Due**: 28 January, 10:00 pm
+
+**Purpose**: The purpose of this assignment is to refresh your skills from P4A and learn some new skills for plotting with the **ggplot2** library in R.
+
+**Skills & Knowledge**: After completing these exercises, you should be able to:
+
+- Create a variety of different charts using the **ggplot2** library in R, including scatter plots, histograms, bar charts, and line charts.
+- Know the distinctions between the elements of a ggplot, including data, aesthetics, geometries, and themes. 
+- Know how to map variables to aesthetics in a ggplot.
+
+**Assessment**: Credit for this assignment will be allocated in proportion to the percentage of the assignment completed by the due date. No more than 2 late days can be used on any one assignment.
+
+**Tasks**:
+
+1. Open up a notebook (physical, digital...whatever you take notes in best), and **take notes** while you complete the entire [Introduction to Data Visualization with ggplot2](https://www.datacamp.com/courses/introduction-to-data-visualization-with-ggplot2) DataCamp course. You should go through all four lessons in the course.
+
+2. When you have completed all of the above exercises, go to the "Assignment Submission" page on Blackboard and write three things you learned by going through these exercises.

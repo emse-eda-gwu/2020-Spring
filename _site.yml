@@ -26,6 +26,8 @@ navbar:
           href: assignment0.html
         - text: "1: Exploring Data"
           href: assignment1.html
+        - text: "2: Plotting with ggplot2"
+          href: assignment2.html
         - text: "Final Project"
           href: assignment-project.html
     - text: "Resources"
@@ -80,4 +82,3 @@ output:
     theme: cosmo
     highlight: textmate
     number_sections: true
-
