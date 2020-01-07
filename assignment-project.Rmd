@@ -4,7 +4,6 @@ output:
   html_document:
     number_sections: false
     toc: true
-    toc_float: true
 ---
 
 ---
@@ -49,8 +48,8 @@ Below is a list of specific items your proposal should include - the % in bracke
 
     - Be between 1 and 2 pages in length.
     - 12 point font, 1 inch margins.
-    - Write your project title at the top of the document (e.g. **Title**: <insert title>).
-    - List the name(s) of student(s) involved in the project below the project title (e.g. **Authors**: <insert list of names>). Your team will not be allowed to change after submitting your proposal.
+    - Write your project title at the top of the document (e.g. **Title**: `<insert title>`).
+    - List the name(s) of student(s) involved in the project below the project title (e.g. **Authors**: `<insert list of names>`). Your team will not be allowed to change after submitting your proposal.
 
 2. [30%] State a clear research question. Follow [these guidelines](https://writingcenter.gmu.edu/guides/how-to-write-a-research-question). Your question should be:
 
@@ -81,7 +80,9 @@ Below is a list of specific items your proposal should include - the % in bracke
 
 **Tasks**:
 
-Write a 3-4 page report summarizing your progress towards your project thus far, including summary statistics and preliminary charts. Alongside this report, **students working in teams must submit a review of their teammates' contributions** to help ensure that the workload and grading are equitable. The link to the team feedback form is listed on the Blackboard submission page for this assignment.
+Write a 3-4 page report summarizing your progress towards your project thus far, including summary statistics and preliminary charts. By this point, you should have already identified data source(s) for your project and begun exploring the data. 
+
+Alongside this report, **students working in teams must submit a review of their teammates' contributions** to help ensure that the workload and grading are equitable. The link to the team feedback form is listed on the Blackboard submission page for this assignment.
 
 Below is a list of specific items your progress report should include - the % in brackets indicates points towards this assignment grade:
 
@@ -89,12 +90,27 @@ Below is a list of specific items your progress report should include - the % in
 
     - Be between 3 and 4 pages in length, including all images.
     - 12 point font, 1 inch margins.
-    - Write your project title at the top of the document, which can be modified from your previous title (e.g. **Title**: <insert title>).
-    - List the name(s) of student(s) involved in the project below the project title (e.g. **Authors**: <insert list of names>).
+    - Write your project title at the top of the document, which can be modified from your previous title (e.g. **Title**: `<insert title>`).
+    - List the name(s) of student(s) involved in the project below the project title (e.g. **Authors**: `<insert list of names>`).
 
-2. [XX%] State a clear research question. This can (and probably should) be a revised question from your proposal. Again, follow [these guidelines](https://writingcenter.gmu.edu/guides/how-to-write-a-research-question).
+2. [20%] State a clear research question. This can (and probably should) be a revised question from your proposal. Again, follow [these guidelines](https://writingcenter.gmu.edu/guides/how-to-write-a-research-question).
 
-3. [TBD]
+3. [20%] Discuss the data source(s) you are using for your analysis:
+
+    - Describe them and include urls or references to the sources. 
+    - Discuss the validity of the source(s) - for each data source, is the data available the _original_ data, or has it been processed? If not, what is the original source? How was the data collected?
+    - Provide a data dictionary in an appendix at the end of your report that contains a table of each the name, type, and description of each variable in your data. Include a dictionary for each dataset used. 
+
+4. [20%] Evaluate your proposal expectations:
+
+    - Do you find support for your original expectation about how one variable might be distributed? If that variable doesn't exist in your data, discuss one key variables and how it is distributed.
+    - Do you find support for your original expectation about how the variables you chose are related? If those variables don't exist in your data, discuss one key relationship that you have identified between two or more variables.
+
+5. [30%] Include two preliminary charts:
+
+    - Your charts should either support or oppose your research question, or they should illustrate what else you might need to address your research question.
+    - You may choose whatever plot types you wish, but your choices should highlight the point you want to make or should clearly show the relationship you want to emphasize. 
+    - Your charts should follow the design principles we have covered in class. Use of default colors and themes is discouraged as they often include distracting non-data ink.
 
 ---
 
@@ -112,12 +128,33 @@ Below is a list of specific items your peer review should include - the % in bra
 
 1. [10%] Follow these formatting rules:
 
-    - Be between 2 and 3 pages in length, including all images.
+    - Be between 1 and 3 pages in length, including all images.
     - 12 point font, 1 inch margins.
     - Write your name as the reviewer at the top of the document (e.g. "**Reviewer:** John Helveston").
-    - Write the title of the project being reviewed below your name (e.g. **Project Being Reviewed**: <insert project title>)
+    - Write the title of the project being reviewed below your name (e.g. **Project Being Reviewed**: `<insert project title>`)
 
-2. [TBD]
+2. [30%] Evaluate their research question according to these qualitites:
+
+    - **Clear**: it provides enough specifics that your audience can easily understand its purpose without needing additional explanation.
+    - **Focused**: it is narrow enough that it can be addressed thoroughly with the data available and within the limits of the final project report.
+    - **Concise**: it is expressed in the fewest possible words.
+    - **Complex**: it is not answerable with a simple "yes" or "no," but rather requires synthesis and analysis of data.
+    - **Arguable**: its potential answers are open to debate rather than accepted facts.
+    
+3. [30%] Evaluate the description of their data source(s):
+
+    - Are the data appropriate for the research question?
+    - Are the data sources well-described? Do you know the source and the original source?
+    - Can you follow the information in the report to obtain the data yourself?
+    - Does each dataset include a data dictionary?
+    - Provide one suggestion to help further clarify any questions you have about the data source(s).
+    
+4. [30%] Evaluate their preliminary results:
+
+    - Are there at least two charts provided in the analysis? 
+    - Do the charts follow the design principles (to a reasonable degree) that we have covered in class?
+    - Do their charts support or oppose their research question, or do they illustrate what else might be needed to address the research question?
+    - Provide at least two suggestions to improve their charts.
 
 ---
 
@@ -129,15 +166,36 @@ Below is a list of specific items your peer review should include - the % in bra
 
 **Tasks**:
 
-Below is a list of specific items your presentation slides should include - the % in brackets indicates points towards this assignment grade:
+You will present your analysis with your teammates in class on April 29. Your slides do not need to include the code used to conduct your analysis (that should be able to be obtained from your report). Instead, your presentation should be a short explanation of 1) what you studied and why it matters, 2) what data you used, and 3) what you found.
+
+Below is a list of specific items your presentation should include - the % in brackets indicates points towards this assignment grade:
 
 1. [10%] Follow these formatting rules:
 
-    - Be between 6 and 8 slides in length.
-    - A title slide that includes the project title, team member names, and the presentation date (April 29, 2020).
+    - Your presentation should be no longer than 10 minutes in length (practice! time yourself!)
+    - Each team member should present at least one slide. 
+    - You should have between 6 and 8 slides total.
+    - Your title slide should include the project title, team member names, and the presentation date (April 29, 2020).
     - All slides should be numbered in the bottom-left or bottom-right corners.
 
-2. [TBD]
+2. [20%] State your research question and explaining why we should care.
+
+3. [20%] Discuss the data source(s) you used for your analysis:
+
+    - Describe them and include urls or references to the sources.
+    - Discuss the validity of the source(s) - for each data source, is the data available the _original_ data, or has it been processed? If not, what is the original source? How was the data collected?
+    - Provide a data dictionary in an appendix at the end of your report that contains a table of each the name, type, and description of each variable in your data. Include a dictionary for each dataset used. 
+  
+4. [20%] Describe your data:
+
+    - Articulate the main variables of interest in your project, and justify your choice of variables.
+    - Provide descriptive statistics for all your relevant variables. These can be a mix of graphs and summary tables.
+
+5. [30%] Describe your results:
+
+    - Display charts that either support or oppose your research question, or illustrate what else you might need to address your research question.
+    - Your plot type choices should highlight the point you want to make or clearly show the relationship you want to emphasize - basically, what do the data say about your research question?
+    - Your charts should be polished, following the design principles we have covered in class.
 
 ---
 
@@ -149,16 +207,45 @@ Below is a list of specific items your presentation slides should include - the 
 
 **Tasks**:
 
-Below is a list of specific items your final report should include - the % in brackets indicates points towards this assignment grade:
+Your final report should be a fully reproducible product and available online as a html webpage. It should include text, data, code, and plots. Below is a list of specific items your final report should include - the % in brackets indicates points towards this assignment grade:
 
 1. [10%] Follow these formatting rules:
 
-    - Be between 3 and 4 pages in length, including all images.
-    - In your markdown YAML header, include the project title and the name(s) of student(s) involved in the project.
+    - As the final report is a webpage, there is no length requirement; your analysis should be sufficiently long to address your research question and sufficiently concise such that it is expressed in the fewest necessary words.
+    - In your markdown YAML header, include the project title and the name(s) of student(s) involved in the project such that they appear at the top of the rendered html page.
 
-2. [XX%] State your research question, again following [these guidelines](https://writingcenter.gmu.edu/guides/how-to-write-a-research-question).
+2. [20%] State your research question and explain why we should care.
 
-3. [TBD]
+3. [20%] Describe your data source(s) you used for your analysis:
+
+    - You do not need the exact urls on your slides, just show the name of the source.
+    - Discuss the validity of the source(s). How was the data collected? Was the source you used the original, and if not what was the original source?
+    
+4. [20%] Describe your data:
+
+    - Articulate the main variables of interest in your project, and justify your choice of variables.
+    - Provide descriptive statistics for all your relevant variables. These can be a mix of graphs and summary tables.
+
+5. [30%] Describe your results:
+
+    - Display charts that either support or oppose your research question, or illustrate what else you might need to address your research question.
+    - Your plot type choices should highlight the point you want to make or clearly show the relationship you want to emphasize - basically, what do the data say about your research question?
+    - Your charts should be polished, following the design principles we have covered in class.
+
+
+
+
+
+
+1. You pose a clearly stated question and explain what makes it an interesting question.
+2. You use data appropriate for your research question. Precisely state your data source(s), the unit of analysis (geography, level of analysis, time frame, etc.).
+3. You articulate the main variables of interest in your project (specifically
+your outcome/dependent variable and one or two independent variables), justifying your choice of variables.
+4. You provide descriptive statistics for all your relevant variables. These can be a mix of graphs and summary tables.
+5. You summarize the relationships of interest graphically or with statistical models,
+or with both. What do the data say about your research question?
+6. You include code and a data
+
 
 ---
 
@@ -168,8 +255,9 @@ Here are some examples of exploratory data analyses:
 
 - [Is Usain Bolt really the fastest man on earth?](https://radmuzom.com/2019/05/18/fun-with-statistics-is-usain-bolt-really-the-fastest-man-on-earth/), by [Anindya Mozumdar](https://radmuzom.com/about/). This analysis uses some statistical modeling (which won't cover), but the use of visualizations alone are effective for addressing the research questions posed.
 - [F1 racing data analysis](https://www.kaggle.com/jonathanbouchet/f1-data-analysis), by Jonathan Bouchet. This is an extensive exploratory data analysis of a variety of data on races, drivers, and constructors across the history of [Formula 1](https://www.formula1.com/) racing. This would probably be overkill for a course project, but sections of it (e.g. section 3 on the races, or sections 4 and 5 together on the drivers and constructors) would make a nice project. It involves mutliple data sets, some not-so-simple data cleaning, and a wide variety of nice visualizations.
-- [Increasing Intensity of Strong Atlantic Hurricanes](http://myweb.fsu.edu/jelsner/stronger-hur.html), by James B. Elsner. This is a short analysis with the goal of validating the predictions of [this study](https://www.nature.com/articles/nature07234) published in Nature in 2008, which predicted that Atlantic tropical cyclones would continue to get stronger on average over time. While this analysis is too short to be considered adequate for a final project, it is still a good example of good data source documentation and one effective visualization. An expanded inquiriy into the questions addressd here would make a good course project.
+- [Increasing Intensity of Strong Atlantic Hurricanes](http://myweb.fsu.edu/jelsner/stronger-hur.html), by James B. Elsner. This is a short analysis with the goal of validating the predictions of [this study](https://www.nature.com/articles/nature07234) published in Nature in 2008, which predicted that Atlantic tropical cyclones would continue to get stronger on average over time. While this analysis is too short to be considered adequate for a final project, it is still a good example of good data source documentation and one effective visualization. An expanded inquiry into the questions addressed here would make a good course project.
 - [Death: Reality vs Reported](https://owenshen24.github.io/charting-death/), by Owen Shen: This is an interesting original analysis in which the author collected the data himself. The analysis compares whether the proportion of actual causes of death is consistent with the proportion of death causes that the media reports. This analysis also uses some interactive graphics so that the reader can view different versions of the same plot, such as scrolling through the plot over time.
+- [Are first babies more likely to be late?](https://towardsdatascience.com/are-first-babies-more-likely-to-be-late-1b099b5796b6), by Allen Downey. This is another relatively short analysis, but the author does a good job of documenting his data sources, stating the assumptions he makes, and also describes what data were dropped from the analysis (i.e. babies born via C-section).
 
 ---
 
