@@ -166,9 +166,10 @@ This can be a challenging class - don't suffer in silence! Look at the ["Getting
 
 ## [tl;dr](https://whatis.techtarget.com/definition/tldr-TLDR)
 
-**BE NICE. BE HONEST. DON'T CHEAT.**
-
-Write your own code - don't look at others' code, and don't let others look at your code.
+- **BE NICE. BE HONEST. DON'T CHEAT.**
+- Write your own code - don't look at others' code & don't let others look at your code.
+- You get **5** late days - use them however you want, no strings attached.
+- You can't use more than **2** late days on any one assignment.
 
 ## Late Policy
 
