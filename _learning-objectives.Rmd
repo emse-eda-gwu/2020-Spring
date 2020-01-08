@@ -6,5 +6,3 @@ Having successfully completed this course, students will be able to:
 - Wrangle data from its original format into a fit-for-purpose format.
 - Get data off the web and expose data, code, results on the web.
 - Generate fully reproducible reports that contain code, equations, visualizations, and narrative text.
-
-
