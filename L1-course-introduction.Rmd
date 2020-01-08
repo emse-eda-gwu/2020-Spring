@@ -71,6 +71,7 @@ The course [schedule](schedule.html) is your roadmap for the semester. Visit it 
 To prepare for class, you'll need to do a few things. First, use your **@gwu.edu** email address to register for the following:
 
 - [Slack](https://emse-eda-s20.slack.com) - a link to sign up for the course slack page can be found on the one (and only) announcement on Blackboard.
+- Install the Slack app on your phone and **Turn notifications on!**
 - [DataCamp](https://www.datacamp.com/groups/shared_links/dc8dffcb7204d04728b4a92c5511bac4293fec6b) - you must use your @gwu.edu email for this to work (not the @email.gwu.edu).
 - [RStudio Cloud](https://login.rstudio.cloud/register) - we'll use this for some in-class activities and quizzes.
 
@@ -99,6 +100,6 @@ Now that you've got R and RStudio installed, read the ["Getting Started"](http:/
 - Working in plain text.
 - Using RMarkdown to conduct and report on our analyses.
 
-Also, check out the [**readr**](https://readr.tidyverse.org/articles/readr.html) and [**readxl**](https://readxl.tidyverse.org/) packages - we'll be using these throughout the semester to import data into R. 
+Also, check out the [**readr**](https://readr.tidyverse.org/articles/readr.html) and [**readxl**](https://readxl.tidyverse.org/) packages - we'll be using these throughout the semester to import data into R.
 
 Finally, read through [this guide](https://writingcenter.gmu.edu/guides/how-to-write-a-research-question), from GMU on how to write a research question. We'll come back to these ideas again later when you start working on your final projects, but it's a good idea to start thinking about your research question early.
