@@ -30,6 +30,10 @@ Lingmei Zhao, Masters student in Statistics
 
 ![](images/lingmei.jpg){ width=250 }
 
+# For new students
+
+Students taking this course should have already taken [Programming for Analytics](https://emse-p4a-gwu.github.io/). If you haven't, you can try and get up to speed by completing [Assignment 0](assignment0.html) **before classes start**. Once classes start, it may be difficult to keep up without this background, and it may be more beneficial to wait and take this course next year after taking Programming for Analytics in the Fall of 2020.
+
 # What's new?
 
 Students taking this course should have already taken [Programming for Analytics](https://emse-p4a-gwu.github.io/). If you haven't, I **strongly** recommend you review the lessons and assignments on the [previous semester website](https://emse6574-gwu.github.io/2019-Fall/). You can also get up to speed by completing [Assignment 0](assignment0.html).
@@ -72,7 +76,7 @@ To prepare for class, you'll need to do a few things. First, use your **@gwu.edu
 
 - [Slack](https://emse-eda-s20.slack.com) - a link to sign up for the course slack page can be found on the one (and only) announcement on Blackboard.
 - Install the Slack app on your phone and **Turn notifications on!**
-- [DataCamp](https://www.datacamp.com/groups/shared_links/dc8dffcb7204d04728b4a92c5511bac4293fec6b) - you must use your @gwu.edu email for this to work (not the @email.gwu.edu).
+- DataCamp.com - you must use your @gwu.edu email for this to work (not the @email.gwu.edu). **An invite link can be found in in the announcement on Blackboard or in Slack**
 - [RStudio Cloud](https://login.rstudio.cloud/register) - we'll use this for some in-class activities and quizzes.
 
 Next, install R and RStudio:
