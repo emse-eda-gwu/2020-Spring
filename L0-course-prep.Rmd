@@ -1,0 +1,40 @@
+---
+title: "Week 1: Course Prep"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+rm(list=objects()) # start with a clean workspace
+source("knitr_setup.R")
+```
+
+---
+
+This page has everything you need to do to prepare for class. Ideally, you should do all these things _before_ the first day of class.
+
+First, register for the following:
+
+- [Slack](https://emse-eda-s20.slack.com): a link to sign up for the course slack page can be found on the only announcement on Blackboard.
+- Install the Slack app on your phone and **Turn notifications on!**
+- [DataCamp](https://www.datacamp.com/home): **you must use your @gwu.edu email for this to work** (not the @email.gwu.edu address). An invite link can be found in the announcement on Blackboard or in Slack.
+- [RStudio Cloud](https://login.rstudio.cloud/register): we'll use this for some in-class activities and quizzes.
+
+Next, install R and RStudio:
+
+- [Download and install R](https://cloud.r-project.org).
+- [Download and install RStudio](https://rstudio.com/products/rstudio/download/) (Desktop version).
+
+**We will always work in RStudio**, so be careful to open RStudio and not the default R application that comes with R. 
+
+In other words:
+
+<div style="width:200px">
+Open this   | Not this
+:----------:|:----------:
+![](images/RStudio-Ball.png){ width=50 }  |  ![](images/Rlogo.png){ width=50 }
+</div>
+
+# Course prerequisites
+
+```{r child = '_prerequisites.Rmd'}
+```

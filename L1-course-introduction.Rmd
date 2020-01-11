@@ -26,13 +26,18 @@ Background:
 
 ## Meet your tutors!
 
-Lingmei Zhao, Masters student in Statistics
-
-![](images/lingmei.jpg){ width=250 }
+Yanjie He, Masters student in Data Analytics | Lingmei Zhao, Masters student in Statistics
+---|---
+![](images/yanjie.jpg){ width=250 } | ![](images/lingmei.jpg){ width=250 }
 
 # For new students
 
-Students taking this course should have already taken [Programming for Analytics](https://emse-p4a-gwu.github.io/). If you haven't, you can try and get up to speed by completing [Assignment 0](assignment0.html) **before classes start**. Once classes start, it may be difficult to keep up without this background, and it may be more beneficial to wait and take this course next year after taking Programming for Analytics in the Fall of 2020.
+```{r child = '_prerequisites.Rmd'}
+```
+
+# Course prep
+
+For this class, you'll need to install some software and register for some websites. Go to the [course prep](L0-course-prep.html) page to get setup.
 
 # What's new?
 
@@ -70,33 +75,13 @@ The [syllabus](syllabus.html) is lengthy, but I do expect you to look through ea
 
 The course [schedule](schedule.html) is your roadmap for the semester. Visit it often to make sure you are well-prepared for class and aware of upcoming assignment / quiz dates.
 
-# Setup
-
-To prepare for class, you'll need to do a few things. First, use your **@gwu.edu** email address to register for the following:
-
-- [Slack](https://emse-eda-s20.slack.com) - a link to sign up for the course slack page can be found on the one (and only) announcement on Blackboard.
-- Install the Slack app on your phone and **Turn notifications on!**
-- DataCamp.com - you must use your @gwu.edu email for this to work (not the @email.gwu.edu). **An invite link can be found in in the announcement on Blackboard or in Slack**
-- [RStudio Cloud](https://login.rstudio.cloud/register) - we'll use this for some in-class activities and quizzes.
-
-Next, install R and RStudio:
-
-- [Download and install R](https://cloud.r-project.org).
-- [Download and install RStudio](https://rstudio.com/products/rstudio/download/) (Desktop version).
-
-After you install R and RStudio on your computer, you'll have two new applications you can open. **We will always work in RStudio**. In other words:
-
-<div style="width:150px">
-Open this   | Not this
-:----------:|:----------:
-![](images/RStudio-Ball.png){ width=50 }  |  ![](images/Rlogo.png){ width=50 }
-</div>
-
 # Communication & Help
 
 This can be a challenging class - don't suffer in silence! Look at the ["Getting Help"](getting-help.html) page, come to office hours, send me a message on Slack.
 
 # Readings!
+
+## Workflow
 
 Now that you've got R and RStudio installed, read the ["Getting Started"](http://socviz.co/gettingstarted.html) lesson in [Healy](http://socviz.co/). We will follow the conventions laid out in this chapter throughout the class, including:
 
@@ -104,6 +89,14 @@ Now that you've got R and RStudio installed, read the ["Getting Started"](http:/
 - Working in plain text.
 - Using RMarkdown to conduct and report on our analyses.
 
-Also, check out the [**readr**](https://readr.tidyverse.org/articles/readr.html) and [**readxl**](https://readxl.tidyverse.org/) packages - we'll be using these throughout the semester to import data into R.
+## Reading in Data
 
-Finally, read through [this guide](https://writingcenter.gmu.edu/guides/how-to-write-a-research-question), from GMU on how to write a research question. We'll come back to these ideas again later when you start working on your final projects, but it's a good idea to start thinking about your research question early.
+Check out the [**readr**](https://readr.tidyverse.org/articles/readr.html) and [**readxl**](https://readxl.tidyverse.org/) packages - we'll be using these throughout the semester to import data into R.
+
+## Tidy Data 
+
+We'll cover the concept of "tidy" data in class on day 1. To get familiar with it, read [Chapter 12](https://r4ds.had.co.nz/tidy-data.html) in R4DS, and take a look at these [Tidy data explanations](https://github.com/gadenbuie/tidyexplain#tidy-data).
+
+## A look at your final project
+
+Read through [this guide](https://writingcenter.gmu.edu/guides/how-to-write-a-research-question) from GMU on how to write a research question. We'll come back to these ideas again later when you start working on your [final projects](assignment-project.html), but it's a good idea to start thinking about your research question early.

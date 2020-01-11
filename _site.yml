@@ -16,6 +16,8 @@ navbar:
       href: schedule.html
     - text: "Lessons"
       menu:
+        - text: "Week 0: Course Prep"
+          href: L0-course-prep.html
         - text: "Week 1: Course Introduction"
           href: L1-course-introduction.html
         - text: "Week 2: Exploring Data"
