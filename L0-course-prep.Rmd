@@ -1,6 +1,8 @@
 ---
 title: "Week 1: Course Prep"
-output: html_document
+output:
+  html_document:
+    toc: false
 ---
 
 ```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
@@ -24,7 +26,7 @@ Next, install R and RStudio:
 - [Download and install R](https://cloud.r-project.org).
 - [Download and install RStudio](https://rstudio.com/products/rstudio/download/) (Desktop version).
 
-**We will always work in RStudio**, so be careful to open RStudio and not the default R application that comes with R. 
+**We will always work in RStudio**, so be careful to open RStudio and not the default R application that comes with R.
 
 In other words:
 
