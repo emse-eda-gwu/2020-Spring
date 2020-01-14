@@ -61,7 +61,9 @@ Here you will find a long list of links to helpful references, organized by what
 
 ## Data Visualization Guides
 
-Beautiful, interactive guides for making effective information visualizations:
+A good starting point for browsing through the many different types of data visualizations is to check out Chapter 5 in Wilke: [Directory of visualizations](https://serialmentor.com/dataviz/directory-of-visualizations.html)
+
+In addition, some amazing people have put together beautiful interactive guides for making effective information visualizations:
 
 - [Data-to-Viz](https://www.data-to-viz.com/)
 - [R Graph Gallery](http://r-graph-gallery.com/)
