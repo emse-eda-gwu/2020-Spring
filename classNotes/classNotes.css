@@ -46,26 +46,18 @@ https://github.com/rstudio-education/arm-workshop-rsc2019
 
 .red {
   color: var(--color-red);
-  font-size: 200%;
-  font-weight:700;
 }
 
 .orange {
   color: var(--color-orange);
-  font-size: 200%;
-  font-weight:700;
 }
 
 .green {
   color: var(--color-green);
-  font-size: 200%;
-  font-weight:700;
 }
 
 .blue {
   color: var(--color-blue);
-  font-size: 200%;
-  font-weight:700;
 }
 
 .redinline {
