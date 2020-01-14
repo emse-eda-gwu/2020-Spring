@@ -19,6 +19,7 @@ other courses, workshops, and textbooks. Below are a list of resources I have us
 Name | Author(s) | Links
 --------- | --------- | ---
 STAT 545 | U. of British Columbia | [course](http://stat545.com/); [GitHub](https://github.com/STAT545-UBC)
+Patrick Meyer's Youtube lectures | Prof. Patrick Meyer | [playlists](https://www.youtube.com/channel/UCyTTRlOdjHg23q3l6_CD4gg/playlists)
 
 ### Books
 
