@@ -1,0 +1,26 @@
+Fundamentals of EDA:
+- Data type & scales;
+- Numbers worth knowing;
+- plot types.
+-Dummy coding?
+
+"Fundamentals of exploring data": https://rstudio.cloud/learn/primers/3)
+
+Data scales:
+- nominal, ordinal, ratio, interval
+Data types:
+- numerical (discrete vs. continuous)
+- categorical (nominal vs. ordinal).
+
+See this video: https://www.youtube.com/watch?v=zHcQPKP6NpM
+
+See this blog post: https://towardsdatascience.com/data-types-in-statistics-347e152e8bee
+
+This page: https://www.questionpro.com/blog/nominal-ordinal-interval-ratio/
+
+
+EDA:
+Although there are no formalized set of steps for conducting an EDA, the typical process involves 1) generating questions about the data, 2) searching for answers to those questions through data visualizations and summaries, and 3) using the results to refine the original questions and/or generate new questions (Wickham & Grolemund, 2016).
+
+
+FOA: Flaw of averages - Plans based on average inputs are wrong on average

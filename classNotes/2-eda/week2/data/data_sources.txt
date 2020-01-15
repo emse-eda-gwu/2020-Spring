@@ -1,0 +1,135 @@
+# ----------------------------------------------------------------------
+Data file: diamonds.csv
+
+Date downloaded: January 15, 2020
+
+Description: A dataset containing the prices and other attributes of almost 54,000 diamonds.
+
+Source of downloaded file:
+- Built in dataset that comes with R.
+- More info here: https://ggplot2.tidyverse.org/reference/diamonds.html
+
+Dictionary:
+
+Variable  | Description
+----------|------------------------------------------------
+`carat`   | Weight of the diamond [0.2 - 5.01]
+`cut`     | Quality of the cut [Fair (worst), Good, Very Good, Premium, Ideal (best)]
+`color`   | Diamond color, from J (worst) to D (best)
+`clarity` | A measurement of how clear the diamond is [I1 (worst), SI2, SI1, VS2, VS1, VVS2, VVS1, IF (best)]
+`depth`   | Total depth percentage = z / mean(x, y) = 2 * z / (x + y) [43–79]
+`table`   | Width of top of diamond relative to widest point [43–95]
+`price`   | Price in US dollars [$326 - $18,823]
+`x`       | Length in mm [0 – 10.74]
+`y`       | Width in mm [0 – 58.9]
+`z`       | Depth in mm [0 – 31.8]
+
+
+
+# ----------------------------------------------------------------------
+Data file: faithful.csv
+
+Date downloaded: January 14, 2020
+
+Description: Waiting time between eruptions and the duration of the eruption for the Old Faithful geyser in Yellowstone National Park, Wyoming, USA.
+
+Source of downloaded file:
+- Built in dataset that comes with R.
+- More info here: https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/faithful.html
+
+Original data source:
+- zzalini, A. and Bowman, A. W. (1990). A look at some data on the Old Faithful geyser. Applied Statistics, 39, 357–365. doi: 10.2307/2347385.
+
+Dictionary:
+
+variable   |class   |description
+-----------|--------|----------------------
+eruptions  |double  |Eruption time in mins
+waiting    |double  |Waiting time to next eruption (in mins)
+
+
+
+# ----------------------------------------------------------------------
+Data file: lotr_words.csv
+
+Date downloaded: January 5, 2020
+
+Description: Words spoken by characters of different races and gender in the Lord of the Rings movie trilogy.
+
+Source of downloaded file:
+- Jenny Bryan's Github repo on tidy data: https://github.com/jennybc/lotr-tidy/tree/master/data
+- I merged the three separate .csv files for each film into one .csv file.
+
+Original data source:
+- Original data file was found here: http://www-958.ibm.com/software/data/cognos/manyeyes/datasets/words-spoken-by-character-race-scene/versions/1.txt
+- Many Eyes and the website above no longer exist.
+
+Dictionary:
+
+variable |class     |description
+---------|----------|----------------------
+Film     |character |Title of the film
+Race     |character |US State
+Female   |double    |Number of words spoken by female characters
+Male     |double    |Number of words spoken by male characters
+
+
+# ----------------------------------------------------------------------
+Data file: marathon.csv
+
+Date downloaded: January 14, 2020
+
+Description: Data on the finishers of the 2017 Boston Marathon.
+
+Source of downloaded file:
+- Downloaded from Kaggle: https://www.kaggle.com/rojour/boston-results/data#
+- Original downloaded file name: marathon_results_2017.csv
+
+Original data source:
+- Data was scrapped from the official marathon website: http://registration.baa.org/2017/cf/Public/iframe_ResultsSearch.cfm
+
+
+# ----------------------------------------------------------------------
+Data file: milk_production.csv
+
+Date downloaded: January 5, 2020
+
+Description: U.S. Milk production (in pounds) by state from 1970 to 2017
+
+Source of downloaded file:
+- The Tidy Tuesday challenge here: https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-01-29
+- Here's the link to the original file I downloaded: https://github.com/rfordatascience/tidytuesday/blob/master/data/2019/2019-01-29/state_milk_production.csv
+
+Original data source: The original data source is the USDA (United States Department of Agriculture). See the website here:
+https://www.ers.usda.gov/data-products/dairy-data/documentation/#Loc3
+
+Dictionary:
+
+variable      |class     |description
+--------------|----------|----------------------
+region        |character |Region of the US
+state         |character |US State
+year          |date      |Year
+milk_produced |double    |Pounds of Milk Produced
+
+
+# ----------------------------------------------------------------------
+Data file: wildlife_impacts.csv
+
+Date downloaded: January 5, 2020
+
+Description: U.S. Milk production (in pounds) by state from 1970 to 2017
+
+Source of downloaded file:
+- The Tidy Tuesday challenge here: https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-07-23
+- Here's the link to the original file I downloaded: https://github.com/rfordatascience/tidytuesday/blob/master/data/2019/2019-07-23/wildlife_impacts.csv?raw=true
+
+Original data source:
+- FAA wildlife strike database: https://wildlife.faa.gov/home
+
+Notes:
+- Note that the wildlife impact data is only from the big 4 airlines - 70% of the full database.
+- The data have been pre-processed
+
+Link to full data dictionary:
+https://wildlife.faa.gov/downloads/fieldlist.xls

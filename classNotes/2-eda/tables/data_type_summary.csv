@@ -1,0 +1,6 @@
+﻿ OK to compute....,Nominal,Ordinal,Interval,Ratio
+ Frequency distribution,Yes,Yes,Yes,Yes
+ Median and percentiles,No,Yes,Yes,Yes
+ Add or subtract,No,No,Yes,Yes
+"Mean, standard deviation",No,No,Yes,Yes
+"Ratios, coefficient of variation",No,No,No,Yes

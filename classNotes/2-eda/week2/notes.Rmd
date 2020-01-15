@@ -1,0 +1,134 @@
+---
+title: "Week 2 In Class Notes"
+output: html_document
+---
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(here)
+options(
+    htmltools.dir.version = FALSE,
+    knitr.table.format = "html",
+    knitr.kable.NA = '')
+knitr::opts_chunk$set(
+    warning = FALSE,
+    message = FALSE,
+    fig.retina = 3)
+```
+
+# Practice with data types
+
+1) Read in the following data sets:
+
+- `milk_production.csv`
+- `lotr_words.csv`
+
+2) For each variable in each data set, note the data type:
+ 
+Categorical | Numerical
+------------|------------
+Nominal     | Interval
+Ordinal     | Ratio
+
+3) Share your results with your neighbor
+
+```{r}
+# Write code here
+```
+
+
+# Practice with summary measurements: centrality & variability
+
+1) Read in the following data sets:
+
+- `milk_production.csv`
+- `lotr_words.csv`
+
+ 2) For each variable in each data set, if possible, summarize its
+
+- _Centrality_
+- _Variability_
+
+3) Share your results with your neighbor
+
+```{r}
+# Write code here
+```
+
+
+# Practice with visual summaries
+
+1) Read in the following data sets:
+
+- `faithful.csv`
+- `marathon.csv`
+
+2) Summarize the following variables using an appropriate chart (bar chart, histogram, and / or boxplot):
+
+- faithful: `eruptions`
+- faithful: `waiting`
+- marathon: `Age`
+- marathon: `State`
+- marathon: `Country`
+- marathon: `` `Official Time` ``
+
+3) Share what you learned about each variable with your neighbor.
+
+```{r}
+# Write code here
+```
+
+
+
+# Practice with visualizing relationships
+
+1) Read in the following data sets:
+
+- `marathon.csv`
+- `wildlife_impacts.csv`
+
+2) Visualize the _relationships_ between the following variables using an appropriate chart (bar plots, scatterplots, and / or box plots):
+
+- marathon: `Age` & `` `Official Time` ``
+- marathon: `` `M/F` `` & `` `Official Time` ``
+- wildlife_impacts: `state` & `operator`
+
+3) Share what you learned about each variable with your neighbor.
+
+```{r}
+# Write code here
+```
+
+
+
+# Practice doing EDA 
+
+1) Read in the following data set: `data.csv`
+
+2) For each variable, note the data type:
+
+Categorical | Numerical
+------------|-----------
+Nominal     | Interval
+Ordinal     | Ratio
+
+3) For each variable, if possible, summarize its
+
+- _Centrality_
+- _Variability_
+
+4) Summarize some of the variables using an appropriate chart:
+
+- Bar chart
+- Histogram
+- Boxplot
+
+5) Visualize a _relationship_ between two variables using an appropriate chart:
+
+- Bar chart
+- Scatterplot
+- Boxplot
+
+```{r}
+# Write code here
+```

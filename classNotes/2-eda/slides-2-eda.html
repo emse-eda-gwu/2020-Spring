@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Week 2: Exploring Data</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="John Paul Helveston" />
+    <meta name="date" content="2020-01-22" />
+    <link href="slides-2-eda_files/remark-css/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://emse-eda-gwu.github.io/2020-Spring/classNotes/classNotes.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+name: xaringan-title
+class: title-slide, center, middle, inverse
+
+# Week 2: Exploring Data
+
+.large[EMSE 4197 | John Paul Helveston | January 22, 2020]
+
+---
+class: inverse, center
+
+# Thanks for the hero gifs :)
+
+&lt;img src="images/hero_ellinport.gif"&gt;
+&lt;img src="images/hero_stricklett.gif"&gt;
+
+---
+class: inverse, center, middle
+
+# 24,901
+
+---
+class:inverse, center, middle
+
+# 24,901 miles
+
+---
+class: inverse, center, middle
+
+# Earth's circumference at the equator: 24,901 miles
+
+---
+class: inverse, center, middle
+
+# Quantitative information always describes _relationships_
+
+---
+# Types of Data
+
+.leftcol[
+### **Categorical**
+
+Subdivide things into useful groups
+
+- What type?
+- Which category?
+]
+.rightcol[
+### **Numerical**
+
+Measure things with numbers
+
+- How many?
+- How much?
+]
+--
+.leftcol[
+Variable type:
+
+- Nominal
+- Ordinal
+]
+--
+.rightcol[
+Scale type:
+
+- Interval
+- Ratio
+]
+
+---
+## Categorical (discrete) variables
+
+--
+.leftcol[
+### **Nominal**
+
+- Order doesn't matter
+- Differ in "name" (nominal) only
+
+Example: `country` in _TB cases_
+
+
+```
+## # A tibble: 6 x 4
+##   country      year  cases population
+##   &lt;chr&gt;       &lt;int&gt;  &lt;int&gt;      &lt;int&gt;
+## 1 Afghanistan  1999    745   19987071
+## 2 Afghanistan  2000   2666   20595360
+## 3 Brazil       1999  37737  172006362
+## 4 Brazil       2000  80488  174504898
+## 5 China        1999 212258 1272915272
+## 6 China        2000 213766 1280428583
+```
+]
+--
+.rightcol[
+### **Ordinal**
+
+- Order matters
+- Distance between units not equal
+
+Example: `Placement` _2017 Boston marathon_
+
+
+```
+## # A tibble: 6 x 3
+##   Placement `Official Time` Name            
+##       &lt;dbl&gt; &lt;drtn&gt;          &lt;chr&gt;           
+## 1         1 02:09           Kirui, Geoffrey 
+## 2         2 02:09           Rupp, Galen     
+## 3         3 02:10           Osako, Suguru   
+## 4         4 02:12           Biwott, Shadrack
+## 5         5 02:12           Chebet, Wilson  
+## 6         6 02:12           Abdirahman, Abdi
+```
+]
+
+---
+## Numerical data
+
+--
+.leftcol[
+### **Interval**
+
+- Numerical scale with arbitrary starting point
+- No "0" point
+- Can't say "x" is double "y"
+
+Example: `day`, `time`, &amp; `temp` in _Beaver temperature_
+
+```
+##   day time  temp activ
+## 1 346 1610 36.81     0
+## 2 346 1440 36.55     0
+## 3 346 2130 36.86     0
+## 4 346  920 36.55     0
+## 5 346 2200 37.23     0
+## 6 346 1600 36.80     0
+```
+]
+--
+.rightcol[
+### **Ratio**
+
+- Has a "0" point
+- Can be described as percentages
+- Can say "x" is double "y"
+
+Example: `height` &amp; `speed` in wildlife impacts
+
+```
+## # A tibble: 6 x 3
+##   incident_date       height speed
+##   &lt;dttm&gt;               &lt;dbl&gt; &lt;dbl&gt;
+## 1 2018-12-31 00:00:00    700   200
+## 2 2018-12-27 00:00:00    600   145
+## 3 2018-12-23 00:00:00      0   130
+## 4 2018-12-22 00:00:00    500   160
+## 5 2018-12-21 00:00:00    100   150
+## 6 2018-12-18 00:00:00   4500   250
+```
+]
+
+---
+# Be careful of how variables are encoded
+
+--
+- When numbers are categories
+    - "Dummy coding": "Has Graduated" = `1`, "Has not Graduated" = `0`)
+    - "North", "South", "East", "West" = `1`, `2`, `3`, `4`
+
+--
+- When ratio data are discrete (i.e. counts)
+    - Number of eggs in a carton, heart beats per minute, etc.
+    - Continuous variables measured discretely (e.g. age)
+
+--
+- Time:
+    - As _ordinal_ categories: "Jan.", "Feb.", "Mar.", etc.
+    - As _interval_ scale: "Jan.", "Feb.", "Mar.", etc.
+    - As _ratio_ scale: "Day 1", "Day 2", "Day 3", etc.
+
+---
+class: inverse
+
+# Your Turn: Think, Pair, Share
+
+.leftcol60[
+1) Read in the following data sets:
+
+- `milk_production.csv`
+- `lotr_words.csv`
+
+2) For each variable in each data set, note the data type:
+
+Categorical | Numerical
+------------|-----------
+Nominal     | Interval
+Ordinal     | Ratio
+
+3) Share your results with your neighbor
+]
+
+
+
+---
+class: inverse, middle, center
+
+# Summary measures:
+
+.rightcol70[.left[
+## 1. Centrality
+## 2. Variability
+]]
+
+---
+# Centrality ("Average")
+
+--
+### A single number representing the _middle_ of a set of numbers
+&lt;br&gt;
+
+--
+### **Mean**: `\(\frac{\text{Sum of values}}{\text{# of values}}\)`
+&lt;br&gt;
+
+--
+### **Median**: Middle value (50% of data above &amp; below)
+&lt;br&gt;
+
+--
+### **Mode**: Most frequent value (rarely use)
+
+---
+class: center
+
+# "Mean" isn't always the best choice
+
+.leftcol60[
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-6-1.png" width="648" style="display: block; margin: auto;" /&gt;
+]
+.rightcol40[.left[
+
+```r
+wildlife_impacts %&gt;%
+    filter(! is.na(height)) %&gt;%
+    summarise(
+      mean = mean(height),
+      median = median(height))
+```
+
+```
+## # A tibble: 1 x 2
+##    mean median
+##   &lt;dbl&gt;  &lt;dbl&gt;
+## 1  984.     50
+```
+]]
+
+---
+class: inverse 
+
+## Beware the "flaw of averages"
+
+### A statistician crosses a river that has an average depth of 3 feet...
+
+--
+### ...he drowned
+
+&lt;img src = "images/foa.jpg"&gt;
+
+---
+# Variability ("Spread")
+
+--
+### **Range**: max - min
+&lt;br&gt;
+
+--
+### **Standard deviation**: distribution of values relative to the mean
+&lt;br&gt;
+
+--
+### **Interquartile range (IQR)**: `\(Q_3 - Q_1\)` (middle 50% of data)
+
+---
+# Example: Days to ship
+
+.leftcol40[
+Complaints are coming in about orders shipped from warehouse B, so you collect some data:
+
+
+```
+##    order warehouseA warehouseB
+## 1      1          3          1
+## 2      2          3          1
+## 3      3          3          1
+## 4      4          4          3
+## 5      5          4          3
+## 6      6          4          4
+## 7      7          5          5
+## 8      8          5          5
+## 9      9          5          5
+## 10    10          5          6
+## 11    11          5          7
+## 12    12          5         10
+```
+]
+--
+.rightcol60[
+Here, **averages** are misleading:
+
+```r
+daysToShip %&gt;%
+    gather(warehouse, days, warehouseA:warehouseB) %&gt;%
+    group_by(warehouse) %&gt;%
+    summarise(
+        mean   = mean(days),
+        median = median(days))
+```
+
+```
+## # A tibble: 2 x 3
+##   warehouse   mean median
+##   &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;
+## 1 warehouseA  4.25    4.5
+## 2 warehouseB  4.25    4.5
+```
+]
+
+---
+# Example: Days to ship
+
+.leftcol40[
+Complaints are coming in about orders shipped from warehouse B, so you collect some data:
+
+
+```
+##    order warehouseA warehouseB
+## 1      1          3          1
+## 2      2          3          1
+## 3      3          3          1
+## 4      4          4          3
+## 5      5          4          3
+## 6      6          4          4
+## 7      7          5          5
+## 8      8          5          5
+## 9      9          5          5
+## 10    10          5          6
+## 11    11          5          7
+## 12    12          5         10
+```
+]
+.rightcol60[
+**Variability** reveals difference in days to ship:
+
+```r
+daysToShip %&gt;%
+    gather(warehouse, days, warehouseA:warehouseB) %&gt;%
+    group_by(warehouse) %&gt;%
+    summarise(
+        mean   = mean(days),
+        median = median(days),
+*       range = max(days) - min(days),
+*       sd    = sd(days))
+```
+
+```
+## # A tibble: 2 x 5
+##   warehouse   mean median range    sd
+##   &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 warehouseA  4.25    4.5     2 0.866
+## 2 warehouseB  4.25    4.5     9 2.70
+```
+]
+
+---
+# Example: Days to ship
+
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-12-1.png" width="864" style="display: block; margin: auto;" /&gt;
+
+---
+class: center
+
+## Interpreting the standard deviation
+
+.leftcol[
+### `\(s = \sqrt{\frac{\sum_{i=1}^{N}(x_i - \bar{x})^2}{N - 1}}\)`
+
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-13-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+.rightcol[
+&lt;img src='images/sd.png'&gt;
+]
+
+---
+class: inverse
+
+# Your Turn: Think, Pair, Share
+
+1) Read in the following data sets:
+
+- `milk_production.csv`
+- `lotr_words.csv`
+
+2) For each variable in each data set, if possible, summarize its
+
+- _Centrality_
+- _Variability_
+
+3) Share your results with your neighbor
+
+
+
+---
+class: inverse, center, middle
+
+# Which summary measures you use depends on the type of data
+
+---
+
+.cols3[
+### **Nominal**
+### **(Categorical)**
+
+**Measures**:
+- Frequency counts
+- Proportions
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+**Charts**:
+- Bars
+]
+--
+.cols3[
+### **Ordinal**
+### **(Categorical)**
+
+**Measures**:
+- Frequency counts
+- Proportions
+- Centrality: Median
+- Variability: IQR
+&lt;br&gt;
+
+**Charts**:
+- Bars
+]
+--
+.cols3[
+### **Numerical**
+### **(Continuous)**
+
+**Measures**:
+- Centrality: Mean, median
+- Variability: Range, standard deviation, IQR
+&lt;br&gt;
+&lt;br&gt;
+&lt;br&gt;
+
+**Charts**:
+- Histogram
+- Boxplot
+]
+
+---
+## Summarizing **Nominal** data
+
+.leftcol[
+Summarize with counts / percentages
+
+
+```r
+wildlife_impacts %&gt;%
+    count(operator) %&gt;%
+    mutate(percentage = 100*(n / sum(n)))
+```
+
+```
+## # A tibble: 4 x 3
+##   operator               n percentage
+##   &lt;chr&gt;              &lt;int&gt;      &lt;dbl&gt;
+## 1 AMERICAN AIRLINES  14887       26.1
+## 2 DELTA AIR LINES     9005       15.8
+## 3 SOUTHWEST AIRLINES 17970       31.5
+## 4 UNITED AIRLINES    15116       26.5
+```
+]
+--
+.rightcol[
+Visualize with bars
+
+
+```r
+wildlife_impacts %&gt;%
+    ggplot() +
+    geom_bar(aes(x = operator), width = 0.7) +
+    coord_flip()
+```
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-17-1.png" width="504" /&gt;
+]
+
+---
+## Summarizing **Ordinal** data
+
+.leftcol[
+Summarize with counts / percentages
+
+.code70[
+
+```r
+wildlife_impacts %&gt;%
+    count(incident_month) %&gt;%
+    mutate(percentage = 100*(n / sum(n)))
+```
+
+```
+## # A tibble: 12 x 3
+##    incident_month     n percentage
+##             &lt;dbl&gt; &lt;int&gt;      &lt;dbl&gt;
+##  1              1  1951       3.42
+##  2              2  1692       2.97
+##  3              3  2678       4.70
+##  4              4  4490       7.88
+##  5              5  6161      10.8 
+##  6              6  4541       7.97
+##  7              7  6133      10.8 
+##  8              8  7104      12.5 
+##  9              9  7980      14.0 
+## 10             10  7754      13.6 
+## 11             11  4191       7.36
+## 12             12  2303       4.04
+```
+]]
+--
+.rightcol[
+Visualize with bars
+
+
+```r
+wildlife_impacts %&gt;%
+    ggplot() +
+    geom_bar(aes(x = as.factor(incident_month)),
+             width = 0.7)
+```
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-20-1.png" width="504" /&gt;
+]
+
+---
+## Summarizing **continuous** variables
+
+.leftcol30[
+**Histograms**:
+
+- Identifying skewness
+- Identifying # of modes
+&lt;br&gt;
+&lt;br&gt;
+
+**Boxplots**:
+
+- Identifying outliers
+- Comparing distributions across groups
+]
+.rightcol70[
+&lt;img src = 'images/eda-boxplot.png'&gt;
+]
+
+---
+
+.leftcol[
+## Continuous variables: **histogram**
+
+Summarise with mean, median, sd, range, &amp; IQR:
+
+
+```
+## # A tibble: 2 x 6
+##   var     mean median     sd range   IQR
+##   &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 height  1212    200 2157.  25000  1500
+## 2 speed    154    140   42.3   354    40
+```
+
+Visualize with **histogram** to:
+
+- Identify skewness
+- Identify # of modes
+
+
+```r
+wildlife_impacts %&gt;%
+    ggplot() +
+    geom_histogram(aes(x = height), bins = 50)
+```
+]
+.rightcol[
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-23-1.png" width="504" style="display: block; margin: auto;" /&gt;
+
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-24-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## Continuous variables: **boxplot**
+
+.leftcol60[
+Summarise with mean, median, sd, range, &amp; IQR:
+
+
+```
+## # A tibble: 2 x 6
+##   var     mean median     sd range   IQR
+##   &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 height  1212    200 2157.  25000  1500
+## 2 speed    154    140   42.3   354    40
+```
+
+Visualize with **boxplot** to:
+
+- Identify outliers
+
+
+```r
+wildlife_impacts %&gt;%
+    ggplot() +
+    geom_boxplot(aes(y = speed))
+```
+]
+.rightcol40[
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-27-1.png" width="216" style="display: block; margin: auto;" /&gt;
+]
+
+---
+class: inverse
+
+## Your Turn: Think, Pair, Share
+
+.font90[
+1) Read in the following data sets:
+
+- `faithful.csv`
+- `marathon.csv`
+
+2) Summarize the following variables using an appropriate chart (bar chart, histogram, and / or boxplot):
+
+- faithful: `eruptions`
+- faithful: `waiting`
+- marathon: `Age`
+- marathon: `State`
+- marathon: `Country`
+- marathon: `` `Official Time` ``
+
+3) Share what you learned about each variable with your neighbor.
+]
+
+
+
+---
+class: inverse, center, middle
+
+# Relationship between two variables
+
+---
+## Two categorical variables
+
+.leftcol[
+Summarize with a table of counts
+
+.code70[
+
+```r
+wildlife_impacts %&gt;%
+    count(operator, time_of_day) %&gt;%
+    spread(time_of_day, n)
+```
+
+```
+## # A tibble: 4 x 6
+##   operator            Dawn   Day  Dusk Night `&lt;NA&gt;`
+##   &lt;chr&gt;              &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt;
+## 1 AMERICAN AIRLINES    458  7809   584  3710   2326
+## 2 DELTA AIR LINES      267  4846   353  2090   1449
+## 3 SOUTHWEST AIRLINES   394  9109   599  5425   2443
+## 4 UNITED AIRLINES      151  3359   181  1510   9915
+```
+]]
+--
+.rightcol[.code70[
+Map **color** aesthetic to denote 2nd categorical var
+
+
+```r
+wildlife_impacts %&gt;%
+    ggplot() +
+*   geom_bar(aes(x = operator, fill = time_of_day),
+             width = 0.7, position = 'dodge') +
+    coord_flip()
+```
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-31-1.png" width="504" /&gt;
+]]
+
+---
+## Two continuous variables
+
+.leftcol[
+Summarise with mean, median, sd, range, &amp; IQR:
+
+.code70[
+
+```
+## # A tibble: 2 x 6
+##   var     mean median     sd range   IQR
+##   &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 height  1212    200 2157.  25000  1500
+## 2 speed    154    140   42.3   354    40
+```
+]]
+.rightcol[
+Visualize with **scatterplot**
+
+
+```r
+wildlife_impacts %&gt;%
+    ggplot() +
+    geom_point(aes(x = speed, y = height),
+               size = 0.5)
+```
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-34-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## One continuous, one categorical
+
+.leftcol[
+Summarise with mean, median, sd, range, &amp; IQR:
+
+.code70[
+
+```
+## # A tibble: 4 x 6
+##   operator            mean median    sd range   IQR
+##   &lt;chr&gt;              &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 AMERICAN AIRLINES    155    143  41.3   350    40
+## 2 DELTA AIR LINES      149    140  41.1   345    30
+## 3 SOUTHWEST AIRLINES   156    140  42.7   349    50
+## 4 UNITED AIRLINES      149    140  44.3   350    50
+```
+]]
+.rightcol[
+Visualize with **boxplot**
+
+
+```r
+wildlife_impacts %&gt;%
+    ggplot() +
+*   geom_boxplot(aes(x = operator, y = speed)) +
+    coord_flip()
+```
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-37-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+class: inverse
+
+## Your Turn: Think, Pair, Share
+
+.leftcol70[.font90[
+1) Read in the following data sets:
+
+- `marathon.csv`
+- `wildlife_impacts.csv`
+
+2) Visualize the _relationships_ between the following variables using an appropriate chart (bar plots, scatterplots, and / or box plots):
+
+- marathon: `Age` &amp; `` `Official Time` ``
+- marathon: `` `M/F` `` &amp; `` `Official Time` ``
+- wildlife_impacts: `state` &amp; `operator`
+
+3) Share what you learned about each variable with your neighbor.
+]]
+
+
+---
+class: inverse, middle, center
+
+# Outliers
+
+&lt;center&gt;
+&lt;img src = "images/outliers.jpeg" width = "600"&gt;
+&lt;/center&gt;
+
+---
+# Outliers (continuous data)
+
+**Outliers**: `\(Q_1 \pm 1.5 IQR\)`
+
+**Extreme values**: `\(Q_1 \pm 3.0 IQR\)`
+
+Outliers can have strong effect on the **mean** and **standard deviation**
+
+--
+.leftcol[
+
+```r
+data = c(7,4,6,5,6,5,3,3,8,9)
+```
+- Mean: 5.6
+- Standard Deviation: 2.01
+- Median: 5.5
+- IQR: 2.5
+]
+--
+.rightcol[
+
+```r
+data = c(7,4,6,5,6,5,3,3,9,20)
+```
+- .red[Mean: 6.8]
+- .red[Standard Deviation: 4.98]
+- .blue[Median: 5.5]
+- .blue[IQR: 2.5]
+]
+
+---
+class: inverse
+
+# Robust statistics for continuous data
+
+### **Centrality**: Use _median_ rather than _mean_
+
+### **Variability**: Use _IQR_ rather than _standard deviation_
+
+---
+# Doing EDA
+
+--
+EDA is an iterative process that helps you understand your data:
+
+1. Generate questions about your data
+2. Search for answers by visualising, transforming, and/or modelling your data
+3. Use what you learn to refine your questions and/or generate new questions
+
+&lt;br&gt;
+
+--
+EDA is a tool for _discovery_, not _confirmation_
+
+---
+## Visualizing variation
+
+.leftcol30[
+Ask yourself:
+
+- What type of **variation** occurs within my variables?
+- What type of **covariation** occurs between my variables?
+
+Check out [these guides](https://emse-eda-gwu.github.io/2020-Spring/references.html#22_data_visualization_guides)
+]
+.rightcol70[
+&lt;center&gt;
+&lt;img src = "images/plots-table.png" width = "800"&gt;
+&lt;/center&gt;
+]
+
+---
+class: inverse, middle
+
+### "Far better an approximate answer to the right question, which is often vague, than an exact answer to the wrong question, which can always be made precise."
+### — John Tukey
+
+---
+class: inverse
+
+## Your Turn: Do Some EDA
+
+.leftcol[
+1) Read in the following data set: `data.csv`
+
+2) For each variable, note the data type:
+
+Categorical | Numerical
+------------|-----------
+Nominal     | Interval
+Ordinal     | Ratio
+
+3) For each variable, if possible, summarize its
+
+- _Centrality_
+- _Variability_
+
+]
+.rightcol[
+4) Summarize some of the variables using an appropriate chart:
+
+- Bar chart
+- Histogram
+- Boxplot
+
+5) Visualize a _relationship_ between two variables using an appropriate chart:
+
+- Bar chart
+- Scatterplot
+- Boxplot
+
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
