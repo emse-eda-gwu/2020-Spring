@@ -13,7 +13,7 @@ output:
 **Skills & Knowledge**: After completing these exercises, you should be able to:
 
 - Create a variety of different charts using the **ggplot2** library in R, including scatter plots, histograms, bar charts, and line charts.
-- Know the distinctions between the elements of a ggplot, including data, aesthetics, geometries, and themes. 
+- Know the distinctions between the elements of a ggplot, including data, aesthetics, geometries, and themes.
 - Know how to map variables to aesthetics in a ggplot.
 
 **Assessment**: Credit for this assignment will be allocated in proportion to the percentage of the assignment completed by the due date. No more than 2 late days can be used on any one assignment.
