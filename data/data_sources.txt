@@ -133,3 +133,13 @@ Notes:
 
 Link to full data dictionary:
 https://wildlife.faa.gov/downloads/fieldlist.xls
+
+
+# ----------------------------------------------------------------------
+Data file: north_america_bear_killings.txt
+
+
+
+# ----------------------------------------------------------------------
+Data file: pc_sales_2018.xlsx
+
