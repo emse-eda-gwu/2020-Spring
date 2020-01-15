@@ -1,0 +1,158 @@
+---
+title: "Week 1 In Class Notes"
+output: html_document
+---
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(here)
+options(
+    htmltools.dir.version = FALSE,
+    knitr.table.format = "html",
+    knitr.kable.NA = '')
+knitr::opts_chunk$set(
+    warning = FALSE,
+    message = FALSE,
+    fig.retina = 3)
+```
+
+# Importing data
+
+Read in .csv files with read_csv():
+```{r}
+csvPath <- here('data', 'milk_production.csv')
+milk_production <- read_csv(csvPath)
+```
+
+Read in .txt files with read.table():
+```{r}
+txtPath <- here('data', 'nasa_global_temps.txt')
+global_temps <- read.table(txtPath, skip = 5, header = FALSE)
+# Rename the variables
+names(global_temps) <- c('year', 'meanTemp', 'smoothTemp')
+```
+
+Read in .xlsx files with read_excel():
+```{r}
+library(readxl)
+xlsxPath <- here('data', 'pv_cell_production.xlsx')
+pv_cells <- read_excel(xlsxPath, sheet = 'Cell Prod by Country', skip = 2)
+# Drop rows that don't contain data
+pv_cells <- pv_cells %>%
+    filter(is.na(Year) == FALSE, Year <= 2013)
+```
+
+
+
+
+# Importing data practice:
+
+Write code to import the following files inside the "data" folder:
+
+- wildlife_impacts.csv
+- north_america_bear_killings.txt
+- pc_sales_2018.xlsx
+
+```{r}
+wildlife_impacts <- read_csv(here('data', 'wildlife_impacts.csv'))
+
+bear_killings <- read.table(
+    here('data', 'north_america_bear_killings.txt'),
+    header = TRUE)
+
+pc_sales <- read_excel(here('data', 'pc_sales_2018.xlsx'),
+                       sheet = 'pc_sales', skip = 5)
+```
+
+
+# Data provenance practice:
+
+URLs to the original data sources:
+
+- wildlife_impacts.csv: https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-07-23
+- north_america_bear_killings.txt: https://data.world/makeovermonday/2019w21
+- pc_sales_2018.xlsx: http://www.oica.net/category/sales-statistics/
+
+Go to each of the above sites, then add the following information about the data to the "data_sources.txt" file:
+
+- The name of the downloaded file in the "`data`" folder.
+- The date you downloaded the file (i.e. today's date).
+- The url to the site you downloaded the data from.
+- The source of the _original_ data (if different from where you downloaded the data).
+- A short description of the data and how they were collected.
+- A dictionary for the data (if available).
+
+
+### wildlife_impacts.csv:
+The wildlife impact data is only from the big 4 airlines - 70% of the full database. Also, the data have been pre-processed.
+
+### north_america_bear_killings.txt:
+The source is Wikipedia and was hand-copied from by Ali Sanne.
+
+### pc_sales_2018.xlsx:
+The source is the International Organization of Motor Vehicle Manufacturers. Also, it only include passenger cars (not commercial vehicles).
+
+
+
+
+# Tidy data
+
+Read in data:
+```{r}
+library(readxl)
+xlsxPath <- here('data', 'pv_cell_production.xlsx')
+pv_cells <- read_excel(xlsxPath, sheet = 'Cell Prod by Country', skip = 2) %>%
+    filter(is.na(Year) == FALSE, Year <= 2013)
+```
+
+Convert to "long" format (tidy):
+```{r}
+pv_cells_long <- pv_cells %>%
+    gather(key = 'Country', value = 'nPVCells', China:World)
+```
+
+Convert to "wide" format (un-tidy):
+```{r}
+pv_cells_wide <- pv_cells_long %>%
+    spread(key = Country, value = nPVCells)
+```
+
+
+
+
+# Tidy data practice 1: wide to long
+
+1. Read in the `lotr_words.csv` data file.
+2. Use `gather()` to "tidy" the data into four columns: Film, Race, Gender, Words.
+3. Use `write_csv()` and `here()` to save your file at `lotr_words_tidy.csv` in the `data` folder.
+
+```{r}
+lotr_words <- read_csv(here('data', 'lotr_words.csv'))
+lotr_words_tidy <- lotr_words %>% 
+    gather(key = 'Gender', value = 'wordCount', Female:Male)
+
+lotr_words_tidy %>% 
+    ggplot() +
+    geom_col(aes(x = Film, y = wordCount, fill = Gender), 
+             position = 'dodge') 
+    # Use geom_col instead of geom_bar so that you don't have to type
+    # stat = 'identity'
+```
+
+# Tidy data practice 2: long to wide
+
+1. Read in the `lotr_words_tidy.csv` data file.
+2. Use `spread()` to convert the "tidy" data back into it's untidy format with the columns: Film, Race, Female, Male.
+
+```{r}
+lotr_words_wide <- lotr_words_tidy %>% 
+    spread(key = Gender, value = wordCount) 
+
+lotr_words_wide %>% 
+    group_by(Film) %>% 
+    summarise(Female = sum(Female), 
+              Male = sum(Male)) %>% 
+    mutate(
+        proportion = Female / (Female + Male),
+        percent = round(100*proportion, 1))
+```
