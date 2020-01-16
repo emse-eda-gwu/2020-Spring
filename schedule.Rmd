@@ -50,5 +50,6 @@ schedule <- schedule[c('Week', 'Date', 'Topics / Lessons', 'Readings',
 kable(schedule, format = 'html', escape = FALSE, 
       align = c('c', 'c', 'l', 'l', 'l', 'l', 'l')) %>% 
     kable_styling(full_width = F) %>% 
-    column_spec(c(4, 7), width = c('14em', '6em'))
+    column_spec(column = c(3, 4), width = '15em') %>% 
+    column_spec(column = c(5, 7), width = '8em')
 ```
