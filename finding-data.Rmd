@@ -20,6 +20,7 @@ Many packages contain interesting datasets. [Here](https://vincentarelbundock.gi
 
 In addition, some packages exclusively just contain datasets, such as:
 
+- [fivethirtyeight](https://www.rdocumentation.org/packages/fivethirtyeight/versions/0.5.0): Datasets and code published by the data journalism website 'FiveThirtyEight', available at https://github.com/fivethirtyeight/data
 - [gapminder](https://www.rdocumentation.org/packages/gapminder/)
 - [babynames](https://github.com/hadley/babynames)
 - [nycflights13](https://github.com/hadley/nycflights13)
