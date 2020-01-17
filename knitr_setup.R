@@ -1,5 +1,7 @@
 library(knitr)
 library(here)
+library(tidyverse)
+library(fontawesome) # from github: https://github.com/rstudio/fontawesome
 options(knitr.kable.NA = '')
 
 # default figure size
