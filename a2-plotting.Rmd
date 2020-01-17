@@ -20,6 +20,8 @@ output:
 
 **Tasks**:
 
-1. Open up a notebook (physical, digital...whatever you take notes in best), and **take notes** while you complete the entire [Introduction to Data Visualization with ggplot2](https://www.datacamp.com/courses/introduction-to-data-visualization-with-ggplot2) DataCamp course. You should go through all four lessons in the course.
+1. **Read**: Open up a notebook (physical, digital...whatever you take notes in best), and **take notes** while you go through the [readings for this week](r3-information-visualization.html).
 
-2. When you have completed all of the above exercises, go to the "Assignment Submission" page on Blackboard and write three things you learned by going through these exercises.
+2. **Exercise**: Take notes while you complete the entire [Introduction to Data Visualization with ggplot2](https://www.datacamp.com/courses/introduction-to-data-visualization-with-ggplot2) DataCamp course. You should go through all four lessons in the course.
+
+3. **Report**: When you have completed all of the above exercises, go to the "Assignment Submission" page on Blackboard and write three things from your notes that you learned while going through these readings and exercises.
