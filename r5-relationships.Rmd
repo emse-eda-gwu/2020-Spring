@@ -1,0 +1,16 @@
+---
+title: "Week 5: Graphing Relationships"
+output:
+  html_document:
+    number_sections: false
+    toc: no
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+rm(list=objects()) # start with a clean workspace
+source("knitr_setup.R")
+```
+
+Wilke: [10 - Visualizing proportions](https://serialmentor.com/dataviz/visualizing-proportions.html)
+Wilke: [9 - Visualizing many distributions at once](https://serialmentor.com/dataviz/boxplots-violins.html)
+Wilke: [12 - Visualizing associations](https://serialmentor.com/dataviz/visualizing-associations.html)

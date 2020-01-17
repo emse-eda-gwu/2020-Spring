@@ -1,0 +1,14 @@
+---
+title: "Week 11: Correlation Analysis"
+output:
+  html_document:
+    number_sections: false
+    toc: no
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+rm(list=objects()) # start with a clean workspace
+source("knitr_setup.R")
+```
+
+R4DS: [23 - Model basics](https://r4ds.had.co.nz/model-basics.html)

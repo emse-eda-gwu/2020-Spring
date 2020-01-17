@@ -1,0 +1,18 @@
+---
+title: "Week 4: Graphing Single Variables"
+output:
+  html_document:
+    number_sections: false
+    toc: no
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+rm(list=objects()) # start with a clean workspace
+source("knitr_setup.R")
+```
+
+Wilke: [6 - Visualizing amounts](https://serialmentor.com/dataviz/visualizing-amounts.html)
+Wilke: [7 - Visualizing distributions](https://serialmentor.com/dataviz/histograms-density-plots.html)
+R4DS: [15 - Factors](https://r4ds.had.co.nz/factors.html)
+R4DS: [3.5 - Facets](https://r4ds.had.co.nz/data-visualisation.html#facets)
+

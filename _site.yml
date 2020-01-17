@@ -24,6 +24,24 @@ navbar:
           href: r2-exploring-data.html
         - text: "3: Information visualization"
           href: r3-information-visualization.html
+        - text: "4: Graphing single variables"
+          href: r4-single-vars.html
+        - text: "5: Graphing relationships"
+          href: r5-relationships.html
+        - text: "6: Graphing trends"
+          href: r6-trends.html
+        - text: "7: Data cleaning & joins"
+          href: r7-cleaning-joins.html
+        - text: "8: Polishing your charts"
+          href: r8-polish.html
+        - text: "9: Maps & geospatial data"
+          href: r9-maps.html
+        - text: "11: Correlation analysis"
+          href: r11-correlation.html
+        - text: "12: Cluster analysis"
+          href: r12-clusters.html
+        - text: "13: Communicating your results"
+          href: r13-communicating.html
     - text: "Assignments"
       menu:
         - text: "0: Class Prerequisites"

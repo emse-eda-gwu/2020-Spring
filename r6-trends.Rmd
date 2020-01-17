@@ -1,0 +1,15 @@
+---
+title: "Week 6: Graphing Trends"
+output:
+  html_document:
+    number_sections: false
+    toc: no
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+rm(list=objects()) # start with a clean workspace
+source("knitr_setup.R")
+```
+
+Wilke: [13 - Visualizing time series](https://serialmentor.com/dataviz/time-series.html)
+Wilke: [14 - Visualizing trends](https://serialmentor.com/dataviz/visualizing-trends.html)

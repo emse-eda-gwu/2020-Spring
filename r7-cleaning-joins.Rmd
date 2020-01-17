@@ -1,0 +1,15 @@
+---
+title: "Week 7: Data Cleaning & Joins"
+output:
+  html_document:
+    number_sections: false
+    toc: no
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+rm(list=objects()) # start with a clean workspace
+source("knitr_setup.R")
+```
+
+R4DS: [13 - Relational data](https://r4ds.had.co.nz/relational-data.html)
+[Join function explanations](https://github.com/gadenbuie/tidyexplain#mutating-joins)
