@@ -12,4 +12,5 @@ source("knitr_setup.R")
 ```
 
 Healy: [7 - Draw maps](http://socviz.co/maps.html#maps)
+
 Wilke: [15 - Visualizing geospatial data](https://serialmentor.com/dataviz/geospatial-data.html)

@@ -12,6 +12,9 @@ source("knitr_setup.R")
 ```
 
 R4DS: [28 - Graphics for communication](https://r4ds.had.co.nz/graphics-for-communication.html)
+
 Healy: [8 - Refine your plots](http://socviz.co/refineplots.html#refineplots)
+
 Wilke: [21 - Multi-panel figures](https://serialmentor.com/dataviz/multi-panel-figures.html)
+
 [The patchwork package](https://patchwork.data-imaginist.com/articles/patchwork.html)

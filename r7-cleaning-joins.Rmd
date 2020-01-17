@@ -12,4 +12,5 @@ source("knitr_setup.R")
 ```
 
 R4DS: [13 - Relational data](https://r4ds.had.co.nz/relational-data.html)
+
 [Join function explanations](https://github.com/gadenbuie/tidyexplain#mutating-joins)

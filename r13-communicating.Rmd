@@ -12,5 +12,6 @@ source("knitr_setup.R")
 ```
 
 Video: [How to start a speech](https://www.youtube.com/watch?v=w82a1FT5o88)
+
 Wilke: [29 - Telling a story and making a point](https://serialmentor.com/dataviz/telling-a-story.html)
 

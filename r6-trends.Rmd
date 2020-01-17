@@ -12,4 +12,5 @@ source("knitr_setup.R")
 ```
 
 Wilke: [13 - Visualizing time series](https://serialmentor.com/dataviz/time-series.html)
+
 Wilke: [14 - Visualizing trends](https://serialmentor.com/dataviz/visualizing-trends.html)
