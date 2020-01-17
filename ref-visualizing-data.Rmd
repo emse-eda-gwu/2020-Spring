@@ -20,7 +20,7 @@ source("knitr_setup.R")
 
 # Choosing the right chart
 
-Not to long ago, people used to have to spend days and weeks coming up with the perfect graph for their data. Fortunately, we live in the future and awesome people have created these wonderful, beautiful interactive websites to help you find the most appropriate graph for your data. These will come in handy when you start working on your class project:
+You will want to choose different chart types depending on the relationship or message you want to convey. Fortunately, we live in the future and awesome people have created wonderful, beautiful interactive websites to help you find the most appropriate graph for your data. Take a look through some of these sites - these will come in handy when you start working on your final project:
 
 - [The Data Visualisation Catalogue](https://datavizcatalogue.com/)
 - [Data-to-Viz](https://www.data-to-viz.com/)
