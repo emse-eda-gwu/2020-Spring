@@ -1,6 +1,9 @@
 ---
 title: "Visualizing Data"
-output: html_document
+output:
+  html_document:
+    number_sections: false
+    toc: no
 ---
 
 ```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
@@ -20,8 +23,9 @@ source("knitr_setup.R")
 
 # Choosing the right chart
 
-You will want to choose different chart types depending on the relationship or message you want to convey. Fortunately, we live in the future and awesome people have created wonderful, beautiful interactive websites to help you find the most appropriate graph for your data. Take a look through some of these sites - these will come in handy when you start working on your final project:
+You will want to choose different chart types depending on the relationship or message you want to convey. Fortunately, we live in the future and awesome people have created wonderful tools to help you find the most appropriate graph for your data. Take a look through some of these resources - these will come in handy when you start working on your final project:
 
+- `r fa('file-pdf')`[Stephen Few's Graph Selection Matrix]()
 - [The Data Visualisation Catalogue](https://datavizcatalogue.com/)
 - [Data-to-Viz](https://www.data-to-viz.com/)
 - [R Graph Gallery](http://r-graph-gallery.com/)
