@@ -8,8 +8,6 @@ rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
 
----
-
 # Teaching Team
 
 ## Meet your instructor!
@@ -97,6 +95,6 @@ Check out the [**readr**](https://readr.tidyverse.org/articles/readr.html) and [
 
 We'll cover the concept of "tidy" data in class on day 1. To get familiar with it, read [Chapter 12](https://r4ds.had.co.nz/tidy-data.html) in R4DS, and take a look at these [Tidy data explanations](https://github.com/gadenbuie/tidyexplain#tidy-data).
 
-## A look at your final project
+## Writing a research question
 
 Read through [this guide](https://writingcenter.gmu.edu/guides/how-to-write-a-research-question) from GMU on how to write a research question. We'll come back to these ideas again later when you start working on your [final projects](assignment-project.html), but it's a good idea to start thinking about your research question early.

@@ -1,0 +1,38 @@
+---
+title: "Visualizing Data"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+rm(list=objects()) # start with a clean workspace
+source("knitr_setup.R")
+```
+
+# Principles of data visualization
+
+- Healy, Kieran. "Data Visualization: A practical introduction"
+[[free online](http://socviz.co/)],
+[[buy on amazon](https://www.amazon.com/Data-Visualization-Introduction-Kieran-Healy/dp/0691181624)]
+- Wilke, Claus O. "Fundamentals of Data Visualization"
+[[free online](https://serialmentor.com/dataviz/)],
+[[buy on amazon](https://www.amazon.com/Fundamentals-Data-Visualization-Informative-Compelling/dp/1492031089)]
+- Video: [How Humans See Data](https://youtu.be/fSgEeI2Xpdc), by John Rauser. This is probably the best overviews I've seen on how to exploit the psychology of how our brains interpret images to make effective visualizations.
+
+# Choosing the right chart
+
+Not to long ago, people used to have to spend days and weeks coming up with the perfect graph for their data. Fortunately, we live in the future and awesome people have created these wonderful, beautiful interactive websites to help you find the most appropriate graph for your data. These will come in handy when you start working on your class project:
+
+- [The Data Visualisation Catalogue](https://datavizcatalogue.com/)
+- [Data-to-Viz](https://www.data-to-viz.com/)
+- [R Graph Gallery](http://r-graph-gallery.com/)
+- [Visual Vocabulary](https://gramener.github.io/visual-vocabulary-vega/)
+- [The Data Viz Project](https://datavizproject.com/)
+
+# Making plots with **ggplot2**
+
+- [The R Graph Catalog](http://shinyapps.stat.ubc.ca/r-graph-catalog/): 124 examples (with code) for making common ggplots.
+- [Top 50 `ggplot2` visualizations](http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html)
+- [R Cookbook for `ggplot2`](http://www.cookbook-r.com/Graphs/)
+- [RStudio `ggplot2` Cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
+- [Tidyverse `ggplot2` reference guide](https://ggplot2.tidyverse.org/reference/)
+- [ggThemeAssist](https://github.com/calligross/ggthemeassist): Package for customizing plot themes and layout

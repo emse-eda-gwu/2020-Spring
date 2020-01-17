@@ -14,14 +14,16 @@ navbar:
       href: syllabus.html
     - text: "Schedule"
       href: schedule.html
-    - text: "Lessons"
+    - text: "Readings"
       menu:
-        - text: "Week 0: Course Prep"
-          href: L0-course-prep.html
-        - text: "Week 1: Course Introduction"
-          href: L1-course-introduction.html
-        - text: "Week 2: Exploring Data"
-          href: L2-exploring-data.html
+        - text: "0: Course prep"
+          href: r0-course-prep.html
+        - text: "1: Course introduction"
+          href: r1-course-introduction.html
+        - text: "2: Exploring data"
+          href: r2-exploring-data.html
+        - text: "3: Information visualization"
+          href: r3-information-visualization.html
     - text: "Assignments"
       menu:
         - text: "0: Class Prerequisites"
@@ -36,13 +38,19 @@ navbar:
       menu:
         - text: "Getting Help"
           icon: fa-question-circle
-          href: getting-help.html
+          href: ref-getting-help.html
         - text: "Finding Data"
           icon: fa-database
-          href: finding-data.html
-        - text: "Books, Guides, Tutorials, Oh My!"
-          icon: fa-book
-          href: references.html
+          href: ref-finding-data.html
+        - text: "Visualizing Data"
+          icon: fa-chart-bar
+          href: ref-visualizing-data.html
+        - text: "Programming in R"
+          icon: fa-code
+          href: ref-programming.html
+        - text: "Other"
+          icon: fa-ellipsis-h
+          href: ref-other.html
     - text: "About"
       menu:
         - text: About

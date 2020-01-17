@@ -44,12 +44,12 @@ dates <- c(dates, format(c(makeup, finals), format="%m/%d"))
 schedule$Date <- dates
 # Define the week
 schedule$Week <- seq(length(dates))
-schedule <- schedule[c('Week', 'Date', 'Topics / Lessons', 'Readings',
-                       'Class Notes', 'Quizzes', 'Assignments')]
+schedule <- schedule[c('Week', 'Date', 'Topics', 'Readings',
+                       'Class', 'Quizzes', 'Assignments')]
 # Render the schedule as markdown
 kable(schedule, format = 'html', escape = FALSE, 
       align = c('c', 'c', 'l', 'l', 'l', 'l', 'l')) %>% 
     kable_styling(full_width = F) %>% 
-    column_spec(column = c(3, 4), width = '15em') %>% 
-    column_spec(column = c(5, 7), width = '8em')
+    column_spec(column = 3, width = '18em') %>% 
+    column_spec(column = c(5, 7), width = '10em')
 ```

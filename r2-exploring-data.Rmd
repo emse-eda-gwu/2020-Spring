@@ -1,0 +1,37 @@
+---
+title: "Week 2: Exploring Data"
+output:
+  html_document:
+    number_sections: false
+    toc: no
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+rm(list=objects()) # start with a clean workspace
+source("knitr_setup.R")
+```
+
+This week, we will learn some strategies for exploring data sets to gain a greater understanding of the variable types and their relationships.
+
+# Data types & descriptive statistics
+
+To get started, open up a notebook (physical, digital...whatever you take notes in best), and **take notes** while you watch [this 20 minute video](https://www.youtube.com/watch?v=zHcQPKP6NpM) to learn about some basic data types and descriptive statistics:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/zHcQPKP6NpM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+# Readings!
+
+After watching the above video, read through the following chapters and **take notes**. 
+
+- [R4DS - 7: Exploratory data analysis](https://r4ds.had.co.nz/exploratory-data-analysis.html): Provides some more "hands on" strategies for exploring data using R and the **ggplot2** library.
+- [Wilke - 5: Directory of visualizations](https://serialmentor.com/dataviz/directory-of-visualizations.html): Provides a quick overview of many common plot types.
+
+# Choosing the right chart
+
+Not to long ago, people used to have to spend days and weeks coming up with the perfect graph for their data. Fortunately, we live in the future and awesome people have created wonderful, beautiful interactive websites to help you find the most appropriate graph for your data. These will come in handy when you start working on your class project:
+
+- [The Data Visualisation Catalogue](https://datavizcatalogue.com/)
+- [Data-to-Viz](https://www.data-to-viz.com/)
+- [R Graph Gallery](http://r-graph-gallery.com/)
+- [Visual Vocabulary](https://gramener.github.io/visual-vocabulary-vega/)
+- [The Data Viz Project](https://datavizproject.com/)

@@ -2,15 +2,14 @@
 title: "Week 1: Course Prep"
 output:
   html_document:
-    toc: false
+    number_sections: false
+    toc: no
 ---
 
 ```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
 rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
-
----
 
 This page has everything you need to do to prepare for class. Ideally, you should do all these things _before_ the first day of class.
 

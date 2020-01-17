@@ -39,7 +39,7 @@ A collection of various websites that have lots of interesting datasets:
 
 ## Large, searchable websites
 
-- [Kaggle](https://www.kaggle.com/datasets)
+- [Kaggle](https://www.kaggle.com/datasets): Hosts machine learning competitions, and as a result has lots of really interesting data sets open to the public.
 - [Google Dataset Search](https://toolbox.google.com/datasetsearch)
 - [Quandl](https://www.quandl.com/): Searchable, over 2 million financial, economic, and social datasets.
 - [Wharton Research Data Services](https://wrds-www.wharton.upenn.edu/): Single-point access to over 200 terabytes of data across multiple disciplines, including Finance, Marketing, and Economics.
@@ -49,6 +49,7 @@ A collection of various websites that have lots of interesting datasets:
 "Government-ish" because while some of these sites host government data, the sites themselves may or may not be affiliated with a government agency:
 
 - [US Open Gov Data](https://www.data.gov/open-gov/): links to federal and non-federal sources in US and abroad
+- [US City Open Data Census](http://us-city.census.okfn.org/): Open data from more than 100 U.S. cities.
 - [Open Africa](https://africaopendata.org/)
 - [EU Open Data Portal](https://data.europa.eu/euodp/en/home)
 - [China data](https://www.ganghe.net/research/data): Various datasets on China posted by [Gang He](https://www.ganghe.net/).
