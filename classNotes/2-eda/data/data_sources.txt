@@ -1,4 +1,49 @@
 # ----------------------------------------------------------------------
+Data file: avengers.csv
+
+Date downloaded: January 17, 2020
+
+Description: The raw data behind the story "Joining The Avengers Is As Deadly As Jumping Off A Four-Story Building" https://fivethirtyeight.com/features/avengers-death-comics-age-of-ultron/.
+
+Source of downloaded file:
+- These are from the fivethirtyeight R package:
+https://www.rdocumentation.org/packages/fivethirtyeight/versions/0.5.0
+
+Dictionary here: https://www.rdocumentation.org/packages/fivethirtyeight/versions/0.5.0/topics/avengers
+
+
+
+# ----------------------------------------------------------------------
+Data file: candy_rankings.csv
+
+Date downloaded: January 17, 2020
+
+Description: The raw data behind the story "The Ultimate Halloween Candy Power Ranking" https://fivethirtyeight.com/features/the-ultimate-halloween-candy-power-ranking/.
+
+Source of downloaded file:
+- These are from the fivethirtyeight R package:
+https://www.rdocumentation.org/packages/fivethirtyeight/versions/0.5.0
+
+Dictionary here: https://www.rdocumentation.org/packages/fivethirtyeight/versions/0.5.0/topics/candy_rankings
+
+
+
+# ----------------------------------------------------------------------
+Data file: college_all_ages.csv
+
+Date downloaded: January 17, 2020
+
+Description: The raw data behind the story "The Economic Guide To Picking A College Major" https://fivethirtyeight.com/features/the-economic-guide-to-picking-a-college-major/.
+
+Source of downloaded file:
+- These are from the fivethirtyeight R package:
+https://www.rdocumentation.org/packages/fivethirtyeight/versions/0.5.0
+
+Dictionary here: https://www.rdocumentation.org/packages/fivethirtyeight/versions/0.5.0/topics/college_all_ages
+
+
+
+# ----------------------------------------------------------------------
 Data file: faithful.csv
 
 Date downloaded: January 14, 2020
@@ -46,6 +91,7 @@ Female   |double    |Number of words spoken by female characters
 Male     |double    |Number of words spoken by male characters
 
 
+
 # ----------------------------------------------------------------------
 Data file: marathon.csv
 
@@ -59,6 +105,7 @@ Source of downloaded file:
 
 Original data source:
 - Data was scrapped from the official marathon website: http://registration.baa.org/2017/cf/Public/iframe_ResultsSearch.cfm
+
 
 
 # ----------------------------------------------------------------------
@@ -83,6 +130,7 @@ region        |character |Region of the US
 state         |character |US State
 year          |date      |Year
 milk_produced |double    |Pounds of Milk Produced
+
 
 
 # ----------------------------------------------------------------------

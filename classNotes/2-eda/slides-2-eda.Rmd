@@ -195,7 +195,7 @@ wildlife_impacts %>%
 ---
 class: inverse
 
-# Your Turn: Think, Pair, Share
+# Practice with data types
 
 .leftcol60[
 1) Read in the following data sets:
@@ -296,11 +296,11 @@ wildlife_impacts %>%
 ]]
 
 ---
-class: inverse 
+class: inverse
 
 ## Beware the "flaw of averages"
 
-### A statistician crosses a river that has an average depth of 3 feet...
+### What happened to the statistician that crossed a river with an average depth of 3 feet?
 
 --
 ### ...he drowned
@@ -438,7 +438,7 @@ daysToShip %>%
 ---
 class: inverse
 
-# Your Turn: Think, Pair, Share
+# Practice with summary measurements
 
 1) Read in the following data sets:
 
@@ -484,9 +484,48 @@ summary(lotr_words$Male)
 ```
 
 ---
+
+class: center, middle
+
+# "Visualizing data helps us think"<sup>1</sup>
+
+<center>
+<img src = "images/anscombe_data.png" width = "700">
+</center>
+
+---
+class: center, middle
+
+# "Visualizing data helps us think"<sup>1</sup>
+
+```{r, echo=FALSE, fig.height=6, fig.width=8, fig.align='center'}
+x       <- c(anscombe$x1, anscombe$x2, anscombe$x3, anscombe$x4)
+y       <- c(anscombe$y1, anscombe$y2, anscombe$y3, anscombe$y4)
+quartet <- rep(c('A', 'B', 'C', 'D'), each = nrow(anscombe))
+ansDf   <- tibble(x, y, quartet)
+ansDf %>%
+    ggplot(aes(x = x, y = y)) +
+    geom_point(alpha = 0.6, size = 2) +
+    stat_smooth(method = 'lm', se = F, size = 0.4, alpha = 0.6) +
+    facet_wrap(vars(quartet)) +
+    scale_x_continuous(breaks=seq(4, 18, 2), limits=c(4, 19)) +
+    scale_y_continuous(breaks=seq(4, 12, 2), limits=c(3, 13)) +
+    theme_bw() +
+    theme(
+        axis.ticks = element_blank(),
+        axis.ticks.length = unit(0, "cm"),
+        axis.text = element_blank(),
+        axis.title = element_blank(),
+        plot.margin = margin(0, 0, 0, 0, "cm"))
+```
+
+.left[.footer-small[Stephen Few (2009, pg. 6)]]
+
+---
 class: inverse, center, middle
 
-# Which summary measures you use depends on the type of data
+# The data type determines 
+# how to summarize it
 
 ---
 
@@ -710,7 +749,7 @@ wildlife_impacts %>%
 ---
 class: inverse
 
-## Your Turn: Think, Pair, Share
+# Practice with visual summaries
 
 .font90[
 1) Read in the following data sets:
@@ -874,7 +913,7 @@ wildlife_impacts %>%
 ---
 class: inverse
 
-## Your Turn: Think, Pair, Share
+# Practice with visualizing relationships
 
 .leftcol70[.font90[
 1) Read in the following data sets:
@@ -982,7 +1021,7 @@ Ask yourself:
 - What type of **variation** occurs within my variables?
 - What type of **covariation** occurs between my variables?
 
-Check out [these guides](https://emse-eda-gwu.github.io/2020-Spring/references.html#22_data_visualization_guides)
+Check out [these guides](https://emse-eda-gwu.github.io/2020-Spring/ref-visualizing-data.html)
 ]
 .rightcol70[
 <center>
@@ -999,10 +1038,14 @@ class: inverse, middle
 ---
 class: inverse
 
-## Your Turn: Do Some EDA
+## Practice doing EDA: Groups of 3
 
 .leftcol[
-1) Read in the following data set: `data.csv`
+1) Read in the following data sets: 
+
+- `avengers.csv`
+- `candy_rankings.csv`
+- `college_all_ages.csv`
 
 2) For each variable, note the data type:
 
@@ -1033,6 +1076,65 @@ Ordinal     | Ratio
 ]
 
 ```{r, include=FALSE, eval=FALSE}
-marathon <- read_csv(here('data', 'marathon.csv'))
-wildlife_impacts <- read_csv(here('data', 'wildlife_impacts.csv'))
+candy_rankings <- read_csv(here('data', 'candy_rankings.csv'))
+avengers <- read_csv(here('data', 'avengers.csv'))
+college_all_ages <- read_csv(here('data', 'college_all_ages.csv'))
+
+# candy_rankings
+candy_rankings %>% 
+  ggplot() + 
+  geom_col(aes(x=competitorname, y = winpercent)) + 
+  coord_flip()
+
+candy_rankings %>% 
+  ggplot() + 
+  geom_point(aes(x=pricepercent, y = sugarpercent)) 
+
+candy_rankings %>% 
+  ggplot() + 
+  geom_point(aes(x=winpercent, y = sugarpercent)) 
+
+candy_rankings %>% 
+  ggplot() + 
+  geom_point(aes(x=winpercent, y = pricepercent))
+
+candy_rankings %>% 
+  ggplot() + 
+  geom_boxplot(aes(x = chocolate, y = winpercent))
+
+# avengers
+avengers %>% 
+  ggplot() + 
+  geom_bar(aes(x = death1))
+
+avengers %>% 
+  ggplot() + 
+  geom_col(aes(x = gender, y = appearances))
+
+avengers %>% 
+  arrange(desc(appearances)) %>% 
+  mutate(appearRank = seq(nrow(avengers))) %>% 
+  filter(appearRank <= 10) %>% 
+  mutate(name_alias = fct_reorder(name_alias, appearRank)) %>% 
+  ggplot() + 
+  geom_col(aes(x = name_alias, y = appearances, fill = gender)) +
+  coord_flip()
+
+avengers %>% 
+  ggplot() + 
+  geom_point(aes(x = year, y = appearances))
+
+# college_all_ages
+college_all_ages %>% 
+  group_by(major_category) %>% 
+  summarise(category_median = median(median)) %>% 
+  mutate(major_category = fct_reorder(major_category, category_median)) %>% 
+  ggplot() + 
+  geom_col(aes(x = major_category, y = category_median)) +
+  coord_flip()
+
+college_all_ages %>% 
+  ggplot() + 
+  geom_boxplot(aes(x = major_category, y = median)) + 
+  coord_flip()
 ```

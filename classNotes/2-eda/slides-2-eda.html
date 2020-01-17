@@ -121,13 +121,13 @@ Example: `Placement` _2017 Boston marathon_
 ```
 ## # A tibble: 6 x 3
 ##   Placement `Official Time` Name            
-##       &lt;dbl&gt; &lt;drtn&gt;          &lt;chr&gt;           
-## 1         1 02:09           Kirui, Geoffrey 
-## 2         2 02:09           Rupp, Galen     
-## 3         3 02:10           Osako, Suguru   
-## 4         4 02:12           Biwott, Shadrack
-## 5         5 02:12           Chebet, Wilson  
-## 6         6 02:12           Abdirahman, Abdi
+##       &lt;dbl&gt; &lt;time&gt;          &lt;chr&gt;           
+## 1         1 02:09:37        Kirui, Geoffrey 
+## 2         2 02:09:58        Rupp, Galen     
+## 3         3 02:10:28        Osako, Suguru   
+## 4         4 02:12:08        Biwott, Shadrack
+## 5         5 02:12:35        Chebet, Wilson  
+## 6         6 02:12:45        Abdirahman, Abdi
 ```
 ]
 
@@ -146,12 +146,12 @@ Example: `day`, `time`, &amp; `temp` in _Beaver temperature_
 
 ```
 ##   day time  temp activ
-## 1 346 1610 36.81     0
-## 2 346 1440 36.55     0
-## 3 346 2130 36.86     0
-## 4 346  920 36.55     0
-## 5 346 2200 37.23     0
-## 6 346 1600 36.80     0
+## 1 346  940 36.71     0
+## 2 346 2050 36.85     0
+## 3 346 2340 36.93     0
+## 4 346 1920 36.92     0
+## 5 346 1900 36.97     0
+## 6 347   50 36.73     0
 ```
 ]
 --
@@ -199,7 +199,7 @@ Example: `height` &amp; `speed` in wildlife impacts
 ---
 class: inverse
 
-# Your Turn: Think, Pair, Share
+# Practice with data types
 
 .leftcol60[
 1) Read in the following data sets:
@@ -274,11 +274,11 @@ wildlife_impacts %&gt;%
 ]]
 
 ---
-class: inverse 
+class: inverse
 
 ## Beware the "flaw of averages"
 
-### A statistician crosses a river that has an average depth of 3 feet...
+### What happened to the statistician that crossed a river with an average depth of 3 feet?
 
 --
 ### ...he drowned
@@ -412,7 +412,7 @@ class: center
 ---
 class: inverse
 
-# Your Turn: Think, Pair, Share
+# Practice with summary measurements
 
 1) Read in the following data sets:
 
@@ -429,9 +429,29 @@ class: inverse
 
 
 ---
+
+class: center, middle
+
+# "Visualizing data helps us think"&lt;sup&gt;1&lt;/sup&gt;
+
+&lt;center&gt;
+&lt;img src = "images/anscombe_data.png" width = "700"&gt;
+&lt;/center&gt;
+
+---
+class: center, middle
+
+# "Visualizing data helps us think"&lt;sup&gt;1&lt;/sup&gt;
+
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-15-1.png" width="576" style="display: block; margin: auto;" /&gt;
+
+.left[.footer-small[Stephen Few (2009, pg. 6)]]
+
+---
 class: inverse, center, middle
 
-# Which summary measures you use depends on the type of data
+# The data type determines 
+# how to summarize it
 
 ---
 
@@ -516,7 +536,7 @@ wildlife_impacts %&gt;%
     geom_bar(aes(x = operator), width = 0.7) +
     coord_flip()
 ```
-&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-17-1.png" width="504" /&gt;
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-18-1.png" width="504" /&gt;
 ]
 
 ---
@@ -562,7 +582,7 @@ wildlife_impacts %&gt;%
     geom_bar(aes(x = as.factor(incident_month)),
              width = 0.7)
 ```
-&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-20-1.png" width="504" /&gt;
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-21-1.png" width="504" /&gt;
 ]
 
 ---
@@ -614,9 +634,9 @@ wildlife_impacts %&gt;%
 ```
 ]
 .rightcol[
-&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-23-1.png" width="504" style="display: block; margin: auto;" /&gt;
-
 &lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-24-1.png" width="504" style="display: block; margin: auto;" /&gt;
+
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-25-1.png" width="504" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -646,13 +666,13 @@ wildlife_impacts %&gt;%
 ```
 ]
 .rightcol40[
-&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-27-1.png" width="216" style="display: block; margin: auto;" /&gt;
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-28-1.png" width="216" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
 class: inverse
 
-## Your Turn: Think, Pair, Share
+# Practice with visual summaries
 
 .font90[
 1) Read in the following data sets:
@@ -715,7 +735,7 @@ wildlife_impacts %&gt;%
              width = 0.7, position = 'dodge') +
     coord_flip()
 ```
-&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-31-1.png" width="504" /&gt;
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-32-1.png" width="504" /&gt;
 ]]
 
 ---
@@ -744,7 +764,7 @@ wildlife_impacts %&gt;%
     geom_point(aes(x = speed, y = height),
                size = 0.5)
 ```
-&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-34-1.png" width="504" style="display: block; margin: auto;" /&gt;
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-35-1.png" width="504" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -775,13 +795,13 @@ wildlife_impacts %&gt;%
 *   geom_boxplot(aes(x = operator, y = speed)) +
     coord_flip()
 ```
-&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-37-1.png" width="504" style="display: block; margin: auto;" /&gt;
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-38-1.png" width="504" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
 class: inverse
 
-## Your Turn: Think, Pair, Share
+# Practice with visualizing relationships
 
 .leftcol70[.font90[
 1) Read in the following data sets:
@@ -873,7 +893,7 @@ Ask yourself:
 - What type of **variation** occurs within my variables?
 - What type of **covariation** occurs between my variables?
 
-Check out [these guides](https://emse-eda-gwu.github.io/2020-Spring/references.html#22_data_visualization_guides)
+Check out [these guides](https://emse-eda-gwu.github.io/2020-Spring/ref-visualizing-data.html)
 ]
 .rightcol70[
 &lt;center&gt;
@@ -890,10 +910,14 @@ class: inverse, middle
 ---
 class: inverse
 
-## Your Turn: Do Some EDA
+## Practice doing EDA: Groups of 3
 
 .leftcol[
-1) Read in the following data set: `data.csv`
+1) Read in the following data sets: 
+
+- `avengers.csv`
+- `candy_rankings.csv`
+- `college_all_ages.csv`
 
 2) For each variable, note the data type:
 
@@ -970,7 +994,24 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     }
     deleted = true;
   });
-})();</script>
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
 
 <script>
 (function() {

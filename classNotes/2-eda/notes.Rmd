@@ -37,7 +37,7 @@ Ordinal     | Ratio
 ```
 
 
-# Practice with summary measurements: centrality & variability
+# Practice with summary measurements
 
 1) Read in the following data sets:
 
@@ -100,10 +100,13 @@ Ordinal     | Ratio
 ```
 
 
+# Practice doing EDA: Groups of 3
 
-# Practice doing EDA 
+1) Read in the following data sets: 
 
-1) Read in the following data set: `data.csv`
+- `avengers.csv`
+- `candy_rankings.csv`
+- `college_all_ages.csv`
 
 2) For each variable, note the data type:
 
