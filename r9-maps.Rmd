@@ -14,3 +14,9 @@ source("knitr_setup.R")
 Healy: [7 - Draw maps](http://socviz.co/maps.html#maps)
 
 Wilke: [15 - Visualizing geospatial data](https://serialmentor.com/dataviz/geospatial-data.html)
+
+[Map projections](https://xkcd.com/977/)
+
+Watch [this video](https://www.youtube.com/watch?v=kIID5FDi2JQ):
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kIID5FDi2JQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
