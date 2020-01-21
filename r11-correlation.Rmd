@@ -11,4 +11,6 @@ rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
 
+Wilke: [12 - Visualizing associations](https://serialmentor.com/dataviz/visualizing-associations.html)
+
 R4DS: [23 - Model basics](https://r4ds.had.co.nz/model-basics.html)

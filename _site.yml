@@ -24,10 +24,10 @@ navbar:
           href: r2-exploring-data.html
         - text: "3: Visualizing information"
           href: r3-visualizing-information.html
-        - text: "4: Graphing single variables"
-          href: r4-single-vars.html
-        - text: "5: Graphing relationships"
-          href: r5-relationships.html
+        - text: "4: Graphing amounts & proportions"
+          href: r4-amounts-proportions.html
+        - text: "5: Graphing comparisons"
+          href: r5-comparisons.html
         - text: "6: Graphing trends"
           href: r6-trends.html
         - text: "7: Data cleaning & joins"

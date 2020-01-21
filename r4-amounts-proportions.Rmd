@@ -1,5 +1,5 @@
 ---
-title: "Week 4: Graphing Single Variables"
+title: "Week 4: Graphing Amounts & Proportions"
 output:
   html_document:
     number_sections: false
@@ -10,12 +10,14 @@ output:
 rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
-
 Wilke: [6 - Visualizing amounts](https://serialmentor.com/dataviz/visualizing-amounts.html)
 
 Wilke: [7 - Visualizing distributions](https://serialmentor.com/dataviz/histograms-density-plots.html)
 
+Wilke: [9 - Visualizing many distributions at once](https://serialmentor.com/dataviz/boxplots-violins.html)
+
+Wilke: [10 - Visualizing proportions](https://serialmentor.com/dataviz/visualizing-proportions.html)
+
 R4DS: [15 - Factors](https://r4ds.had.co.nz/factors.html)
 
 R4DS: [3.5 - Facets](https://r4ds.had.co.nz/data-visualisation.html#facets)
-
