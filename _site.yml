@@ -22,8 +22,8 @@ navbar:
           href: r1-course-introduction.html
         - text: "2: Exploring data"
           href: r2-exploring-data.html
-        - text: "3: Information visualization"
-          href: r3-information-visualization.html
+        - text: "3: Visualizing information"
+          href: r3-visualizing-information.html
         - text: "4: Graphing single variables"
           href: r4-single-vars.html
         - text: "5: Graphing relationships"
