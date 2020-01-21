@@ -15,14 +15,18 @@ output:
 - Create a variety of different charts using the **ggplot2** library in R, including scatter plots, histograms, bar charts, and line charts.
 - Know the distinctions between the elements of a ggplot, including data, aesthetics, geometries, and themes.
 - Know how to map variables to aesthetics in a ggplot.
+- Know how to create faceted plots.
 
 **Assessment**: Credit for this assignment will be allocated in proportion to the percentage of the assignment completed by the due date. No more than 2 late days can be used on any one assignment.
 
 **Tasks**:
 
-1. **Read**: Open up a notebook (physical, digital...whatever you take notes in best), and **take notes** while you go through the [readings for this week](r3-information-visualization.html).
+1. **Read**: Open up a notebook (physical, digital...whatever you take notes in best), and **take notes** while you go through the [readings for this week](r3-visualizing-information.html).
 
-2. **Exercise**: Take notes while you complete the entire [Introduction to Data Visualization with ggplot2](https://www.datacamp.com/courses/introduction-to-data-visualization-with-ggplot2) DataCamp course. You should go through all four lessons in the course. This is mostly a refresher, but you'll also learn some new content.
+2. **Exercises**: Take notes while you complete the following DataCamp exercises:
+
+    - Complete the entire [Introduction to Data Visualization with ggplot2](https://www.datacamp.com/courses/introduction-to-data-visualization-with-ggplot2) course. You should go through all four lessons in the course. This is mostly a refresher, but you'll also learn some new content.
+    - Complete [Lesson 3: Facets](https://campus.datacamp.com/courses/intermediate-data-visualization-with-ggplot2/facets) from the DataCamp course "Intermediate Data Visualization with ggplot2" (you don't need to complete the other lessons in the course).
 
 3. **Report**: When you have completed all of the above exercises, go to the "Assignment Submission" page on Blackboard and write three things from your notes that you learned while going through these readings and exercises.
 
