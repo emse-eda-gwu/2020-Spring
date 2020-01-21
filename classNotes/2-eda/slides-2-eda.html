@@ -26,8 +26,16 @@ class: inverse, center
 
 # Thanks for the hero gifs :)
 
+.leftcol[
+&lt;center&gt;
 &lt;img src="images/hero_ellinport.gif"&gt;
+&lt;/center&gt;
+]
+.rightcol[
+&lt;center&gt;
 &lt;img src="images/hero_stricklett.gif"&gt;
+&lt;/center&gt;
+]
 
 ---
 class: inverse, center, middle
@@ -45,13 +53,9 @@ class: inverse, center, middle
 # Earth's circumference at the equator: 24,901 miles
 
 ---
-class: inverse, center, middle
-
-# Quantitative information always describes _relationships_
-
----
 # Types of Data
 
+--
 .leftcol[
 ### **Categorical**
 
@@ -60,6 +64,7 @@ Subdivide things into useful groups
 - What type?
 - Which category?
 ]
+--
 .rightcol[
 ### **Numerical**
 
@@ -146,12 +151,12 @@ Example: `day`, `time`, &amp; `temp` in _Beaver temperature_
 
 ```
 ##   day time  temp activ
-## 1 346  940 36.71     0
-## 2 346 2050 36.85     0
-## 3 346 2340 36.93     0
-## 4 346 1920 36.92     0
-## 5 346 1900 36.97     0
-## 6 347   50 36.73     0
+## 1 346 1120 36.50     0
+## 2 346 1240 36.92     0
+## 3 346 1620 36.87     0
+## 4 347  250 36.84     0
+## 5 347  320 36.93     0
+## 6 347   10 36.83     0
 ```
 ]
 --
@@ -225,8 +230,8 @@ class: inverse, middle, center
 # Summary measures:
 
 .rightcol70[.left[
-## 1. Centrality
-## 2. Variability
+# 1. Centrality
+# 2. Variability
 ]]
 
 ---
@@ -271,12 +276,17 @@ wildlife_impacts %&gt;%
 ##   &lt;dbl&gt;  &lt;dbl&gt;
 ## 1  984.     50
 ```
+Percent of data below mean:
+
+```
+## [1] "73.9%"
+```
 ]]
 
 ---
 class: inverse
 
-## Beware the "flaw of averages"
+# Beware the "flaw of averages"
 
 ### What happened to the statistician that crossed a river with an average depth of 3 feet?
 
@@ -393,17 +403,17 @@ daysToShip %&gt;%
 ---
 # Example: Days to ship
 
-&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-12-1.png" width="864" style="display: block; margin: auto;" /&gt;
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-13-1.png" width="864" style="display: block; margin: auto;" /&gt;
 
 ---
 class: center
 
-## Interpreting the standard deviation
+# Interpreting the standard deviation
 
 .leftcol[
 ### `\(s = \sqrt{\frac{\sum_{i=1}^{N}(x_i - \bar{x})^2}{N - 1}}\)`
 
-&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-13-1.png" width="432" style="display: block; margin: auto;" /&gt;
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-14-1.png" width="432" style="display: block; margin: auto;" /&gt;
 ]
 .rightcol[
 &lt;img src='images/sd.png'&gt;
@@ -441,9 +451,9 @@ class: center, middle
 ---
 class: center, middle
 
-# "Visualizing data helps us think"&lt;sup&gt;1&lt;/sup&gt;
+# Anscombe's Quartet
 
-&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-15-1.png" width="576" style="display: block; margin: auto;" /&gt;
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-16-1.png" width="576" style="display: block; margin: auto;" /&gt;
 
 .left[.footer-small[Stephen Few (2009, pg. 6)]]
 
@@ -478,7 +488,7 @@ class: inverse, center, middle
 **Measures**:
 - Frequency counts
 - Proportions
-- Centrality: Median
+- Centrality: Median, Mode
 - Variability: IQR
 &lt;br&gt;
 
@@ -512,17 +522,19 @@ Summarize with counts / percentages
 ```r
 wildlife_impacts %&gt;%
     count(operator) %&gt;%
-    mutate(percentage = 100*(n / sum(n)))
+    mutate(
+        p = n / sum(n),
+        percent = round(100*p, 2))
 ```
 
 ```
-## # A tibble: 4 x 3
-##   operator               n percentage
-##   &lt;chr&gt;              &lt;int&gt;      &lt;dbl&gt;
-## 1 AMERICAN AIRLINES  14887       26.1
-## 2 DELTA AIR LINES     9005       15.8
-## 3 SOUTHWEST AIRLINES 17970       31.5
-## 4 UNITED AIRLINES    15116       26.5
+## # A tibble: 4 x 4
+##   operator               n     p percent
+##   &lt;chr&gt;              &lt;int&gt; &lt;dbl&gt;   &lt;dbl&gt;
+## 1 AMERICAN AIRLINES  14887 0.261    26.1
+## 2 DELTA AIR LINES     9005 0.158    15.8
+## 3 SOUTHWEST AIRLINES 17970 0.315    31.5
+## 4 UNITED AIRLINES    15116 0.265    26.5
 ```
 ]
 --
@@ -533,9 +545,11 @@ Visualize with bars
 ```r
 wildlife_impacts %&gt;%
     ggplot() +
-    geom_bar(aes(x = operator), width = 0.7) +
-    coord_flip()
+*   geom_bar(aes(x = operator), width = 0.7) +
+    coord_flip() +
+    theme_cowplot()
 ```
+
 &lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-18-1.png" width="504" /&gt;
 ]
 
@@ -550,25 +564,27 @@ Summarize with counts / percentages
 ```r
 wildlife_impacts %&gt;%
     count(incident_month) %&gt;%
-    mutate(percentage = 100*(n / sum(n)))
+    mutate(
+        p = n / sum(n),
+        percent = round(100*p, 2))
 ```
 
 ```
-## # A tibble: 12 x 3
-##    incident_month     n percentage
-##             &lt;dbl&gt; &lt;int&gt;      &lt;dbl&gt;
-##  1              1  1951       3.42
-##  2              2  1692       2.97
-##  3              3  2678       4.70
-##  4              4  4490       7.88
-##  5              5  6161      10.8 
-##  6              6  4541       7.97
-##  7              7  6133      10.8 
-##  8              8  7104      12.5 
-##  9              9  7980      14.0 
-## 10             10  7754      13.6 
-## 11             11  4191       7.36
-## 12             12  2303       4.04
+## # A tibble: 12 x 4
+##    incident_month     n      p percent
+##             &lt;dbl&gt; &lt;int&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+##  1              1  1951 0.0342    3.42
+##  2              2  1692 0.0297    2.97
+##  3              3  2678 0.0470    4.7 
+##  4              4  4490 0.0788    7.88
+##  5              5  6161 0.108    10.8 
+##  6              6  4541 0.0797    7.97
+##  7              7  6133 0.108    10.8 
+##  8              8  7104 0.125    12.5 
+##  9              9  7980 0.140    14.0 
+## 10             10  7754 0.136    13.6 
+## 11             11  4191 0.0736    7.36
+## 12             12  2303 0.0404    4.04
 ```
 ]]
 --
@@ -579,10 +595,13 @@ Visualize with bars
 ```r
 wildlife_impacts %&gt;%
     ggplot() +
-    geom_bar(aes(x = as.factor(incident_month)),
-             width = 0.7)
+*   geom_bar(aes(x = as.factor(incident_month)),
+*            width = 0.7) +
+    theme_cowplot() +
+    labs(x = 'Incident month')
 ```
-&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-21-1.png" width="504" /&gt;
+
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-20-1.png" width="504" /&gt;
 ]
 
 ---
@@ -630,13 +649,14 @@ Visualize with **histogram** to:
 ```r
 wildlife_impacts %&gt;%
     ggplot() +
-    geom_histogram(aes(x = height), bins = 50)
+*   geom_histogram(aes(x = height), bins=50) +
+    theme_cowplot()
 ```
 ]
 .rightcol[
-&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-24-1.png" width="504" style="display: block; margin: auto;" /&gt;
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-23-1.png" width="504" style="display: block; margin: auto;" /&gt;
 
-&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-25-1.png" width="504" style="display: block; margin: auto;" /&gt;
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-24-1.png" width="504" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -662,11 +682,12 @@ Visualize with **boxplot** to:
 ```r
 wildlife_impacts %&gt;%
     ggplot() +
-    geom_boxplot(aes(y = speed))
+*   geom_boxplot(aes(y = speed)) +
+    theme_cowplot() 
 ```
 ]
 .rightcol40[
-&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-28-1.png" width="216" style="display: block; margin: auto;" /&gt;
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-27-1.png" width="216" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -693,6 +714,17 @@ class: inverse
 ]
 
 
+
+---
+class: inverse
+
+# [5 minute](https://www.youtube.com/watch?v=_W0bSen8Qjg) break!
+
+## Stand up
+
+## Move around
+
+## Stretch!
 
 ---
 class: inverse, center, middle
@@ -732,10 +764,10 @@ Map **color** aesthetic to denote 2nd categorical var
 wildlife_impacts %&gt;%
     ggplot() +
 *   geom_bar(aes(x = operator, fill = time_of_day),
-             width = 0.7, position = 'dodge') +
+*            width = 0.7, position = 'dodge') +
     coord_flip()
 ```
-&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-32-1.png" width="504" /&gt;
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-31-1.png" width="504" /&gt;
 ]]
 
 ---
@@ -761,10 +793,10 @@ Visualize with **scatterplot**
 ```r
 wildlife_impacts %&gt;%
     ggplot() +
-    geom_point(aes(x = speed, y = height),
-               size = 0.5)
+*   geom_point(aes(x = speed, y = height),
+*              size = 0.5)
 ```
-&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-35-1.png" width="504" style="display: block; margin: auto;" /&gt;
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-34-1.png" width="504" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -792,10 +824,10 @@ Visualize with **boxplot**
 ```r
 wildlife_impacts %&gt;%
     ggplot() +
-*   geom_boxplot(aes(x = operator, y = speed)) +
+*   geom_boxplot(aes(x=operator, y=speed)) +
     coord_flip()
 ```
-&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-38-1.png" width="504" style="display: block; margin: auto;" /&gt;
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-37-1.png" width="504" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -904,8 +936,8 @@ Check out [these guides](https://emse-eda-gwu.github.io/2020-Spring/ref-visualiz
 ---
 class: inverse, middle
 
-### "Far better an approximate answer to the right question, which is often vague, than an exact answer to the wrong question, which can always be made precise."
-### — John Tukey
+## "Far better an approximate answer to the right question, which is often vague, than an exact answer to the wrong question, which can always be made precise."
+## — John Tukey
 
 ---
 class: inverse
@@ -994,24 +1026,7 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     }
     deleted = true;
   });
-})();
-// adds .remark-code-has-line-highlighted class to <pre> parent elements
-// of code chunks containing highlighted lines with class .remark-code-line-highlighted
-(function(d) {
-  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
-  const preParents = [];
-  const findPreParent = function(line, p = 0) {
-    if (p > 1) return null; // traverse up no further than grandparent
-    const el = line.parentElement;
-    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
-  };
-
-  for (let line of hlines) {
-    let pre = findPreParent(line);
-    if (pre && !preParents.includes(pre)) preParents.push(pre);
-  }
-  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
-})(document);</script>
+})();</script>
 
 <script>
 (function() {

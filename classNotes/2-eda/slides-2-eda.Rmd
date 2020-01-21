@@ -46,8 +46,16 @@ class: inverse, center
 
 # Thanks for the hero gifs :)
 
+.leftcol[
+<center>
 <img src="images/hero_ellinport.gif">
+</center>
+]
+.rightcol[
+<center>
 <img src="images/hero_stricklett.gif">
+</center>
+]
 
 ---
 class: inverse, center, middle
@@ -65,13 +73,9 @@ class: inverse, center, middle
 # Earth's circumference at the equator: 24,901 miles
 
 ---
-class: inverse, center, middle
-
-# Quantitative information always describes _relationships_
-
----
 # Types of Data
 
+--
 .leftcol[
 ### **Categorical**
 
@@ -80,6 +84,7 @@ Subdivide things into useful groups
 - What type?
 - Which category?
 ]
+--
 .rightcol[
 ### **Numerical**
 
@@ -236,8 +241,8 @@ class: inverse, middle, center
 # Summary measures:
 
 .rightcol70[.left[
-## 1. Centrality
-## 2. Variability
+# 1. Centrality
+# 2. Variability
 ]]
 
 ---
@@ -293,12 +298,18 @@ wildlife_impacts %>%
       mean = mean(height),
       median = median(height))
 ```
+Percent of data below mean:
+```{r, echo=FALSE}
+percentiles <- ecdf(wildlife_impacts$height)
+meanP <- percentiles(mean(wildlife_impacts$height, na.rm = TRUE))
+paste0(round(100*meanP, 1), '%')
+```
 ]]
 
 ---
 class: inverse
 
-## Beware the "flaw of averages"
+# Beware the "flaw of averages"
 
 ### What happened to the statistician that crossed a river with an average depth of 3 feet?
 
@@ -412,7 +423,7 @@ daysToShip %>%
 ---
 class: center
 
-## Interpreting the standard deviation
+# Interpreting the standard deviation
 
 .leftcol[
 ### $s = \sqrt{\frac{\sum_{i=1}^{N}(x_i - \bar{x})^2}{N - 1}}$
@@ -496,7 +507,7 @@ class: center, middle
 ---
 class: center, middle
 
-# "Visualizing data helps us think"<sup>1</sup>
+# Anscombe's Quartet
 
 ```{r, echo=FALSE, fig.height=6, fig.width=8, fig.align='center'}
 x       <- c(anscombe$x1, anscombe$x2, anscombe$x3, anscombe$x4)
@@ -552,7 +563,7 @@ class: inverse, center, middle
 **Measures**:
 - Frequency counts
 - Proportions
-- Centrality: Median
+- Centrality: Median, Mode
 - Variability: IQR
 <br>
 
@@ -585,25 +596,21 @@ Summarize with counts / percentages
 ```{r}
 wildlife_impacts %>%
     count(operator) %>%
-    mutate(percentage = 100*(n / sum(n)))
+    mutate(
+        p = n / sum(n),
+        percent = round(100*p, 2))
 ```
 ]
 --
 .rightcol[
 Visualize with bars
 
-```{r, eval=FALSE}
+```{r, fig.width=7, fig.height=4}
 wildlife_impacts %>%
     ggplot() +
-    geom_bar(aes(x = operator), width = 0.7) +
-    coord_flip()
-```
-```{r, echo=FALSE, fig.width=7, fig.height=4}
-wildlife_impacts %>%
-    ggplot() +
-    geom_bar(aes(x = operator), width = 0.7) +
-    theme_cowplot() +
-    coord_flip()
+    geom_bar(aes(x = operator), width = 0.7) + #<<
+    coord_flip() +
+    theme_cowplot()
 ```
 ]
 
@@ -617,23 +624,20 @@ Summarize with counts / percentages
 ```{r}
 wildlife_impacts %>%
     count(incident_month) %>%
-    mutate(percentage = 100*(n / sum(n)))
+    mutate(
+        p = n / sum(n),
+        percent = round(100*p, 2))
 ```
 ]]
 --
 .rightcol[
 Visualize with bars
 
-```{r, eval=FALSE}
+```{r, fig.width=7, fig.height=4}
 wildlife_impacts %>%
     ggplot() +
-    geom_bar(aes(x = as.factor(incident_month)),
-             width = 0.7)
-```
-```{r, echo=FALSE, fig.width=7, fig.height=4}
-wildlife_impacts %>%
-    ggplot() +
-    geom_bar(aes(x = as.factor(incident_month)), width = 0.7) +
+    geom_bar(aes(x = as.factor(incident_month)), #<<
+             width = 0.7) + #<<
     theme_cowplot() +
     labs(x = 'Incident month')
 ```
@@ -688,7 +692,8 @@ Visualize with **histogram** to:
 ```{r, eval=FALSE}
 wildlife_impacts %>%
     ggplot() +
-    geom_histogram(aes(x = height), bins = 50)
+    geom_histogram(aes(x = height), bins=50) + #<<
+    theme_cowplot()
 ```
 ]
 .rightcol[
@@ -732,7 +737,8 @@ Visualize with **boxplot** to:
 ```{r, eval=FALSE}
 wildlife_impacts %>%
     ggplot() +
-    geom_boxplot(aes(y = speed))
+    geom_boxplot(aes(y = speed)) + #<<
+    theme_cowplot() 
 ```
 ]
 .rightcol40[
@@ -803,6 +809,17 @@ marathon %>%
 ```
 
 ---
+class: inverse
+
+# [5 minute](https://www.youtube.com/watch?v=_W0bSen8Qjg) break!
+
+## Stand up
+
+## Move around
+
+## Stretch!
+
+---
 class: inverse, center, middle
 
 # Relationship between two variables
@@ -828,7 +845,7 @@ Map **color** aesthetic to denote 2nd categorical var
 wildlife_impacts %>%
     ggplot() +
     geom_bar(aes(x = operator, fill = time_of_day), #<<
-             width = 0.7, position = 'dodge') +
+             width = 0.7, position = 'dodge') + #<<
     coord_flip()
 ```
 ```{r, echo=FALSE, fig.width=7, fig.height=4.5}
@@ -858,8 +875,8 @@ Visualize with **scatterplot**
 ```{r, eval=FALSE}
 wildlife_impacts %>%
     ggplot() +
-    geom_point(aes(x = speed, y = height),
-               size = 0.5)
+    geom_point(aes(x = speed, y = height), #<<
+               size = 0.5) #<<
 ```
 ```{r, echo=FALSE, fig.width=7, fig.height=4, fig.align='center'}
 wildlife_impacts %>%
@@ -896,7 +913,7 @@ Visualize with **boxplot**
 ```{r, eval=FALSE}
 wildlife_impacts %>%
     ggplot() +
-    geom_boxplot(aes(x = operator, y = speed)) + #<<
+    geom_boxplot(aes(x=operator, y=speed)) + #<<
     coord_flip()
 ```
 ```{r, echo=FALSE, fig.width=7, fig.height=4, fig.align='center'}
@@ -1032,8 +1049,8 @@ Check out [these guides](https://emse-eda-gwu.github.io/2020-Spring/ref-visualiz
 ---
 class: inverse, middle
 
-### "Far better an approximate answer to the right question, which is often vague, than an exact answer to the wrong question, which can always be made precise."
-### — John Tukey
+## "Far better an approximate answer to the right question, which is often vague, than an exact answer to the wrong question, which can always be made precise."
+## — John Tukey
 
 ---
 class: inverse
