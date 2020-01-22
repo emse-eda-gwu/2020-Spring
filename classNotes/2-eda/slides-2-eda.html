@@ -126,13 +126,13 @@ Example: `Placement` _2017 Boston marathon_
 ```
 ## # A tibble: 6 x 3
 ##   Placement `Official Time` Name            
-##       &lt;dbl&gt; &lt;time&gt;          &lt;chr&gt;           
-## 1         1 02:09:37        Kirui, Geoffrey 
-## 2         2 02:09:58        Rupp, Galen     
-## 3         3 02:10:28        Osako, Suguru   
-## 4         4 02:12:08        Biwott, Shadrack
-## 5         5 02:12:35        Chebet, Wilson  
-## 6         6 02:12:45        Abdirahman, Abdi
+##       &lt;dbl&gt; &lt;drtn&gt;          &lt;chr&gt;           
+## 1         1 02:09           Kirui, Geoffrey 
+## 2         2 02:09           Rupp, Galen     
+## 3         3 02:10           Osako, Suguru   
+## 4         4 02:12           Biwott, Shadrack
+## 5         5 02:12           Chebet, Wilson  
+## 6         6 02:12           Abdirahman, Abdi
 ```
 ]
 
@@ -151,12 +151,12 @@ Example: `day`, `time`, &amp; `temp` in _Beaver temperature_
 
 ```
 ##   day time  temp activ
-## 1 346 1120 36.50     0
-## 2 346 1240 36.92     0
-## 3 346 1620 36.87     0
-## 4 347  250 36.84     0
-## 5 347  320 36.93     0
-## 6 347   10 36.83     0
+## 1 346 1410 36.69     0
+## 2 346 2030 36.84     0
+## 3 346 1730 37.07     1
+## 4 346 2000 37.09     0
+## 5 346 1450 36.67     0
+## 6 347  140 36.82     0
 ```
 ]
 --
@@ -460,7 +460,7 @@ class: center, middle
 ---
 class: inverse, center, middle
 
-# The data type determines 
+# The data type determines
 # how to summarize it
 
 ---
@@ -541,17 +541,17 @@ wildlife_impacts %&gt;%
 .rightcol[
 Visualize with bars
 
+.code70[
 
 ```r
 wildlife_impacts %&gt;%
     ggplot() +
 *   geom_bar(aes(x = operator), width = 0.7) +
-    coord_flip() +
-    theme_cowplot()
+    coord_flip() + 
+    theme_half_open()
 ```
-
-&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-18-1.png" width="504" /&gt;
-]
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-19-1.png" width="504" /&gt;
+]]
 
 ---
 ## Summarizing **Ordinal** data
@@ -591,18 +591,18 @@ wildlife_impacts %&gt;%
 .rightcol[
 Visualize with bars
 
+.code70[
 
 ```r
 wildlife_impacts %&gt;%
     ggplot() +
 *   geom_bar(aes(x = as.factor(incident_month)),
 *            width = 0.7) +
-    theme_cowplot() +
+    theme_half_open() +
     labs(x = 'Incident month')
 ```
-
-&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-20-1.png" width="504" /&gt;
-]
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-22-1.png" width="504" /&gt;
+]]
 
 ---
 ## Summarizing **continuous** variables
@@ -650,13 +650,13 @@ Visualize with **histogram** to:
 wildlife_impacts %&gt;%
     ggplot() +
 *   geom_histogram(aes(x = height), bins=50) +
-    theme_cowplot()
+    theme_half_open()
 ```
 ]
 .rightcol[
-&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-23-1.png" width="504" style="display: block; margin: auto;" /&gt;
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-25-1.png" width="504" style="display: block; margin: auto;" /&gt;
 
-&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-24-1.png" width="504" style="display: block; margin: auto;" /&gt;
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-26-1.png" width="504" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -683,11 +683,11 @@ Visualize with **boxplot** to:
 wildlife_impacts %&gt;%
     ggplot() +
 *   geom_boxplot(aes(y = speed)) +
-    theme_cowplot() 
+    theme_half_open()
 ```
 ]
 .rightcol40[
-&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-27-1.png" width="216" style="display: block; margin: auto;" /&gt;
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-29-1.png" width="216" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -767,7 +767,7 @@ wildlife_impacts %&gt;%
 *            width = 0.7, position = 'dodge') +
     coord_flip()
 ```
-&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-31-1.png" width="504" /&gt;
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-33-1.png" width="504" /&gt;
 ]]
 
 ---
@@ -796,7 +796,7 @@ wildlife_impacts %&gt;%
 *   geom_point(aes(x = speed, y = height),
 *              size = 0.5)
 ```
-&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-34-1.png" width="504" style="display: block; margin: auto;" /&gt;
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-36-1.png" width="504" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -827,7 +827,7 @@ wildlife_impacts %&gt;%
 *   geom_boxplot(aes(x=operator, y=speed)) +
     coord_flip()
 ```
-&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-37-1.png" width="504" style="display: block; margin: auto;" /&gt;
+&lt;img src="slides-2-eda_files/figure-html/unnamed-chunk-39-1.png" width="504" style="display: block; margin: auto;" /&gt;
 ]
 
 ---
@@ -945,7 +945,7 @@ class: inverse
 ## Practice doing EDA: Groups of 3
 
 .leftcol[
-1) Read in the following data sets: 
+1) Read in the following data sets:
 
 - `avengers.csv`
 - `candy_rankings.csv`
