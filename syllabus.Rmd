@@ -112,9 +112,11 @@ Attendance & Participation    | 10 %   |
 Quizzes                       | 15 %   | Lowest quiz grade is dropped
 Assignment 1                  | 5 %    | Exercises
 Assignment 2                  | 5 %    | Exercises
-Assignment 3                  | 10 %   | Mini Project
-Assignment 4                  | 10 %   | Mini Project
-Assignment 5                  | 5 %    | Exercises
+Assignment 3                  | 5 %    | Exercises
+Assignment 4                  | 5 %    | Redesign mini project
+Assignment 5                  | 5 %    | Redesign mini project
+Assignment 6                  | 5 %    | Exercises
+Assignment 7                  | 5 %    | Exercises
 Final Project Proposal        | 5 %    |
 Final Project Progress Report | 5 %    |
 Final Project Peer Review     | 5 %    |
