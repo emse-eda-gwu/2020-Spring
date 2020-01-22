@@ -24,6 +24,7 @@ source("knitr_setup.R")
 [[buy on amazon](https://www.amazon.com/Data-Science-Transform-Visualize-Model/dp/1491910399)]
 - Peng, Roger D. "Exploratory Data Analysis with R"
 [[online - pay what you want](https://leanpub.com/exdata)]
+- [16 HOWTO's](https://bookdown.org/lyzhang10/lzhang_r_tips_book/), by Lingyun Zhang
 
 # RMarkdown
 

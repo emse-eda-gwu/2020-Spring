@@ -40,3 +40,4 @@ You will want to choose different chart types depending on the relationship or m
 - [RStudio `ggplot2` Cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
 - [Tidyverse `ggplot2` reference guide](https://ggplot2.tidyverse.org/reference/)
 - [ggThemeAssist](https://github.com/calligross/ggthemeassist): Package for customizing plot themes and layout
+- [16 HOWTO's](https://bookdown.org/lyzhang10/lzhang_r_tips_book/how-to-plot-data.html), by Lingyun Zhang - super useful for making specific types of charts
