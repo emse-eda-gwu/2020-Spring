@@ -323,6 +323,7 @@ monsterBars <- data.frame(
     y = c(70, 85, 125, 200, 240, 310)) %>%
     ggplot() +
     geom_col(aes(x = year, y = y), width = 0.7) +
+    scale_y_continuous(expand = expand_scale(mult = c(0, 0.05))) +
     theme_minimal_hgrid() +
     labs(x = 'Year', y = 'Campaign expenditures ($ mil)',
          title = 'Total House and Senate\ncampaign expenditures')
@@ -416,6 +417,7 @@ facetedBars <- data.frame(
     ggplot() +
     geom_col(aes(x = type, y = count)) +
     facet_grid(group ~ .) +
+    scale_y_continuous(expand = expand_scale(mult = c(0, 0.05))) +
     coord_flip() +
     theme_bw()
 
@@ -430,6 +432,7 @@ simpleBars <- data.frame(
     group = c(LETTERS[1:5])) %>%
     ggplot() +
     geom_col(aes(x = group, y = count), width = 0.7) +
+    scale_y_continuous(expand = expand_scale(mult = c(0, 0.05))) +
     theme_bw()
 
 ggsave(here('images', 'plots', 'simpleBars.png'),
@@ -441,6 +444,7 @@ ggsave(here('images', 'plots', 'simpleBars.png'),
 mpg_bars <- mpg %>%
     ggplot() +
     geom_bar(aes(class), width = 0.8) +
+    scale_y_continuous(expand = expand_scale(mult = c(0, 0.05))) +
     theme_cowplot()
 mpg_bars_flipped <- mpg_bars +
     coord_flip()
@@ -450,6 +454,7 @@ mpg_bars_flipped_sorted <- mpg %>%
     mutate(class = fct_reorder(class, count)) %>%
     ggplot() +
     geom_col(aes(x=class, y=count), width = 0.8) +
+    scale_y_continuous(expand = expand_scale(mult = c(0, 0.05))) +
     coord_flip() +
     theme_cowplot()
 
@@ -472,7 +477,8 @@ barchart_zero <- data.frame(
     geom_col(fill = 'blue', width = 0.7) +
     theme_minimal_hgrid() +
     labs(x= '', y = 'Millions of enrollments') +
-    scale_y_continuous(breaks = seq(0, 8, 2), limits = c(0,8))
+    scale_y_continuous(breaks = seq(0, 8, 2), limits = c(0,8),
+                       expand = expand_scale(mult = c(0, 0.05)))
 
 ggsave(here('images', 'plots', 'barchart_zero.png'),
        barchart_zero, width = 3, height = 4)
@@ -502,6 +508,7 @@ statesBar <- statesData %>%
     ggplot(aes(x = region, y = area, fill = region)) +
     geom_col(position = 'dodge') +
     scale_fill_brewer(palette = "Spectral") +
+    scale_y_continuous(expand = expand_scale(mult = c(0, 0.05))) +
     theme_cowplot() +
     coord_flip() +
     labs(x = 'Region', y = 'Area (Sq. Miles)') +
@@ -571,30 +578,33 @@ mtcars <- datasets::mtcars %>%
 jr_hue <- ggplot(mtcars, aes(x = "", y = model, fill = mpg)) +
     geom_tile() +
     scale_fill_viridis() +
-    scale_x_discrete() +
+    scale_x_discrete(expand = expand_scale(mult = c(0.01, 0.05))) +
     jr_theme()
 
 jr_hue_ordered <- ggplot(mtcars, aes(x = "", y = reorder(model, mpg), fill = mpg)) +
     geom_tile() +
     scale_fill_viridis() +
-    scale_x_discrete() +
+    scale_x_discrete(expand = expand_scale(mult = c(0.01, 0.05))) +
     jr_theme()
 
 jr_saturation <- ggplot(mtcars, aes(x = "", y = model, fill = mpg)) +
     geom_tile() +
-    scale_fill_gradient(low = "white", high = muted("blue"))+
+    scale_fill_gradient(low = "white", high = muted("blue")) +
+    scale_x_discrete(expand = expand_scale(mult = c(0.01, 0.05))) +
     ylab(NULL) +
     jr_theme()
 
 jr_saturation_ordered <- ggplot(mtcars, aes(x = "", y = reorder(model, mpg), fill = mpg)) +
     geom_tile() +
-    scale_fill_gradient(low = "white", high = muted("blue"))+
+    scale_fill_gradient(low = "white", high = muted("blue")) +
+    scale_x_discrete(expand = expand_scale(mult = c(0.01, 0.05))) +
     ylab(NULL) +
     jr_theme()
 
 jr_saturation_ordered_zero <- ggplot(mtcars, aes(x = "", y = reorder(model, mpg), fill = mpg)) +
     geom_tile() +
-    scale_fill_gradient(low = "white", high = muted("blue"))+
+    scale_fill_gradient(low = "white", high = muted("blue")) +
+    scale_x_discrete(expand = expand_scale(mult = c(0.01, 0.05))) +
     ylab(NULL) +
     jr_theme() +
     expand_limits(fill=0)
@@ -633,6 +643,7 @@ jr_length <- mtcars %>%
     mutate(random = runif(32, 0, 5)) %>%
     ggplot(aes(x=random, xend=mpg+random, y=model, yend=model)) +
     geom_segment(size=3) +
+    scale_x_discrete(expand = expand_scale(mult = c(0.01, 0.05))) +
     xlab(NULL) +
     ylab(NULL) +
     jr_theme() +
@@ -644,6 +655,7 @@ jr_length <- mtcars %>%
 jr_bars <- mtcars %>%
     ggplot(aes(x=0, xend=mpg, y=model, yend=model)) +
     geom_segment(size=3) +
+    scale_x_discrete(expand = expand_scale(mult = c(0.01, 0.05))) +
     xlab(NULL) +
     ylab(NULL) +
     jr_theme() +
@@ -670,7 +682,7 @@ jr_position_non_aligned <- mtcars %>%
 jr_position_aligned <- mtcars %>%
     ggplot(aes(x=mpg, y=model)) +
     geom_point() +
-    theme_extras +
+    scale_x_continuous(expand = expand_scale(mult = c(0.01, 0.05))) +
     ylab(NULL) +
     theme_minimal_vgrid() +
     theme(
@@ -682,6 +694,7 @@ jr_position_aligned_ordered <- mtcars %>%
     mutate(model = fct_reorder(model, mpg)) %>%
     ggplot(aes(x=mpg, y=model)) +
     geom_point() +
+    scale_x_continuous(expand = expand_scale(mult = c(0.01, 0.05))) +
     theme_minimal_vgrid() +
     ylab(NULL) +
     theme(
@@ -689,16 +702,19 @@ jr_position_aligned_ordered <- mtcars %>%
         axis.title.y=element_text(size=rel(0.7)))
 
 jr_position_aligned_ordered_zero <- jr_position_aligned_ordered +
+    scale_x_continuous(expand = expand_scale(mult = c(0, 0.05))) +
     expand_limits(x=0)
 
 jr_diamonds_bars_stacked <- ggplot(diamonds, aes(clarity, fill=cut, group=cut)) +
     geom_bar(stat="count", position="stack") +
-    scale_y_continuous("Count", labels=comma) +
+    scale_y_continuous("Count", labels = comma, 
+                       expand = expand_scale(mult = c(0, 0.05))) +
     theme_cowplot()
 
 jr_diamonds_bars_dodged <- ggplot(diamonds, aes(clarity, fill=cut, group=cut)) +
     geom_bar(stat="count", position="dodge") +
-    scale_y_continuous("Count", labels=comma) +
+    scale_y_continuous("Count", labels = comma, 
+                       expand = expand_scale(mult = c(0, 0.05))) +
     theme_cowplot()
 
 jr_diamonds_line_total <- diamonds %>%
