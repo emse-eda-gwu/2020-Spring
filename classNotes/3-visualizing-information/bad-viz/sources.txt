@@ -3,17 +3,11 @@ https://www.vox.com/2016/10/6/13170344/bear-attacks-national-state-parks
 "Improved" versions from "Makeover Monday":
 https://www.makeovermonday.co.uk/week-21-2019/
 
-clinton venn diagram:
-Twitter
-
 army_budget.jpg:
 http://www.wallstats.com/blog/down-the-rabbit-hole-of-the-pentagon-graphics-machine/
 
 life expectancy figures:
-Healy, 2018
-
-utility bill:
-http://www.storytellingwithdata.com/blog/2019/7/12/the-accidental-misdirect
+Healy, 2018 - http://socviz.co/lookatdata.html#lookatdata
 
 prisoners.png:
 https://people.howstuffworks.com/prison4.htm
