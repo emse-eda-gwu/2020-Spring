@@ -10,14 +10,21 @@ output:
 rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
-Wilke: [6 - Visualizing amounts](https://serialmentor.com/dataviz/visualizing-amounts.html)
 
-Wilke: [7 - Visualizing distributions](https://serialmentor.com/dataviz/histograms-density-plots.html)
+This week, we will learn some of the technical details of how to write code to create "good" information visualizations that follow the design principles we discussed last week. We will focus on graphing **amounts**, **distributions**, and **proportions**. The readings listed below are broken into two groups: 1) design principles, and 2) coding techniques to achieve those principles. Now, open up whatever you takes notes in best and **take notes** while reading through the following readings:
 
-Wilke: [9 - Visualizing many distributions at once](https://serialmentor.com/dataviz/boxplots-violins.html)
+## Design principles
 
-Wilke: [10 - Visualizing proportions](https://serialmentor.com/dataviz/visualizing-proportions.html)
+The design principles discussed in the following readings repeat many of the concepts we saw last week, except focused on the particular subset of charts for this week:
 
-R4DS: [15 - Factors](https://r4ds.had.co.nz/factors.html)
+- Wilke: [6 - Visualizing amounts](https://serialmentor.com/dataviz/visualizing-amounts.html)
+- Wilke: [7 - Visualizing distributions](https://serialmentor.com/dataviz/histograms-density-plots.html)
+- Wilke: [9 - Visualizing many distributions at once](https://serialmentor.com/dataviz/boxplots-violins.html)
+- Wilke: [10 - Visualizing proportions](https://serialmentor.com/dataviz/visualizing-proportions.html)
 
-R4DS: [3.5 - Facets](https://r4ds.had.co.nz/data-visualisation.html#facets)
+## Coding techniques
+
+The readings below discuss two important components that we will run into a lot in making charts: factors & facets. Factors are categorical variables, but dealing with them in R can be somewhat messy. Fortunately, we have the [forcats](https://forcats.tidyverse.org/) package to help us tackle these! Facets, on the other hand, are rather straight forward to implement and offer a handy technique for creating charts when you have many different variables to consider at once:
+
+- R4DS: [15 - Factors](https://r4ds.had.co.nz/factors.html)
+- R4DS: [3.5 - Facets](https://r4ds.had.co.nz/data-visualisation.html#facets)

@@ -15,7 +15,7 @@ source("knitr_setup.R")
 >
 > -- Claus O. Wilke in [Fundamentals of Data Visualization](https://serialmentor.com/dataviz/introduction.html)
 
-This week, we will learn what makes a "good" data visualization, which is not entirely a subjective judgement. To get started, open up a notebook (physical, digital...whatever you take notes in best), and **take notes** while reading through the following two chapters:
+This week, we will learn what makes a "good" information visualization, which is _not_ entirely a subjective judgment. There are a wide variety of design principles available to help guide the creation of clear, effective information visualizations--many of which are rooted in research on human psychology. To get started, open up whatever you takes notes in best and **take notes** while reading through the following two chapters:
 
 - [Wilke 1: Introduction](https://serialmentor.com/dataviz/introduction.html): Definitions of "ugly", "bad", and "wrong" figures
 - [Healy 1: Look at Data](http://socviz.co/lookatdata.html#lookatdata): What makes figures good and bad
