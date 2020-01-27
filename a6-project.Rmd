@@ -22,7 +22,7 @@ To make the overall project more manageable, it is broken down into separate "mi
 **Summary of Deliverables**:
 
 <div style="width:400px">
-Item            | Weight towards<br>final grade | Due Date<br>(by 10pm)
+Item            | Weight towards<br>final grade | Due Date<br>(by 11pm)
 ----------------|----------------------------|--------------------
 Proposal        | 5 %    | March 13
 Progress Report | 5 %    | April 10
@@ -41,7 +41,7 @@ Final Report    | 15 %   | May 6
 
 # Proposal
 
-**Due**: March 13 by 10:00 pm
+**Due**: March 13 by 11:00 pm
 
 **Weight**: This assignment is worth 5% of your final grade.
 
@@ -81,7 +81,7 @@ Write a 1-2 page proposal of an exploratory data analysis that you plan to condu
 
 # Progress Report
 
-**Due**: April 10 by 10:00 pm
+**Due**: April 10 by 11:00 pm
 
 **Weight**: This assignment is worth 5% of your final grade.
 
@@ -125,7 +125,7 @@ Below is a list of specific items your progress report should include - the % in
 
 # Peer Review
 
-**Due**: April 17 by 10:00 pm
+**Due**: April 17 by 11:00 pm
 
 **Weight**: This assignment is worth 5% of your final grade.
 
@@ -170,7 +170,7 @@ Each student will be randomly assigned to review the progress reports of one of 
 
 # Presentation
 
-**Due**: Slides due by April 28 by 10:00 pm; presentations will be in class on April 29.
+**Due**: Slides due by April 28 by 11:00 pm; presentations will be in class on April 29.
 
 **Weight**: This assignment is worth 10% of your final grade: 5% for your slides & slide design, and 5% for effectively presenting them in class.
 
@@ -192,7 +192,7 @@ You will present your analysis with your teammates in class on April 29. Your sl
 
 3. [20%] Discuss the data source(s) you used for your analysis:
 
-    - Describe them and display the names of the sources on your slide. You do not need the full urls to the raw data files, just the organization name (e.g. `"**Data source**: U.S. Centers for Disease Control and Prevention"`). 
+    - Describe them and display the names of the sources on your slide. You do not need the full urls to the raw data files, just the organization name (e.g. `"**Data source**: U.S. Centers for Disease Control and Prevention"`).
     - Discuss the validity of your source(s) - for each data source, was the data available the _original_ data, or has it been processed? If not, what is the original source? How was the data collected?
 
 4. [20%] Describe your data:
@@ -210,7 +210,7 @@ You will present your analysis with your teammates in class on April 29. Your sl
 
 # Final Report
 
-**Due**: May 6 by 10:00 pm
+**Due**: May 6 by 11:00 pm
 
 **Weight**: This assignment is worth 15% of your final grade.
 
@@ -233,7 +233,7 @@ Your final report should be a fully reproducible product and available online as
     - Describe them and include urls or references to the sources.
     - Discuss the validity of the source(s) - for each data source, is the data available the _original_ data, or has it been processed? If not, what is the original source? How was the data collected?
     - Provide a data dictionary in an appendix at the end of your report that contains a table of each the name, type, and description of each variable in your data. Include a dictionary for each dataset used.
-    
+
 4. [20%] Describe your data:
 
     - Articulate the main variables of interest in your project, and justify your choice of variables.

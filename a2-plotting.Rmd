@@ -6,7 +6,7 @@ output:
     toc: no
 ---
 
-**Due**: 28 January, 10:00 pm
+**Due**: 28 January, 11:00 pm
 
 **Purpose**: The purpose of this assignment is to refresh your skills from P4A and learn some new skills for plotting with the **ggplot2** library in R.
 

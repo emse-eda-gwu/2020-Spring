@@ -6,7 +6,7 @@ output:
     toc: no
 ---
 
-**Due**: 21 January, 10:00 pm
+**Due**: 21 January, 11:00 pm
 
 **Purpose**: The purpose of this assignment is to develop some basic strategies for exploring data sets to gain a greater understanding of the variable types and their relationships.
 

@@ -6,7 +6,7 @@ output:
     toc: no
 ---
 
-**Due**: 4 February, 10:00 pm
+**Due**: 4 February, 11:00 pm
 
 **Purpose**: The purpose of this assignment is to learn how to handle categorical data (specifically factors) for exploratory analysis and plotting with the **ggplot2** library in R.
 
