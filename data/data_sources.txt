@@ -42,6 +42,21 @@ https://www.rdocumentation.org/packages/fivethirtyeight/versions/0.5.0
 Dictionary here: https://www.rdocumentation.org/packages/fivethirtyeight/versions/0.5.0/topics/college_all_ages
 
 
+# ----------------------------------------------------------------------
+Data file: ComicRelief_360Giving_International.xlsx
+
+Date downloaded: January 26, 2020
+
+Description: Comic Relief International grants awarded from Jan '15
+to Nov '19. 
+
+Source of downloaded file:
+- These are from 360giving.org: http://data.threesixtygiving.org/
+- Here's the specific link to the file: https://assets.ctfassets.net/zsfivwzfgl3t/4WBPSDLiK9RA2P0qkGJYJR/d9a499329bebe4ebebd8c62587f00700/360_Giving_International.xlsx
+
+Dictionary here: http://standard.threesixtygiving.org/en/latest/reference/#spreadsheet-format
+
+
 
 # ----------------------------------------------------------------------
 Data file: diamonds.csv
@@ -119,6 +134,7 @@ Female   |double    |Number of words spoken by female characters
 Male     |double    |Number of words spoken by male characters
 
 
+
 # ----------------------------------------------------------------------
 Data file: marathon.csv
 
@@ -132,6 +148,7 @@ Source of downloaded file:
 
 Original data source:
 - Data was scrapped from the official marathon website: http://registration.baa.org/2017/cf/Public/iframe_ResultsSearch.cfm
+
 
 
 # ----------------------------------------------------------------------
@@ -162,18 +179,22 @@ milk_produced |double    |Pounds of Milk Produced
 # ----------------------------------------------------------------------
 Data file: nasa_global_temps.txt
 
+<need to update>
 
 # ----------------------------------------------------------------------
 Data file: north_america_bear_killings.txt
 
+<need to update>
 
 # ----------------------------------------------------------------------
 Data file: pc_sales_2018.xlsx
 
+<need to update>
 
 # ----------------------------------------------------------------------
 Data file: pv_cell_production.xlsx
 
+<need to update>
 
 # ----------------------------------------------------------------------
 Data file: wildlife_impacts.csv
