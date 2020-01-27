@@ -42,6 +42,7 @@ https://www.rdocumentation.org/packages/fivethirtyeight/versions/0.5.0
 Dictionary here: https://www.rdocumentation.org/packages/fivethirtyeight/versions/0.5.0/topics/college_all_ages
 
 
+
 # ----------------------------------------------------------------------
 Data file: ComicRelief_360Giving_International.xlsx
 
@@ -59,29 +60,35 @@ Dictionary here: http://standard.threesixtygiving.org/en/latest/reference/#sprea
 
 
 # ----------------------------------------------------------------------
-Data file: federal_rd_spending.csv
+Data files:
+- federal_spending_orig.csv
+- federal_spending_wide.csv
+- federal_spending_long.csv
 
 Date downloaded: January 27, 2020
 
-Description: R&D spending by different federal agencies from 1976 to 2017
+Description: R&D spending by different federal agencies from 1976 to 2017. Dollar amounts are in units of millions of dollars.
 
 Source of downloaded file:
-- This dataset was downloaded from this Github repo: https://github.com/rfordatascience/tidytuesday/blob/master/data/2019/2019-02-12/readme.md
+- The federal_spending_orig.csv file was downloaded from this Github repo: https://github.com/rfordatascience/tidytuesday/blob/master/data/2019/2019-02-12/readme.md
 - Link to the raw data file: https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2019/2019-02-12/fed_r_d_spending.csv
+
+Original source:
 - The original data source is the American Association for the Advancement of Science Historical Trends website: https://www.aaas.org/programs/r-d-budget-and-policy/historical-trends-federal-rd
 
-Dictionary:
+Modifications:
+- federal_spending_long.csv file is the same as federal_spending_orig.csv except with units of money converted to millions of dollars and with only the R&D spending variable by department and year (the other spending variables are dropped).
+- The federal_spending_wide.csv is the same as federal_spending_long.csv but in wide format.
 
-### Total Federal R&D Spending by agency/department
+Dictionary of federal_spending.csv:
 
-|variable              |class     |description |
-|:---|:---|:-----------|
-|department            |character | US agency/department          |
-|year                  |date/integer   | Fiscal Year           |
-|rd_budget             |double    | Research and Development Dollars in inflation-adjusted (constant) dollars           |
-|total_outlays         |double    | Total Federal Government spending in inflation-adjusted (constant) dollars         |
-|discretionary_outlays |double    | Total Discretionary Federal Government spending in inflation-adjusted (constant) dollars           |
-|gdp                   |double    | Total US Gross Domestic Product in inflation-adjusted (constant) dollars         |
+variable      | class     |description
+--------------|-----------|---------------------------------------
+department    | character | US agency/department
+year          | date/integer   | Fiscal Year
+rd_budget     | double    | Research and Development Dollars in **millions** of inflation-adjusted (constant) dollars
+total_outlays | double    | Total Federal Government spending in **millions** of inflation-adjusted (constant) dollars
+gdp           | double    | Total US Gross Domestic Product in **millions** of inflation-adjusted (constant) dollars
 
 For reference:
 * DOD - Deparment of Defense
