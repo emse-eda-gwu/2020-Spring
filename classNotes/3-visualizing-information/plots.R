@@ -748,6 +748,18 @@ jr_position_aligned_ordered_zero <- jr_position_aligned_ordered +
     scale_x_continuous(expand = expand_scale(mult = c(0, 0.05))) +
     expand_limits(x=0)
 
+jr_position_aligned_lollipop <- mtcars %>%
+    mutate(model = fct_reorder(model, mpg)) %>%
+    ggplot(aes(x=mpg, y=model)) +
+    geom_point() +
+    geom_segment(aes(x=0, xend=mpg, yend=model)) + 
+    scale_x_continuous(expand = expand_scale(mult = c(0.01, 0.05))) +
+    theme_minimal_vgrid() +
+    ylab(NULL) +
+    theme(
+        axis.text.y=element_text(size=rel(0.7)),
+        axis.title.y=element_text(size=rel(0.7)))
+
 jr_diamonds_bars_stacked <- ggplot(diamonds, aes(clarity, fill=cut, group=cut)) +
     geom_bar(stat="count", position="stack") +
     scale_y_continuous("Count", labels = comma,
@@ -902,6 +914,8 @@ ggsave(here('images', 'plots', 'jr_position_aligned_ordered.png'),
     jr_position_aligned_ordered, width = 5, height = 4)
 ggsave(here('images', 'plots', 'jr_position_aligned_ordered_zero.png'),
     jr_position_aligned_ordered_zero, width = 5, height = 4)
+ggsave(here('images', 'plots', 'jr_position_aligned_lollipop.png'),
+    jr_position_aligned_lollipop, width = 5, height = 4)
 ggsave(here('images', 'plots', 'jr_diamonds_bars_stacked.png'),
     jr_diamonds_bars_stacked, width = 6, height = 4)
 ggsave(here('images', 'plots', 'jr_diamonds_bars_dodged.png'),
