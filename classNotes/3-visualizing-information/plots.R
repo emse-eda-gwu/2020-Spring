@@ -13,6 +13,7 @@ library(cowplot)
 library(ggrepel)
 library(MASS)
 library(viridis)
+library(ggforce)
 set.seed(42)
 
 #-----------------------------------------------------------------------------
@@ -183,10 +184,13 @@ ggsave(here('images', 'plots', 'mammalsScatter.png'),
 # Mtcars scatterplot
 
 mtCarsScatter <- mtcars %>%
-    ggplot() +
-    geom_point(aes(x = mpg, y = hp)) +
+    ggplot(aes(x = mpg, y = hp)) +
+    geom_point() +
     theme_cowplot() +
     labs(color = 'Cylinders')
+
+mtCarsScatterSmooth <- mtCarsScatter +
+    geom_smooth()
 
 mtCarsScatterGradient <- mtcars %>%
     ggplot(aes(x = wt, y = hp)) +
@@ -269,15 +273,28 @@ mtCarsScatterGrid4 <- mtcars %>%
 
 mtCarsScatterGrid5 <- mtcars %>%
     ggplot() +
-    geom_point(aes(x = mpg, y = hp)) +
+    geom_point(aes(x = mpg, y = hp), alpha = 0.7) +
     theme_cowplot() +
     labs(color = 'Cylinders') +
     theme(
+        axis.line = element_line(color = "grey70"),
+        axis.ticks = element_line(color = "grey70"),
+        axis.text = element_text(color = "grey20"),
+        axis.title = element_text(color = "grey20"),
         panel.border     = element_rect(fill = NA, colour = "grey70"),
         panel.grid.major = element_line(colour = "grey80", size = 0.2))
 
+mtCarsScatterLabels <- mtCarsScatter + 
+    geom_mark_ellipse(aes(fill = as.factor(cyl), 
+                          label = paste0(cyl, 'Cylinders'))) +
+    geom_point() + 
+    theme(legend.position = 'none')
+
 ggsave(here('images', 'plots', 'mtCarsScatter.png'),
        mtCarsScatter, width = 4, height = 3)
+
+ggsave(here('images', 'plots', 'mtCarsScatterSmooth.png'),
+       mtCarsScatterSmooth, width = 4, height = 3)
 
 ggsave(here('images', 'plots', 'mtCarsScatterGradient.png'),
        mtCarsScatterGradient, width = 4, height = 3)
@@ -314,6 +331,9 @@ ggsave(here('images', 'plots', 'mtCarsScatterGrid4.png'),
 
 ggsave(here('images', 'plots', 'mtCarsScatterGrid5.png'),
        mtCarsScatterGrid5, width = 4, height = 3)
+
+ggsave(here('images', 'plots', 'mtCarsScatterLabels.png'),
+       mtCarsScatterLabels, width = 7, height = 5)
 
 #-----------------------------------------------------------------------------
 # Monster bars
@@ -433,7 +453,7 @@ simpleBars <- data.frame(
     ggplot() +
     geom_col(aes(x = group, y = count), width = 0.7) +
     scale_y_continuous(expand = expand_scale(mult = c(0, 0.05))) +
-    theme_bw()
+    theme_minimal_hgrid()
 
 ggsave(here('images', 'plots', 'simpleBars.png'),
        simpleBars, width = 4.5, height = 4)
@@ -509,8 +529,8 @@ statesBar <- statesData %>%
     geom_col(position = 'dodge') +
     scale_fill_brewer(palette = "Spectral") +
     scale_y_continuous(expand = expand_scale(mult = c(0, 0.05))) +
-    theme_cowplot() +
     coord_flip() +
+    theme_minimal_vgrid() +
     labs(x = 'Region', y = 'Area (Sq. Miles)') +
     theme(legend.position = 'none')
 
@@ -545,6 +565,29 @@ ggsave(here('images', 'plots', 'colorBlindBad2.png'),
        colorBlindBad2, width = 5, height = 4)
 ggsave(here('images', 'plots', 'colorBlindBad3.png'),
        colorBlindBad3, width = 5, height = 4)
+
+#-----------------------------------------------------------------------------
+# Prisoner bars 
+
+prisoner_bars <- data.frame(
+    category = c('Violent', 'Property', 'Drug', 'Public Order', 'Other'), 
+    rate = c(61.7, 73.8, 66.7, 62.2, 64.7)) %>% 
+    ggplot() +
+    geom_point(aes(x = fct_reorder(category, rate), y = rate)) + 
+    geom_hline(yintercept = 67.5, linetype = 'dashed') +
+    scale_y_continuous(breaks = seq(60, 75, 5), limits = c(60, 75),
+                       expand = expand_scale(mult = c(0, 0.05))) + 
+    annotate('text', label = 'All released prisoners', 
+             x = 5, y = 67.7, hjust = 0) +
+    coord_flip() + 
+    theme_minimal_vgrid() + 
+    labs(
+        x = 'Offense category',
+        y = 'Recidivism rate (%)', 
+        title = 'Recidivism rate of prisoners released in 1994')
+
+ggsave(here('images', 'plots', 'prisoner_bars.png'),
+       prisoner_bars, width = 7, height = 4)
 
 #-----------------------------------------------------------------------------
 # Begin plots from Hauser
