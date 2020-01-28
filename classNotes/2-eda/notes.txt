@@ -25,3 +25,10 @@ Although there are no formalized set of steps for conducting an EDA, the typical
 3) using the results to refine the original questions and/or generate new questions (Wickham & Grolemund, 2016).
 
 FOA: Flaw of averages - Plans based on average inputs are wrong on average
+
+
+# ----------------------------------------------------------------------
+# Post-class notes
+
+- Ran out of time at the end, maybe just use two datasets to practice exploring data at the end
+- Need better datasets to practice exploring

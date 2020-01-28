@@ -14,3 +14,9 @@ Original data source:
 Dictionary:
 Available here:
 https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-07-23
+
+
+# ----------------------------------------------------------------------
+# Post-class notes
+
+- Need more practice time to work with "tidy" data and converting from long to wide formats
