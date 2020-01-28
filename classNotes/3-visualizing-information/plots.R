@@ -707,13 +707,13 @@ jr_position_aligned_ordered_zero <- jr_position_aligned_ordered +
 
 jr_diamonds_bars_stacked <- ggplot(diamonds, aes(clarity, fill=cut, group=cut)) +
     geom_bar(stat="count", position="stack") +
-    scale_y_continuous("Count", labels = comma, 
+    scale_y_continuous("Count", labels = comma,
                        expand = expand_scale(mult = c(0, 0.05))) +
     theme_cowplot()
 
 jr_diamonds_bars_dodged <- ggplot(diamonds, aes(clarity, fill=cut, group=cut)) +
     geom_bar(stat="count", position="dodge") +
-    scale_y_continuous("Count", labels = comma, 
+    scale_y_continuous("Count", labels = comma,
                        expand = expand_scale(mult = c(0, 0.05))) +
     theme_cowplot()
 
@@ -842,7 +842,7 @@ ggsave(here('images', 'plots', 'jr_saturation.png'),
 ggsave(here('images', 'plots', 'jr_saturation_ordered.png'),
     jr_saturation_ordered, width = 5, height = 4)
 ggsave(here('images', 'plots', 'jr_saturation_ordered_zero.png'),
-       jr_saturation_ordered_zero, width = 5, height = 4)
+    jr_saturation_ordered_zero, width = 5, height = 4)
 ggsave(here('images', 'plots', 'jr_area.png'),
     jr_area, width = 5, height = 4)
 ggsave(here('images', 'plots', 'jr_angle.png'),
@@ -858,18 +858,18 @@ ggsave(here('images', 'plots', 'jr_position_aligned.png'),
 ggsave(here('images', 'plots', 'jr_position_aligned_ordered.png'),
     jr_position_aligned_ordered, width = 5, height = 4)
 ggsave(here('images', 'plots', 'jr_position_aligned_ordered_zero.png'),
-       jr_position_aligned_ordered_zero, width = 5, height = 4)
+    jr_position_aligned_ordered_zero, width = 5, height = 4)
 ggsave(here('images', 'plots', 'jr_diamonds_bars_stacked.png'),
-       jr_diamonds_bars_stacked, width = 6, height = 4)
+    jr_diamonds_bars_stacked, width = 6, height = 4)
 ggsave(here('images', 'plots', 'jr_diamonds_bars_dodged.png'),
-       jr_diamonds_bars_dodged, width = 6, height = 4)
+    jr_diamonds_bars_dodged, width = 6, height = 4)
 ggsave(here('images', 'plots', 'jr_diamonds_line_total.png'),
-       jr_diamonds_line_total, width = 6, height = 4)
+    jr_diamonds_line_total, width = 6, height = 4)
 ggsave(here('images', 'plots', 'jr_diamonds_line_cut.png'),
-       jr_diamonds_line_cut, width = 6, height = 4)
+    jr_diamonds_line_cut, width = 6, height = 4)
 ggsave(here('images', 'plots', 'jr_phones_area.png'),
-       jr_phones_area, width = 7, height = 4)
+    jr_phones_area, width = 7, height = 4)
 ggsave(here('images', 'plots', 'jr_phones_line.png'),
-       jr_phones_line, width = 7, height = 4)
+    jr_phones_line, width = 7, height = 4)
 ggsave(here('images', 'plots', 'jr_circle.png'),
-       jr_circle, width = 5, height = 5)
+    jr_circle, width = 5, height = 5)
