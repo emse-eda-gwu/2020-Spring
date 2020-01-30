@@ -1,3 +1,4 @@
 # ----------------------------------------------------------------------
 # Post-class notes
 
+Finished with lots of time to spare, could slow down and maybe add more practice, possibly with some actual time to code an improved version of a chart.
