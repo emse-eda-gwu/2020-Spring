@@ -8,4 +8,6 @@ output:
 
 **Due**: 10 March, 11:00 pm
 
+**Weight**: This assignment is worth 4% of your final grade.
+
 Coming soon!

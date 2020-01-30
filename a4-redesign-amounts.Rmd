@@ -8,6 +8,8 @@ output:
 
 **Due**: 18 February, 11:00 pm
 
+**Weight**: This assignment is worth 8% of your final grade.
+
 **Purpose**: At some point in your career, you will likely be involved in creating or revising a summary chart of some data. When that happens, you will also likely be the most knowledge person in the room about what to do to design the chart(s) to effectively communicate the information in the data. This assignment is a practice run for that day.
 
 **Skills & Knowledge**: In this assignment, you will practice exploring and visualizing a real dataset and to apply some of the graphical design concepts we've learned in class to improve an existing chart. This will involve writing text and code to create a reproducible document in the form of an html page.

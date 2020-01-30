@@ -8,6 +8,8 @@ output:
 
 **Due**: 4 February, 11:00 pm
 
+**Weight**: This assignment is worth 4% of your final grade.
+
 **Purpose**: The purpose of this assignment is to learn how to handle categorical data (specifically factors) for exploratory analysis and plotting with the **ggplot2** library in R.
 
 **Skills & Knowledge**: After completing these exercises, you should be able to:
@@ -17,7 +19,7 @@ output:
 - Create new factor variables from existing ones.
 - Reorder factors within a **ggplot2** plot.
 
-**Assessment**: Credit for this assignment will be allocated in proportion to the percentage of the assignment completed by the due date. No more than 2 late days can be used on any one assignment.
+**Assessment**: This assignment is graded for completion. Credit will be allocated in proportion to the percentage of the assignment completed by the due date. No more than 2 late days can be used on any one assignment.
 
 **Tasks**:
 

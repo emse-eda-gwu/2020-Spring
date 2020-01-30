@@ -8,6 +8,8 @@ output:
 
 **Due**: 21 January, 11:00 pm
 
+**Weight**: This assignment is worth 4% of your final grade.
+
 **Purpose**: The purpose of this assignment is to develop some basic strategies for exploring data sets to gain a greater understanding of the variable types and their relationships.
 
 **Skills & Knowledge**: After completing these exercises, you should be able to:
@@ -18,7 +20,7 @@ output:
 - Select appropriate measures of centrality and variability for different data types.
 - Select appropriate data visualizations for different relationships among data variables.
 
-**Assessment**: Credit for this assignment will be allocated in proportion to the percentage of the assignment completed by the due date. No more than 2 late days can be used on any one assignment.
+**Assessment**: This assignment is graded for completion. Credit will be allocated in proportion to the percentage of the assignment completed by the due date. No more than 2 late days can be used on any one assignment.
 
 **Tasks**:
 

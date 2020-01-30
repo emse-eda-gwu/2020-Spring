@@ -8,6 +8,8 @@ output:
 
 **Due**: 28 January, 11:00 pm
 
+**Weight**: This assignment is worth 4% of your final grade.
+
 **Purpose**: The purpose of this assignment is to refresh your skills from P4A and learn some new skills for plotting with the **ggplot2** library in R.
 
 **Skills & Knowledge**: After completing these exercises, you should be able to:
@@ -17,7 +19,7 @@ output:
 - Know how to map variables to aesthetics in a ggplot.
 - Know how to create faceted plots.
 
-**Assessment**: Credit for this assignment will be allocated in proportion to the percentage of the assignment completed by the due date. No more than 2 late days can be used on any one assignment.
+**Assessment**: This assignment is graded for completion. Credit will be allocated in proportion to the percentage of the assignment completed by the due date. No more than 2 late days can be used on any one assignment.
 
 **Tasks**:
 

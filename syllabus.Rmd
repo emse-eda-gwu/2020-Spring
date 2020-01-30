@@ -9,6 +9,7 @@ output:
 ```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
 rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
+library(cowplot)
 ```
 
 ---
@@ -91,7 +92,7 @@ There will be several quizzes given about once every two weeks immediately at th
 
 ## Assignments
 
-Students will be given a series of assignments throughout the semester. These will be a combination of exercises and mini projects. Exercises include instructional videos and applied practice writing code, mostly using the [DataCamp](https://www.datacamp.com/home) learning platform. Students should begin these assignments prior to the associated lectures to prepare for class and should take notes as they work. Mini project assignments provide hands-on experience with the material covered in class. While students may work with their peers on these assignments, each student must submit their own work. Credit for each assignment will be allocated according to a rubric provided in the assignment description. **No more than 2 late days can be used on any one assignment.**
+Assignments will be a combination of "exercises" and "redesign" projects. Exercises include instructional videos and applied practice writing code, mostly using the [DataCamp](https://www.datacamp.com/home) platform. These are designed to be completed prior to the associated lectures to prepare for class. Redesign project assignments provide hands-on experience with the material covered in class by redesigning an existing data visualization. While students may work with their peers on these assignments, each student must submit their own work. Credit for each assignment will be allocated according to a rubric provided in the assignment description. **No more than 2 late days can be used on any one assignment.**
 
 ## Final Project
 
@@ -108,21 +109,39 @@ Final grades will be calculated as follows:
 <div style="width:500px">
 Item                          | Weight | Notes
 ------------------------------|--------|-------------------------------------
-Attendance & Participation    | 10 %   |
-Quizzes                       | 15 %   | Lowest quiz grade is dropped
-Assignment 1                  | 5 %    | Exercises
-Assignment 2                  | 5 %    | Exercises
-Assignment 3                  | 5 %    | Exercises
-Assignment 4                  | 5 %    | Redesign mini project
-Assignment 5                  | 5 %    | Redesign mini project
-Assignment 6                  | 5 %    | Exercises
-Assignment 7                  | 5 %    | Exercises
-Final Project Proposal        | 5 %    |
-Final Project Progress Report | 5 %    |
+Attendance & Participation    | 5 %    |
+Quizzes                       | 16 %   | Lowest quiz grade is dropped
+Assignment 1                  | 4 %    | Exercises
+Assignment 2                  | 4 %    | Exercises
+Assignment 3                  | 4 %    | Exercises
+Assignment 4                  | 8 %    | Redesign project
+Assignment 5                  | 4 %    | Exercises
+Assignment 6                  | 8 %    | Redesign project
+Assignment 7                  | 4 %    | Exercises
+Final Project Proposal        | 6 %    |
+Final Project Progress Report | 8 %    |
 Final Project Peer Review     | 5 %    |
-Final Project Presentation    | 10 %   |
-Final Project Report          | 15 %   |
+Final Project Presentation    | 8 %    |
+Final Project Report          | 16 %   |
 </div>
+
+Here's a visual breakdown by category:
+
+```{r, echo=FALSE, fig.height=3, fig.align='left'}
+data.frame(
+    category = c('Attendance &\nParticipation', 'Quizzes', 'Assignments',
+                 'Final Project'),
+    percent = c(5, 16, 36, 43)) %>%
+    ggplot() +
+    geom_col(aes(x = fct_reorder(category, percent), y = percent),
+             width = 0.7, alpha = 0.8) +
+    scale_y_continuous(expand = expand_scale(mult = c(0, 0.05))) +
+    coord_flip() +
+    theme_minimal_vgrid() +
+    labs(
+        x = 'Category',
+        y = 'Percent of final grade')
+```
 
 ## AMD Grading
 
@@ -137,12 +156,11 @@ Student cannot "sign up" for AMG grading. Every student will be considered both 
 To compute your AMG score, first use the following to compute your raw score. If the resulting score is higher than a C, set it back to a C.
 
 <div style="width:350px">
-Course Component           | Weight
----------------------------|--------
-DataCamp Assignments (8)   | 25%
-Project Assignments (3)    | 20%
-Quizzes (Top 4)            | 15%
-Final Project              | 40%
+Item             | Weight
+-----------------|----------
+Assignments      | 20%
+Quizzes (Top 4)  | 25%
+Final Project    | 55%
 </div>
 
 ## Grading Scale
@@ -162,16 +180,15 @@ The course instructors may choose to change the scales at their discretion. You 
 
 # Getting Help
 
-This can be a challenging class - don't suffer in silence! Look at the ["Getting Help"](getting-help.html) page, come to office hours, send me a message on Slack.
+This class can be challenging - don't suffer in silence. Look at the ["Getting Help"](getting-help.html) page for ways to get resources that can help you succeed.
 
 # Course Policies
 
 ## [tl;dr](https://whatis.techtarget.com/definition/tldr-TLDR)
 
 - **BE NICE. BE HONEST. DON'T CHEAT.**
-- Write your own code - don't look at others' code & don't let others look at your code.
-- You get **5** late days - use them however you want, no strings attached.
-- You can't use more than **2** late days on any one assignment.
+- You get **5** late days - use them however you want, but you can't use more than **2** late days on any one assignment.
+- If you talk with me, I will listen and believe you. 
 
 ## Late Policy
 
@@ -244,6 +261,35 @@ Programs are naturally structured, which makes them **very easy** to compare for
 Your first year of college is a time when you do a lot of learning. Sometimes, you might make bad decisions or mistakes. The most important thing for you to do is to learn from your mistakes, to constantly grow, and become a better person.
 
 Sometimes, students panic and copy code right before the deadline, then regret what they did afterwards. Therefore, you may rescind any homework submission for up to 24 hours after the deadline with no questions asked. Simply email the course instructors asking to delete the submission in question, and we will do so. Deleted submissions will not be considered during plagiarism detection, though of course they will also not be graded. However, it will always be better to get a 0 (or partial credit) on an assignment than to get a cheating violation!
+
+## Children in class
+
+<!-- Policy copied from Andrew Heiss's class -->
+<!-- https://evalsp20.classes.andrewheiss.com/syllabus/ -->
+
+I applaud all of you who go to graduate school with children! It is difficult to balance academic, work, and family commitments, and I want you to succeed. Here are my policies regarding children in class:
+
+1. All breastfeeding babies are welcome in class as often as necessary.
+2. Non-nursing babies and older children are welcome whenever alternate arrangements cannot be made. As a parent of young children, I understand that babysitters fall through, partners have conflicting schedules, children get sick, and other issues arise that leave parents with few other options.
+3. In cases where children come to class, I invite parents/caregivers to sit close to the door so as to more easily excuse yourself to attend to your child's needs. Non-parents in the class: please reserve seats near the door for your parenting classmates.
+4. All students are expected to join with me in creating a welcoming environment that is respectful of your classmates who bring children to class.
+
+I understand that sleep deprivation and exhaustion are among the most difficult aspects of parenting young children. The struggle of balancing school, work, childcare, and graduate school is tiring, and I will do my best to accommodate any such issues while maintaining the same high expectations for all students enrolled in the class. Please do not hesitate to contact me with any questions or concerns.
+
+## Lauren's Promise
+
+<!-- Policy copied from Andrew Heiss's class -->
+<!-- https://evalsp20.classes.andrewheiss.com/syllabus/ -->
+
+**I will listen and believe you if someone is threatening you.**
+
+Lauren McCluskey, a 21-year-old honors student athlete, [was murdered on October 22, 2018 by a man she briefly dated on the University of Utah campus](https://www.sltrib.com/opinion/commentary/2019/02/10/commentary-failing-lauren/). We must all take action to ensure that this never happens again.
+
+If you are in immediate danger, call 911 or GWU police at 202-994-6111 (GWPD).
+
+If you are experiencing sexual assault, domestic violence, or stalking, if you report it to me I will listen and connect you to resources or call GWU's [Counseling and Psychological Services](https://healthcenter.gwu.edu/counseling-and-psychological-services) (202-994-5300).
+
+Any form of sexual harassment or violence will not be excused or tolerated at GWU. GWU has instituted procedures to respond to violations of these laws and standards, programs aimed at the prevention of such conduct, and intervention on behalf of the victims. GWU Police officers will treat victims of sexual assault, domestic violence, and stalking with respect and dignity. Advocates on campus and in the community can help with victims' physical and emotional health, reporting options, and academic concerns.
 
 ## Use of Course Materials
 

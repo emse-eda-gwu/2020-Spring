@@ -24,11 +24,11 @@ To make the overall project more manageable, it is broken down into separate "mi
 <div style="width:400px">
 Item            | Weight towards<br>final grade | Due Date<br>(by 11pm)
 ----------------|----------------------------|--------------------
-Proposal        | 5 %    | March 13
-Progress Report | 5 %    | April 10
+Proposal        | 6 %    | March 13
+Progress Report | 8 %    | April 10
 Peer Review     | 5 %    | April 17
-Presentation    | 10 %   | April 28
-Final Report    | 15 %   | May 6
+Presentation    | 8 %    | April 28
+Final Report    | 16 %   | May 6
 </div>
 
 **Purpose**: The skills covered in this course are rooted in design rules and principles rather than formulas and equations. As such, the _application_ of these principles to a real data problem is one of the best ways to learn and assess mastery of these skills. I guarantee you one day you will need to apply these principles to communicate an idea to colleagues, so let's make sure you have at least one chance to practice before the [stakes are higher](https://emse6574-gwu.github.io/2019-Fall/challengerExplosion.html).
@@ -43,7 +43,7 @@ Final Report    | 15 %   | May 6
 
 **Due**: March 13 by 11:00 pm
 
-**Weight**: This assignment is worth 5% of your final grade.
+**Weight**: This assignment is worth 6% of your final grade.
 
 **Submission Details**: Submit your proposal as a PDF document on Blackboard by the due date.
 
@@ -83,7 +83,7 @@ Write a 1-2 page proposal of an exploratory data analysis that you plan to condu
 
 **Due**: April 10 by 11:00 pm
 
-**Weight**: This assignment is worth 5% of your final grade.
+**Weight**: This assignment is worth 8% of your final grade.
 
 **Submission Details**: Submit your progress report as a PDF document on Blackboard by the due date.
 
@@ -172,7 +172,7 @@ Each student will be randomly assigned to review the progress reports of one of 
 
 **Due**: Slides due by April 28 by 11:00 pm; presentations will be in class on April 29.
 
-**Weight**: This assignment is worth 10% of your final grade: 5% for your slides & slide design, and 5% for effectively presenting them in class.
+**Weight**: This assignment is worth 8% of your final grade: 4% for your slides & slide design, and 4% for effectively presenting them in class.
 
 **Submission Details**: Submit your slides as a PDF or .pptx file (whichever you feel most comfortable presenting with) on Blackboard by the due date.
 
@@ -212,7 +212,7 @@ You will present your analysis with your teammates in class on April 29. Your sl
 
 **Due**: May 6 by 11:00 pm
 
-**Weight**: This assignment is worth 15% of your final grade.
+**Weight**: This assignment is worth 16% of your final grade.
 
 **Submission Details**: Your final report should be written as a .Rmd file that compiles to a webpage. Publish your compiled page online (e.g. via RPubs, Github, etc.), then submit your entire project folder (including your .Rmd file, data files, .RProj file, etc.) as a single .zip file on Blackboard by the due date. Also include a link to the published page in your Blackboard submission.
 
