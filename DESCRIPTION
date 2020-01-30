@@ -25,4 +25,5 @@ Imports:
     dslabs,
     gapminder,
     gsheet,
-    kableExtra
+    kableExtra,
+    cowplot
