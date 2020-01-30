@@ -1,0 +1,11 @@
+---
+title: "Assignment 7: Redesign 2"
+output:
+  html_document:
+    number_sections: false
+    toc: no
+---
+
+**Due**: 24 March, 11:00 pm
+
+Coming soon!

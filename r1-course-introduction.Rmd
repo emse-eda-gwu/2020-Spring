@@ -97,4 +97,4 @@ We'll cover the concept of "tidy" data in class on day 1. To get familiar with i
 
 ## Writing a research question
 
-Read through [this guide](https://writingcenter.gmu.edu/guides/how-to-write-a-research-question) from GMU on how to write a research question. We'll come back to these ideas again later when you start working on your [final projects](a6-project.html), but it's a good idea to start thinking about your research question early.
+Read through [this guide](https://writingcenter.gmu.edu/guides/how-to-write-a-research-question) from GMU on how to write a research question. We'll come back to these ideas again later when you start working on your [final projects](a-project.html), but it's a good idea to start thinking about your research question early.

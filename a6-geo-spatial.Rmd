@@ -1,0 +1,11 @@
+---
+title: "Assignment 6: Maps & Geo-spatial Data"
+output:
+  html_document:
+    number_sections: false
+    toc: no
+---
+
+**Due**: 10 March, 11:00 pm
+
+Coming soon!
