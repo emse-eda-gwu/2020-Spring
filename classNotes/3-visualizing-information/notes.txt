@@ -2,3 +2,6 @@
 # Post-class notes
 
 Finished with lots of time to spare, could slow down and maybe add more practice, possibly with some actual time to code an improved version of a chart.
+
+Maybe add the section on how to make a good ggplot (which is currently
+at the start of the next class)
