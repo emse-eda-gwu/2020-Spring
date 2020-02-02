@@ -18,7 +18,7 @@ source("knitr_setup.R")
 </div>
 
 <div class = "col-md-7">
-Students who enroll in this course will have the advantage of learning R with an amazing tool: [DataCamp](https://www.datacamp.com/home). DataCamp is the most intuitive interactive platform I've worked with for learning data science tools. DataCamp generously makes their full suite of learning tools available for six months for students enrolled in participating university courses. In addition to completing assigned DataCamp exercises, students enrolled in this course can use the next six months to learn any other data science skills available on DataCamp.
+Students who enroll in this course will have the advantage of learning R with an amazing tool: [DataCamp](https://www.datacamp.com/home). DataCamp is an intuitive interactive platform for learning data science tools, and they make their full suite of learning tools available for six months for students enrolled in participating university courses. In addition to completing assigned DataCamp exercises, students enrolled in this course can use the next six months to learn any other data science skills available on DataCamp.
 
 In particular, I highly recommend student in this class browse the courses in the following two tracks:
 

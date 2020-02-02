@@ -38,9 +38,5 @@ source("knitr_setup.R")
 ```{r child = '_prerequisites.Rmd'}
 ```
 
-**DataCamp**:
-
-This class is supported by [DataCamp.com](https://www.datacamp.com/) - learn more [here](datacamp.html). 
-
 </div>
 </div>
