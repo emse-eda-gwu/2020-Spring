@@ -11,4 +11,20 @@ rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
 
+> "At the heart of quantitative reasoning is a single question: Compared to what?"
+>
+> -- Edward Tufte
 
+This week, we will learn some of the technical details of how to create charts to **compare values** to one another and to a benchmark. Most of these articles have code in them that illustrate how to create each chart type, and I encourage you to try and reproduce the examples provided in R yourself. In addition to these articles, another particularly useful site to review is the [top 50 ggplots](http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html), which contains examples with ggplot code to create 50 common visualizations.
+
+Plot types for comparing values:
+
+- [Bars](http://uc-r.github.io/barcharts)
+- [Dots](http://uc-r.github.io/cleveland-dot-plots)
+- [Lollipops](https://uc-r.github.io/lollipop)
+- [Bullets](http://www.storytellingwithdata.com/blog/2017/5/25/the-bullet-graph)
+- [Ridgelines](https://serialmentor.com/dataviz/boxplots-violins.html#boxplots-violins-horizontal)
+
+Optional readings:
+
+- [Dual-Scaled Axes in Graphs - Are They Ever the Best Solution?](http://www.perceptualedge.com/articles/visual_business_intelligence/dual-scaled_axes.pdf)
