@@ -22,6 +22,11 @@ The design principles discussed in the following readings repeat many of the con
 - Wilke: [9 - Visualizing many distributions at once](https://serialmentor.com/dataviz/boxplots-violins.html)
 - Wilke: [10 - Visualizing proportions](https://serialmentor.com/dataviz/visualizing-proportions.html)
 
+Optional readings:
+
+- [Engaging Readers with Square Pie/Waffle Charts](https://eagereyes.org/blog/2008/engaging-readers-with-square-pie-waffle-charts)
+- [Square pie chart beats out the rest in perception study](https://eagereyes.org/blog/2016/a-reanalysis-of-a-study-about-square-pie-charts-from-2009)
+
 ## Coding techniques
 
 The readings below discuss two important components that we will run into a lot in making charts: factors & facets. Factors are categorical variables, but dealing with them in R can be somewhat messy. Fortunately, we have the [forcats](https://forcats.tidyverse.org/) package to help us tackle these! Facets, on the other hand, are rather straight forward to implement and offer a handy technique for creating charts when you have many different variables to consider at once:
