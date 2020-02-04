@@ -90,7 +90,7 @@ https://github.com/rstudio-education/arm-workshop-rsc2019
   border-radius: 5px; /* Rounded edges */
 }
 .inverse .remark-inline-code {
-  color: var(--color-blue);
+  color: var(--color-orange);
   background-color: transparent;
 }
 
@@ -202,6 +202,12 @@ div.footer-small span {
 img {
   display: block;
   border: 1px solid #000;
+}
+
+/* No border on inverse layout */
+.inverse img {
+  display: block;
+  border: 0px solid #000;
 }
 
 .noborder img {
