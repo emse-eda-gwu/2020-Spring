@@ -1,0 +1,129 @@
+
+---
+class: inverse, middle
+
+# Topics
+
+## 1. Making a (good) ggplot
+## 2. .orange[Using facets]
+## 3. Manipulating factors
+## 4. Graphing proportions
+
+---
+class: center, middle
+
+## When # of categories is large, consider facets
+
+.leftcol[
+```{r diamonds_bars_stacked, echo=FALSE, fig.height=6}
+ggplot(diamonds, aes(clarity, fill=cut, group=cut)) +
+    geom_bar(stat="count", position="stack") +
+    scale_y_continuous(expand = expand_scale(mult = c(0, 0.05))) +
+    theme_minimal_hgrid()
+```
+]
+.rightcol[
+```{r diamonds_bars_dodged, echo=FALSE, fig.height=6}
+ggplot(diamonds, aes(clarity, fill=cut, group=cut)) +
+    geom_bar(stat="count", position="dodge") +
+    scale_y_continuous(expand = expand_scale(mult = c(0, 0.05))) +
+    theme_minimal_hgrid()
+```
+]
+
+---
+## When # of categories is large, consider facets
+
+.leftcol60[
+```{r}
+diamonds_summary <- diamonds %>%
+  count(clarity, cut)
+```
+```{r diamonds_facet, fig.show='hide'}
+ggplot(diamonds_summary) +
+  geom_col(aes(x = clarity, y = n)) +
+  facet_wrap(~cut, nrow = 1) + #<<
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  theme_minimal_hgrid()
+```
+]
+
+```{r ref.label='diamonds_facet', echo=FALSE, fig.height=3, fig.width=15}
+```
+
+---
+.leftcol[.code70[
+## When # of categories is large, consider facets
+
+```{r}
+diamonds_summary <- diamonds %>%
+  count(clarity, cut)
+```
+```{r diamonds_facet_ncol, fig.show='hide'}
+ggplot(diamonds_summary) +
+  geom_col(aes(x = clarity, y = n)) +
+  facet_wrap(~cut, ncol = 2) + #<<
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  theme_minimal_hgrid()
+```
+]]
+.rightcol[
+```{r ref.label='diamonds_facet_ncol', echo=FALSE, fig.height=8, fig.width=8, fig.align='center'}
+```
+]
+
+---
+class: inverse
+
+.leftcol60[
+## Your turn
+
+Create the following charts. For this exercise, you can remove `NA` values.
+
+**Hint**: You may need to reshape and / or summarize the data before plotting!
+
+Data: `lotr_words.csv`
+```{r, echo=FALSE, fig.width=7, fig.height=5}
+lotr_summary <- lotr_words %>%
+  gather(key = 'gender', value = 'wordCount',
+         Female:Male)
+
+ggplot(lotr_summary) +
+  geom_col(aes(x = Film, y = wordCount, fill = gender)) +
+  facet_wrap(~Race, ncol = 1) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid() +
+  labs(
+    x = 'Word count',
+    y = 'Film',
+    fill = 'Gender')
+```
+]
+.rightcol40[
+
+Data: `wildlife_impacts.csv`
+```{r, echo=FALSE, fig.width=5, fig.height=8}
+wildlife_summary <- wildlife_impacts %>%
+  filter(!is.na(time_of_day)) %>%
+  count(operator, time_of_day) %>%
+  mutate(
+    operator = str_to_title(operator),
+    operator = fct_reorder(operator, n),
+    time_of_day = fct_rev(fct_reorder(time_of_day, n)))
+
+ggplot(wildlife_summary) +
+  geom_col(aes(x = operator, y = n)) +
+  facet_wrap(~time_of_day, ncol = 1) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid() +
+  labs(
+    x = 'Airline',
+    y = 'Number of incidents')
+```
+]

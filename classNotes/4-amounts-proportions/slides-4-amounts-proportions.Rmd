@@ -1,0 +1,70 @@
+---
+title: "Week 4: Graphing Amounts & Proportions"
+author: "John Paul Helveston"
+date: February 05, 2020
+output:
+  xaringan::moon_reader:
+    css: ['default', 'https://emse-eda-gwu.github.io/2020-Spring/classNotes/classNotes.css']
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      beforeInit: "https://platform.twitter.com/widgets.js"
+    seal: false
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(knitr)
+library(here)
+library(cowplot)
+library(waffle)
+options(
+    htmltools.dir.version = FALSE,
+    knitr.table.format = "html",
+    knitr.kable.NA = '',
+    tibble.width = Inf)
+knitr::opts_chunk$set(
+    warning = FALSE,
+    message = FALSE,
+    fig.retina = 3)
+dplyr.width = Inf
+
+# Set main theme settings
+theme_set(theme_gray(base_size = 18))
+```
+
+name: xaringan-title
+class: title-slide, center, middle, inverse
+
+# Week 4: Graphing Amounts & Proportions
+
+.large[EMSE 4197 | John Paul Helveston | February 05, 2020]
+
+```{r child = here('parts', 'intro.Rmd')}
+```
+
+```{r child = here('parts', 'making-good-ggplots.Rmd')}
+```
+
+```{r child = here('parts', 'facets.Rmd')}
+```
+
+---
+class: inverse
+
+# [5 minute](https://www.youtube.com/watch?v=_W0bSen8Qjg) break!
+
+## Stand up
+
+## Move around
+
+## Stretch!
+
+```{r child = here('parts', 'factors.Rmd')}
+```
+
+```{r child = here('parts', 'proportions.Rmd')}
+```
