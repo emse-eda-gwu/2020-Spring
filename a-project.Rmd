@@ -6,16 +6,16 @@ output:
     toc: true
 ---
 
----
+For your final project, you will take a dataset, explore it, tinker with it, and tell a nuanced story about it using at least three charts. I want this project to be as useful for you and your future career as possible - you'll hopefully want to show off your final project in a portfolio or during job interviews. Accordingly, you get to choose what data you will use for your project. Choose whatever one you are most interested in or will have the most fun with.
 
 # Overview
 
-The final project for this course will consist of:
+For the final project, you will:
 
-- Writing a research question.
-- Conducting an exploratory data analysis of one or more data sources to address your research question.
-- Creating visualizations to effectively communicate the results of your analysis using the principles of information visualization covered in this course.
-- Documenting your entire analysis in a reproducible way, including detailed curation of the data used.
+- Write a research question.
+- Conduct an exploratory data analysis of one or more data sources to address your research question.
+- Create visualizations to effectively communicate the results of your analysis using the principles of information visualization covered in this course.
+- Document your entire analysis in a reproducible format, including a detailed curation of the data used, analysis conducted, and results produced.
 
 To make the overall project more manageable, it is broken down into separate "milestone" deliverables due throughout the semester, starting with a proposal due just before spring break.
 
@@ -45,20 +45,22 @@ Final Report    | 16 %   | May 6
 
 **Weight**: This assignment is worth 6% of your final grade.
 
-**Submission Details**: Submit your proposal as a PDF document on Blackboard by the due date.
+**Submission Details**: You may write your proposal using any tool you wish (e.g. Microsoft Word, RMarkdown), but you must submit your proposal as a PDF document on Blackboard by the due date.
+
+**Assessment**: We will use [this rubric](assignments/project/proposal-rubric.pdf) to grade your proposal.
 
 **Tasks**:
 
-Write a 1-2 page proposal of an exploratory data analysis that you plan to conduct for your final project. The instructors will review your proposal and provide feedback upon returning from spring break. If your proposal is approved, you're done and can move on towards the next project task. Otherwise, the instructors may ask you to submit a revised proposal, most likely by focusing / adjusting the proposal scope. Below is a list of specific items your proposal should include - the % in brackets indicates points towards this assignment grade:
+Write a 1-2 page proposal of an exploratory data analysis that you plan to conduct for your final project. The instructors will review and grade your proposal and provide feedback upon returning from spring break. If your proposal is approved, you're done and can move on towards the next project task. Otherwise, the instructors may ask you to submit a revised proposal, most likely by focusing / adjusting the proposal scope and / or research question. Below is a list of specific items your proposal should include (check the rubric to see their relative weighting).
 
-1. [10%] Follow these formatting rules:
+1. Follow these formatting guidelines:
 
     - Be between 1 and 2 pages in length.
     - 12 point font, 1 inch margins.
     - Write your project title at the top of the document (e.g. **Title**: `<insert title>`).
     - List the name(s) of student(s) involved in the project below the project title (e.g. **Authors**: `<insert list of names>`). You cannot change your teammates once you've submitted your proposal.
 
-2. [30%] State a clear research question. Follow [these guidelines](https://writingcenter.gmu.edu/guides/how-to-write-a-research-question). Your question should be:
+2. State a clear research question. Follow [these guidelines](https://writingcenter.gmu.edu/guides/how-to-write-a-research-question). Your question should be:
 
     - **Clear**: it provides enough specifics that your audience can easily understand its purpose without needing additional explanation.
     - **Focused**: it is narrow enough that it can be addressed thoroughly with the data available and within the limits of the final project report.
@@ -66,16 +68,17 @@ Write a 1-2 page proposal of an exploratory data analysis that you plan to condu
     - **Complex**: it is not answerable with a simple "yes" or "no," but rather requires synthesis and analysis of data.
     - **Arguable**: its potential answers are open to debate rather than accepted facts.
 
-3. [30%] Discuss the data source(s) you plan to use for your analysis:
+3. Discuss the data source(s) you plan to use for your analysis:
 
-    - If you have already identified the source(s), describe them and include urls or references to the sources. If you have not identified a source yet, describe the data you hope to use, and give at least one plausible source that may have the data (regardless of whether the source makes it available or not).
-    - Discuss the validity of the source(s). For each data source, is the data available the _original_ data, or has it been processed? How was the data collected? If you do not yet have a source, discuss what concerns you have about a plausible source that might have the data.
+    - If you have already identified the source(s), describe them and include urls and / or references to the sources. If you have not identified a source yet, describe the data you hope to use, and give at least one plausible source that may have the data (regardless of whether the source makes it available or not).
+    - Discuss the validity of the source(s). For each data source, is the data available the _original_ data, or has it been processed? How was the original data collected and by whom? If you do not yet have a source, discuss what concerns you have about a plausible source that might have the data.
 
-4. [30%] Describe your anticipated results:
+4. Describe some anticipated results:
 
-    - Describe how you would expect one variable you hope you find in your data to be distributed (e.g. unimodal, multimodel, tightly-group, widely-spread, etc.), regardless of whether that variable actually exists.
-    - Describe one relationship you expect to find between two or more variables you hope to find in your data, regardless of whether those variables actually exist.
-    - Describe at least one chart that would help you visualize this relationship that you expect to find.
+    - Choose two variables that you expect to find in your data and are relevant to your research question. Describe how you would expect each to be distributed (e.g. unimodal, multimodel, tightly-group, widely-spread, etc.), regardless of whether those variables actually exist. For example, you might expect the price of gasoline over a particular period to be rather tightly-grouped around a mean, whereas the stock price of a particular company might vary much more widely over the same period.
+    - Choose two or more variables that you expect to find in your data and are relevant to your research question. Describe two relationships you expect to find these variables, regardless of whether actually exist in your data. For example, you might expect sales of hybrid vehicles to increase when gas prices increase, or sales of SUVs to increase when gas prices decrease.
+    - Describe at least two charts that you expect will help you visualize the relationships that you expect to find. For example, a scatterplot of gasoline prices and SUV sales over a particular time period might be useful for visualizing the level of correlation between these two variables.
+    - Discuss how your expectations about the variables you chose will help inform you about your research question.
 
 ---
 
@@ -265,3 +268,4 @@ Some of the content on this page is inspired by and / or modified from other sou
 
 - Prof. Marti Hearst's Fall 2005 course [SIMS 247: Information Visualization and Presentation](http://courses.ischool.berkeley.edu/i247/f05/assignments/fp.html)
 - The [How to Write a Research Question](https://writingcenter.gmu.edu/guides/how-to-write-a-research-question) article by the GMU writing center.
+- The [final project assignment](https://datavizf17.classes.andrewheiss.com/assignment/final-project/) in Andrew Heiss's course [MPA 635: Data Visualization](https://datavizf17.classes.andrewheiss.com/).
