@@ -14,7 +14,7 @@ output:
 
 **Skills & Knowledge**: In this assignment, you will practice exploring and visualizing a real dataset and to apply some of the graphical design concepts we've learned in class to improve an existing chart. This will involve writing text and code to create a reproducible document in the form of an html page.
 
-**Assessment**: I will use [this rubric](assignments/a4/rubric.pdf) to grade the finished product.
+**Assessment**: I will use [this rubric](assignments/a4/a4-rubric.pdf) to grade the finished product.
 
 **Background**: The American Wind Energy Association ([AWEA](https://www.awea.org/)) is a national trade association that advocates for the wind power industry. They also publish data on wind power statistics in the U.S. The authors of [this article](https://howmuch.net/articles/wind-power-in-the-united-states-2018) at howmuch.net got a hold of some of this data and published this unfortunate chart:
 
