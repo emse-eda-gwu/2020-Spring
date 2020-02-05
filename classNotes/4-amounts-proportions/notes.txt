@@ -21,3 +21,9 @@ Assignment 4 (5 min)
 
 # ----------------------------------------------------------------------
 # Post-class notes
+
+Talked too fast - slow down
+
+Be more careful with time usage - didn't get to show proportion examples at the end.
+
+Revised the examples on factor manipulation - only used `slice()` function, didn't actually practice using `fct_relevel()`, `fct_recode()`, or `fct_other()`
