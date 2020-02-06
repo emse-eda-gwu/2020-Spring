@@ -36,12 +36,14 @@ A collection of various websites that have lots of interesting datasets:
 - ["Makeover Monday" challenges](http://www.makeovermonday.co.uk/data/): Wide variety of datasets for data visualization practice.
 - [Tableau Community Forums](https://community.tableau.com/docs/DOC-10635): Sometimes you'll find some interesting datasets in here.
 - ["Data is Beautiful" subreddit](https://www.reddit.com/r/dataisbeautiful/): Feed of user-generated data visualizations, though quality varies substantially.
-
-## Large, searchable websites
-
 - [Kaggle](https://www.kaggle.com/datasets): Hosts machine learning competitions, and as a result has lots of really interesting data sets open to the public.
-- [Google Dataset Search](https://toolbox.google.com/datasetsearch)
-- [Quandl](https://www.quandl.com/): Searchable, over 2 million financial, economic, and social datasets.
+
+## Large, search-able sites
+
+Large sites, i.e. "Google" for data sets:
+
+- [Google Dataset Search](https://datasetsearch.research.google.com/)
+- [Quandl](https://www.quandl.com/): Over 2 million financial, economic, and social datasets.
 - [Wharton Research Data Services](https://wrds-www.wharton.upenn.edu/): Single-point access to over 200 terabytes of data across multiple disciplines, including Finance, Marketing, and Economics.
 
 # Government-ish sources:
