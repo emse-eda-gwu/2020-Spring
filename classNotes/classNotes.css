@@ -325,6 +325,22 @@ img {
   float: right;
   width: 59%;
 }
+.leftcol65 {
+  float: left;
+  width: 64%;
+}
+.rightcol35 {
+  float: right;
+  width: 34%;
+}
+.leftcol35 {
+  float: left;
+  width: 34%;
+}
+.rightcol65 {
+  float: right;
+  width: 64%;
+}
 .leftcol70 {
   float: left;
   width: 69%;
@@ -340,6 +356,38 @@ img {
 .rightcol70 {
   float: right;
   width: 69%;
+}
+.leftcol75 {
+  float: left;
+  width: 74%;
+}
+.rightcol25 {
+  float: right;
+  width: 25%;
+}
+.leftcol25 {
+  float: left;
+  width: 25%;
+}
+.rightcol75 {
+  float: right;
+  width: 74%;
+}
+.leftcol80 {
+  float: left;
+  width: 79%;
+}
+.rightcol20 {
+  float: right;
+  width: 19%;
+}
+.leftcol20 {
+  float: left;
+  width: 19%;
+}
+.rightcol80 {
+  float: right;
+  width: 79%;
 }
 
 /* 3  columns */
