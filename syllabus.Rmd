@@ -180,7 +180,7 @@ The course instructors may choose to change the scales at their discretion. You 
 
 # Getting Help
 
-This class can be challenging - don't suffer in silence. Look at the ["Getting Help"](getting-help.html) page for ways to get resources that can help you succeed.
+This class can be challenging - don't suffer in silence. Look at the ["Getting Help"](ref-getting-help.html) page for ways to get resources that can help you succeed.
 
 # Course Policies
 
@@ -188,7 +188,7 @@ This class can be challenging - don't suffer in silence. Look at the ["Getting H
 
 - **BE NICE. BE HONEST. DON'T CHEAT.**
 - You get **5** late days - use them however you want, but you can't use more than **2** late days on any one assignment.
-- If you talk with me, I will listen and believe you. 
+- If you talk with me, I will listen and believe you.
 
 ## Late Policy
 
