@@ -98,8 +98,8 @@ ggplot(lotr_summary) +
   coord_flip() +
   theme_minimal_vgrid() +
   labs(
-    x = 'Word count',
-    y = 'Film',
+    x = 'Film',
+    y = 'Word count',
     fill = 'Gender')
 ```
 ]
