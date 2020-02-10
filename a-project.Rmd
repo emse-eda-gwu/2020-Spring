@@ -28,7 +28,7 @@ Proposal        | 6 %    | March 13
 Progress Report | 8 %    | April 10
 Peer Review     | 5 %    | April 17
 Presentation    | 8 %    | April 28
-Final Report    | 16 %   | May 6
+Final Report    | 16 %   | May 8
 </div>
 
 **Purpose**: The skills covered in this course are rooted in design rules and principles rather than formulas and equations. As such, the _application_ of these principles to a real data problem is one of the best ways to learn and assess mastery of these skills. I guarantee you one day you will need to apply these principles to communicate an idea to colleagues, so let's make sure you have at least one chance to practice before the [stakes are higher](https://emse6574-gwu.github.io/2019-Fall/challengerExplosion.html).
@@ -213,7 +213,7 @@ You will present your analysis with your teammates in class on April 29. Your sl
 
 # Final Report
 
-**Due**: May 6 by 11:00 pm
+**Due**: May 8 by 11:00 pm
 
 **Weight**: This assignment is worth 16% of your final grade.
 
