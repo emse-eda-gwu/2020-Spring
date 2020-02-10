@@ -20,8 +20,9 @@ This week, we will learn some of the technical details of how to create charts t
 Plot types for comparing values:
 
 - [Bars](http://uc-r.github.io/barcharts)
-- [Dots](http://uc-r.github.io/cleveland-dot-plots)
 - [Lollipops](https://uc-r.github.io/lollipop)
+- [Dots](http://uc-r.github.io/cleveland-dot-plots)
+- [Slopes](http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html#Slope%20Chart)
 - [Bullets](http://www.storytellingwithdata.com/blog/2017/5/25/the-bullet-graph)
 - [Ridgelines](https://serialmentor.com/dataviz/boxplots-violins.html#boxplots-violins-horizontal)
 
