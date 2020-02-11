@@ -1,0 +1,98 @@
+---
+title: "Week 5: Graphing comparisons"
+author: "John Paul Helveston"
+date: February 12, 2020
+output:
+  xaringan::moon_reader:
+    css: ['default', 'https://emse-eda-gwu.github.io/2020-Spring/classNotes/classNotes.css']
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      beforeInit: "https://platform.twitter.com/widgets.js"
+    seal: false
+---
+
+```{r setup, include=FALSE}
+library(here)
+source(here('setup.R'))
+```
+
+class: inverse
+
+### Your turn
+
+Use the `gapminder.csv` data to create the following charts.
+
+.leftcol[
+```{r, echo=FALSE}
+gapminder_americas <- gapminder %>%
+  filter(year %in% c(1952, 2007), 
+         continent == 'Americas') %>%
+  mutate(
+    country = fct_reorder2(country, year, desc(lifeExp)), 
+    year = as.factor(year))
+```
+```{r gapminder_dumbbell, fig.show='hide', echo=FALSE}
+ggplot(gapminder_americas,
+       aes(x = lifeExp, y = country)) +
+  geom_line(aes(group = country),
+            color = 'lightblue', size = 1) +
+  geom_point(aes(color = year), size = 2.5) +
+  scale_color_manual(values = c('lightblue', 'steelblue')) +
+  theme_minimal_vgrid() +
+  # Remove y axis line
+  theme(axis.line.y = element_blank()) +
+  labs(x = 'Life expectancy (year)',
+       y = 'Country',
+       color = 'Year',
+       title = 'Life expectancy of N. American\ncountries (1952 - 2007)')
+```
+```{r ref.label='gapminder_dumbbell', echo=FALSE, fig.height=6, fig.width=6, fig.align='center'}
+```
+]
+.rightcol[
+```{r, echo=FALSE}
+gapminder_americas <- gapminder %>%
+  filter(year %in% c(1952, 2007), 
+         continent == 'Americas') %>%
+  mutate(
+    country = fct_reorder2(country, year, desc(lifeExp)), 
+    year    = as.factor(year),
+    label   = str_c(country, ' (',
+                  round(lifeExp), ')'),
+    label_left = ifelse(year == 1952, label, NA),
+    label_right = ifelse(year == 2007, label, NA))
+```
+```{r gapminder_slope, fig.show='hide', echo=FALSE}
+ggplot(gapminder_americas,
+       aes(x = year, y = lifeExp,
+           group = country)) +
+    geom_line(size = 1) +
+    # Add 1952 labels (left side)
+    geom_text_repel(aes(label = label_left),
+                    hjust = 1, nudge_x = -0.05,
+                    direction = 'y',
+                    segment.color = 'grey') +
+    # Add 2007 labels (right side)
+    geom_text_repel(aes(label = label_right),
+                    hjust = 0, nudge_x = 0.05,
+                    direction = 'y',
+                    segment.color = 'grey') +
+    # Move year labels to top
+    scale_x_discrete(position = 'top') +
+    # Annotate & adjust theme
+    theme_minimal_grid() +
+    theme(panel.grid  = element_blank(),
+          axis.text.y = element_blank(),
+          axis.ticks = element_blank(),
+          legend.position = 'none') +
+    labs(x = NULL,
+         y = 'Life expectancy (year)',
+         title = 'Life expectancy of N. American\ncountries (1952 - 2007)')
+```
+```{r ref.label='gapminder_slope', echo=FALSE, fig.height=6, fig.width=6, fig.align='center'}
+```
+]

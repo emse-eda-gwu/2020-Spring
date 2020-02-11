@@ -1,0 +1,282 @@
+<!--
+Comparing things to a reference line:
+- Add a simple line
+- diverging bars / lollipops,
+- overlapping bars
+
+- In any of these plots, adding a benchmark can be really useful
+- examples: dumbbell with benchmark, bullet with benchmark
+- Another way is to compare things to a **computed** benchmark, like the mean - diverging bars / lollipops
+- Finally, overlapping bars are great when you want to show when something exceeds a threshold. E.g. going over your budget. -->
+
+---
+class: center
+
+## Use reference lines to add context to chart
+
+```{r life_expectancy_dots_mean, fig.show='hide', echo=FALSE}
+ggplot(gapminder_americas) +
+  geom_point(aes(x = lifeExp, y = country),
+             color = 'steelblue', size = 2.5) +
+  geom_vline(xintercept = mean(gapminder_americas$lifeExp),
+             color = 'red', linetype = 'dashed') +
+  annotate('text', x = 73, y = 'Puerto Rico',
+           color = 'red', hjust = 1,
+           label = 'Mean\nLife\nExpectancy') +
+  theme_minimal_vgrid() +
+  labs(x = 'Life expectancy (years)',
+       y = 'Country')
+```
+
+.leftcol[
+```{r ref.label='life_expectancy_dots', echo=FALSE, fig.height=6, fig.width=6, fig.align='center'}
+```
+]
+--
+.rightcol[
+```{r ref.label='life_expectancy_dots_mean', echo=FALSE, fig.height=6, fig.width=6, fig.align='center'}
+```
+]
+
+---
+class: center
+
+## Or make zero the reference line
+
+```{r, echo=FALSE}
+gapminder_diverging <- gapminder_americas %>%
+    mutate(
+        lifeExp = lifeExp - mean(lifeExp),
+        color = ifelse(lifeExp > 0, 'Above', 'Below'))
+```
+
+```{r life_expectancy_dots_diverging, fig.show='hide', echo=FALSE}
+ggplot(gapminder_diverging) +
+  geom_segment(aes(x = 0, xend = lifeExp,
+                   y = country, yend = country,
+                   color = color)) +
+  geom_point(aes(x = lifeExp, y = country,
+                 color = color), size = 2.5) +
+  scale_color_manual(values = c('steelblue', 'red')) +
+  theme_minimal_vgrid() +
+  theme(legend.position = 'none') +
+  labs(x = 'Difference from mean life expectancy (years)',
+       y = 'Country')
+```
+
+```{r life_expectancy_bars_diverging, fig.show='hide', echo=FALSE}
+ggplot(gapminder_diverging) +
+  geom_col(aes(x = country, y = lifeExp,
+               fill = color), width = 0.7, alpha = 0.8) +
+  scale_fill_manual(values = c('steelblue', 'red')) +
+  coord_flip() +
+  theme_minimal_vgrid() +
+  theme(legend.position = 'none') +
+  labs(x = 'Country',
+       y = 'Difference from mean life expectancy (years)')
+```
+
+.leftcol[
+```{r ref.label='life_expectancy_dots_diverging', echo=FALSE, fig.height=6, fig.width=6, fig.align='center'}
+```
+]
+.rightcol[
+```{r ref.label='life_expectancy_bars_diverging', echo=FALSE, fig.height=6, fig.width=6, fig.align='center'}
+```
+]
+
+---
+## Compare multiple references with overlapping bars
+
+```{r overlapping_bars, fig.show='hide', echo=FALSE}
+water_usage <- tribble(
+    ~'period', ~'current', ~'previous',
+    'JAN/FEB',  64, 48,
+    'MAR/APR',  52, 46,
+    'MAY/JUN',  66, 53,
+    'JUL/AUG',  99, 66,
+    'SEPT/OCT', 50, 54,
+    'NOV/DEC',  52, 49)
+
+ggplot(water_usage) +
+    geom_col(aes(x = period, y = previous,
+                 fill = '2018'),
+             width = 0.7) +
+    geom_col(aes(x = period, y = current,
+                 fill = '2019'),
+             width = 0.3) +
+    scale_fill_manual(values = c('grey', 'black')) +
+    scale_y_continuous(
+        expand = expand_scale(mult = c(0, 0.05))) +
+    coord_flip() +
+    theme_minimal_vgrid() +
+    labs(x = 'Billing period',
+         y = 'Cost ($)',
+         fill = 'Year',
+         title = 'Comparison of water bill in 2018 & 2019')
+```
+<br>
+```{r ref.label='overlapping_bars', echo=FALSE, fig.height=5, fig.width=7, fig.align='center'}
+```
+
+---
+## How to add a reference line
+
+.leftcol[.code70[
+Add horizontal line with `geom_hline()`
+
+Add vertical line with `geom_vline()`
+
+```{r life_expectancy_dots_line, fig.show='hide'}
+ggplot(gapminder_americas) +
+  geom_point(aes(x = lifeExp, y = country),
+             color = 'steelblue', size = 2.5) +
+  geom_vline( #<<
+      xintercept = mean(gapminder_americas$lifeExp), #<<
+      color = 'red', linetype = 'dashed') + #<<
+  theme_minimal_vgrid() +
+  labs(x = 'Life expectancy (years)',
+       y = 'Country')
+```
+]]
+.rightcol[.center[
+```{r ref.label='life_expectancy_dots_line', echo=FALSE, fig.height=6, fig.width=6, fig.align='center'}
+```
+]]
+
+---
+## How to add a reference line
+
+.leftcol[.code70[
+Add text with `annotate()`
+```{r, eval=FALSE}
+ggplot(gapminder_americas) +
+  geom_point(aes(x = lifeExp, y = country),
+             color = 'steelblue', size = 2.5) +
+  geom_vline(
+      xintercept = mean(gapminder_americas$lifeExp),
+      color = 'red', linetype = 'dashed') +
+  annotate('text', x = 73, y = 'Puerto Rico', #<<
+           color = 'red', hjust = 1, #<<
+           label = 'Mean\nLife\nExpectancy') + #<<
+  theme_minimal_vgrid() +
+  labs(x = 'Life expectancy (years)',
+       y = 'Country')
+```
+]]
+.rightcol[.center[
+```{r ref.label='life_expectancy_dots_mean', echo=FALSE, fig.height=6, fig.width=6, fig.align='center'}
+```
+]]
+
+---
+## How to make zero the reference point
+
+.leftcol[.code70[
+```{r, eval=FALSE}
+gapminder_diverging <- gapminder_americas %>%
+    mutate(
+        lifeExp = lifeExp - mean(lifeExp), #<<
+        color = ifelse(lifeExp > 0, 'Above', 'Below')) #<<
+```
+```{r, eval=FALSE}
+ggplot(gapminder_diverging) +
+  geom_col(aes(x = country, y = lifeExp,
+               fill = color),
+           width = 0.7, alpha = 0.8) +
+  scale_fill_manual(values = c('steelblue', 'red')) + #<<
+  coord_flip() +
+  theme_minimal_vgrid() +
+  theme(legend.position = 'none') +
+  labs(
+    x = 'Country',
+    y = 'Difference from mean life expectancy (years)')
+```
+]]
+.rightcol[
+```{r ref.label='life_expectancy_bars_diverging', echo=FALSE, fig.height=5, fig.width=7, fig.align='center'}
+```
+]
+
+---
+## How to make overlapping bars
+
+.leftcol[.code60[
+```{r, echo=FALSE}
+water_usage
+```
+```{r, eval=FALSE}
+ggplot(water_usage) +
+    geom_col(aes(x = period, y = previous,
+                 fill = '2018'), #<<
+             width = 0.7) + #<<
+    geom_col(aes(x = period, y = current,
+                 fill = '2019'), #<<
+             width = 0.3) + #<<
+    scale_fill_manual(values = c('grey', 'black')) + #<<
+    scale_y_continuous(
+        expand = expand_scale(mult = c(0, 0.05))) +
+    coord_flip() +
+    theme_minimal_vgrid() +
+    labs(x = 'Billing period',
+         y = 'Cost ($)',
+         fill = 'Year',
+         title = 'Comparison of water bill in 2018 & 2019')
+```
+]]
+.rightcol[.center[
+```{r ref.label='overlapping_bars', echo=FALSE, fig.height=5, fig.width=7, fig.align='center'}
+```
+]]
+
+---
+class: inverse
+
+### Your turn
+
+Use the `milk_production.csv` data to create the following charts<br>showing differences from the mean state milk production in 2017.
+
+```{r milk_lollipop_mean, fig.show='hide', echo=FALSE}
+milk_summary <- milk_production %>%
+  filter(year == 2017) %>%
+  mutate(
+    milk_produced = milk_produced / 10^9,
+    state = fct_reorder(state, milk_produced))
+
+ggplot(milk_summary) +
+  geom_point(aes(x = milk_produced, y = state),
+             size = 2.5, color = 'steelblue') +
+  geom_vline(xintercept = mean(milk_summary$milk_produced),
+             color = 'red', linetype = 'dashed') +
+  annotate('text', x = 5, y = 'Georgia',
+           color = 'red', hjust = 0,
+           label = 'Mean\nProduction') +
+  theme_minimal_vgrid() +
+  labs(x = 'Milk produced (billions lbs)',
+       y = 'State')
+```
+```{r milk_bars_diverging, fig.show='hide', echo=FALSE}
+milk_summary_diverging <- milk_summary %>%
+  mutate(
+    milk_produced = milk_produced - mean(milk_produced),
+    barColor = ifelse(milk_produced > 0, 'above', 'below'))
+
+ggplot(milk_summary_diverging) +
+  geom_col(aes(x = state, y = milk_produced,
+               fill = barColor), width = 0.7) +
+  scale_fill_manual(values = c('steelblue', 'sienna')) +
+  coord_flip() +
+  theme_minimal_vgrid() +
+  theme(legend.position = 'none') +
+  labs(x = 'State',
+       y = 'Difference from mean milk produced (billions lbs)')
+```
+
+.leftcol[
+```{r ref.label='milk_lollipop_mean', echo=FALSE, fig.height=6.3, fig.width=5, fig.align='center'}
+```
+]
+.rightcol[
+```{r ref.label='milk_bars_diverging', echo=FALSE, fig.height=6.3, fig.width=5, fig.align='center'}
+```
+]

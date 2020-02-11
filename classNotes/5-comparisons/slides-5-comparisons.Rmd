@@ -1,0 +1,103 @@
+---
+title: "Week 5: Graphing comparisons"
+author: "John Paul Helveston"
+date: February 12, 2020
+output:
+  xaringan::moon_reader:
+    css: ['default', 'https://emse-eda-gwu.github.io/2020-Spring/classNotes/classNotes.css']
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      beforeInit: "https://platform.twitter.com/widgets.js"
+    seal: false
+---
+
+```{r setup, include=FALSE}
+library(here)
+source(here('setup.R'))
+```
+
+class: title-slide, center, middle, inverse
+
+# Week 5: Graphing comparisons
+
+.large[EMSE 4197 | John Paul Helveston | February 12, 2020]
+
+```{r child = here('parts', 'intro.Rmd')}
+```
+
+---
+class: inverse, middle
+
+# Graphing comparisons
+
+## 1. Ranking things
+## 2. Comparing things to a reference
+## 3. Comparing two things
+## 4. Comparing distributions
+
+---
+class: inverse, middle
+
+# Graphing comparisons
+
+## 1. .orange[Ranking things]
+## 2. Comparing things to a reference
+## 3. Comparing two things
+## 4. Comparing distributions
+
+```{r child = here('parts', 'ranking.Rmd')}
+```
+
+---
+class: inverse
+
+# Graphing comparisons
+
+## 1. Ranking things
+## 2. .orange[Comparing things to a reference]
+## 3. Comparing two things
+## 4. Comparing distributions
+
+```{r child = here('parts', 'references.Rmd')}
+```
+
+---
+class: inverse
+
+# [5 minute](https://www.youtube.com/watch?v=_W0bSen8Qjg) break!
+
+## Stand up
+
+## Move around
+
+## Stretch!
+
+---
+class: inverse, middle
+
+# Graphing comparisons
+
+## 1. Ranking things
+## 2. Comparing things to a reference
+## 3. .orange[Comparing two things]
+## 4. Comparing distributions
+
+```{r child = here('parts', 'two-things.Rmd')}
+```
+
+---
+class: inverse
+
+# Graphing comparisons
+
+## 1. Ranking things
+## 2. Comparing things to a reference
+## 3. Comparing two things
+## 4. .orange[Comparing distributions]
+
+```{r child = here('parts', 'distributions.Rmd')}
+```

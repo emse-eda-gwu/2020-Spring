@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Week 5: Graphing comparisons</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="John Paul Helveston" />
+    <meta name="date" content="2020-02-12" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://emse-eda-gwu.github.io/2020-Spring/classNotes/classNotes.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+class: title-slide, center, middle, inverse
+
+# Week 5: Graphing comparisons
+
+.large[EMSE 4197 | John Paul Helveston | February 12, 2020]
+
+
+
+---
+class: middle, inverse
+
+## R tip of the week
+
+---
+class: middle, inverse
+
+&gt; ## "At the heart of quantitative reasoning&lt;br&gt;is a single question: Compared to what?"
+&gt; ## -- Edward Tufte
+
+---
+## Today's data
+
+
+```r
+college_all_ages &lt;- read_csv(here('data', 'college_all_ages.csv'))
+federal_spending &lt;- read_csv(here('data', 'federal_spending_long.csv'))
+gapminder        &lt;- read_csv(here('data', 'gapminder.csv'))
+marathon         &lt;- read_csv(here('data', 'marathon.csv'))
+milk_production  &lt;- read_csv(here('data', 'milk_production.csv'))
+```
+
+---
+class: inverse, middle
+
+# Graphing comparisons
+
+## 1. Ranking things
+## 2. Comparing things to a reference
+## 3. Comparing two things
+## 4. Comparing distributions
+
+---
+class: inverse, middle
+
+# Graphing comparisons
+
+## 1. .orange[Ranking things]
+## 2. Comparing things to a reference
+## 3. Comparing two things
+## 4. Comparing distributions
+
+
+&lt;!-- Ranking things (bars, dots, lollipops)
+
+- One of the most fundamental ways to compare things is to rank them
+- We've been doing this
+- Here are a couple other ways.
+- Dots are good when ________
+- lollipops are good when ________ --&gt;
+
+---
+class: inverse, middle
+
+.cols3[
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/bar.png" width=350&gt;
+&lt;center&gt;
+]
+.cols3[
+&lt;center&gt;
+&lt;img src="images/dots.png" width=300&gt;
+&lt;center&gt;
+]
+.cols3[
+&lt;center&gt;
+&lt;img src="images/lollipop.png"&gt;
+&lt;center&gt;
+]
+
+---
+class: center, middle
+
+
+
+
+
+
+.cols3[.noborder[
+&lt;center&gt;
+&lt;img src="images/bar.png" width=300&gt;
+&lt;center&gt;
+]]
+.cols3[.noborder[
+&lt;center&gt;
+&lt;img src="images/dots.png" width=175&gt;
+&lt;center&gt;
+]]
+.cols3[.noborder[
+&lt;center&gt;
+&lt;img src="images/lollipop_rotated.png" width=250&gt;
+&lt;center&gt;
+]]
+.cols3[
+## Bar chart
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-7-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+.cols3[
+## Dot chart
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-8-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+.cols3[
+## Lollipop chart
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-9-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+class: center, middle, inverse
+
+# For ranking,&lt;br&gt;bars are a great starting point
+
+---
+class: center, middle
+
+## Bars are good for highlighting categories w/color
+
+
+
+
+The DOD's R&amp;D budget is nearly the&lt;br&gt;same as all other departments combined
+
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-10-1.png" width="504" style="display: block; margin: auto;" /&gt;
+
+---
+class: center, middle
+
+## Use lollipops when the bars are overwhelming
+
+&lt;!-- Idea from https://www.data-to-viz.com/graph/lollipop.html --&gt;
+
+
+
+
+
+.leftcol[
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-11-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+.rightcol[
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-12-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+
+---
+class: center, middle
+
+## Or use dots and don't set axis to 0
+
+.leftcol[
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-13-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+.rightcol[
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-14-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## How to make a **Bar chart**
+
+.leftcol[.code70[
+Summarize data frame:
+
+```r
+federal_spending_summary &lt;- federal_spending %&gt;%
+  group_by(department) %&gt;%
+  summarise(rd_budget = sum(rd_budget)) %&gt;%
+  mutate(
+    department = fct_reorder(department, rd_budget))
+```
+Make chart:
+
+```r
+ggplot(federal_spending_summary) +
+* geom_col(aes(x = department, y = rd_budget),
+           width = 0.7, alpha = 0.8,
+           fill = 'steelblue') +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid()
+```
+]]
+.rightcol[.center[
+**Bar chart** of federal R&amp;D spending by department
+
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-17-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]]
+
+---
+## How to make a **Bar chart** with color
+
+.leftcol[.code70[
+Summarize data frame:
+
+```r
+federal_spending_summary &lt;- federal_spending %&gt;%
+  group_by(department) %&gt;%
+  summarise(rd_budget = sum(rd_budget)) %&gt;%
+  mutate(
+    department = fct_reorder(department, rd_budget),
+*   dept_color = if_else(
+*     department == 'DOD', 'DOD', 'Other'))
+```
+Make chart:
+
+```r
+ggplot(federal_spending_summary) +
+  geom_col(aes(x = department, y = rd_budget,
+*              fill = dept_color),
+           width = 0.7, alpha = 0.8) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid() +
+  theme(legend.position = 'none')
+```
+]]
+.rightcol[.center[
+The DOD's R&amp;D budget is nearly the same as all other departments combined
+
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-19-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]]
+
+---
+## How to make a **Bar chart** with color
+
+.leftcol[.code70[
+Summarize data frame:
+
+```r
+federal_spending_summary &lt;- federal_spending %&gt;%
+  group_by(department) %&gt;%
+  summarise(rd_budget = sum(rd_budget)) %&gt;%
+  mutate(
+    department = fct_reorder(department, rd_budget),
+    dept_color = if_else(
+      department == 'DOD', 'DOD', 'Other'))
+```
+Make chart:
+
+```r
+ggplot(federal_spending_summary) +
+  geom_col(aes(x = department, y = rd_budget,
+               fill = dept_color),
+           width = 0.7, alpha = 0.8) +
+* scale_fill_manual(values = c('steelblue', 'grey')) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid() +
+  theme(legend.position = 'none')
+```
+]]
+.rightcol[.center[
+The DOD's R&amp;D budget is nearly the same as all other departments combined
+
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-22-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]]
+
+---
+## How to make a **Dot chart**
+
+.leftcol[.code70[
+Summarize data frame:
+
+```r
+federal_spending_summary &lt;- federal_spending %&gt;%
+  group_by(department) %&gt;%
+  summarise(rd_budget = sum(rd_budget)) %&gt;%
+  mutate(
+    department = fct_reorder(department, rd_budget))
+```
+Make chart:
+
+```r
+ggplot(federal_spending_summary) +
+* geom_point(aes(x = department, y = rd_budget),
+             size = 2.5, color = 'steelblue') +
+  coord_flip() +
+  theme_minimal_vgrid()
+```
+]]
+.rightcol[.center[
+**Dot chart** of federal R&amp;D spending by department
+
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-25-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]]
+
+---
+## How to make a **Lollipop chart**
+
+.leftcol[.code70[
+Summarize data frame:
+
+```r
+federal_spending_summary &lt;- federal_spending %&gt;%
+  group_by(department) %&gt;%
+  summarise(rd_budget = sum(rd_budget)) %&gt;%
+  mutate(
+    department = fct_reorder(department, rd_budget))
+```
+Make chart:
+
+```r
+ggplot(federal_spending_summary) +
+* geom_segment(aes(x    = department,
+*                  xend = department,
+*                  y    = 0,
+*                  yend = rd_budget),
+               color = 'grey') +
+  geom_point(aes(x = department, y = rd_budget),
+             size = 2.5, color = 'steelblue') +
+  coord_flip() +
+  theme_minimal_vgrid()
+```
+]]
+.rightcol[.center[
+**Lollipop chart** of federal R&amp;D spending by department
+
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-28-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]]
+
+---
+class: inverse, middle
+
+## Your turn
+
+Use the `milk_production.csv` data to create the following charts&lt;br&gt;ranking states by 2017 milk production.
+
+
+
+
+
+
+.cols3[
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-30-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+.cols3[
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-31-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+.cols3[
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-32-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+
+---
+class: inverse
+
+# Graphing comparisons
+
+## 1. Ranking things
+## 2. .orange[Comparing things to a reference]
+## 3. Comparing two things
+## 4. Comparing distributions
+
+
+&lt;!--
+Comparing things to a reference line:
+- Add a simple line
+- diverging bars / lollipops,
+- overlapping bars
+
+- In any of these plots, adding a benchmark can be really useful
+- examples: dumbbell with benchmark, bullet with benchmark
+- Another way is to compare things to a **computed** benchmark, like the mean - diverging bars / lollipops
+- Finally, overlapping bars are great when you want to show when something exceeds a threshold. E.g. going over your budget. --&gt;
+
+---
+class: center
+
+## Use reference lines to add context to chart
+
+
+
+.leftcol[
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-33-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+--
+.rightcol[
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-34-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+
+---
+class: center
+
+## Or make zero the reference line
+
+
+
+
+
+
+
+.leftcol[
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-36-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+.rightcol[
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-37-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## Compare multiple references with overlapping bars
+
+
+&lt;br&gt;
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-38-1.png" width="504" style="display: block; margin: auto;" /&gt;
+
+---
+## How to add a reference line
+
+.leftcol[.code70[
+Add horizontal line with `geom_hline()`
+
+Add vertical line with `geom_vline()`
+
+
+```r
+ggplot(gapminder_americas) +
+  geom_point(aes(x = lifeExp, y = country),
+             color = 'steelblue', size = 2.5) +
+* geom_vline(
+*     xintercept = mean(gapminder_americas$lifeExp),
+*     color = 'red', linetype = 'dashed') +
+  theme_minimal_vgrid() +
+  labs(x = 'Life expectancy (years)',
+       y = 'Country')
+```
+]]
+.rightcol[.center[
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-39-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]]
+
+---
+## How to add a reference line
+
+.leftcol[.code70[
+Add text with `annotate()`
+
+```r
+ggplot(gapminder_americas) +
+  geom_point(aes(x = lifeExp, y = country),
+             color = 'steelblue', size = 2.5) +
+  geom_vline(
+      xintercept = mean(gapminder_americas$lifeExp),
+      color = 'red', linetype = 'dashed') +
+* annotate('text', x = 73, y = 'Puerto Rico',
+*          color = 'red', hjust = 1,
+*          label = 'Mean\nLife\nExpectancy') +
+  theme_minimal_vgrid() +
+  labs(x = 'Life expectancy (years)',
+       y = 'Country')
+```
+]]
+.rightcol[.center[
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-41-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]]
+
+---
+## How to make zero the reference point
+
+.leftcol[.code70[
+
+```r
+gapminder_diverging &lt;- gapminder_americas %&gt;%
+    mutate(
+*       lifeExp = lifeExp - mean(lifeExp),
+*       color = ifelse(lifeExp &gt; 0, 'Above', 'Below'))
+```
+
+```r
+ggplot(gapminder_diverging) +
+  geom_col(aes(x = country, y = lifeExp,
+               fill = color),
+           width = 0.7, alpha = 0.8) +
+* scale_fill_manual(values = c('steelblue', 'red')) +
+  coord_flip() +
+  theme_minimal_vgrid() +
+  theme(legend.position = 'none') +
+  labs(
+    x = 'Country',
+    y = 'Difference from mean life expectancy (years)')
+```
+]]
+.rightcol[
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-44-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## How to make overlapping bars
+
+.leftcol[.code60[
+
+```
+## # A tibble: 6 x 3
+##   period   current previous
+##   &lt;chr&gt;      &lt;dbl&gt;    &lt;dbl&gt;
+## 1 JAN/FEB       64       48
+## 2 MAR/APR       52       46
+## 3 MAY/JUN       66       53
+## 4 JUL/AUG       99       66
+## 5 SEPT/OCT      50       54
+## 6 NOV/DEC       52       49
+```
+
+```r
+ggplot(water_usage) +
+    geom_col(aes(x = period, y = previous,
+*                fill = '2018'),
+*            width = 0.7) +
+    geom_col(aes(x = period, y = current,
+*                fill = '2019'),
+*            width = 0.3) +
+*   scale_fill_manual(values = c('grey', 'black')) +
+    scale_y_continuous(
+        expand = expand_scale(mult = c(0, 0.05))) +
+    coord_flip() +
+    theme_minimal_vgrid() +
+    labs(x = 'Billing period',
+         y = 'Cost ($)',
+         fill = 'Year',
+         title = 'Comparison of water bill in 2018 &amp; 2019')
+```
+]]
+.rightcol[.center[
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-47-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]]
+
+---
+class: inverse
+
+### Your turn
+
+Use the `milk_production.csv` data to create the following charts&lt;br&gt;showing differences from the mean state milk production in 2017.
+
+
+
+
+.leftcol[
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-48-1.png" width="360" style="display: block; margin: auto;" /&gt;
+]
+.rightcol[
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-49-1.png" width="360" style="display: block; margin: auto;" /&gt;
+]
+
+---
+class: inverse
+
+# [5 minute](https://www.youtube.com/watch?v=_W0bSen8Qjg) break!
+
+## Stand up
+
+## Move around
+
+## Stretch!
+
+---
+class: inverse, middle
+
+# Graphing comparisons
+
+## 1. Ranking things
+## 2. Comparing things to a reference
+## 3. .orange[Comparing two things]
+## 4. Comparing distributions
+
+
+&lt;!--
+Comparing two things (dodged bars, slope chart, dumbbell chart)
+
+- dodged comparisons are fine, but really no more than 2 things.
+- Using facets to break up 3-4 groups of 2 is okay.
+- A better approach for multiple categories:
+    - slope charts
+    - dumbbell charts --&gt;
+
+---
+## When comparing **only 2** things,&lt;br&gt;dodged bars are a good starting point
+
+.leftcol[.code70[
+
+```r
+milk_compare &lt;- milk_production %&gt;%
+  filter(year %in% c(1970, 2017)) %&gt;%
+  mutate(state = fct_other(state,
+    keep = c('California', 'Wisconsin'))) %&gt;%
+  group_by(year, state) %&gt;%
+  summarise(milk_produced = sum(milk_produced) / 10^9)
+
+milk_compare
+```
+
+```
+## # A tibble: 6 x 3
+## # Groups:   year [2]
+##    year state      milk_produced
+##   &lt;dbl&gt; &lt;fct&gt;              &lt;dbl&gt;
+## 1  1970 California          9.46
+## 2  1970 Wisconsin          18.4 
+## 3  1970 Other              89.1 
+## 4  2017 California         39.8 
+## 5  2017 Wisconsin          30.3 
+## 6  2017 Other             145.
+```
+
+]]
+.rightcol[
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-50-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## When comparing **only 2** things,&lt;br&gt;dodged bars are a good starting point&lt;br&gt;...and facets can be helpful
+
+.leftcol[
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-51-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+.rightcol[
+
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-52-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## With **more than 2** things,&lt;br&gt;dodged bars start to get confusing
+
+.leftcol[.center[
+Still comparing 2 time periods,&lt;br&gt;but in groups of **3**]
+
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-53-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+--
+.rightcol[.center[
+Still comparing 2 time periods,&lt;br&gt;but across **10** categories]
+
+
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-54-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+class: center
+
+### Charts for comparing change between 2 things&lt;br&gt;across _more than_ 2 categories
+
+--
+.leftcol[
+### Dumbbell chart
+
+
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-55-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+--
+.rightcol[
+### Slope chart
+
+
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-56-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+
+---
+.leftcol[
+Dumbbell charts highlight...
+
+- ...change in _magnitudes_ across two periods / groups
+
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-57-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+--
+.rightcol[
+Slope charts highlight...
+
+- ...change in _ranking_ across two periods / groups
+- ...how one thing is different from another
+
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-58-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## How to make a **Dumbbell chart**
+
+.leftcol[.code70[
+Create data frame for plotting
+
+```r
+# Identify the top 10 states (by 2017 production)
+top10states &lt;- milk_production %&gt;%
+    filter(year == 2017) %&gt;%
+    arrange(desc(milk_produced)) %&gt;%
+    slice(1:10)
+
+# Now make the plot data frame
+milk_summary_dumbbell &lt;- milk_production %&gt;%
+    filter(
+        year %in% c(1970, 2017),
+        state %in% top10states$state) %&gt;%
+    mutate(
+        # Reorder state variables
+        state = fct_relevel(
+            state, rev(top10states$state)),
+        # Convert year to discrete variable
+        year = as.factor(year),
+        # Modify the units
+        milk_produced = milk_produced / 10^9)
+```
+]]
+.rightcol[.code70[
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-60-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]]
+
+---
+## How to make a **Dumbbell chart**
+
+.leftcol[.code70[
+Make the plot
+
+Start with points:
+
+```r
+ggplot(milk_summary_dumbbell,
+*      aes(x = milk_produced, y = state)) +
+* geom_point(aes(color = year), size = 2.5)
+```
+]]
+.rightcol[.code70[
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-61-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]]
+
+---
+## How to make a **Dumbbell chart**
+
+.leftcol[.code70[
+Add lines - note the `group` variable:
+
+```r
+ggplot(milk_summary_dumbbell,
+       aes(x = milk_produced, y = state)) +
+* geom_line(aes(group = state),
+*           color = 'lightblue', size = 1) +
+  geom_point(aes(color = year), size = 2.5)
+```
+]]
+.rightcol[.code70[
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-62-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]]
+
+---
+## How to make a **Dumbbell chart**
+
+.leftcol[.code70[
+Change the colors:
+
+```r
+ggplot(milk_summary_dumbbell,
+       aes(x = milk_produced, y = state)) +
+  geom_line(aes(group = state),
+            color = 'lightblue', size = 1) +
+  geom_point(aes(color = year), size = 2.5) +
+* scale_color_manual(
+*     values = c('lightblue', 'steelblue'))
+```
+]]
+.rightcol[.code70[
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-63-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]]
+
+---
+## How to make a **Dumbbell chart**
+
+.leftcol[.code70[
+Adjust the theme and annotate:
+
+```r
+ggplot(milk_summary_dumbbell,
+       aes(x = milk_produced, y = state)) +
+  geom_line(aes(group = state),
+            color = 'lightblue', size = 1) +
+  geom_point(aes(color = year), size = 2.5) +
+  scale_color_manual(
+      values = c('lightblue', 'steelblue')) +
+* theme_minimal_vgrid() +
+  # Remove y axis line
+* theme(axis.line.y = element_blank()) +
+* labs(x = 'Milk produced (billion lbs)',
+*      y = 'State',
+*      color = 'Year',
+*      title = 'Top 10 milk producing states (1970 - 2017)')
+```
+]]
+.rightcol[.code70[
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-65-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]]
+
+---
+.leftcol[.code60[
+Create data frame for plotting
+
+```r
+# Identify the top 10 states (by 2017 production)
+top10states &lt;- milk_production %&gt;%
+    filter(year == 2017) %&gt;%
+    arrange(desc(milk_produced)) %&gt;%
+    slice(1:10)
+
+# Now make the plot data frame
+milk_summary_slope &lt;- milk_production %&gt;%
+    filter(
+        year %in% c(1970, 2017),
+        state %in% top10states$state) %&gt;%
+    mutate(
+        # Modify the units
+        milk_produced = milk_produced / 10^9,
+        # Reorder state variables to follow top 10 states
+        state = fct_relevel(state, rev(top10states$state)),
+        # Make year a factor
+        year = as.factor(year),
+        # Create variable for the line color
+        lineColor = if_else(
+            state == 'California', 'CA', 'other'))
+        # Create labels
+*       label = str_c(state, ' (',
+*                     round(milk_produced), ')'),
+*       label_left = ifelse(year == 1970, label, NA),
+*       label_right = ifelse(year == 2017, label, NA))
+```
+]]
+.rightcol[.code50[
+## .center[How to make a&lt;br&gt;**Slope chart**]
+
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-67-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]]
+
+---
+.leftcol[.code60[
+Create data frame for plotting
+
+```r
+# Identify the top 10 states (by 2017 production)
+top10states &lt;- milk_production %&gt;%
+    filter(year == 2017) %&gt;%
+    arrange(desc(milk_produced)) %&gt;%
+    slice(1:10)
+
+# Now make the plot data frame
+milk_summary_slope &lt;- milk_production %&gt;%
+    filter(
+        year %in% c(1970, 2017),
+        state %in% top10states$state) %&gt;%
+    mutate(
+        # Modify the units
+        milk_produced = milk_produced / 10^9,
+        # Reorder state variables to follow top 10 states
+        state = fct_relevel(state, rev(top10states$state)),
+        # Make year a factor
+        year = as.factor(year),
+        # Create variable for the line color
+        lineColor = if_else(
+            state == 'California', 'CA', 'other'))
+        # Create labels
+*       label = str_c(state, ' (',
+*                     round(milk_produced), ')'),
+*       label_left = ifelse(year == 1970, label, NA),
+*       label_right = ifelse(year == 2017, label, NA))
+```
+]]
+.rightcol[.code50[
+## .center[How to make a&lt;br&gt;**Slope chart**]
+
+
+```r
+milk_summary_slope %&gt;%
+    select(state, year, milk_produced, label, lineColor)
+```
+
+```
+## # A tibble: 20 x 5
+##    state        year  milk_produced label             lineColor
+##    &lt;fct&gt;        &lt;fct&gt;         &lt;dbl&gt; &lt;chr&gt;             &lt;chr&gt;    
+##  1 New York     1970         10.3   New York (10)     other    
+##  2 Pennsylvania 1970          7.12  Pennsylvania (7)  other    
+##  3 Michigan     1970          4.60  Michigan (5)      other    
+##  4 Wisconsin    1970         18.4   Wisconsin (18)    other    
+##  5 Minnesota    1970          9.64  Minnesota (10)    other    
+##  6 Texas        1970          3.06  Texas (3)         other    
+##  7 Idaho        1970          1.49  Idaho (1)         other    
+##  8 New Mexico   1970          0.304 New Mexico (0)    other    
+##  9 Washington   1970          2.09  Washington (2)    other    
+## 10 California   1970          9.46  California (9)    CA       
+## 11 New York     2017         14.9   New York (15)     other    
+## 12 Pennsylvania 2017         10.9   Pennsylvania (11) other    
+## 13 Michigan     2017         11.2   Michigan (11)     other    
+## 14 Wisconsin    2017         30.3   Wisconsin (30)    other    
+## 15 Minnesota    2017          9.86  Minnesota (10)    other    
+## 16 Texas        2017         12.1   Texas (12)        other    
+## 17 Idaho        2017         14.6   Idaho (15)        other    
+## 18 New Mexico   2017          8.21  New Mexico (8)    other    
+## 19 Washington   2017          6.53  Washington (7)    other    
+## 20 California   2017         39.8   California (40)   CA
+```
+]]
+
+---
+## How to make a **Slope chart**
+
+.leftcol[.code70[
+Start with a line plot - note the `group` variable:
+
+```r
+ggplot(milk_summary_slope,
+*      aes(x = year, y = milk_produced,
+*          group = state)) +
+*   geom_line(aes(color = lineColor))
+```
+]]
+.rightcol[.code70[
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-70-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]]
+
+---
+## How to make a **Slope chart**
+
+.leftcol[.code70[
+Add labels:
+
+```r
+ggplot(milk_summary_slope,
+       aes(x = year, y = milk_produced,
+           group = state)) +
+    geom_line(aes(color = lineColor)) +
+    # Add 1970 labels (left side)
+*   geom_text(aes(label = label_left),
+*               hjust = 1, nudge_x = -0.05) +
+    # Add 2017 labels (right side)
+*   geom_text(aes(label = label_right),
+*                   hjust = 0, nudge_x = 0.05)
+```
+]]
+.rightcol[.code70[
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-71-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]]
+
+---
+class: center, middle
+
+## Overlapping labels?&lt;br&gt;**ggrepel** library to the rescue!
+
+&lt;center&gt;
+&lt;img src="images/horst_monsters_ggrepel.jpg" width=600&gt;
+&lt;/center&gt;
+
+---
+## How to make a **Slope chart**
+
+.leftcol[.code70[
+Align labels so they don't overlap:
+
+```r
+*library(ggrepel)
+
+ggplot(milk_summary_slope,
+       aes(x = year, y = milk_produced,
+           group = state)) +
+    geom_line(aes(color = lineColor)) +
+    # Add 1970 labels (left side)
+*   geom_text_repel(aes(label = label_left),
+                    hjust = 1, nudge_x = -0.05,
+*                   direction = 'y',
+*                   segment.color = 'grey') +
+    # Add 2017 labels (right side)
+*   geom_text_repel(aes(label = label_right),
+                    hjust = 0, nudge_x = 0.05,
+*                   direction = 'y',
+*                   segment.color = 'grey')
+```
+]]
+.rightcol[.code70[
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-72-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]]
+
+---
+## How to make a **Slope chart**
+
+.leftcol[.code70[
+Adjust colors:
+
+```r
+ggplot(milk_summary_slope,
+       aes(x = year, y = milk_produced,
+           group = state)) +
+    geom_line(aes(color = lineColor)) +
+    # Add 1970 labels (left side)
+    geom_text_repel(aes(label = label_left),
+                    hjust = 1, nudge_x = -0.05,
+                    direction = 'y',
+                    segment.color = 'grey') +
+    # Add 2017 labels (right side)
+    geom_text_repel(aes(label = label_right),
+                    hjust = 0, nudge_x = 0.05,
+                    direction = 'y',
+                    segment.color = 'grey') +
+    # Move year labels to top, modify line colors
+*   scale_x_discrete(position = 'top') +
+*   scale_color_manual(values = c('red', 'black'))
+```
+]]
+.rightcol[.code70[
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-73-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]]
+
+---
+.leftcol[.code60[
+Adjust the theme and annotate
+
+
+```r
+ggplot(milk_summary_slope,
+       aes(x = year, y = milk_produced,
+           group = state)) +
+    geom_line(aes(color = lineColor)) +
+    # Add 1970 labels (left side)
+    geom_text_repel(aes(label = label_left),
+                    hjust = 1, nudge_x = -0.05,
+                    direction = 'y',
+                    segment.color = 'grey') +
+    # Add 2017 labels (right side)
+    geom_text_repel(aes(label = label_right),
+                    hjust = 0, nudge_x = 0.05,
+                    direction = 'y',
+                    segment.color = 'grey') +
+    # Move year labels to top, modify line colors
+    scale_x_discrete(position = 'top') +
+    scale_color_manual(values = c('red', 'black')) +
+    # Annotate &amp; adjust theme
+    labs(x = NULL,
+         y = 'Milk produced (billion lbs)',
+         title = 'Top 10 milk producing states (1970 - 2017)') +
+*   theme_minimal_grid() +
+*   theme(panel.grid  = element_blank(),
+*         axis.text.y = element_blank(),
+*         axis.ticks = element_blank(),
+*         legend.position = 'none')
+```
+]]
+.rightcol[.code70[
+## .center[How to make a&lt;br&gt;**Slope chart**]
+
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-75-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]]
+
+---
+class: inverse
+
+### Your turn
+
+Use the `federal_spending_long.csv` data to create the following charts.
+
+.leftcol[
+
+
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-77-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+.rightcol[
+
+
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-79-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+
+---
+class: inverse
+
+# Graphing comparisons
+
+## 1. Ranking things
+## 2. Comparing things to a reference
+## 3. Comparing two things
+## 4. .orange[Comparing distributions]
+
+
+&lt;!-- Comparing distributions
+
+- Box plots
+- Transparent histograms &amp; densities (good for maybe 2 categories)
+- Ridgeline plots (good for lots of categories)
+
+Ridgeline plots: https://wilkelab.org/ggridges/ --&gt;
+
+&lt;!-- Helpful:
+https://datavizf17.classes.andrewheiss.com/files/example_2017-09-19.Rmd --&gt;
+
+---
+class: center
+## Overlapping histograms have issues
+
+
+
+
+.leftcol[
+### Bad
+
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-80-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+--
+.rightcol[
+### Slightly better
+
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-81-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+class: center
+
+## Good when # categories **small**
+
+
+
+
+
+.leftcol[
+### Density facets
+
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-82-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+--
+.rightcol[
+### Diverging histograms
+
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-83-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+class: center
+
+## Good when # categories **large**
+
+
+
+
+.leftcol[
+### Boxplot
+
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-84-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+--
+.rightcol[
+### Ridgeplot
+
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-85-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+.leftcol[.code70[
+## How to make density facets
+
+You can use `facet_wrap()`,&lt;br&gt;but you won't get the full density overlay
+
+```r
+ggplot(marathon,
+       aes(x = Age, y = ..count.., fill = `M/F`)) +
+*   geom_density(alpha = 0.7) +
+*   facet_wrap(~`M/F`) +
+    scale_fill_manual(
+        values = c('sienna', 'steelblue')) +
+    scale_y_continuous(
+        expand = expand_scale(mult = c(0, 0.05))) +
+    theme_minimal_hgrid()
+```
+]]
+.rightcol[
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-86-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+--
+.rightcol[
+.center[If you want the full density overlay,&lt;br&gt;you have to hand-make the facets]
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-87-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## How to make density facets
+
+.leftcol[.code70[
+Make the full density plot first
+
+
+```r
+base &lt;- ggplot(marathon,
+*              aes(x = Age, y = ..count..)) +
+*   geom_density(fill = 'grey', alpha = 0.7) +
+    scale_y_continuous(
+        expand = expand_scale(mult = c(0, 0.05))) +
+    theme_minimal_hgrid()
+```
+]]
+.rightcol[
+&lt;img src="slides-5-comparisons_files/figure-html/density_facet_base-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## How to make density facets
+
+.leftcol[.code70[
+Separately create each sub-plot
+
+
+```r
+male &lt;- base +
+* geom_density(data = marathon %&gt;%
+*                  filter(`M/F` == 'M'),
+               fill = 'steelblue', alpha = 0.7) +
+  theme(legend.position = 'none')
+```
+
+```r
+female &lt;- base +
+* geom_density(data = marathon %&gt;%
+*                  filter(`M/F` == 'F'),
+               fill = 'sienna', alpha = 0.7) +
+  theme(legend.position = 'none')
+```
+]]
+.rightcol[
+&lt;img src="slides-5-comparisons_files/figure-html/density_facet_male-1.png" width="288" style="display: block; margin: auto;" /&gt;
+
+&lt;img src="slides-5-comparisons_files/figure-html/density_facet_female-1.png" width="288" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## How to make density facets
+
+.leftcol[.code70[
+Combine into single plot
+
+
+```r
+plot_grid(male, female,
+          labels = c('Male', 'Female'))
+```
+]]
+.rightcol[
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-92-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## How to make diverging histograms
+
+.leftcol[.code70[
+Make the histograms by filtering the data
+
+
+```r
+ggplot(marathon, aes(x = Age)) +
+    # Add histogram for Female runners:
+*   geom_histogram(data = marathon %&gt;%
+*                      filter(`M/F` == 'F'),
+*                  aes(fill = `M/F`, y=..count..),
+                   alpha = 0.7, color = 'white') +
+    # Add negative histogram for Male runners:
+    geom_histogram(data = marathon %&gt;%
+                       filter(`M/F` == 'M'),
+*                  aes(fill = `M/F`, y=..count..*(-1)),
+                   alpha = 0.7, color = 'white')
+```
+]]
+.rightcol[
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-93-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## How to make diverging histograms
+
+.leftcol[.code70[
+Rotate, adjust colors, theme, and annotate
+
+
+```r
+ggplot(marathon, aes(x = Age)) +
+    # Add histogram for Female runners:
+    geom_histogram(data = marathon %&gt;%
+                       filter(`M/F` == 'F'),
+                   aes(fill = `M/F`, y=..count..),
+                   alpha = 0.7, color = 'white') +
+    # Add negative histogram for Male runners:
+    geom_histogram(data = marathon %&gt;%
+                       filter(`M/F` == 'M'),
+                   aes(fill = `M/F`, y=..count..*(-1)),
+                   alpha = 0.7, color = 'white') +
+*   scale_fill_manual(
+*       values = c('sienna', 'steelblue')) +
+*   coord_flip() +
+*   theme_minimal_hgrid() +
+*   labs(fill = 'Gender',
+*        y    = 'Count')
+```
+]]
+.rightcol[
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-95-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## How to make ridgeplots
+
+.leftcol[.code70[
+Reorder `major_category` variable
+
+
+```r
+college_summary &lt;- college_all_ages %&gt;%
+    mutate(
+        major_category = fct_reorder(
+            major_category, median))
+```
+
+Make the ridgeplot using the **ggridges** library
+
+
+```r
+*library(ggridges)
+
+ggplot(college_summary) +
+* geom_density_ridges(aes(x = median,
+*                         y = major_category),
+*                     scale = 4, alpha = 0.7) +
+  scale_y_discrete(expand = c(0, 0)) +
+  scale_x_continuous(expand = c(0, 0)) +
+* coord_cartesian(clip = "off") +
+* theme_ridges() +
+  labs(x = 'Median income ($)',
+       y = 'Major category')
+```
+]]
+.rightcol[
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-98-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+class: inverse
+
+## Your turn
+
+Use the `gapminder.csv` data to create the following charts comparing the distribution of life expectancy across countries in continents in 2007.
+
+.leftcol[
+
+
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-100-1.png" width="468" style="display: block; margin: auto;" /&gt;
+]
+.rightcol[
+
+&lt;img src="slides-5-comparisons_files/figure-html/unnamed-chunk-101-1.png" width="468" style="display: block; margin: auto;" /&gt;
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

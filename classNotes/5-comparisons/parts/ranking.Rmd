@@ -1,0 +1,425 @@
+<!-- Ranking things (bars, dots, lollipops)
+
+- One of the most fundamental ways to compare things is to rank them
+- We've been doing this
+- Here are a couple other ways.
+- Dots are good when ________
+- lollipops are good when ________ -->
+
+---
+class: inverse, middle
+
+.cols3[
+<br>
+<center>
+<img src="images/bar.png" width=350>
+<center>
+]
+.cols3[
+<center>
+<img src="images/dots.png" width=300>
+<center>
+]
+.cols3[
+<center>
+<img src="images/lollipop.png">
+<center>
+]
+
+---
+class: center, middle
+
+```{r federal_spending_summary, echo=FALSE}
+federal_spending_summary <- federal_spending %>%
+  group_by(department) %>%
+  summarise(rd_budget = sum(rd_budget)) %>%
+  mutate(
+    department = fct_reorder(department, rd_budget))
+```
+```{r federal_spending_bars, fig.show='hide', echo=FALSE}
+ggplot(federal_spending_summary) +
+  geom_col(aes(x = department, y = rd_budget),
+           width = 0.7, alpha = 0.8, fill = 'steelblue') +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid()
+```
+```{r federal_spending_dots, fig.show='hide', echo=FALSE}
+ggplot(federal_spending_summary) +
+  geom_point(aes(x = department, y = rd_budget),
+             size = 2.5, color = 'steelblue') +
+  coord_flip() +
+  theme_minimal_vgrid()
+```
+```{r federal_spending_lollipop, fig.show='hide', echo=FALSE}
+ggplot(federal_spending_summary) +
+  geom_segment(aes(x = department, xend = department,
+                   y = 0, yend = rd_budget),
+               color = 'grey') +
+  geom_point(aes(x = department, y = rd_budget),
+             size = 2.5, color = 'steelblue') +
+  coord_flip() +
+  theme_minimal_vgrid()
+```
+
+.cols3[.noborder[
+<center>
+<img src="images/bar.png" width=300>
+<center>
+]]
+.cols3[.noborder[
+<center>
+<img src="images/dots.png" width=175>
+<center>
+]]
+.cols3[.noborder[
+<center>
+<img src="images/lollipop_rotated.png" width=250>
+<center>
+]]
+.cols3[
+## Bar chart
+```{r ref.label='federal_spending_bars', echo=FALSE, fig.height=5, fig.width=7, fig.align='center'}
+```
+]
+.cols3[
+## Dot chart
+```{r ref.label='federal_spending_dots', echo=FALSE, fig.height=5, fig.width=7, fig.align='center'}
+```
+]
+.cols3[
+## Lollipop chart
+```{r ref.label='federal_spending_lollipop', echo=FALSE, fig.height=5, fig.width=7, fig.align='center'}
+```
+]
+
+---
+class: center, middle, inverse
+
+# For ranking,<br>bars are a great starting point
+
+---
+class: center, middle
+
+## Bars are good for highlighting categories w/color
+
+```{r federal_spending_summary_highlight, echo=FALSE}
+federal_spending_summary <- federal_spending %>%
+  group_by(department) %>%
+  summarise(rd_budget = sum(rd_budget)) %>%
+  mutate(
+    department = fct_reorder(department, rd_budget),
+    dept_color = if_else(
+      department == 'DOD', 'DOD', 'Other'))
+```
+```{r federal_spending_bars_highlight, fig.show='hide', echo=FALSE}
+ggplot(federal_spending_summary) +
+  geom_col(aes(x = department, y = rd_budget,
+               fill = dept_color), #<<
+           width = 0.7, alpha = 0.8) +
+  scale_fill_manual(values = c('steelblue', 'grey')) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid() +
+  theme(legend.position = 'none')
+```
+
+The DOD's R&D budget is nearly the<br>same as all other departments combined
+
+```{r ref.label='federal_spending_bars_highlight', echo=FALSE, fig.height=5, fig.width=7, fig.align='center'}
+```
+
+---
+class: center, middle
+
+## Use lollipops when the bars are overwhelming
+
+<!-- Idea from https://www.data-to-viz.com/graph/lollipop.html -->
+
+```{r gapminder_americas, echo=FALSE}
+gapminder_americas <- gapminder %>%
+  filter(year == 2007, continent == "Americas") %>%
+  mutate(country = fct_reorder(country, lifeExp))
+```
+```{r life_expectancy_bars, fig.show='hide', echo=FALSE}
+ggplot(gapminder_americas) +
+  geom_col(aes(x = country, y = lifeExp),
+           fill = 'steelblue', alpha = 0.9) +
+  coord_flip() +
+  scale_y_continuous(
+    limits = c(0, 85),
+    expand = c(0, 0)) +
+  theme_minimal_vgrid() +
+  labs(
+    x = 'Country',
+    y = 'Life expectancy (years)')
+```
+```{r life_expectancy_lollipop, fig.show='hide', echo=FALSE}
+ggplot(gapminder_americas) +
+  geom_segment(aes(x = country, xend = country,
+                   y = 0, yend = lifeExp), color = 'grey') +
+  geom_point(aes(x = country, y = lifeExp),
+             color = 'steelblue', alpha = 0.9, size = 2.5) +
+  coord_flip() +
+  scale_y_continuous(
+    limits = c(0, 85),
+    expand = c(0, 0)) +
+  theme_minimal_vgrid() +
+  labs(
+    x = 'Country',
+    y = 'Life expectancy (years)')
+```
+```{r life_expectancy_dots, fig.show='hide', echo=FALSE}
+ggplot(gapminder_americas) +
+  geom_point(aes(x = country, y = lifeExp),
+             color = 'steelblue', size = 2.5) +
+  coord_flip() +
+  theme_minimal_vgrid() +
+  labs(x = 'Country',
+       y = 'Life expectancy (years)')
+```
+.leftcol[
+```{r ref.label='life_expectancy_bars', echo=FALSE, fig.height=6, fig.width=6, fig.align='center'}
+```
+]
+.rightcol[
+```{r ref.label='life_expectancy_lollipop', echo=FALSE, fig.height=6, fig.width=6, fig.align='center'}
+```
+]
+
+---
+class: center, middle
+
+## Or use dots and don't set axis to 0
+
+.leftcol[
+```{r ref.label='life_expectancy_bars', echo=FALSE, fig.height=6, fig.width=6, fig.align='center'}
+```
+]
+.rightcol[
+```{r ref.label='life_expectancy_dots', echo=FALSE, fig.height=6, fig.width=6, fig.align='center'}
+```
+]
+
+---
+## How to make a **Bar chart**
+
+.leftcol[.code70[
+Summarize data frame:
+```{r, eval=FALSE}
+federal_spending_summary <- federal_spending %>%
+  group_by(department) %>%
+  summarise(rd_budget = sum(rd_budget)) %>%
+  mutate(
+    department = fct_reorder(department, rd_budget))
+```
+Make chart:
+```{r, eval=FALSE}
+ggplot(federal_spending_summary) +
+  geom_col(aes(x = department, y = rd_budget), #<<
+           width = 0.7, alpha = 0.8,
+           fill = 'steelblue') +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid()
+```
+]]
+.rightcol[.center[
+**Bar chart** of federal R&D spending by department
+
+```{r ref.label='federal_spending_bars', echo=FALSE, fig.height=5, fig.width=7, fig.align='center'}
+```
+]]
+
+---
+## How to make a **Bar chart** with color
+
+.leftcol[.code70[
+Summarize data frame:
+```{r, eval=FALSE}
+federal_spending_summary <- federal_spending %>%
+  group_by(department) %>%
+  summarise(rd_budget = sum(rd_budget)) %>%
+  mutate(
+    department = fct_reorder(department, rd_budget),
+    dept_color = if_else( #<<
+      department == 'DOD', 'DOD', 'Other')) #<<
+```
+Make chart:
+```{r federal_spending_summary_highlight_badcolor, fig.show='hide'}
+ggplot(federal_spending_summary) +
+  geom_col(aes(x = department, y = rd_budget,
+               fill = dept_color), #<<
+           width = 0.7, alpha = 0.8) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid() +
+  theme(legend.position = 'none')
+```
+]]
+.rightcol[.center[
+The DOD's R&D budget is nearly the same as all other departments combined
+
+```{r ref.label='federal_spending_summary_highlight_badcolor', echo=FALSE, fig.height=5, fig.width=7, fig.align='center'}
+```
+]]
+
+---
+## How to make a **Bar chart** with color
+
+.leftcol[.code70[
+Summarize data frame:
+```{r, eval=FALSE}
+federal_spending_summary <- federal_spending %>%
+  group_by(department) %>%
+  summarise(rd_budget = sum(rd_budget)) %>%
+  mutate(
+    department = fct_reorder(department, rd_budget),
+    dept_color = if_else(
+      department == 'DOD', 'DOD', 'Other'))
+```
+Make chart:
+```{r, eval=FALSE}
+ggplot(federal_spending_summary) +
+  geom_col(aes(x = department, y = rd_budget,
+               fill = dept_color),
+           width = 0.7, alpha = 0.8) +
+  scale_fill_manual(values = c('steelblue', 'grey')) + #<<
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid() +
+  theme(legend.position = 'none')
+```
+]]
+.rightcol[.center[
+The DOD's R&D budget is nearly the same as all other departments combined
+
+```{r ref.label='federal_spending_bars_highlight', echo=FALSE, fig.height=5, fig.width=7, fig.align='center'}
+```
+]]
+
+---
+## How to make a **Dot chart**
+
+.leftcol[.code70[
+Summarize data frame:
+```{r, eval=FALSE}
+federal_spending_summary <- federal_spending %>%
+  group_by(department) %>%
+  summarise(rd_budget = sum(rd_budget)) %>%
+  mutate(
+    department = fct_reorder(department, rd_budget))
+```
+Make chart:
+```{r, eval=FALSE}
+ggplot(federal_spending_summary) +
+  geom_point(aes(x = department, y = rd_budget), #<<
+             size = 2.5, color = 'steelblue') +
+  coord_flip() +
+  theme_minimal_vgrid()
+```
+]]
+.rightcol[.center[
+**Dot chart** of federal R&D spending by department
+
+```{r ref.label='federal_spending_dots', echo=FALSE, fig.height=5, fig.width=7, fig.align='center'}
+```
+]]
+
+---
+## How to make a **Lollipop chart**
+
+.leftcol[.code70[
+Summarize data frame:
+```{r, eval=FALSE}
+federal_spending_summary <- federal_spending %>%
+  group_by(department) %>%
+  summarise(rd_budget = sum(rd_budget)) %>%
+  mutate(
+    department = fct_reorder(department, rd_budget))
+```
+Make chart:
+```{r, eval=FALSE}
+ggplot(federal_spending_summary) +
+  geom_segment(aes(x    = department,   #<<
+                   xend = department,   #<<
+                   y    = 0,            #<<
+                   yend = rd_budget),   #<<
+               color = 'grey') +
+  geom_point(aes(x = department, y = rd_budget),
+             size = 2.5, color = 'steelblue') +
+  coord_flip() +
+  theme_minimal_vgrid()
+```
+]]
+.rightcol[.center[
+**Lollipop chart** of federal R&D spending by department
+
+```{r ref.label='federal_spending_lollipop', echo=FALSE, fig.height=5, fig.width=7, fig.align='center'}
+```
+]]
+
+---
+class: inverse, middle
+
+## Your turn
+
+Use the `milk_production.csv` data to create the following charts<br>ranking states by 2017 milk production.
+
+```{r, echo=FALSE}
+milk_summary <- milk_production %>%
+  filter(year == 2017) %>%
+  mutate(
+    milk_produced = milk_produced / 10^9,
+    state = fct_reorder(state, milk_produced))
+```
+```{r milk_bars, fig.show='hide', echo=FALSE}
+ggplot(milk_summary) +
+  geom_col(aes(x = state, y = milk_produced),
+           width = 0.7, alpha = 0.8, fill = 'steelblue') +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid() +
+  labs(x = 'State',
+       y = 'Milk produced (billions lbs)')
+```
+```{r milk_dots, fig.show='hide', echo=FALSE}
+ggplot(milk_summary) +
+  geom_point(aes(x = state, y = milk_produced),
+             size = 2.5, color = 'steelblue') +
+  coord_flip() +
+  theme_minimal_vgrid() +
+  labs(x = 'State',
+       y = 'Milk produced (billions lbs)')
+```
+```{r milk_lollipop, fig.show='hide', echo=FALSE}
+ggplot(milk_summary) +
+  geom_segment(aes(x = state, xend = state,
+                   y = 0, yend = milk_produced),
+               color = 'grey') +
+  geom_point(aes(x = state, y = milk_produced),
+             size = 2.5, color = 'steelblue') +
+  coord_flip() +
+  theme_minimal_vgrid() +
+  labs(x = 'State',
+       y = 'Milk produced (billions lbs)')
+```
+
+.cols3[
+```{r ref.label='milk_bars', echo=FALSE, fig.height=7.5, fig.width=6, fig.align='center'}
+```
+]
+.cols3[
+```{r ref.label='milk_dots', echo=FALSE, fig.height=7.5, fig.width=6, fig.align='center'}
+```
+]
+.cols3[
+```{r ref.label='milk_lollipop', echo=FALSE, fig.height=7.5, fig.width=6, fig.align='center'}
+```
+]
