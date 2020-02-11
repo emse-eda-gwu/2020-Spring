@@ -1,8 +1,37 @@
 
 ---
+class: middle, inverse, center
+
+# R tip of the week
+
+---
 class: middle, inverse
 
-## R tip of the week
+## 1) Quick shortcuts
+
+.leftcol[
+Insert a `<-` operator:
+
+- **Windows**: `ALT` + `-`
+- **Mac**: `OPTION` + `-`
+]
+--
+.rightcol[
+Insert a `%>%` operator:
+
+- **Windows**: `CTRL` + `SHIFT` + `M`
+- **Mac**: `COMMAND` + `SHIFT` + `M`
+]
+
+---
+class: middle, inverse
+
+## 2) Edit multiple lines of code at once
+
+1. Select multiple lines of code 
+2. Press `ALT` (Windows) or `OPTION` (Mac)
+
+https://twitter.com/i/status/995394452821721088
 
 ---
 class: middle, inverse

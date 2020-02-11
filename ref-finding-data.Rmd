@@ -38,7 +38,7 @@ A collection of various websites that have lots of interesting datasets:
 - ["Data is Beautiful" subreddit](https://www.reddit.com/r/dataisbeautiful/): Feed of user-generated data visualizations, though quality varies substantially.
 - [Kaggle](https://www.kaggle.com/datasets): Hosts machine learning competitions, and as a result has lots of really interesting data sets open to the public.
 
-## Large, search-able sites
+# Large, search-able sites
 
 Large sites, i.e. "Google" for data sets:
 
@@ -63,3 +63,18 @@ Since I happen to work with energy data a lot, here's some common go-to sources:
 - [China Energy Portal Statistics](https://chinaenergyportal.org/en/category/stats/): Loads of energy statistics from China.
 - [U.S. Energy Information Administration](https://www.eia.gov/): from Wikipedia: the "principal agency of the U.S. Federal Statistical System responsible for collecting, analyzing, and disseminating energy information to promote sound policymaking, efficient markets, and public understanding of energy and its interaction with the economy and the environment. EIA programs cover data on coal, petroleum, natural gas, electric, renewable and nuclear energy. EIA is part of the U.S. Department of Energy."
 - [Environmental Performance Index, Yale University](https://epi.envirocenter.yale.edu/): Ranks 163 countries on 25 performance indicators tracked across ten policy categories covering both environmental public health and ecosystem vitality. These indicators provide a gauge at a national government scale of how close countries are to established environmental policy goals.
+
+# Spatial data
+
+- http://freegisdata.rtwilson.com/
+- https://data.nasa.gov/
+- https://planet.parts/
+- https://www.efi.int/knowledge/maps/forest
+- https://land.copernicus.eu/
+- https://maps.elie.ucl.ac.be/CCI/viewer/
+- https://www.ecad.eu//dailydata/predefinedseries.php
+- http://www.worldclim.org/version2
+- https://www.geoportal.org/
+- https://scihub.copernicus.eu/
+- https://sedac.ciesin.columbia.edu/
+- https://earthexplorer.usgs.gov/

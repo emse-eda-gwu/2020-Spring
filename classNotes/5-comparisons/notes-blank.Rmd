@@ -1,0 +1,180 @@
+---
+title: "Week 5 In Class Notes"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+# install.packages('ggrepel')
+# install.packages('ggridges')
+
+library(knitr)
+library(tidyverse)
+library(cowplot)
+library(ggrepel)
+library(ggridges)
+library(here)
+options(
+    htmltools.dir.version = FALSE,
+    knitr.table.format = "html",
+    knitr.kable.NA = '',
+    tibble.width = Inf)
+knitr::opts_chunk$set(
+    warning = FALSE,
+    message = FALSE,
+    fig.retina = 3)
+dplyr.width = Inf
+```
+
+Load all the data sets:
+
+```{r}
+college_all_ages <- read_csv(here('data', 'college_all_ages.csv'))
+federal_spending <- read_csv(here('data', 'federal_spending_long.csv'))
+gapminder        <- read_csv(here('data', 'gapminder.csv'))
+marathon         <- read_csv(here('data', 'marathon.csv'))
+milk_production  <- read_csv(here('data', 'milk_production.csv'))
+```
+
+# 1. Ranking plots: bars, dots, and lollipops
+
+Use the `milk_production.csv` data to create the charts shown on the slide ranking states by 2017 milk production.
+
+First summarize the data
+
+```{r}
+milk_summary <- milk_production %>%
+  filter(year == 2017) %>%
+  mutate(
+    milk_produced = milk_produced / 10^9,
+    state = fct_reorder(state, milk_produced))
+```
+
+Figure 1: Bars
+
+```{r, fig.height=8}
+# Write plot code here
+```
+
+Figure 2: Dots
+
+```{r, fig.height=8}
+# Write plot code here
+```
+
+Figure 3: Lollipop
+
+```{r, fig.height=8}
+# Write plot code here
+```
+
+# 2. Reference lines
+
+Use the `milk_production.csv` data to create the charts shown on the slide showing differences from the mean state milk production in 2017.
+
+First summarize the data
+
+```{r}
+milk_summary <- milk_production %>%
+  filter(year == 2017) %>%
+  mutate(
+    milk_produced = milk_produced / 10^9,
+    state = fct_reorder(state, milk_produced))
+```
+
+Figure 1: Lollipop chart with mean reference line
+
+```{r, fig.height=8}
+# Write plot code here
+```
+
+Figure 2: Diverging bars
+
+Here, you'll need to first create another summary data frame. Use the `mutate()` function to subtract the mean of the `milk_produced` variable from itself.
+
+```{r}
+# Write code here to create another summary data frame
+```
+
+Now create the plot
+
+```{r, fig.height=8}
+# Write plot code here
+```
+
+# 3. Dumbbell & slope charts
+
+Use the `federal_spending_long.csv` data to create the charts shown on the slide.
+
+Figure 1: Dumbbell chart
+
+First summarize the data
+
+```{r}
+federal_spending_summary <- federal_spending %>%
+  filter(year %in% c(1976, 2017)) %>%
+  mutate(
+    rd_budget = rd_budget / 10^3,
+    department = fct_reorder2(department, year, desc(rd_budget)),
+    year = as.factor(year))
+```
+
+Now create the plot
+
+```{r, fig.height=6}
+# Write plot code here
+```
+
+Figure 2: Slope chart
+
+First summarize the data
+
+```{r}
+federal_spending_summary <- federal_spending %>%
+  filter(year %in% c(1976, 2017)) %>%
+  mutate(
+    rd_budget = rd_budget / 10^3,
+    department = fct_reorder2(department, year, desc(rd_budget)),
+    year = as.factor(year),
+    label = str_c(department, ' (',
+                  round(rd_budget), ')'),
+    label_left = ifelse(year == 1976, label, NA),
+    label_right = ifelse(year == 2017, label, NA))
+```
+
+Now create the plot
+
+```{r, fig.height=6}
+library(ggrepel)
+
+# Write plot code here
+```
+
+# 4. Comparing distributions
+
+Use the `gapminder.csv` data to create the charts shown on the slide comparing the distribution of life expectancy across countries in continents in 2007
+
+Figure 1: Overlapping densities
+
+First summarize the data
+
+```{r}
+gapminder_2007 <- gapminder %>%
+  filter(year == 2007) %>%
+  mutate(continent = fct_reorder(continent, lifeExp))
+```
+
+Now create the plot
+
+```{r}
+# Write plot code here
+```
+
+Figure 2: Ridgelineplot
+
+For this plot, you should be able to use the same summary data frame as the previous plot
+
+```{r}
+library(ggridges)
+
+# Write plot code here
+```
