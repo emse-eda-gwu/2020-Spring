@@ -32,9 +32,14 @@ https://github.com/rstudio-education/arm-workshop-rsc2019
 
 /* Background glow color around main slide container */
 .remark-slide-scaler {
+  -moz-box-shadow: 0 0 0px #000;
+  -webkit-box-shadow: 0 0 0px #000;
+}
+/*.remark-slide-scaler {
   -moz-box-shadow: 0 0 30px #000;
   -webkit-box-shadow: 0 0 30px #000;
-}
+}*/
+
 /* Background color of container behind slide */
 .remark-slide-container {
   background-color: var(--color-gray);
