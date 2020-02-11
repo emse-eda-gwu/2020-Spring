@@ -11,6 +11,17 @@ rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
 
-Wilke: [13 - Visualizing time series](https://serialmentor.com/dataviz/time-series.html)
+This week, we will learn some of the technical details of how to create charts that highlight **trends**, which inherently involve changes over time. Most of these articles have code in them that illustrate how to create each chart type, and I encourage you to try and reproduce the examples provided in R yourself.
 
-Wilke: [14 - Visualizing trends](https://serialmentor.com/dataviz/visualizing-trends.html)
+- Wilke: [13 - Visualizing time series](https://serialmentor.com/dataviz/time-series.html)
+- Wilke: [14 - Visualizing trends](https://serialmentor.com/dataviz/visualizing-trends.html)
+- [11 Ways to Visualize Changes Over Time – A Guide](https://flowingdata.com/2010/01/07/11-ways-to-visualize-changes-over-time-a-guide/)
+- [Common ggplots for showing change](http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html#6.%20Change)
+- [Time-Series Calendar Heatmaps](https://towardsdatascience.com/time-series-calendar-heatmaps-9f576578fcfe)
+- [Sankey diagrams](https://www.data-to-viz.com/graph/sankey.html)
+
+Optional readings:
+
+- [The fallen of WWII (video)](http://www.fallen.io/ww2/)
+- [How common is your birthday?](http://thedailyviz.com/2016/09/17/how-common-is-your-birthday-dailyviz/)
+- [Dual-Scaled Axes in Graphs - Are They Ever the Best Solution?](http://www.perceptualedge.com/articles/visual_business_intelligence/dual-scaled_axes.pdf)
