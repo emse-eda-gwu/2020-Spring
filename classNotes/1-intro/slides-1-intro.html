@@ -492,7 +492,7 @@ Read in `.csv` files with `read_csv()`:
 library(tidyverse)
 library(here)
 
-csvPath &lt;- here('week1', 'data', 'milk_production.csv')
+csvPath &lt;- here('data', 'milk_production.csv')
 milk_production &lt;- read_csv(csvPath)
 ```
 ]
@@ -504,7 +504,7 @@ Read in `.txt` files with `read.table()`:
 .code60[
 
 ```r
-txtPath &lt;- here('week1', 'data', 'nasa_global_temps.txt')
+txtPath &lt;- here('data', 'nasa_global_temps.txt')
 global_temps &lt;- read.table(txtPath, skip = 5)
 ```
 ]
@@ -518,7 +518,7 @@ Read in `.xlsx` files with `read_excel()`:
 ```r
 library(readxl)
 
-xlsxPath &lt;- here('week1', 'data', 'pv_cell_production.xlsx')
+xlsxPath &lt;- here('data', 'pv_cell_production.xlsx')
 pv_cells &lt;- read_excel(xlsxPath, sheet = 'Cell Prod by Country', skip = 2)
 ```
 ]
@@ -723,15 +723,15 @@ head(pv_cells)
 
 ```
 ## # A tibble: 6 x 10
-##   Year  China Taiwan Japan Malaysia Germany `South Korea` `United States`
-##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;                   &lt;dbl&gt;
-## 1 1995  NA    NA      16.4 NA       NA      NA                       34.8
-## 2 1996  NA    NA      21.2 NA       NA      NA                       38.8
-## 3 1997  NA    NA      35   NA       NA      NA                       51  
-## 4 1998  NA    NA      49   NA       NA      NA                       53.7
-## 5 1999  NA    NA      80   NA       NA      NA                       60.8
-## 6 2000  2.5   NA     129.  NA       22.5    NA                       75  
-## # … with 2 more variables: Others &lt;chr&gt;, World &lt;dbl&gt;
+##   Year  China Taiwan Japan Malaysia Germany `South Korea` `United States` Others
+##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;                   &lt;dbl&gt; &lt;chr&gt; 
+## 1 1995  NA    NA      16.4 NA       NA      NA                       34.8 NA    
+## 2 1996  NA    NA      21.2 NA       NA      NA                       38.8 NA    
+## 3 1997  NA    NA      35   NA       NA      NA                       51   NA    
+## 4 1998  NA    NA      49   NA       NA      NA                       53.7 NA    
+## 5 1999  NA    NA      80   NA       NA      NA                       60.8 NA    
+## 6 2000  2.5   NA     129.  NA       22.5    NA                       75   48.20…
+## # … with 1 more variable: World &lt;dbl&gt;
 ```
 ]]
 
@@ -769,15 +769,15 @@ head(pv_cells_tidy)
 
 ```
 ## # A tibble: 6 x 10
-##   Year  China Taiwan Japan Malaysia Germany `South Korea` `United States`
-##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;                   &lt;dbl&gt;
-## 1 1995  NA    NA      16.4 NA       NA      NA                       34.8
-## 2 1996  NA    NA      21.2 NA       NA      NA                       38.8
-## 3 1997  NA    NA      35   NA       NA      NA                       51  
-## 4 1998  NA    NA      49   NA       NA      NA                       53.7
-## 5 1999  NA    NA      80   NA       NA      NA                       60.8
-## 6 2000  2.5   NA     129.  NA       22.5    NA                       75  
-## # … with 2 more variables: Others &lt;chr&gt;, World &lt;dbl&gt;
+##   Year  China Taiwan Japan Malaysia Germany `South Korea` `United States` Others
+##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;                   &lt;dbl&gt; &lt;chr&gt; 
+## 1 1995  NA    NA      16.4 NA       NA      NA                       34.8 NA    
+## 2 1996  NA    NA      21.2 NA       NA      NA                       38.8 NA    
+## 3 1997  NA    NA      35   NA       NA      NA                       51   NA    
+## 4 1998  NA    NA      49   NA       NA      NA                       53.7 NA    
+## 5 1999  NA    NA      80   NA       NA      NA                       60.8 NA    
+## 6 2000  2.5   NA     129.  NA       22.5    NA                       75   48.20…
+## # … with 1 more variable: World &lt;dbl&gt;
 ```
 
 ```r
@@ -847,15 +847,15 @@ pv_cells_wide &lt;- pv_cells_long %&gt;%
 
 ```
 ## # A tibble: 6 x 10
-##   Year  China Germany Japan Malaysia Others `South Korea` Taiwan
-##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt; 
-## 1 1995  NA    NA      16.4  NA       NA     NA            NA    
-## 2 1996  NA    NA      21.2  NA       NA     NA            NA    
-## 3 1997  NA    NA      35    NA       NA     NA            NA    
-## 4 1998  NA    NA      49    NA       NA     NA            NA    
-## 5 1999  NA    NA      80    NA       NA     NA            NA    
-## 6 2000  2.5   22.5    128.6 NA       48.20… NA            NA    
-## # … with 2 more variables: `United States` &lt;chr&gt;, World &lt;chr&gt;
+##   Year  China Germany Japan Malaysia Others `South Korea` Taiwan `United States`
+##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;          
+## 1 1995  NA    NA      16.4  NA       NA     NA            NA     34.75          
+## 2 1996  NA    NA      21.2  NA       NA     NA            NA     38.85          
+## 3 1997  NA    NA      35    NA       NA     NA            NA     51             
+## 4 1998  NA    NA      49    NA       NA     NA            NA     53.7           
+## 5 1999  NA    NA      80    NA       NA     NA            NA     60.8           
+## 6 2000  2.5   22.5    128.6 NA       48.20… NA            NA     75             
+## # … with 1 more variable: World &lt;chr&gt;
 ```
 ]]
 
@@ -977,7 +977,24 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     }
     deleted = true;
   });
-})();</script>
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
 
 <script>
 (function() {

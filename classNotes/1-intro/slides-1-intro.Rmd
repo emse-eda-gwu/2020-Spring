@@ -558,7 +558,7 @@ Read in `.csv` files with `read_csv()`:
 library(tidyverse)
 library(here)
 
-csvPath <- here('week1', 'data', 'milk_production.csv')
+csvPath <- here('data', 'milk_production.csv')
 milk_production <- read_csv(csvPath)
 ```
 ]
@@ -569,7 +569,7 @@ Read in `.txt` files with `read.table()`:
 
 .code60[
 ```{r, eval = FALSE}
-txtPath <- here('week1', 'data', 'nasa_global_temps.txt')
+txtPath <- here('data', 'nasa_global_temps.txt')
 global_temps <- read.table(txtPath, skip = 5)
 ```
 ]
@@ -582,7 +582,7 @@ Read in `.xlsx` files with `read_excel()`:
 ```{r, eval = FALSE}
 library(readxl)
 
-xlsxPath <- here('week1', 'data', 'pv_cell_production.xlsx')
+xlsxPath <- here('data', 'pv_cell_production.xlsx')
 pv_cells <- read_excel(xlsxPath, sheet = 'Cell Prod by Country', skip = 2)
 ```
 ]
@@ -761,7 +761,7 @@ Un-tidy format:
 
 ```{r, echo=FALSE}
 library(readxl)
-xlsxPath <- here('week1', 'data', 'pv_cell_production.xlsx')
+xlsxPath <- here('data', 'pv_cell_production.xlsx')
 pv_cells <- read_excel(xlsxPath, sheet = 'Cell Prod by Country', skip = 2) %>%
     filter(is.na(Year) == FALSE, Year <= 2013)
 ```
