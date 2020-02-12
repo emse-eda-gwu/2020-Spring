@@ -28,8 +28,8 @@ class: middle, inverse
 
 ## 2) Edit multiple lines of code at once
 
-1. Select multiple lines of code 
-2. Press `ALT` (Windows) or `OPTION` (Mac)
+1. Press and hold `ALT` (Windows) or `OPTION` (Mac)
+2. Select multiple lines of code
 
 https://twitter.com/i/status/995394452821721088
 
