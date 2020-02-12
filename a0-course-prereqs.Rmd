@@ -21,10 +21,10 @@ output:
 
 1. Get familiar with R and RStudio by reading (at a minimum) the following lessons from the [previous semester of Programming for Analytics](https://emse6574-gwu.github.io/2019-Fall/index.html):
 
-- ["Getting Started"](https://emse6574-gwu.github.io/2019-Fall/L1.2-getting-started.html): Installing R & RStudio, basic operators, staying organized with RStudio Projects.
-- ["Programming Basics"](https://emse6574-gwu.github.io/2019-Fall/L2-programming-basics.html): Functions, arguments, objects, data types, packages.
-- ["Data Frames"](https://emse6574-gwu.github.io/2019-Fall/L10-da1-data-frames.html): Learn the foundational data structure, basic data manipulation, and how to import data as a data frame.
+- ["Getting Started"](https://p4a.seas.gwu.edu/2019-Fall/L1.2-getting-started.html): Installing R & RStudio, basic operators, staying organized with RStudio Projects.
+- ["Programming Basics"](https://p4a.seas.gwu.edu/2019-Fall/L2-programming-basics.html): Functions, arguments, objects, data types, packages.
+- ["Data Frames"](https://p4a.seas.gwu.edu/2019-Fall/L10-da1-data-frames.html): Learn the foundational data structure, basic data manipulation, and how to import data as a data frame.
 
-2. If you haven't already, register for [DataCamp](https://www.datacamp.com/groups/shared_links/dc8dffcb7204d04728b4a92c5511bac4293fec6b) using your **@gwu.edu** email address. Then complete the entire [Introduction to the Tidyverse](https://www.datacamp.com/courses/introduction-to-the-tidyverse) DataCamp course. You should go through all four lessons in the course.
+2. If you haven't already, register for [DataCamp](https://www.datacamp.com/) using your **@gwu.edu** email address. Then complete the entire [Introduction to the Tidyverse](https://www.datacamp.com/courses/introduction-to-the-tidyverse) DataCamp course. You should go through all four lessons in the course.
 
 3. Finally, it can be very helpful to see these skills applied in practice. Take a look at [this example](https://www.datacamp.com/community/tutorials/tidyverse-tutorial-r) of using Tidyverse tools to explore and visualize data on survivors aboard the Titantic. It's a good example of conducting an Exploratory Data Analysis to gain insights about a data set.
