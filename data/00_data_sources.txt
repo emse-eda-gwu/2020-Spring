@@ -183,6 +183,63 @@ gdpPercap | per-capita GDP
 
 
 # ----------------------------------------------------------------------
+Data file: hot-dog-contest-winners.csv
+
+Date downloaded: February 13, 2020
+
+Description: Winners of the annual Nathan's hot dog eating contest
+
+Source of downloaded file:
+- Plot of this data is from flowingdata.com: https://flowingdata.com/2009/07/02/whos-going-to-win-nathans-hot-dog-eating-contest/
+- Original data source is wikipedia: https://en.wikipedia.org/wiki/Nathan%27s_Hot_Dog_Eating_Contest
+
+Dictionary:
+
+Variable           | Description
+-------------------|-----------------------------------------
+Year               |
+Winner             | Name of winner
+Competition        | Mens vs. Womens competition
+Dogs eaten         | Number of hot dogs eaten
+Country of winner  | total population
+New record         | 1 or 0 for whether new record was set
+
+
+
+# ----------------------------------------------------------------------
+Data file:
+- internet_users_region_country.csv
+- internet_users_region.csv
+
+Date downloaded: February 13, 2020
+
+Description: Data on the number of people using the Internet in different countries and world regions between 1990 and 2015.
+
+Source of downloaded file:
+- This data comes from Max Roser's Our World in Data project. They processed the originaldata to estimate the number of users based on the usage rate times the population: https://ourworldindata.org/internet
+- The original data come from the World Bank: https://data.worldbank.org/indicator/it.net.user.zs
+
+Dictionaries:
+
+Region data:
+
+Variable   | Description
+-----------|----------------------------
+region     |
+year       |
+numUsers   | Number of Internet users
+
+Country data:
+
+Variable   | Description
+-----------|----------------------------
+country    |
+year       |
+percent    | Percent of population in country using the Internet
+
+
+
+# ----------------------------------------------------------------------
 Data file: lotr_words.csv
 
 Date downloaded: January 5, 2020
