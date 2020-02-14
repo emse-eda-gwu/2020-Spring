@@ -183,7 +183,7 @@ gdpPercap | per-capita GDP
 
 
 # ----------------------------------------------------------------------
-Data file: hot-dog-contest-winners.csv
+Data file: hot_dog_winners.csv
 
 Date downloaded: February 13, 2020
 
@@ -307,7 +307,9 @@ milk_produced |double    |Pounds of Milk Produced
 
 
 # ----------------------------------------------------------------------
-Data file: nasa_global_temps.txt
+Data file:
+- nasa_global_temps.txt
+- nasa_global_temps.csv
 
 <need to update>
 

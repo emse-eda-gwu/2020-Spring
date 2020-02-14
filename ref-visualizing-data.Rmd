@@ -35,6 +35,7 @@ You will want to choose different chart types depending on the relationship or m
 # Making plots with **ggplot2**
 
 - [The R Graph Catalog](http://shinyapps.stat.ubc.ca/r-graph-catalog/): 124 examples (with code) for making common ggplots.
+- [The ggplot2 Extensions gallery](http://www.ggplot2-exts.org/gallery/): 64 registered libraries that extend the functionality of ggplot2.
 - [Top 50 `ggplot2` visualizations](http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html)
 - [R Cookbook for `ggplot2`](http://www.cookbook-r.com/Graphs/)
 - [RStudio `ggplot2` Cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf)
