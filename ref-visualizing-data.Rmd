@@ -47,3 +47,8 @@ You will want to choose different chart types depending on the relationship or m
 
 - [Customizing colors](http://r-graph-gallery.com/ggplot2-color)
 - [Follow good design rules](https://www.data-to-viz.com/caveats.html)
+
+# Animating **ggplot2** plots
+
+- [Animate your ggplots with gganimate](https://gganimate.com/articles/gganimate.html)
+- [How to make a bar chart race](https://towardsdatascience.com/create-animated-bar-charts-using-r-31d09e5841da)
