@@ -311,22 +311,92 @@ Data file:
 - nasa_global_temps.txt
 - nasa_global_temps.csv
 
-<need to update>
+Date downloaded: January 5, 2020
+
+Description: NASA data on the change in global surface temperature relative to 1951-1980 average temperatures.
+
+Source of downloaded file:
+- Originally downloaded from NASA here: https://data.giss.nasa.gov/gistemp/graphs/graph_data/Global_Mean_Estimates_based_on_Land_and_Ocean_Data/graph.txt
+- I modified two of the column names
+
+Original data source: NASA
+
+Other:
+- View the NASA plot of these data here: https://climate.nasa.gov/vital-signs/global-temperature/
+
+Dictionary:
+
+variable    | description
+------------|----------------------
+year        |
+meanTemp    | Global annual mean temperature anomaly wrt 1951-80 (Celsius)
+smoothTemp  | Five-year lowess smooth of the "No_Smoothing" variable
+
+
 
 # ----------------------------------------------------------------------
 Data file: north_america_bear_killings.txt
 
 <need to update>
 
+
+
 # ----------------------------------------------------------------------
 Data file: pc_sales_2018.xlsx
 
 <need to update>
 
+
+
 # ----------------------------------------------------------------------
 Data file: pv_cell_production.xlsx
 
-<need to update>
+Date downloaded: January 5, 2020
+
+Description: Annual solar photovoltaics cell production by country, 1995-2013
+
+Source of downloaded file:
+- The Earth Policy Institute
+- Downloaded file is "book_tgt_solar_9.xlsx" found here: http://www.earth-policy.org/data_center/C23
+- Name of file on site is "Annual Solar Photovoltaics Cell Production by Country, 1995-2013"
+
+Original data source:
+- The following is copied from the data file itself: "Compiled by Earth Policy Institute (EPI) with 1995-1999 data from Worldwatch Institute, Signposts 2004, CD-ROM (Washington, DC: 2005); 2000 data from Prometheus Institute, "23rd Annual Data Collection - Final," PVNews, vol. 26, no. 4 (April 2007), pp. 8-9; 2001-2006 from Prometheus Institute and Greentech Media, "25th Annual Data Collection Results: PV Production Explodes in 2008," PVNews, vol. 28, no. 4 (April 2009), pp. 15-18; 2007-2013 compiled by Earth Policy Institute from GTM Research, PV Cell Module Production Data, electronic database, updated June 2014."
+
+Dictionary:
+
+variable              |class  |description
+----------------------|-------|----------------------
+Year                  |double |Year
+China - United States |double |Annual solar photovoltaics cell production for each country
+Others                |double |Annual solar photovoltaics cell production for all countries other than those in China - United States
+World                 |double |World total annual solar photovoltaics cell production
+
+
+
+# ----------------------------------------------------------------------
+Data file: us_contagious_diseases.csv
+
+Date downloaded: February 14, 2020
+
+Description: Weekly reported counts for seven diseases from 1928 to 2011, from all fifty states.
+
+Source of downloaded file:
+- These are from the dslabs R package:
+https://www.rdocumentation.org/packages/dslabs/versions/0.7.3
+
+Dictionary:
+
+variable        | description
+----------------|----------------------
+disease         | A factor containing disease names.
+state           | A factor containing state names.
+year            |
+weeks_reporting | Number of weeks counts were reported that year.
+count           | Total number of reported cases.
+population      | State population, interpolated for non-census years.
+
+
 
 # ----------------------------------------------------------------------
 Data file: wildlife_impacts.csv
