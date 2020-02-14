@@ -22,6 +22,7 @@ This week, we will learn some of the technical details of how to create charts t
 
 Optional readings:
 
+- [Changes in how couples meet over time](https://flowingdata.com/2019/03/15/shifts-in-how-couples-meet-online-takes-the-top-spot/)
 - [The fallen of WWII (video)](http://www.fallen.io/ww2/)
 - [How common is your birthday?](http://thedailyviz.com/2016/09/17/how-common-is-your-birthday-dailyviz/)
 - [Dual-Scaled Axes in Graphs - Are They Ever the Best Solution?](http://www.perceptualedge.com/articles/visual_business_intelligence/dual-scaled_axes.pdf)
