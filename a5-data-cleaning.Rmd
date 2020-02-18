@@ -10,4 +10,22 @@ output:
 
 **Weight**: This assignment is worth 4% of your final grade.
 
-Coming soon!
+**Purpose**: The purpose of this assignment is to learn how to manage messy data and join together separate data sets using some clever tools in libraries in R.
+
+**Skills & Knowledge**: After completing these exercises, you should be able to:
+
+- Join two data sets together using a common variable.
+-
+
+**Assessment**: This assignment is graded for completion. Credit will be allocated in proportion to the percentage of the assignment completed by the due date. No more than 2 late days can be used on any one assignment.
+
+**Tasks**:
+
+1. **Read**: Open up a notebook (physical, digital...whatever you take notes in best), and **take notes** while you go through the [readings for this week](r7-cleaning-joins.html).
+
+2. **Exercises**: Take notes while you complete the following DataCamp exercises:
+
+    - Complete the entire [Working with Data in the Tidyverse](https://www.datacamp.com/courses/working-with-data-in-the-tidyverse) course. You should go through all four lessons in the course (some of it will be review - it's good to see things more than once!).
+    - Complete lessons 1 - 3 of the [Joining Data with dplyr](https://www.datacamp.com/courses/joining-data-with-dplyr-01e2a153-6da4-4113-bb99-62574cda1aeb) course. The last lesson is a case study, and you are encouraged to go through it though it is not required.
+
+3. **Report**: When you have completed the above exercises, go to the "Assignment Submission" page on Blackboard and write three things from your notes that you learned while going through these readings and exercises.
