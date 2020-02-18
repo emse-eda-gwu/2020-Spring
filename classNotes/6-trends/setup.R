@@ -34,6 +34,7 @@ milk_production <- milk_production %>%
     mutate(
         milk_produced = milk_produced / 10^9,
         state = fct_reorder(state, milk_produced))
+
 gapminder <- gapminder %>%
     mutate(year = as.integer(year))
 

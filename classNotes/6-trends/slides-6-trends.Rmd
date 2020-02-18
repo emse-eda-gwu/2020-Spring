@@ -30,9 +30,9 @@ class: title-slide, center, middle, inverse
 ---
 class: inverse, middle, center
 
-# Quiz 2: [25 minutes](https://www.youtube.com/watch?v=ddL3y1saEJs)
+# Quiz 2
 
----
+# [25 minutes](https://www.youtube.com/watch?v=ddL3y1saEJs)
 
 ```{r child = here('parts', 'intro.Rmd')}
 ```

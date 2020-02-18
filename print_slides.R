@@ -13,6 +13,9 @@ file   <- 'slides-4-amounts-proportions'
 folder <- '5-comparisons'
 file   <- 'slides-5-comparisons'
 
+folder <- '6-trends'
+file   <- 'slides-6-trends'
+
 # Save the slides
 pagedown::chrome_print(
     input  = here('classNotes', folder, paste0(file, '.html')),
