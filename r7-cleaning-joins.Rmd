@@ -11,6 +11,8 @@ rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
 
-R4DS: [13 - Relational data](https://r4ds.had.co.nz/relational-data.html)
+This week, we will learn some techniques for dealing with messy data. Most of the time, the raw data you get is in the wrong format and variables are not properly coded, so you will need to "clean" the data before starting any analysis. Other times the data will be split into two or more data sets, and you'll need to "join" them together into a single data frame. The readings below discuss some clever techniques for how to address these situations.
 
-[Join function explanations](https://github.com/gadenbuie/tidyexplain#mutating-joins)
+- [Nice animations of joining functions](https://github.com/gadenbuie/tidyexplain#mutating-joins)
+- [Stat 545 chapter on joining two tables](https://stat545.com/join-cheatsheet.html)
+- [Tips for Cleaning Messy Data in R](https://rfortherestofus.com/2019/12/how-to-clean-messy-data-in-r/)
