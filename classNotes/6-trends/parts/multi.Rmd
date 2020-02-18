@@ -1,0 +1,543 @@
+
+```{r milk_region_dot, fig.show='hide', echo=FALSE}
+ggplot(milk_region,
+       aes(x = year, y = milk_produced,
+           color = region)) +
+    geom_point() +
+    scale_color_manual(values = c(
+        'sienna', 'forestgreen', 'dodgerblue', 'orange')) +
+    theme_half_open(font_size = 18) +
+    labs(x = 'Year',
+         y = 'Milk produced (billion lbs)',
+         color = 'Region',
+         title = 'Milk production in four US regions')
+```
+```{r milk_region_dot_line, fig.show='hide', echo=FALSE}
+ggplot(milk_region,
+    aes(x = year, y = milk_produced,
+        color = region)) +
+    geom_point() +
+    geom_line() +
+    scale_color_manual(values = c(
+        'sienna', 'forestgreen', 'dodgerblue', 'orange')) +
+    theme_half_open(font_size = 18) +
+    labs(x = 'Year',
+         y = 'Milk produced (billion lbs)',
+         color = 'Region',
+         title = 'Milk production in four US regions')
+```
+```{r milk_region_line, fig.show='hide', echo=FALSE}
+ggplot(milk_region,
+    aes(x = year, y = milk_produced,
+        color = region)) +
+    geom_line(size = 1) +
+    scale_color_manual(values = c(
+        'sienna', 'forestgreen', 'dodgerblue', 'orange')) +
+    theme_half_open(font_size = 18) +
+    labs(x = 'Year',
+         y = 'Milk produced (billion lbs)',
+         color = 'Region',
+         title = 'Milk production in four US regions')
+```
+```{r milk_region_line_label, fig.show='hide', echo=FALSE}
+ggplot(milk_region,
+    aes(x = year, y = milk_produced,
+        color = region)) +
+    geom_line(size = 1) +
+    geom_text(aes(label = label),
+              hjust = 0, nudge_x = 1,
+              size = 6) +
+    scale_color_manual(values = c(
+        'sienna', 'forestgreen', 'dodgerblue', 'orange')) +
+    coord_cartesian(clip = 'off') +
+    theme_half_open(font_size = 18) +
+    theme(legend.position = 'none',
+          plot.margin = margin(0.1, 2.7, 0.1, 0.1, "cm")) +
+    labs(x = 'Year',
+         y = 'Milk produced (billion lbs)',
+         title = 'Milk production in four US regions')
+```
+```{r internet_region_line_label, fig.show='hide', echo=FALSE}
+ggplot(internet_region_summary,
+    aes(x = year, y = numUsers,
+        color = region)) +
+    geom_line(size = 1) +
+    geom_text(aes(label = label),
+              hjust = 0, nudge_x = 0.5, size = 5) +
+    coord_cartesian(clip = 'off') +
+    theme_half_open(font_size = 18) +
+    theme(legend.position = 'none',
+          plot.margin = margin(0.1, 5.8, 0.1, 0.1, "cm")) +
+    labs(x = 'Year', y = NULL,
+         title = 'Number of internet users (billions)')
+```
+```{r internet_region_area, fig.show='hide', echo=FALSE}
+ggplot(internet_region_summary,
+    aes(x = year, y = numUsers,
+        fill = region)) +
+    geom_area() +
+    scale_fill_viridis(discrete = TRUE) +
+    theme_minimal(base_size = 15) +
+    theme(legend.position = 'bottom') +
+    labs(x = 'Year', y = NULL,
+         fill = 'Region',
+         title = 'Number of internet users (billions)')
+```
+```{r measles_line_ca, fig.show='hide', echo=FALSE}
+ggplot(measles_ca) +
+    geom_line(aes(x = year, y = rate)) +
+    geom_vline(xintercept = 1963, col = 'blue',
+               linetype = 'dashed') +
+    annotate('text', x = 1964, y = 70, hjust = 0,
+             label = 'Vaccine introduced in 1964',
+             color = 'blue') +
+    labs(y = 'Cases per 10,000 people') +
+    theme_bw()
+```
+```{r measles_line_us, fig.show='hide', echo=FALSE}
+ggplot(measles) +
+    geom_line(aes(x = year, y = rate, group = state),
+              color = 'grey', alpha = 0.3) +
+    geom_line(data = measles_us,
+              aes(x = year, y = rate),
+              size = 0.8) +
+    geom_vline(xintercept = 1963, col = 'blue',
+               linetype = 'dashed') +
+    annotate('text', x = 1945, y = 55, hjust = 0,
+             label = 'US Mean') +
+    annotate('text', x = 1964, y = 150, hjust = 0,
+             label = 'Vaccine introduced in 1964',
+             color = 'blue') +
+    labs(y = 'Cases per 10,000 people') +
+    theme_bw()
+```
+```{r measles_heat_map, fig.show='hide', echo=FALSE}
+ggplot(measles) +
+    geom_tile(aes(x = year, y = state, fill = rate),
+              color = 'grey80') +
+    geom_vline(xintercept = 1963, col = 'blue') +
+    annotate('text', x = 1964, y = 51, hjust = 0,
+             label = 'Vaccine introduced in 1964',
+             color = 'blue') +
+    scale_x_continuous(expand = c(0, 0)) +
+    scale_fill_viridis(option = 'inferno', direction = -1,
+                       trans = 'sqrt') +
+    guides(fill = guide_colorbar(title.position = 'top',
+                                 reverse = TRUE)) +
+    coord_cartesian(clip = 'off') +
+    theme_minimal() +
+    theme(panel.grid = element_blank(),
+          legend.position = 'bottom',
+          text = element_text(size = 10)) +
+    labs(x = '', y = '',
+         fill = 'Cases per 10,000 people',
+         title = 'Measles in the U.S.')
+```
+
+---
+class: center, middle
+
+## With multiple categories,<br>points & lines can get messy
+
+--
+.leftcol[
+```{r ref.label='milk_region_dot', echo=FALSE, fig.height=5, fig.width=7.5, fig.align='center'}
+```
+]
+--
+.rightcol[
+```{r ref.label='milk_region_dot_line', echo=FALSE, fig.height=5, fig.width=7.5, fig.align='center'}
+```
+]
+
+---
+class: center, middle
+
+.leftcol[
+### **Better**: Lines alone makes distinguishing trends easier
+
+```{r ref.label='milk_region_line', echo=FALSE, fig.height=5, fig.width=7.5, fig.align='center'}
+```
+]
+--
+.rightcol[
+### **Even better**: Directly label<br>lines to remove legend
+
+```{r ref.label='milk_region_line_label', echo=FALSE, fig.height=5, fig.width=7, fig.align='center'}
+```
+]
+
+---
+class: center, middle
+
+### If goal is to communicate the **overall** trend,<br>consider a stacked area chart
+
+--
+.leftcol[
+### Highlights **regional** trends
+
+```{r ref.label='internet_region_line_label', echo=FALSE, fig.height=5, fig.width=9, fig.align='center'}
+```
+]
+--
+.rightcol[
+### Highlights **overall** trend
+
+```{r ref.label='internet_region_area', echo=FALSE, fig.height=5, fig.width=9, fig.align='center'}
+```
+]
+
+---
+### If you have **lots** of categories:
+
+### 1) Plot all the data with the average highlighted
+
+--
+.leftcol[
+### .center[Measles in California]
+
+```{r ref.label='measles_line_ca', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+--
+.rightcol[
+### .center[Measles in all 50 states]
+
+```{r ref.label='measles_line_us', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+
+---
+### If you have **lots** of categories:
+
+### 1) Plot all the data with the average highlighted
+
+### 2) Plot all the data with a heat map
+
+```{r ref.label='measles_heat_map', echo=FALSE, fig.height=6, fig.width=8, fig.align='center'}
+```
+
+---
+## Heatmaps are great for multiple divisions of time
+
+My activity on Github:
+<center>
+<img src="images/jhelvy_github.png" width=800>
+</center>
+<br>
+
+--
+[Traffic fatalities](https://flowingdata.com/2017/04/27/traffic-fatalities-when-and-where/)
+
+---
+.leftcol[.code60[
+Format the data
+```{r, eval=FALSE}
+milk_region <- milk_production %>%
+    filter(region %in% c(
+        'Pacific', 'Northeast', 'Lake States', 'Mountain')) %>%
+    group_by(year, region) %>%
+    summarise(milk_produced = sum(milk_produced))
+```
+Make the line plot
+```{r, eval=FALSE}
+ggplot(milk_region,
+    aes(x = year, y = milk_produced, color = region)) +
+    geom_line(size = 1) +
+    scale_color_manual(values = c(
+        'sienna', 'forestgreen', 'dodgerblue', 'orange')) +
+    theme_half_open(font_size = 18) +
+    labs(x     = 'Year',
+         y     = 'Milk produced (billion lbs)',
+         color = 'Region',
+         title = 'Milk production in four US regions')
+```
+]]
+.rightcol[## .center[How to:<br>**Directly label lines**]
+
+<br>
+
+```{r ref.label='milk_region_line', echo=FALSE, fig.height=5, fig.width=7, fig.align='center'}
+```
+]
+
+---
+.leftcol[.code60[
+Format the data
+```{r, eval=FALSE}
+milk_region <- milk_production %>%
+    filter(region %in% c(
+        'Pacific', 'Northeast', 'Lake States', 'Mountain')) %>%
+    group_by(year, region) %>%
+    summarise(milk_produced = sum(milk_produced)) %>%
+    # Create the labels #<<
+    ungroup() %>% #<<
+    mutate(label = ifelse( #<<
+           year == max(year), region, NA)) #<<
+```
+Make the line plot
+```{r, eval=FALSE}
+ggplot(milk_region,
+    aes(x = year, y = milk_produced, color = region)) +
+    geom_line(size = 1) +
+    # Add labels to plot #<<
+    geom_text(aes(label = label), #<<
+              hjust = 0, nudge_x = 1, size = 6) + #<<
+    scale_color_manual(values = c(
+        'sienna', 'forestgreen', 'dodgerblue', 'orange')) +
+    # Create space for labels on right side #<<
+    coord_cartesian(clip = 'off') + #<<
+    theme(legend.position = 'none', #<<
+          # Remember "trouble": T    R    B    L #<<
+          plot.margin = margin(0.1, 2.7, 0.1, 0.1, "cm")) + #<<
+    theme_half_open(font_size = 18) +
+    labs(x     = 'Year',
+         y     = 'Milk produced (billion lbs)',
+         title = 'Milk production in four US regions')
+```
+]]
+.rightcol[## .center[How to:<br>**Directly label lines**]
+
+<br>
+
+```{r ref.label='milk_region_line_label', echo=FALSE, fig.height=5, fig.width=7, fig.align='center'}
+```
+]
+
+---
+## How to: **Stacked area**
+
+.leftcol[.code70[
+Format the data
+```{r, eval=FALSE}
+internet_region_summary <- internet_region %>%
+    mutate(numUsers = numUsers / 10^9)
+```
+Make the plot
+```{r, eval=FALSE}
+ggplot(internet_region_summary) +
+    geom_area(aes(x = year, y = numUsers, #<<
+        fill = region)) + #<<
+    # Nice colors from "viridis" library:
+    scale_fill_viridis(discrete = TRUE) +
+    theme_minimal(base_size = 15) +
+    theme(legend.position = 'bottom') +
+    labs(x = 'Year', y = NULL,
+         fill  = 'Region',
+         title = 'Number of internet users (billions)')
+```
+]]
+.rightcol[
+```{r ref.label='internet_region_area', echo=FALSE, fig.height=5, fig.width=9, fig.align='center'}
+```
+]
+
+---
+## How to: **Average line overlay**
+
+.leftcol[.code60[
+Format the data
+```{r, eval=FALSE}
+measles <- us_diseases %>%
+    filter(!state %in% c("Hawaii", "Alaska"),
+           disease == 'Measles',
+           ! is.na(count),
+           ! is.na(population)) %>%
+    mutate(
+        rate = (count / population) * 10000,
+        state = fct_reorder(state, rate)) %>%
+    filter(! is.na(rate))
+```
+Make all the state lines in light grey color
+```{r measles_states, fig.show='hide'}
+ggplot(measles) +
+    geom_line(aes(x = year, y = rate, group = state), #<<
+              color = 'grey', alpha = 0.3) + #<<
+    # Add reference line:
+    geom_vline(xintercept = 1963, col = 'blue',
+               linetype = 'dashed') +
+    annotate('text', x = 1964, y = 150, hjust = 0,
+             label = 'Vaccine introduced in 1964',
+             color = 'blue') +
+    theme_bw() +
+    labs(y = 'Cases per 10,000 people')
+```
+]]
+.rightcol[
+```{r ref.label='measles_states', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+
+---
+## How to: **Average line overlay**
+
+.leftcol[.code60[
+Now overlay the state average line
+```{r, eval=FALSE}
+measles_us <- measles %>% #<<
+    group_by(year) %>% #<<
+    summarize( #<<
+        rate = sum(count) / sum(population) * 10000) #<<
+
+ggplot(measles) +
+    geom_line(aes(x = year, y = rate, group = state),
+              color = 'grey', alpha = 0.3) +
+    geom_line(data = measles_us, #<<
+              aes(x = year, y = rate), #<<
+              size = 0.8) + #<<
+    # Add reference line:
+    geom_vline(xintercept = 1963, col = 'blue',
+               linetype = 'dashed') +
+    annotate('text', x = 1964, y = 150, hjust = 0,
+             label = 'Vaccine introduced in 1964',
+             color = 'blue') +
+    # Add US average label: #<<
+    annotate('text', x = 1945, y = 55, hjust = 0, #<<
+             label = 'US Mean') + #<<
+    theme_bw() +
+    labs(y = 'Cases per 10,000 people')
+```
+]]
+.rightcol[
+```{r ref.label='measles_line_us', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+
+---
+## How to: **Heat map**
+
+.leftcol[.code70[
+Create main grid with `geom_tile()`
+```{r measles_grid, fig.show='hide'}
+ggplot(measles) +
+    geom_tile(aes(x = year, y = state, fill = rate), #<<
+              color = 'grey80') + #<<
+    # Add reference line:
+    geom_vline(xintercept = 1963, col = 'blue') +
+    annotate('text', x = 1964, y = 51, hjust = 0,
+             label = 'Vaccine introduced in 1964',
+             color = 'blue')
+```
+]]
+.rightcol[
+```{r ref.label='measles_grid', echo=FALSE, fig.height=7, fig.width=8, fig.align='center'}
+```
+]
+
+---
+## How to: **Heat map**
+
+.leftcol[.code60[
+Adjust scales and theme
+```{r, eval=FALSE}
+ggplot(measles) +
+    geom_tile(aes(x = year, y = state, fill = rate),
+              color = 'grey80') +
+    # Add reference line:
+    geom_vline(xintercept = 1963, col = 'blue') +
+    annotate('text', x = 1964, y = 51, hjust = 0,
+             label = 'Vaccine introduced in 1964',
+             color = 'blue') +
+    # Adjust scales
+    scale_x_continuous(expand = c(0, 0)) +
+    scale_fill_viridis(option = 'inferno', direction = -1, #<<
+                       trans = 'sqrt') + #<<
+    guides(fill = guide_colorbar(
+        title.position = 'top', reverse = TRUE)) +
+    coord_cartesian(clip = 'off') +
+    # Adjust theme
+    theme_minimal() + #<<
+    theme(panel.grid = element_blank(), #<<
+          legend.position = 'bottom', #<<
+          text = element_text(size = 10)) + #<<
+    labs(x = '', y = '',
+         fill = 'Cases per 10,000 people',
+         title = 'Measles')
+```
+]]
+.rightcol[
+```{r ref.label='measles_heat_map', echo=FALSE, fig.height=7, fig.width=8, fig.align='center'}
+```
+]
+
+---
+class: inverse
+
+.leftcol[
+## Your turn
+
+Use the `internet_users_country.csv` data to create this chart:
+
+```{r, echo=FALSE, fig.height=4, fig.width=7}
+ggplot(internet_country_summary,
+       aes(x = year, y = percent,
+           color = country)) +
+    geom_line(size = 1) +
+    geom_text(aes(label = label),
+              hjust = 0, nudge_x = 0.5) +
+    scale_color_manual(values = c(
+        'sienna', 'forestgreen', 'orange', 'dodgerblue')) +
+    coord_cartesian(clip = 'off') +
+    theme_half_open(font_size = 18) +
+    theme(legend.position = 'none',
+          plot.margin = margin(0.1, 2, 0.1, 0.1, "cm")) +
+    labs(x = 'Year',
+         y = 'Percent of population')
+```
+]
+.rightcol[
+Use the `milk_production.csv` data to create this chart:
+
+```{r, echo=FALSE, fig.height=7, fig.width=8}
+ggplot(milk_production) +
+    geom_tile(aes(x = year, y = state, fill = milk_produced),
+              color = 'grey80') +
+    scale_x_continuous(expand = c(0, 0)) +
+    scale_fill_viridis(option = 'inferno', direction = -1,
+                       trans = 'sqrt') +
+    guides(fill = guide_colorbar(title.position = 'top',
+                                 reverse = TRUE)) +
+    coord_cartesian(clip = 'off') +
+    theme_minimal() +
+    theme(panel.grid = element_blank(),
+          legend.position = 'bottom',
+          text = element_text(size = 10)) +
+    labs(x = '', y = '',
+         fill = 'Billions of lbs produced',
+         title = 'U.S. Milk Production by State')
+```
+]
+
+---
+class: center, middle, inverse
+
+# Two other examples for showing<br>change across mutliple categories
+
+---
+class: center
+
+# Seasonal chart
+
+<center>
+<img src="images/seasonal_chart.png" width=700>
+</center>
+
+---
+class: center
+
+## Sankey chart
+
+<center>
+<img src="images/energy_sankey.png" width=800>
+</center>
+
+Source: https://flowcharts.llnl.gov/
+
+---
+class: center, middle
+
+Would you consider purchasing an electric car?
+
+<center>
+<img src="images/bevSankey.png" width=850>
+</center>

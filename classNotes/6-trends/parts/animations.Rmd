@@ -1,0 +1,279 @@
+<!-- (exercise: bar chart race of where people met online, milk production states) -->
+
+```{r milk_region_anim_plot, fig.show='hide', echo=FALSE}
+ggplot(milk_region,
+       aes(x = year, y = milk_produced,
+           color = region)) +
+    geom_line(size = 1) +
+    geom_point() +
+    geom_text(aes(label = region),
+              hjust = 0,
+              nudge_x = 1,
+              nudge_y = -2) +
+    scale_color_manual(values = c(
+        'sienna', 'forestgreen', 'dodgerblue', 'orange')) +
+    coord_cartesian(clip = 'off') +
+    theme_half_open() +
+    theme(legend.position = 'none',
+          plot.margin = margin(0.1, 2, 0.1, 0.1, "cm")) +
+    labs(x = 'Year',
+         y = 'Milk produced (billion lbs)')
+```
+```{r gapminder_anim_plot, fig.show='hide', echo=FALSE}
+ggplot(gapminder,
+    aes(x = gdpPercap, y = lifeExp,
+        size = pop, color = continent)) +
+    geom_point(alpha = 0.7) +
+    scale_color_brewer(palette = 'Set2') +
+    scale_size_area(guide = FALSE, max_size = 15) +
+    scale_x_log10() +
+    theme_bw() +
+    theme(legend.position = c(0.85, 0.3)) +
+    labs(x = 'GDP per capita',
+         y = 'Life expectancy',
+         color = 'Continent')
+```
+
+---
+class: center, middle
+
+### When displaying chart on a webpage,<br>animation can add emphasis to the change over time
+
+--
+### ...plus it's fun
+
+--
+.leftcol[
+### Static chart
+```{r ref.label='milk_region_line_label', echo=FALSE, fig.height=4, fig.width=7, fig.align='center'}
+```
+]
+--
+.rightcol[
+### Animated chart
+<center>
+<img src="images/milk_region_animation.gif">
+</center>
+]
+
+---
+class: center, middle
+
+### When animating, it's a good idea to **pause on the last frame**
+
+.leftcol[
+### No pause
+<center>
+<img src="images/milk_region_animation_no_pause.gif">
+</center>
+]
+--
+.rightcol[
+### Slight pause
+<center>
+<img src="images/milk_region_animation.gif">
+</center>
+]
+
+---
+class: center, middle
+
+### Use animation to show the **time dimension**
+
+"Gapminder" visualization by Hans Rosling
+<center>
+<img src="images/gapminder_animation.gif" width=650>
+</center>
+
+---
+class: center, middle
+
+### Use animation to show the **time dimension**
+
+"Bar chart race" of top 10 milk producing states
+<center>
+<img src="images/milk_race_anim.gif" width=500>
+</center>
+
+---
+## How to: **Animate a line plot**
+
+.leftcol[.code60[
+First make a static plot with labels for each year
+```{r, eval=FALSE}
+milk_region_anim_plot <- ggplot(milk_region, #<<
+       aes(x = year, y = milk_produced,
+           color = region)) +
+    geom_line(size = 1) +
+    geom_point() + #<<
+    geom_text(aes(label = region), #<<
+              hjust = 0,
+              nudge_x = 1,
+              nudge_y = -2) +
+    scale_color_manual(values = c(
+        'sienna', 'forestgreen', 'dodgerblue', 'orange')) +
+    coord_cartesian(clip = 'off') +
+    theme_half_open() +
+    theme(legend.position = 'none',
+          plot.margin = margin(0.1, 2, 0.1, 0.1, "cm")) +
+    labs(x = 'Year',
+         y = 'Milk produced (billion lbs)')
+```
+]]
+.rightcol[
+```{r ref.label='milk_region_anim_plot', echo=FALSE, fig.height=4, fig.width=7, fig.align='center'}
+```
+]
+
+---
+## How to: **Animate a line plot**
+
+.leftcol[.code60[
+Now animate it
+```{r, eval=FALSE}
+milk_region_anim <- milk_region_anim_plot +
+    transition_reveal(year) #<<
+
+# Render the animation
+animate(milk_region_anim, end_pause = 10, #<<
+        width = 800, height = 450, res = 150) #<<
+```
+]]
+.rightcol[
+<center>
+<img src="images/milk_region_animation.gif">
+</center>
+]
+
+---
+## How to: **Save an animation**
+
+.leftcol[.code60[
+Now animate it
+```{r, eval=FALSE}
+milk_region_anim <- milk_region_anim_plot +
+    transition_reveal(year)
+
+# Render the animation
+animate(milk_region_anim, end_pause = 10,
+        width = 800, height = 450, res = 150)
+
+# Save last animation
+anim_save(here::here('plots', 'milk_region_animation.gif')) #<<
+```
+]]
+.rightcol[
+<center>
+<img src="images/milk_region_animation.gif">
+</center>
+]
+
+---
+## How to: **Change label based on year**
+
+.leftcol[.code60[
+First make a static plot
+```{r, eval=FALSE}
+ggplot(gapminder,
+    aes(x = gdpPercap, y = lifeExp, #<<
+        size = pop, color = continent)) + #<<
+    geom_point(alpha = 0.7) +
+    scale_size_area(guide = FALSE, max_size = 15) + #<<
+    scale_color_brewer(palette = 'Set2') +
+    scale_x_log10() + #<<
+    theme_bw() +
+    theme(legend.position = c(0.85, 0.3)) +
+    labs(x = 'GDP per capita',
+         y = 'Life expectancy',
+         color = 'Continent')
+```
+]]
+.rightcol[
+```{r ref.label='gapminder_anim_plot', echo=FALSE, fig.height=6, fig.width=7, fig.align='center'}
+```
+]
+
+---
+## How to: **Change label based on year**
+
+.leftcol[.code60[
+Now animate it
+
+**Note**: Year must be an integer!
+
+```{r, eval=FALSE}
+gapminder_anim <- gapminder_anim_plot +
+    transition_time(year) + #<<
+    labs(title = "Year: {frame_time}") #<<
+
+# Render the animation
+animate(gapminder_anim, end_pause = 10,
+        width = 800, height = 600, res = 150)
+```
+]]
+.rightcol[
+<center>
+<img src="images/gapminder_animation.gif" width=600>
+</center>
+]
+
+---
+class: inverse
+
+## Your turn
+
+Use the `internet_users_country.csv` data to create the following animation:
+
+<center>
+<img src="images/internet_country_animation.gif">
+</center>
+
+---
+## One more animation option: **plotly**
+
+.leftcol[.code70[
+Note that it's `plot_ly`, not `plotly`
+```{r, eval=FALSE}
+library(plotly)
+
+plot_ly(gapminder, #<<
+    x = ~gdpPercap,
+    y = ~lifeExp,
+    size = ~pop,
+    color = ~continent,
+    frame = ~year,
+    text = ~country,
+    hoverinfo = "text",
+    type = 'scatter',
+    mode = 'markers'
+  ) %>%
+  layout(
+    xaxis = list(
+      type = "log"
+    )
+  )
+```
+]]
+.rightcol[
+
+<br>
+
+```{r, echo=FALSE, fig.height=5, fig.width=7, fig.align='center'}
+plot_ly(gapminder,
+    x = ~gdpPercap,
+    y = ~lifeExp,
+    size = ~pop,
+    color = ~continent,
+    frame = ~year,
+    text = ~country,
+    hoverinfo = "text",
+    type = 'scatter',
+    mode = 'markers'
+  ) %>%
+  layout(
+    xaxis = list(
+      type = "log"
+    )
+  )
+```
+]

@@ -1,0 +1,94 @@
+---
+title: "Week 6: Graphing trends"
+author: "John Paul Helveston"
+date: February 19, 2020
+output:
+  xaringan::moon_reader:
+    css: ['default', 'https://emse-eda-gwu.github.io/2020-Spring/classNotes/classNotes.css']
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      beforeInit: "https://platform.twitter.com/widgets.js"
+    seal: false
+---
+
+```{r setup, include=FALSE}
+library(here)
+source(here('setup.R'))
+```
+
+name: xaringan-title
+class: title-slide, center, middle, inverse
+
+# Week 6: Graphing trends
+
+.large[EMSE 4197 | John Paul Helveston | February 19, 2020]
+
+---
+class: inverse, middle, center
+
+# Quiz 2: [25 minutes](https://www.youtube.com/watch?v=ddL3y1saEJs)
+
+---
+
+```{r child = here('parts', 'intro.Rmd')}
+```
+
+---
+class: inverse, middle
+
+# Graphing trends
+
+## 1. Single variables
+## 2. Multiple variables
+## 3. Animations
+
+---
+class: inverse, middle
+
+# Graphing trends
+
+## 1. .orange[Single variables]
+## 2. Multiple variables
+## 3. Animations
+
+```{r child = here('parts', 'single.Rmd')}
+```
+
+---
+class: inverse, middle
+
+# Graphing trends
+
+## 1. Single variables
+## 2. .orange[Multiple variables]
+## 3. Animations
+
+```{r child = here('parts', 'multi.Rmd')}
+```
+
+---
+class: inverse
+
+# [5 minute](https://www.youtube.com/watch?v=_W0bSen8Qjg) break!
+
+## Stand up
+
+## Move around
+
+## Stretch!
+
+---
+class: inverse, middle
+
+# Graphing trends
+
+## 1. Single variables
+## 2. Multiple variables
+## 3. .orange[Animations]
+
+```{r child = here('parts', 'animations.Rmd')}
+```

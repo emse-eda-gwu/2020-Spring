@@ -1,0 +1,293 @@
+
+```{r milk_ca_point, fig.show='hide', echo=FALSE}
+ggplot(milk_ca,
+    aes(x = year, y = milk_produced)) +
+    geom_point(color = 'steelblue', size = 2) +
+    theme_half_open(font_size = 18) +
+    labs(x = 'Year',
+         y = 'Milk produced (billion lbs)',
+         title = 'Milk production in California')
+```
+```{r milk_ca_point_line, fig.show='hide', echo=FALSE}
+ggplot(milk_ca,
+    aes(x = year, y = milk_produced)) +
+    geom_point(color = 'steelblue', size = 2) +
+    geom_line(color = 'steelblue', size = 0.5) +
+    theme_half_open(font_size = 18) +
+    labs(x = 'Year',
+         y = 'Milk produced (billion lbs)',
+         title = 'Milk production in California')
+```
+```{r milk_ca_line, fig.show='hide', echo=FALSE}
+ggplot(milk_ca,
+    aes(x = year, y = milk_produced)) +
+    geom_line(color = 'steelblue', size = 1) +
+    theme_half_open(font_size = 18) +
+    labs(x = 'Year',
+         y = 'Milk produced (billion lbs)',
+         title = 'Milk production in California')
+```
+```{r milk_ca_line_area, fig.show='hide', echo=FALSE}
+ggplot(milk_ca,
+    aes(x = year, y = milk_produced)) +
+    geom_line(color = 'steelblue', size = 1) +
+    geom_area(fill = 'steelblue', alpha = 0.5) +
+    scale_y_continuous(expand = expand_scale(mult = c(0, 0.05))) +
+    theme_half_open(font_size = 18) +
+    labs(x = 'Year',
+         y = 'Milk produced (billion lbs)',
+         title = 'Milk production in California')
+```
+```{r milk_ca_point_line_sparse1, fig.show='hide', echo=FALSE}
+ggplot(milk_ca_sparse,
+       aes(x = year, y = milk_produced)) +
+    geom_line(color = 'steelblue', size = 0.5) +
+    geom_point(aes(color = yearColor), size = 2) +
+    scale_color_manual(values = c('red', 'steelblue')) +
+    theme_half_open(font_size = 18) +
+    theme(legend.position = 'none') +
+    labs(x = 'Year',
+         y = 'Milk produced (billion lbs)',
+         title = 'Milk production in California')
+```
+```{r milk_ca_point_line_sparse2, fig.show='hide', echo=FALSE}
+ggplot(milk_ca_sparse %>%
+           filter(yearColor == 'one'),
+       aes(x = year, y = milk_produced)) +
+    geom_line(color = 'steelblue', size = 0.5) +
+    geom_point(color = 'red', size = 2) +
+    theme_half_open(font_size = 18) +
+    labs(x = 'Year',
+         y = 'Milk produced (billion lbs)',
+         title = 'Milk production in California')
+```
+```{r milk_ca_smooth, fig.show='hide', echo=FALSE}
+ggplot(milk_ca,
+    aes(x = year, y = milk_produced)) +
+    geom_smooth(color = 'steelblue', size = 1, se = FALSE) +
+    theme_half_open(font_size = 18) +
+    labs(x = 'Year',
+         y = 'Milk produced (billion lbs)',
+         title = 'Milk production in California')
+```
+```{r milk_ca_smooth_points, fig.show='hide', echo=FALSE}
+ggplot(milk_ca,
+    aes(x = year, y = milk_produced)) +
+    geom_point(color = 'grey', size = 2, alpha = 0.9) +
+    geom_smooth(color = 'steelblue', size = 1, se = FALSE) +
+    theme_half_open(font_size = 18) +
+    labs(x = 'Year',
+         y = 'Milk produced (billion lbs)',
+         title = 'Milk production in California')
+```
+```{r hotdog_bar_record, fig.show='hide', echo=FALSE}
+ggplot(hotdogs_mens) +
+    geom_col(aes(x = Year, y = dogs, fill = record),
+             width = 0.8, alpha = 0.9) +
+    scale_fill_manual(values = c("grey", "sienna")) +
+    scale_y_continuous(expand = expand_scale(mult = c(0, 0.05))) +
+    theme_minimal_hgrid() +
+    theme(legend.position = c(0.1, 0.65)) +
+    labs(x = 'Year',
+         y = 'Number of hot dogs & buns\nin 10 minutes',
+         fill = 'Record\nbroken?',
+         title = "Record-breaking wins in Nathan's hot dog\neating competition, men's division")
+```
+```{r hotdog_bar_winner, fig.show='hide', echo=FALSE}
+ggplot(hotdogs_mens) +
+    geom_col(aes(x = Year, y = dogs, fill = Winner),
+             width = 0.8, alpha = 0.9) +
+    scale_y_continuous(expand = expand_scale(mult = c(0, 0.05))) +
+    theme_minimal_hgrid() +
+    theme(legend.position = c(0.1, 0.65)) +
+    labs(x = 'Year',
+         y = 'Number of hot dogs & buns\nin 10 minutes',
+         fill = 'Winner',
+         title = "Winner of Nathan's hot dog eating competition,\nmen's division")
+```
+
+---
+
+.leftcol[
+## Points
+
+Plotting the data points is a good starting point<br>&nbsp;
+
+```{r ref.label='milk_ca_point', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+--
+.rightcol[
+## Points + line
+
+Adding lines between the points helps<br>see the overall trend
+
+```{r ref.label='milk_ca_point_line', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+
+---
+
+.leftcol[
+## Line
+
+Omitting the points emphasizes the overall trend<br>&nbsp;
+
+```{r ref.label='milk_ca_line', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+--
+.rightcol[
+## Line + area
+
+Filling area below line further emphasizes the trend,<br>but the y-axis must start at zero
+
+```{r ref.label='milk_ca_line_area', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+
+]
+
+---
+class: center, middle
+
+### If points are too sparse, a line can be misleading
+
+.leftcol[
+```{r ref.label='milk_ca_point_line_sparse1', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+.rightcol[
+```{r ref.label='milk_ca_point_line_sparse2', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+
+---
+
+.leftcol[
+## Smoothed line
+
+Adding a "smoothed" line shows a modeled representation of the overall trend
+
+```{r ref.label='milk_ca_smooth', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+--
+.rightcol[
+## Smoothed line + points
+
+Putting the smoothed line over the data points helps show whether **outliers** are driving the trend line
+
+```{r ref.label='milk_ca_smooth_points', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+
+---
+class: center, middle
+
+### Bars are useful when emphasizing the **data points**<br>rather than the **slope between them**
+
+.leftcol[
+```{r ref.label='hotdog_bar_record', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+--
+.rightcol[
+```{r ref.label='hotdog_bar_winner', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+
+---
+## How to: **Points + line**
+
+.leftcol[.code70[
+```{r, eval=FALSE}
+ggplot(milk_ca,
+    aes(x = year, y = milk_produced)) + #<<
+    geom_point(color = 'steelblue', size = 2) + #<<
+    geom_line(color = 'steelblue', size = 0.5) + #<<
+    theme_half_open(font_size = 18) +
+    labs(x = 'Year',
+         y = 'Milk produced (billion lbs)',
+         title = 'Milk production in California')
+```
+]]
+.rightcol[
+```{r ref.label='milk_ca_point_line', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+
+---
+
+## How to: **Line + area**
+
+.leftcol[.code70[
+```{r, eval=FALSE}
+ggplot(milk_ca,
+    aes(x = year, y = milk_produced)) +
+    geom_line(color = 'steelblue', size = 1) + #<<
+    geom_area(fill = 'steelblue', alpha = 0.5) + #<<
+    scale_y_continuous(
+        expand = expand_scale(mult = c(0, 0.05))) +
+    theme_half_open(font_size = 18) +
+    labs(x = 'Year',
+         y = 'Milk produced (billion lbs)',
+         title = 'Milk production in California')
+```
+]]
+.rightcol[
+```{r ref.label='milk_ca_line_area', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+
+---
+
+## How to: **Smoothed line + points**
+
+.leftcol[.code70[
+```{r, eval=FALSE}
+ggplot(milk_ca,
+    aes(x = year, y = milk_produced)) +
+    geom_point(color = 'grey', #<<
+               size = 2, #<<
+               alpha = 0.9) + #<<
+    geom_smooth(color = 'steelblue', #<<
+                size = 1, #<<
+                se = FALSE) + #<<
+    theme_half_open(font_size = 18) +
+    labs(x = 'Year',
+         y = 'Milk produced (billion lbs)',
+         title = 'Milk production in California')
+```
+]]
+.rightcol[
+```{r ref.label='milk_ca_smooth_points', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+
+---
+class: inverse
+
+## Your turn
+
+.leftcol[
+
+Use the `nasa_global_temps.csv` data to explore ways to visualize the change in average global temperatures.
+
+Consider using:
+
+- points
+- lines
+- areas
+- smoothed lines
+
+]
+.rightcol[
+```{r, echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+ggplot(global_temps,
+       aes(x = year, y = meanTemp)) +
+    geom_point(color = 'steelblue', size = 1.5) +
+    theme_half_open() +
+    labs(x = 'Year',
+         y = 'Temperature anomaly (C)')
+```
+]
