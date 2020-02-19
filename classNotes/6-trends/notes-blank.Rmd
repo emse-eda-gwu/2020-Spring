@@ -1,0 +1,161 @@
+---
+title: "Week 6 In Class Notes"
+output: html_document
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+# install.packages('viridis')
+# install.packages('gganimate')
+# install.packages('plotly')
+
+library(knitr)
+library(cowplot)
+library(tidyverse)
+library(viridis)
+library(gganimate)
+library(plotly)
+library(here)
+
+options(
+    htmltools.dir.version = FALSE,
+    knitr.table.format = "html",
+    knitr.kable.NA = '',
+    tibble.width = Inf)
+knitr::opts_chunk$set(
+    warning = FALSE,
+    message = FALSE,
+    fig.retina = 3)
+dplyr.width = Inf
+```
+
+Load all the data sets:
+
+```{r}
+gapminder        <- read_csv(here::here('data', 'gapminder.csv'))
+milk_production  <- read_csv(here::here('data', 'milk_production.csv'))
+global_temps     <- read_csv(here::here('data', 'nasa_global_temps.csv'))
+hotdogs          <- read_csv(here::here('data', 'hot_dog_winners.csv'))
+internet_country <- read_csv(here::here('data', 'internet_users_country.csv'))
+internet_region  <- read_csv(here::here('data', 'internet_users_region.csv'))
+us_diseases      <- read_csv(here::here('data', 'us_contagious_diseases.csv'))
+```
+
+# 1. Visualizing single variables over time
+
+Use the `nasa_global_temps.csv` data to explore ways to visualize the change in average global temperatures.
+
+Consider using:
+
+- points
+- lines
+- areas
+- smoothed lines
+
+Dot plot:
+
+```{r, fig.height=3.5, fig.width=6}
+ggplot(global_temps) + 
+    geom_point(aes(x = year, y = meanTemp), color = 'grey', alpha = 0.3) +
+    geom_smooth(aes(x = year, y = meanTemp), se = FALSE) + 
+    geom_hline(yintercept = 0, color = 'grey', linetype = 'dashed') +
+    theme_half_open()
+
+
+```
+
+Line plot:
+
+```{r, fig.height=5, fig.width=6}
+
+# Write plot code here
+
+```
+
+Smoothed line plot:
+
+```{r, fig.height=5, fig.width=6}
+
+# Write plot code here
+
+```
+
+# 2. Visualizing mutliple variables over time
+
+Use the `internet_users_country.csv` data to create the chart shown on the screen.
+
+First summarize the data:
+
+```{r}
+internet_country_summary <- internet_country %>%
+    filter(country %in% c(
+        'United States', 'China',
+        'Singapore', 'Cuba')) %>%
+    mutate(
+        label = ifelse(year == max(year), country, NA))
+```
+
+Now make the plot:
+
+```{r, fig.height=4, fig.width=7}
+
+ggplot(internet_country_summary, 
+       aes(x = year, y = percent, color = country)) + 
+    geom_line() + 
+    geom_text(aes(label = label), hjust = 0, nudge_x = 1) + 
+    coord_cartesian(clip = 'off') + 
+    theme_half_open(font_size = 18) + 
+    theme(legend.position = 'none',
+          plot.margin = margin(0.1, 2, 0.1, 0.1, 'cm'))
+
+```
+
+Use the `milk_production.csv` data to create the chart shown on the screen.
+
+First summarize the data:
+
+```{r}
+milk_production_summary <- milk_production %>%
+    mutate(
+        milk_produced = milk_produced / 10^9,
+        state = fct_reorder(state, milk_produced))
+```
+
+Now make the plot:
+
+```{r, echo=FALSE, fig.height=7, fig.width=8}
+
+ggplot(milk_production_summary) + 
+    geom_tile(aes(x = year, y = state, fill = milk_produced)) +
+     scale_fill_viridis(option = 'inferno', direction = -1,
+                       trans = 'sqrt') + 
+    theme_minimal()
+    
+
+```
+
+# 3. Animation
+
+Use the `internet_users_country.csv` data to create the animation shown on the screen.
+
+**Hint**: use the `internet_country_summary` data frame from part 2 above!
+
+```{r, fig.height=4, fig.width=7}
+
+# Write plot code here to make the figure
+internet_country_animation <- ggplot(internet_country_summary,
+    aes(x = year, y = percent, color = country)) + 
+    geom_line() + 
+    geom_text(aes(label = country), hjust = 0, nudge_x = 1) + 
+    coord_cartesian(clip = 'off') + 
+    theme_half_open(font_size = 18) + 
+    theme(legend.position = 'none',
+          plot.margin = margin(0.1, 2, 0.1, 0.1, 'cm')) + 
+    transition_reveal(year)
+
+# Now render the animation
+animate(internet_country_animation, end_pause = 10,
+        width = 800, height = 450, res = 150)
+
+# Save last animation
+# anim_save(here::here('images', 'internet_country_animation.gif'))
+```

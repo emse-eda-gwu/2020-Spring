@@ -25,3 +25,4 @@ Assignment 4 (5 min)
 # ----------------------------------------------------------------------
 # Post-class notes
 
+Make sure libraries are installed!
