@@ -17,6 +17,8 @@ For the final project, you will:
 - Create visualizations to effectively communicate the results of your analysis using the principles of information visualization covered in this course.
 - Document your entire analysis in a reproducible format, including a detailed curation of the data used, analysis conducted, and results produced.
 
+**Click [here](a-project-template.html) for a template to use for your analysis**.
+
 To make the overall project more manageable, it is broken down into separate "milestone" deliverables due throughout the semester, starting with a proposal due just before spring break.
 
 **Summary of Deliverables**:
@@ -28,7 +30,7 @@ Proposal        | 6 %    | March 13
 Progress Report | 8 %    | April 10
 Peer Review     | 5 %    | April 17
 Presentation    | 8 %    | April 28
-Final Report    | 16 %   | May 8
+Final Report    | 16 %   | May 6
 </div>
 
 **Purpose**: The skills covered in this course are rooted in design rules and principles rather than formulas and equations. As such, the _application_ of these principles to a real data problem is one of the best ways to learn and assess mastery of these skills. I guarantee you one day you will need to apply these principles to communicate an idea to colleagues, so let's make sure you have at least one chance to practice before the [stakes are higher](https://emse6574-gwu.github.io/2019-Fall/challengerExplosion.html).
@@ -45,9 +47,9 @@ Final Report    | 16 %   | May 8
 
 **Weight**: This assignment is worth 6% of your final grade.
 
-**Submission Details**: You may write your proposal using any tool you wish (e.g. Microsoft Word, RMarkdown), but you must submit your proposal as a PDF document on Blackboard by the due date.
+**Submission Details**: You may write your proposal using any tool you wish (e.g. Microsoft Word, RMarkdown), but you must submit your proposal as a **PDF document** on Blackboard by the due date.
 
-**Assessment**: We will use [this rubric](assignments/project/proposal-rubric.pdf) to grade your proposal.
+**Assessment**: We will use [this rubric](assignments/project/proposal_rubric.pdf) to grade your proposal.
 
 **Tasks**:
 
@@ -82,28 +84,34 @@ Write a 1-2 page proposal of an exploratory data analysis that you plan to condu
 
 ---
 
+
+
+**Tasks**:
+
+Your final report should be a fully reproducible product and available online as a html webpage. It should include text, data, code, and plots. Below is a list of specific items your final report should include - the % in brackets indicates points towards this assignment grade:
+
+
 # Progress Report
 
 **Due**: April 10 by 11:00 pm
 
 **Weight**: This assignment is worth 8% of your final grade.
 
-**Submission Details**: Submit your progress report as a PDF document on Blackboard by the due date.
+**Submission Details**: Your progress report should be written as a .Rmd file that compiles to a html webpage. **Click [here](a-project-template.html) for a template to use for your analysis.** Submit your entire project folder (including your .Rmd file, data files, .RProj file, etc.) as a single .zip file on Blackboard by the due date.
 
 **Tasks**:
 
-Write a 3-4 page report summarizing your progress towards your project thus far, including summary statistics and preliminary charts. By this point, you should have already identified data source(s) for your project and begun exploring the data.
+Write a report summarizing progress you have made towards your project thus far, including summary statistics of your data and preliminary charts. You should have already identified data source(s) for your project and begun exploring the data.
 
-Alongside this report, **students working in teams must submit a review of their teammates' contributions** to help ensure that the workload and grading are equitable. The link to the team feedback form is listed on the Blackboard submission page for this assignment.
+Alongside this report, **students working in teams must submit a short review of their teammates' contributions** to help ensure that the workload and grading for team members are equitable. The link to the team feedback form is listed on the Blackboard submission page for this assignment.
 
 Below is a list of specific items your progress report should include - the % in brackets indicates points towards this assignment grade:
 
 1. [10%] Follow these formatting rules:
 
-    - Be between 3 and 4 pages in length, including all images.
-    - 12 point font, 1 inch margins.
-    - Write your project title at the top of the document, which can be modified from your previous title (e.g. **Title**: `<insert title>`).
-    - List the name(s) of student(s) involved in the project below the project title (e.g. **Authors**: `<insert list of names>`).
+    - As the report will compile to a html webpage, there is no length requirement; your report should be sufficiently detailed to address the requirements listed below and sufficiently concise such that it is expressed in the fewest necessary words.
+    - In your markdown YAML header, include the project title and the name(s) of student(s) involved in the project such that they appear at the top of the rendered html page.
+    - Your report should be written in a narrative format (i.e. using coherent pargraphs rather than a series of bullet points). You may use headings where appropriate to break up your report into sections.
 
 2. [20%] State a clear research question. This can (and probably should) be a revised question from your proposal. Again, follow [these guidelines](https://writingcenter.gmu.edu/guides/how-to-write-a-research-question).
 
@@ -213,11 +221,11 @@ You will present your analysis with your teammates in class on April 29. Your sl
 
 # Final Report
 
-**Due**: May 8 by 11:00 pm
+**Due**: May 6 by 11:00 pm
 
 **Weight**: This assignment is worth 16% of your final grade.
 
-**Submission Details**: Your final report should be written as a .Rmd file that compiles to a webpage. Publish your compiled page online (e.g. via RPubs, Github, etc.), then submit your entire project folder (including your .Rmd file, data files, .RProj file, etc.) as a single .zip file on Blackboard by the due date. Also include a link to the published page in your Blackboard submission.
+**Submission Details**: Your final report should be written as a .Rmd file that compiles to a html webpage. **Click [here](a-project-template.html) for a template to use for your analysis.** Publish your compiled page online (e.g. via RPubs, Github, etc.), then submit your entire project folder (including your .Rmd file, data files, .RProj file, etc.) as a single .zip file on Blackboard by the due date. Also include a link to the published report page in your Blackboard submission.
 
 **Tasks**:
 
@@ -225,9 +233,9 @@ Your final report should be a fully reproducible product and available online as
 
 1. [10%] Follow these formatting rules:
 
-    - As the final report is a webpage, there is no length requirement; your analysis should be sufficiently long to address your research question and sufficiently concise such that it is expressed in the fewest necessary words.
+    - As the report will compile to a html webpage, there is no length requirement; your report should be sufficiently detailed to address the requirements listed below and sufficiently concise such that it is expressed in the fewest necessary words.
     - In your markdown YAML header, include the project title and the name(s) of student(s) involved in the project such that they appear at the top of the rendered html page.
-    - Your report should be written in a narrative format (i.e. using coherent pargraphs rather than a series of bullet points). You may use headings where appropriate to break up your report into natural sections.
+    - Your report should be written in a narrative format (i.e. using coherent pargraphs rather than a series of bullet points). You may use headings where appropriate to break up your report into sections.
 
 2. [20%] State your research question and explain why we should care.
 
