@@ -1,0 +1,432 @@
+
+---
+.leftcol40[
+
+## Stragies for when variables encode 2 things
+
+#### 1. Divide & conquer
+#### 2. Gather, separate, spread
+
+<br>
+
+Example:
+
+Winners of Nathan's hot dog eating contest
+]
+.rightcol60[.center[
+<center>
+<img src="images/hot_dogs.png" width=500>
+</center>
+]]
+
+---
+## Strategy 1: divide & conquer
+
+.leftcol40[
+Steps:
+
+1. Read in the data
+2. Clean the names
+3. Remove `*` note at bottom of table
+]
+.rightcol60[
+```{r}
+hot_dogs <- read_excel(
+    here::here('data', 'hot_dog_winners.xlsx'),
+    sheet = 'hot_dog_winners') %>%
+    clean_names() %>%
+    dplyr::filter(!is.na(mens))
+
+glimpse(hot_dogs)
+```
+]
+
+---
+## Strategy 1: divide & conquer
+
+.leftcol40[
+Steps
+
+1. Read in the data
+2. Clean the names
+3. Remove `*` note at bottom of table
+4. **Split data into two competitions with the same variable names**
+5. **Create new variable in each data frame: `competition`**
+]
+.rightcol60[
+```{r}
+hot_dogs_m <- hot_dogs %>%
+    select(
+        year,
+        competitor = mens,
+        dogs_eaten = dogs_eaten_3,
+        country    = country_4) %>%
+    mutate(competition = 'Mens')
+
+hot_dogs_w <- hot_dogs %>%
+    select(
+        year,
+        competitor = womens,
+        dogs_eaten = dogs_eaten_6,
+        country    = country_7) %>%
+    mutate(competition = 'Womens') %>%
+    dplyr::filter(!is.na(competitor))
+```
+]
+
+---
+## Strategy 1: divide & conquer
+
+.leftcol40[
+Steps
+
+1. Read in the data
+2. Clean the names
+3. Remove `*` note at bottom of table
+4. Split data into two competitions **with the same variable names**
+5. Create new variable in each data frame: `competition`
+6. **Merge data together with `bind_rows()`**
+7. **Clean up final data frame**
+]
+.rightcol60[
+```{r}
+hot_dogs <- bind_rows(hot_dogs_m, hot_dogs_w) %>% #<<
+    mutate(
+        new_record = str_detect(dogs_eaten, "\\*"),
+        dogs_eaten = parse_number(dogs_eaten),
+        year       = as.numeric(year))
+
+glimpse(hot_dogs)
+```
+]
+
+---
+## Strategy 2: gather, separate, spread
+
+.leftcol40[
+Steps:
+
+1. Read in the data
+2. Clean the names
+3. Remove `*` note at bottom of table
+]
+.rightcol60[
+```{r}
+hot_dogs <- read_excel(
+    here::here('data', 'hot_dog_winners.xlsx'),
+    sheet = 'hot_dog_winners') %>%
+    clean_names() %>%
+    dplyr::filter(!is.na(mens))
+
+glimpse(hot_dogs)
+```
+]
+
+---
+## Strategy 2: gather, separate, spread
+
+.leftcol40[
+Steps:
+
+1. Read in the data
+2. Clean the names
+3. Remove `*` note at bottom of table
+4. **Rename variables**
+5. **Gather all the "joint" variables**
+]
+.rightcol60[
+```{r}
+hot_dogs <- hot_dogs %>%
+    select(
+        year,
+        competitor.mens   = mens,
+        competitor.womens = womens,
+        dogs_eaten.mens   = dogs_eaten_3,
+        dogs_eaten.womens = dogs_eaten_6,
+        country.mens      = country_4,
+        country.womens    = country_7) %>%
+    gather(key = 'variable', value = 'value',
+           competitor.mens:country.womens)
+
+head(hot_dogs, 3)
+```
+]
+
+---
+## Strategy 2: gather, separate, spread
+
+.leftcol30[
+Steps:
+
+1. Read in the data
+2. Clean the names
+3. Remove `*` note at bottom of table
+4. Rename variables
+5. Gather all the "joint" variables
+6. **Separate "joint" variables into components**
+]
+.rightcol70[
+```{r}
+hot_dogs <- hot_dogs %>%
+    separate(variable, into = c('variable', 'competition'),
+             sep = '\\.')
+
+head(hot_dogs)
+```
+]
+
+---
+## Strategy 2: gather, separate, spread
+
+.leftcol30[
+Steps:
+
+1. Read in the data
+2. Clean the names
+3. Remove `*` note at bottom of table
+4. Rename variables
+5. Gather all the "joint" variables
+6. Separate "joint" variables into components
+7. **Spread variable and value back to columns**
+8. **Clean up final data frame**
+]
+.rightcol70[
+```{r}
+hot_dogs <- hot_dogs %>%
+    spread(key = variable, value = value) %>% #<<
+    mutate(
+        new_record = str_detect(dogs_eaten, "\\*"),
+        dogs_eaten = parse_number(dogs_eaten),
+        year       = as.numeric(year))
+
+glimpse(hot_dogs)
+```
+]
+
+---
+.leftcol[.code60[
+Divide & conquer
+```{r, eval=FALSE}
+hot_dogs <- read_excel(
+    here::here('data', 'hot_dog_winners.xlsx'),
+    sheet = 'hot_dog_winners') %>%
+    clean_names() %>%
+    dplyr::filter(!is.na(mens))
+
+# Divide #<<
+hot_dogs_m <- hot_dogs %>% #<<
+    select( #<<
+        year, #<<
+        competitor = mens, #<<
+        dogs_eaten = dogs_eaten_3, #<<
+        country    = country_4) %>% #<<
+    mutate(competition = 'Mens') #<<
+
+hot_dogs_w <- hot_dogs %>% #<<
+    select( #<<
+        year, #<<
+        competitor = womens, #<<
+        dogs_eaten = dogs_eaten_6, #<<
+        country    = country_7) %>% #<<
+    mutate(competition = 'Womens') %>%  #<<
+    dplyr::filter(!is.na(competitor)) #<<
+
+# Merge and finish cleaning
+hot_dogs <- bind_rows(hot_dogs_m, hot_dogs_w) %>% #<<
+    mutate(
+        new_record = str_detect(dogs_eaten, "\\*"),
+        dogs_eaten = parse_number(dogs_eaten),
+        year       = as.numeric(year))
+```
+]]
+.rightcol[.code60[
+Gather, separate, spread
+```{r, eval=FALSE}
+hot_dogs <- read_excel(
+    here::here('data', 'hot_dog_winners.xlsx'),
+    sheet = 'hot_dog_winners') %>%
+    clean_names() %>%
+    dplyr::filter(!is.na(mens)) %>%
+    # Rename variables #<<
+    select( #<<
+        year, #<<
+        competitor.mens   = mens, #<<
+        competitor.womens = womens, #<<
+        dogs_eaten.mens   = dogs_eaten_3, #<<
+        dogs_eaten.womens = dogs_eaten_6, #<<
+        country.mens      = country_4, #<<
+        country.womens    = country_7) %>% #<<
+    # Gather "joint" variables #<<
+    gather(key = 'variable', value = 'value', #<<
+           competitor.mens:country.womens) %>%  #<<
+    # Separate "joint" variables #<<
+    separate(variable, into = c('variable', 'competition'), #<<
+             sep = '\\.') %>%  #<<
+    # Spread "joint" variables #<<
+    spread(key = variable, value = value) %>% #<<
+    # Finish cleaning
+    mutate(
+        new_record = str_detect(dogs_eaten, "\\*"),
+        dogs_eaten = parse_number(dogs_eaten),
+        year       = as.numeric(year))
+```
+]]
+
+---
+.leftcol30[
+## Strategies for dealing with sub-headers
+
+<br>
+
+Example:
+
+OICA passenger car sales data
+]
+.rightcol70[.center[
+<br>
+<center>
+<img src="images/pc_sales.png" width=800>
+</center>
+]]
+
+---
+## Strategies for dealing with sub-headers
+
+.leftcol40[
+Steps:
+
+1. Read in the data, skipping first 5 rows
+2. Clean the names
+]
+.rightcol60[
+```{r}
+pc_sales <- read_excel(
+    here::here('data', 'pc_sales_2018.xlsx'),
+    sheet = 'pc_sales', skip = 5) %>%
+    clean_names() %>%
+    rename(country = regions_countries)
+
+glimpse(pc_sales)
+```
+]
+
+---
+## Strategies for dealing with sub-headers
+
+.leftcol30[
+Steps:
+
+1. Read in the data, skipping first 5 rows
+2. Clean the names
+3. **Filter out bad columns**
+4. **Filter out bad rows**
+
+<br>
+
+Use **datapasta** to get rows to drop
+]
+.rightcol70[
+```{r}
+drop <- c(
+    'EUROPE', 'EU 28 countries + EFTA',
+    'EU 15 countries + EFTA', 'EUROPE NEW MEMBERS',
+    'RUSSIA, TURKEY & OTHER EUROPE', 'AMERICA',
+    'NAFTA', 'CENTRAL & SOUTH AMERICA',
+    'ASIA/OCEANIA/MIDDLE EAST', 'AFRICA', 'ALL COUNTRIES')
+
+pc_sales <- pc_sales %>%
+    select(-c(x2:x4)) %>%       # Drop bad columns
+    filter(! country %in% drop, # Drop bad rows
+           ! is.na(country))
+
+head(pc_sales)
+```
+]
+
+---
+## Strategies for dealing with sub-headers
+
+.leftcol30[
+Steps:
+
+1. Read in the data, skipping first 5 rows
+2. Clean the names
+3. Filter out bad columns
+4. Filter out bad rows
+5. **Gather the year variables**
+]
+.rightcol70[
+```{r}
+pc_sales <- pc_sales %>%
+    gather(key = 'year', value = 'num_cars', x2005:x2018)
+
+head(pc_sales)
+```
+]
+
+---
+## Strategies for dealing with sub-headers
+
+.leftcol30[
+Steps:
+
+1. Read in the data, skipping first 5 rows
+2. Clean the names
+3. Filter out bad columns
+4. Filter out bad rows
+5. Gather the year variables
+6. **Separate the "x" from the year**
+]
+.rightcol70[
+```{r}
+pc_sales <- pc_sales %>%
+    separate(year, into = c('drop', 'year'), sep = 'x',
+             convert = TRUE)
+
+head(pc_sales)
+```
+]
+
+---
+## Strategies for dealing with sub-headers
+
+.leftcol30[
+Steps:
+
+1. Read in the data, skipping first 5 rows
+2. Clean the names
+3. Filter out bad columns
+4. Filter out bad rows
+5. Gather the year variables
+6. Separate the "x" from the year
+7. **Finish cleaning**
+
+]
+.rightcol70[
+```{r}
+pc_sales <- pc_sales %>%
+    select(-drop) %>%
+    mutate(
+        country  = str_to_title(country),
+        num_cars = num_cars / 10^6)
+
+head(pc_sales)
+```
+]
+
+---
+class: inverse
+
+# Your turn: `weather` case study
+
+Follow along as we:
+
+1. Import the data
+2. Gather columns that are values
+3. Spread values that are variable names
+4. Clean up dates
+5. Re-arrange the column order
+6. Convert strings to numbers
+7. Re-name columns
+8. Deal with missing values
+9. Fix errors in the data

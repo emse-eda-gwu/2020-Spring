@@ -373,7 +373,13 @@ Data file: north_america_bear_killings.txt
 # ----------------------------------------------------------------------
 Data file: pc_sales_2018.xlsx
 
-<need to update>
+Date downloaded: January 5, 2020
+
+Description: Annual passenger car sales by country, 2005-2018
+
+Source of downloaded file:
+- International Organization of Motor Vehicle Manufacturers
+- http://www.oica.net/category/sales-statistics/
 
 
 

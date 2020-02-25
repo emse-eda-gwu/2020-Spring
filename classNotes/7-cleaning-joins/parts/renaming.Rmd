@@ -1,0 +1,207 @@
+<!--
+got the content on select() from Suzan Baert:
+https://suzan.rbind.io/2018/01/dplyr-tutorial-1/
+-->
+
+---
+## Renaming made easy
+
+.leftcol35[.noborder[.center[
+`janitor::clean_names()`
+
+<center>
+<img src="images/janitor_logo.png" width=200>
+</center>
+]]]
+--
+.rightcol65[
+```{r}
+wind <- read_excel(
+    here::here('data',
+               'US_State_Wind_Energy_Facts_2018.xlsx'))
+
+glimpse(wind)
+```
+]
+
+---
+## Renaming made easy
+
+.leftcol35[.noborder[.center[
+`janitor::clean_names()`
+
+<center>
+<img src="images/janitor_logo.png" width=200>
+</center>
+
+]]]
+.rightcol65[
+```{r}
+wind <- read_excel(
+    here::here('data',
+               'US_State_Wind_Energy_Facts_2018.xlsx')) %>%
+    clean_names() #<<
+
+glimpse(wind)
+```
+]
+
+---
+## Renaming made easy
+
+.leftcol35[.noborder[.center[
+`janitor::clean_names()`
+
+<center>
+<img src="images/janitor_logo.png" width=200>
+</center>
+
+]]]
+.rightcol65[
+```{r}
+wind <- read_excel(
+    here::here('data',
+               'US_State_Wind_Energy_Facts_2018.xlsx')) %>%
+    clean_names(case = 'lower_camel') #<<
+
+glimpse(wind)
+```
+]
+
+---
+### `select()`: more powerful than you probably thought
+
+--
+.leftcol[.code70[
+Use `select()` to choose which columns to **keep**
+```{r}
+msleep %>%
+    select(name:order, sleep_total:sleep_cycle) %>%
+    glimpse()
+```
+]]
+--
+.rightcol[.code70[
+Use `select()` to choose which columns to **drop**
+```{r}
+msleep %>%
+    select(-(name:order)) %>%
+    glimpse()
+```
+]]
+
+---
+## Select columns based on partial column names
+
+--
+.leftcol[.code70[
+Select columns that start with "sleep":
+```{r}
+msleep %>%
+    select(name, starts_with("sleep")) %>%
+    glimpse()
+```
+]]
+--
+.rightcol[.code70[
+Select columns that contain "eep" and end with "wt":
+```{r}
+msleep %>%
+    select(contains("eep"), ends_with("wt")) %>%
+    glimpse()
+```
+]]
+
+---
+## Select columns based on their data type
+
+--
+.leftcol60[
+Select only numeric columns:
+```{r}
+msleep %>%
+    select_if(is.numeric) %>%
+    glimpse()
+```
+]
+
+---
+## Use `select()` to reorder variables
+
+--
+.leftcol45[.code70[
+```{r}
+msleep %>%
+    select(everything()) %>%
+    glimpse()
+```
+]]
+--
+.rightcol55[.code70[
+```{r}
+msleep %>%
+    select(conservation, sleep_total, everything()) %>%
+    glimpse()
+```
+]]
+
+---
+## Use `select()` to **rename** variables
+
+--
+.leftcol[.code70[
+Use `rename()` to just change the name
+```{r}
+msleep %>%
+    rename(animal = name,
+           extinction_threat = conservation) %>%
+    glimpse()
+```
+]]
+--
+.rightcol[.code70[
+Use `select()` to change the name **and drop everything else**
+```{r}
+msleep %>%
+    select(animal = name,
+           extinction_threat = conservation) %>%
+    glimpse()
+```
+]]
+
+---
+class: inverse
+
+.leftcol40[
+## Your turn
+
+```{r, echo=FALSE}
+countdown(minutes = 15,
+          warn_when = 30,
+          update_every = 15,
+          left = 8,
+          font_size = '2em')
+```
+Read in the `hot_dog_winners.xlsx` file and adjust the variable names and types to the following:
+```{r, echo=FALSE}
+read_excel(here::here('data', 'hot_dog_winners.xlsx'),
+           col_types = c('numeric', 'text', 'numeric', 'text',
+                         'text', 'numeric', 'text')) %>%
+    clean_names() %>%
+    select(
+        year,
+        competitor.mens   = mens,
+        competitor.womens = womens,
+        dogs_eaten.mens   = dogs_eaten_3,
+        dogs_eaten.womens = dogs_eaten_6,
+        country.mens      = country_4,
+        country.womens    = country_7) %>%
+    glimpse()
+```
+
+]
+.rightcol60[
+<center>
+<img src="images/hot_dogs.png" width=500>
+</center>
+]

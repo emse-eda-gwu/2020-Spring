@@ -1,0 +1,23 @@
+
+## 1) Cleaning messy data
+
+- Steps while reading in data
+- janitor
+- Sub-headers in Excel files
+
+
+
+## 2) Recoding messy data
+
+- Recoding data
+
+# Dates with lubridate
+https://cran.r-project.org/web/packages/lubridate/vignettes/lubridate.html
+
+year = year(date)
+
+
+
+## 3) Joins
+
+- joins (use this: https://r4ds.had.co.nz/relational-data.html)
