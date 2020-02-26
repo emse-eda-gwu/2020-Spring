@@ -21,3 +21,10 @@ year = year(date)
 ## 3) Joins
 
 - joins (use this: https://r4ds.had.co.nz/relational-data.html)
+
+# ----------------------------------------------------------------------
+# Post-class notes
+
+Ran out of time again :(
+
+Need to spend less time up front, possibly cut the re-typing content since we often do the retyping after reading in data anyway.
