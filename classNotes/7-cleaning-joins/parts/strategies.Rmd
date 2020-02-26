@@ -56,12 +56,12 @@ Steps
 .rightcol60[
 ```{r}
 hot_dogs_m <- hot_dogs %>%
-    select(
-        year,
-        competitor = mens,
-        dogs_eaten = dogs_eaten_3,
-        country    = country_4) %>%
-    mutate(competition = 'Mens')
+    select( 
+        year, 
+        competitor = mens, 
+        dogs_eaten = dogs_eaten_3, 
+        country    = country_4) %>% 
+    mutate(competition = 'Mens') #<<
 
 hot_dogs_w <- hot_dogs %>%
     select(
@@ -69,7 +69,7 @@ hot_dogs_w <- hot_dogs %>%
         competitor = womens,
         dogs_eaten = dogs_eaten_6,
         country    = country_7) %>%
-    mutate(competition = 'Womens') %>%
+    mutate(competition = 'Womens') %>% #<<
     dplyr::filter(!is.na(competitor))
 ```
 ]
@@ -145,8 +145,8 @@ hot_dogs <- hot_dogs %>%
         dogs_eaten.womens = dogs_eaten_6,
         country.mens      = country_4,
         country.womens    = country_7) %>%
-    gather(key = 'variable', value = 'value',
-           competitor.mens:country.womens)
+    gather(key = 'variable', value = 'value',  #<<
+           competitor.mens:country.womens)  #<<
 
 head(hot_dogs, 3)
 ```
@@ -168,8 +168,8 @@ Steps:
 .rightcol70[
 ```{r}
 hot_dogs <- hot_dogs %>%
-    separate(variable, into = c('variable', 'competition'),
-             sep = '\\.')
+    separate(variable, into = c('variable', 'competition'),  #<<
+             sep = '\\.') #<<
 
 head(hot_dogs)
 ```
@@ -358,7 +358,7 @@ Steps:
 .rightcol70[
 ```{r}
 pc_sales <- pc_sales %>%
-    gather(key = 'year', value = 'num_cars', x2005:x2018)
+    gather(key = 'year', value = 'num_cars', x2005:x2018) #<<
 
 head(pc_sales)
 ```
@@ -380,8 +380,8 @@ Steps:
 .rightcol70[
 ```{r}
 pc_sales <- pc_sales %>%
-    separate(year, into = c('drop', 'year'), sep = 'x',
-             convert = TRUE)
+    separate(year, into = c('drop', 'year'), sep = 'x', #<<
+             convert = TRUE) #<<
 
 head(pc_sales)
 ```

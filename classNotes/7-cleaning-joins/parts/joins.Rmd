@@ -154,6 +154,7 @@ state_data <- milk_production %>%
 head(state_data)
 ```
 ]]]
+--
 .rightcol[.font90[
 2) Create the data frame `wildlife_impacts2` by joining the `state_data` data frame to the `wildlife_impacts` data frame, adding the variables `region` and `state_name`.
 

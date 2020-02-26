@@ -376,7 +376,7 @@ class: inverse
 
 .leftcol[.font90[
 ## Your turn
-<div class="countdown blink-colon noupdate-15" id="timer_5e567e13" style="bottom:0;left:8;font-size:1.5em;" data-warnwhen="30">
+<div class="countdown blink-colon noupdate-15" id="timer_5e569637" style="bottom:0;left:8;font-size:1.5em;" data-warnwhen="30">
 <code class="countdown-time"><span class="countdown-digits minutes">15</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
@@ -405,6 +405,7 @@ head(state_data)
 ## 6 Northeast Connecticut   CT
 ```
 ]]]
+--
 .rightcol[.font90[
 2) Create the data frame `wildlife_impacts2` by joining the `state_data` data frame to the `wildlife_impacts` data frame, adding the variables `region` and `state_name`.
 
@@ -705,6 +706,69 @@ glimpse(wind)
 ]
 
 ---
+## Renaming made easy
+
+.leftcol35[.noborder[.center[
+`janitor::clean_names()`
+
+&lt;center&gt;
+&lt;img src="images/janitor_logo.png" width=200&gt;
+&lt;/center&gt;
+
+]]]
+.rightcol65[
+
+```r
+wind &lt;- read_excel(
+    here::here('data',
+               'US_State_Wind_Energy_Facts_2018.xlsx')) %&gt;%
+*   clean_names(case = 'screaming_snake')
+
+glimpse(wind)
+```
+
+```
+## Observations: 50
+## Variables: 7
+## $ RANKING                   &lt;chr&gt; "1.0", "2.0", "3.0", "4.0", "5.0", "6.0", "…
+## $ STATE                     &lt;chr&gt; "TEXAS", "OKLAHOMA", "IOWA", "CALIFORNIA", …
+## $ INSTALLED_CAPACITY_MW     &lt;dbl&gt; 23262, 7495, 7312, 5686, 5110, 4464, 3699, …
+## $ EQUIVALENT_HOMES_POWERED  &lt;chr&gt; "6235000.0", "2268000.0", "1935000.0", "129…
+## $ TOTAL_INVESTMENT_MILLIONS &lt;chr&gt; "42000.0", "13700.0", "14200.0", "12600.0",…
+## $ WIND_PROJECTS_ONLINE      &lt;dbl&gt; 136, 45, 107, 104, 35, 49, 98, 31, 25, 20, …
+## $ NUMBER_OF_WIND_TURBINES   &lt;chr&gt; "12750.0", "3717.0", "4145.0", "6972.0", "2…
+```
+]
+
+---
+### `select()`: more powerful than you probably thought
+
+--
+.leftcol60[.code70[
+&amp;zwj;Example: data on sleeping patterns of different mammals
+
+```r
+glimpse(msleep)
+```
+
+```
+## Observations: 83
+## Variables: 11
+## $ name         &lt;chr&gt; "Cheetah", "Owl monkey", "Mountain beaver", "Greater sho…
+## $ genus        &lt;chr&gt; "Acinonyx", "Aotus", "Aplodontia", "Blarina", "Bos", "Br…
+## $ vore         &lt;chr&gt; "carni", "omni", "herbi", "omni", "herbi", "herbi", "car…
+## $ order        &lt;chr&gt; "Carnivora", "Primates", "Rodentia", "Soricomorpha", "Ar…
+## $ conservation &lt;chr&gt; "lc", NA, "nt", "lc", "domesticated", NA, "vu", NA, "dom…
+## $ sleep_total  &lt;dbl&gt; 12.1, 17.0, 14.4, 14.9, 4.0, 14.4, 8.7, 7.0, 10.1, 3.0, …
+## $ sleep_rem    &lt;dbl&gt; NA, 1.8, 2.4, 2.3, 0.7, 2.2, 1.4, NA, 2.9, NA, 0.6, 0.8,…
+## $ sleep_cycle  &lt;dbl&gt; NA, NA, NA, 0.1333333, 0.6666667, 0.7666667, 0.3833333, …
+## $ awake        &lt;dbl&gt; 11.9, 7.0, 9.6, 9.1, 20.0, 9.6, 15.3, 17.0, 13.9, 21.0, …
+## $ brainwt      &lt;dbl&gt; NA, 0.01550, NA, 0.00029, 0.42300, NA, NA, NA, 0.07000, …
+## $ bodywt       &lt;dbl&gt; 50.000, 0.480, 1.350, 0.019, 600.000, 3.850, 20.490, 0.0…
+```
+]]
+
+---
 ### `select()`: more powerful than you probably thought
 
 --
@@ -753,7 +817,7 @@ msleep %&gt;%
 ]]
 
 ---
-## Select columns based on partial column names
+## Select columns based on **partial column names**
 
 --
 .leftcol[.code70[
@@ -796,7 +860,7 @@ msleep %&gt;%
 ]]
 
 ---
-## Select columns based on their data type
+## Select columns based on their **data type**
 
 --
 .leftcol60[
@@ -821,7 +885,7 @@ msleep %&gt;%
 ]
 
 ---
-## Use `select()` to reorder variables
+## Use `select()` to **reorder** variables
 
 --
 .leftcol45[.code70[
@@ -924,12 +988,69 @@ msleep %&gt;%
 ]]
 
 ---
+## Use `select()` to **rename** variables
+
+.leftcol[.code70[
+Use `rename()` to just change the name
+
+```r
+msleep %&gt;%
+    rename(animal = name,
+           extinction_threat = conservation) %&gt;%
+    glimpse()
+```
+
+```
+## Observations: 83
+## Variables: 11
+## $ animal            &lt;chr&gt; "Cheetah", "Owl monkey", "Mountain beaver", "Greate…
+## $ genus             &lt;chr&gt; "Acinonyx", "Aotus", "Aplodontia", "Blarina", "Bos"…
+## $ vore              &lt;chr&gt; "carni", "omni", "herbi", "omni", "herbi", "herbi",…
+## $ order             &lt;chr&gt; "Carnivora", "Primates", "Rodentia", "Soricomorpha"…
+## $ extinction_threat &lt;chr&gt; "lc", NA, "nt", "lc", "domesticated", NA, "vu", NA,…
+## $ sleep_total       &lt;dbl&gt; 12.1, 17.0, 14.4, 14.9, 4.0, 14.4, 8.7, 7.0, 10.1, …
+## $ sleep_rem         &lt;dbl&gt; NA, 1.8, 2.4, 2.3, 0.7, 2.2, 1.4, NA, 2.9, NA, 0.6,…
+## $ sleep_cycle       &lt;dbl&gt; NA, NA, NA, 0.1333333, 0.6666667, 0.7666667, 0.3833…
+## $ awake             &lt;dbl&gt; 11.9, 7.0, 9.6, 9.1, 20.0, 9.6, 15.3, 17.0, 13.9, 2…
+## $ brainwt           &lt;dbl&gt; NA, 0.01550, NA, 0.00029, 0.42300, NA, NA, NA, 0.07…
+## $ bodywt            &lt;dbl&gt; 50.000, 0.480, 1.350, 0.019, 600.000, 3.850, 20.490…
+```
+]]
+.rightcol[.code70[
+Use `select()` + `everything()` to change the name **and keep everything else**
+
+```r
+msleep %&gt;%
+    select(animal = name,
+           extinction_threat = conservation,
+*          everything()) %&gt;%
+    glimpse()
+```
+
+```
+## Observations: 83
+## Variables: 11
+## $ animal            &lt;chr&gt; "Cheetah", "Owl monkey", "Mountain beaver", "Greate…
+## $ extinction_threat &lt;chr&gt; "lc", NA, "nt", "lc", "domesticated", NA, "vu", NA,…
+## $ genus             &lt;chr&gt; "Acinonyx", "Aotus", "Aplodontia", "Blarina", "Bos"…
+## $ vore              &lt;chr&gt; "carni", "omni", "herbi", "omni", "herbi", "herbi",…
+## $ order             &lt;chr&gt; "Carnivora", "Primates", "Rodentia", "Soricomorpha"…
+## $ sleep_total       &lt;dbl&gt; 12.1, 17.0, 14.4, 14.9, 4.0, 14.4, 8.7, 7.0, 10.1, …
+## $ sleep_rem         &lt;dbl&gt; NA, 1.8, 2.4, 2.3, 0.7, 2.2, 1.4, NA, 2.9, NA, 0.6,…
+## $ sleep_cycle       &lt;dbl&gt; NA, NA, NA, 0.1333333, 0.6666667, 0.7666667, 0.3833…
+## $ awake             &lt;dbl&gt; 11.9, 7.0, 9.6, 9.1, 20.0, 9.6, 15.3, 17.0, 13.9, 2…
+## $ brainwt           &lt;dbl&gt; NA, 0.01550, NA, 0.00029, 0.42300, NA, NA, NA, 0.07…
+## $ bodywt            &lt;dbl&gt; 50.000, 0.480, 1.350, 0.019, 600.000, 3.850, 20.490…
+```
+]]
+
+---
 class: inverse
 
 .leftcol40[
 ## Your turn
 
-<div class="countdown blink-colon noupdate-15" id="timer_5e567ea3" style="bottom:0;left:8;font-size:2em;" data-warnwhen="30">
+<div class="countdown blink-colon noupdate-15" id="timer_5e569740" style="bottom:0;left:8;font-size:2em;" data-warnwhen="30">
 <code class="countdown-time"><span class="countdown-digits minutes">15</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 Read in the `hot_dog_winners.xlsx` file and adjust the variable names and types to the following:
@@ -958,7 +1079,7 @@ class: inverse
 
 # 5 minute break!
 
-<div class="countdown" id="timer_5e567bde" style="bottom:0;left:0;font-size:5em;" data-warnwhen="30">
+<div class="countdown" id="timer_5e5698af" style="bottom:0;left:0;font-size:5em;" data-warnwhen="30">
 <code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 
@@ -1404,7 +1525,7 @@ tuberculosis_rates
 ```r
 tuberculosis_rates %&gt;%
   separate(year, into = c("century", "year"),
-           sep = 2) %&gt;%
+           sep = 1) %&gt;%
   unite(year_new, century, year,
 *       sep = "")
 ```
@@ -1440,6 +1561,48 @@ class: inverse, middle, center
 `library(lubridate)`
 
 --
+.cols3[
+.center[Year-Month-Day]
+
+```r
+ymd('2020-02-26')
+```
+
+```
+## [1] "2020-02-26"
+```
+]
+
+---
+### Create dates from strings - **order is the ONLY thing that matters!**
+
+`library(lubridate)`
+
+.cols3[
+.center[Year-Month-Day]
+
+```r
+ymd('2020-02-26')
+```
+
+```
+## [1] "2020-02-26"
+```
+
+```r
+ymd('2020 Feb 26')
+```
+
+```
+## [1] "2020-02-26"
+```
+]
+
+---
+### Create dates from strings - **order is the ONLY thing that matters!**
+
+`library(lubridate)`
+
 .cols3[
 .center[Year-Month-Day]
 
@@ -1555,6 +1718,30 @@ year(date)
 ```
 ## [1] 2020
 ```
+]]
+
+---
+## Manipulate dates
+
+
+```r
+date &lt;- today()
+date
+```
+
+```
+## [1] "2020-02-26"
+```
+.leftcol[.code70[
+
+```r
+# Get the year
+year(date)
+```
+
+```
+## [1] 2020
+```
 
 ```r
 # Get the month
@@ -1607,6 +1794,25 @@ wday(date, label = TRUE, abbr = TRUE)
 ## Levels: Sun &lt; Mon &lt; Tue &lt; Wed &lt; Thu &lt; Fri &lt; Sat
 ```
 ]]
+
+---
+class: inverse 
+
+# Quick practice 
+
+On what day of the week were you born?
+
+.leftcol60[
+
+```r
+wday("2020-02-26", label = TRUE)
+```
+
+```
+## [1] Wed
+## Levels: Sun &lt; Mon &lt; Tue &lt; Wed &lt; Thu &lt; Fri &lt; Sat
+```
+]
 
 ---
 ## Modify elements of the date
@@ -1678,14 +1884,14 @@ After:
 ]]]
 --
 .rightcol[.font80[
-<div class="countdown blink-colon noupdate-15" id="timer_5e567d9b" style="right:0;bottom:0;font-size:1.5em;position: relative; width: min-content;&#10;                   display: block; margin-left: 300px;" data-warnwhen="30">
+<div class="countdown blink-colon noupdate-15" id="timer_5e569625" style="right:0;bottom:0;font-size:1.5em;position: relative; width: min-content;&#10;                   display: block; margin-left: 300px;" data-warnwhen="30">
 <code class="countdown-time"><span class="countdown-digits minutes">20</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
 </div>
 2) Use the **lubridate** package to create a new variable, `weekday_name`, from the `incident_date` variable in the `wildlife_impacts` data.
 
 3) Use `weekday_name` and `phase_of_flt` to make this plot of "arrival" and "departure" impacts from **Feb. 2016**.
 
-&lt;img src="slides-7-cleaning-joins_files/figure-html/unnamed-chunk-78-1.png" width="504" style="display: block; margin: auto;" /&gt;
+&lt;img src="slides-7-cleaning-joins_files/figure-html/unnamed-chunk-87-1.png" width="504" style="display: block; margin: auto;" /&gt;
 ]]
 
 
@@ -1773,12 +1979,12 @@ Steps
 
 ```r
 hot_dogs_m &lt;- hot_dogs %&gt;%
-    select(
-        year,
-        competitor = mens,
-        dogs_eaten = dogs_eaten_3,
-        country    = country_4) %&gt;%
-    mutate(competition = 'Mens')
+    select( 
+        year, 
+        competitor = mens, 
+        dogs_eaten = dogs_eaten_3, 
+        country    = country_4) %&gt;% 
+*   mutate(competition = 'Mens')
 
 hot_dogs_w &lt;- hot_dogs %&gt;%
     select(
@@ -1786,7 +1992,7 @@ hot_dogs_w &lt;- hot_dogs %&gt;%
         competitor = womens,
         dogs_eaten = dogs_eaten_6,
         country    = country_7) %&gt;%
-    mutate(competition = 'Womens') %&gt;%
+*   mutate(competition = 'Womens') %&gt;%
     dplyr::filter(!is.na(competitor))
 ```
 ]
@@ -1888,8 +2094,8 @@ hot_dogs &lt;- hot_dogs %&gt;%
         dogs_eaten.womens = dogs_eaten_6,
         country.mens      = country_4,
         country.womens    = country_7) %&gt;%
-    gather(key = 'variable', value = 'value',
-           competitor.mens:country.womens)
+*   gather(key = 'variable', value = 'value',
+*          competitor.mens:country.womens)
 
 head(hot_dogs, 3)
 ```
@@ -1921,8 +2127,8 @@ Steps:
 
 ```r
 hot_dogs &lt;- hot_dogs %&gt;%
-    separate(variable, into = c('variable', 'competition'),
-             sep = '\\.')
+*   separate(variable, into = c('variable', 'competition'),
+*            sep = '\\.')
 
 head(hot_dogs)
 ```
@@ -2183,7 +2389,7 @@ Steps:
 
 ```r
 pc_sales &lt;- pc_sales %&gt;%
-    gather(key = 'year', value = 'num_cars', x2005:x2018)
+*   gather(key = 'year', value = 'num_cars', x2005:x2018)
 
 head(pc_sales)
 ```
@@ -2218,8 +2424,8 @@ Steps:
 
 ```r
 pc_sales &lt;- pc_sales %&gt;%
-    separate(year, into = c('drop', 'year'), sep = 'x',
-             convert = TRUE)
+*   separate(year, into = c('drop', 'year'), sep = 'x',
+*            convert = TRUE)
 
 head(pc_sales)
 ```

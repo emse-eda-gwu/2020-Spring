@@ -69,6 +69,39 @@ glimpse(wind)
 ]
 
 ---
+## Renaming made easy
+
+.leftcol35[.noborder[.center[
+`janitor::clean_names()`
+
+<center>
+<img src="images/janitor_logo.png" width=200>
+</center>
+
+]]]
+.rightcol65[
+```{r}
+wind <- read_excel(
+    here::here('data',
+               'US_State_Wind_Energy_Facts_2018.xlsx')) %>%
+    clean_names(case = 'screaming_snake') #<<
+
+glimpse(wind)
+```
+]
+
+---
+### `select()`: more powerful than you probably thought
+
+--
+.leftcol60[.code70[
+&zwj;Example: data on sleeping patterns of different mammals
+```{r}
+glimpse(msleep)
+```
+]]
+
+---
 ### `select()`: more powerful than you probably thought
 
 --
@@ -91,7 +124,7 @@ msleep %>%
 ]]
 
 ---
-## Select columns based on partial column names
+## Select columns based on **partial column names**
 
 --
 .leftcol[.code70[
@@ -113,7 +146,7 @@ msleep %>%
 ]]
 
 ---
-## Select columns based on their data type
+## Select columns based on their **data type**
 
 --
 .leftcol60[
@@ -126,7 +159,7 @@ msleep %>%
 ]
 
 ---
-## Use `select()` to reorder variables
+## Use `select()` to **reorder** variables
 
 --
 .leftcol45[.code70[
@@ -165,6 +198,29 @@ Use `select()` to change the name **and drop everything else**
 msleep %>%
     select(animal = name,
            extinction_threat = conservation) %>%
+    glimpse()
+```
+]]
+
+---
+## Use `select()` to **rename** variables
+
+.leftcol[.code70[
+Use `rename()` to just change the name
+```{r}
+msleep %>%
+    rename(animal = name,
+           extinction_threat = conservation) %>%
+    glimpse()
+```
+]]
+.rightcol[.code70[
+Use `select()` + `everything()` to change the name **and keep everything else**
+```{r}
+msleep %>%
+    select(animal = name,
+           extinction_threat = conservation,
+           everything()) %>% #<<
     glimpse()
 ```
 ]]
