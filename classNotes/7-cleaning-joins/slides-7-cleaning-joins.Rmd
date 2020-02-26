@@ -27,7 +27,7 @@ class: title-slide, center, middle, inverse
 
 .large[EMSE 4197 | John Paul Helveston | February 26, 2020]
 
-```{r child = here::here('parts', 'intro.Rmd')}
+```{r child = here::here('parts', 'strategies.Rmd')}
 ```
 
 ---
@@ -148,3 +148,12 @@ Following [these guidelines](https://writingcenter.gmu.edu/guides/how-to-write-a
 - **Concise**: it is expressed in the fewest possible words.
 - **Complex**: it is not answerable with a simple "yes" or "no," but rather requires synthesis and analysis of data.
 - **Arguable**: its potential answers are open to debate rather than accepted facts (do others care about it?)
+
+---
+class: inverse, middle, center
+
+# This is an iterative process
+
+<center>
+<img src="images/rq_iteration.png" width=500>
+</center>

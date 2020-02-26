@@ -430,3 +430,32 @@ Follow along as we:
 7. Re-name columns
 8. Deal with missing values
 9. Fix errors in the data
+
+---
+class: inverse
+
+```{r, echo=FALSE}
+pv_cells <- read_excel(here::here('data', 'pv_cell_production.xlsx'),
+                       sheet = 'Cell Prod by Country', skip = 2, 
+                       col_types = 'numeric') %>% 
+    filter(! is.na(Year)) %>%
+    rename(year = Year) %>% 
+    gather(key = 'country', value = 'n', China:Others) %>% 
+    select(-World)
+```
+
+.leftcol[
+## Extra practice:<br>`pv_cells` case study
+
+Read in the `pv_cell_production.xlsx` file and format it to produce this data frame.
+```{r}
+pv_cells %>% 
+    distinct(country)
+```
+]
+.rightcol[
+```{r}
+head(pv_cells)
+tail(pv_cells)
+```
+]

@@ -336,7 +336,13 @@ weather <- weather %>%
 
 glimpse(weather)
 
+# Case study: PV Cells ------------------------------------------------
 
+pv_cells <- read_excel(here::here('data', 'pv_cell_production.xlsx'),
+                       sheet = 'Cell Prod by Country', skip = 2, 
+                       col_types = 'numeric') %>% 
+    filter(! is.na(Year)) %>% 
+    gather(key = 'country', value = 'n', China:Others) %>% 
+    select(-World)
 
-
-
+glimpse(pv_cells)
