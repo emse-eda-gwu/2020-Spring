@@ -11,10 +11,22 @@ rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
 
-R4DS: [28 - Graphics for communication](https://r4ds.had.co.nz/graphics-for-communication.html)
+This week, we will learn some techniques for adding polish to your charts. We will start choosing colors and fonts more carefully, and we will also annotate our charts with informative text. The readings below discuss some concepts to consider when making these design choices as well as some of the technical details for how to implement them in R.
 
-Healy: [8 - Refine your plots](http://socviz.co/refineplots.html#refineplots)
+Read these articles:
 
-Wilke: [21 - Multi-panel figures](https://serialmentor.com/dataviz/multi-panel-figures.html)
+- R4DS: [28 - Graphics for communication](https://r4ds.had.co.nz/graphics-for-communication.html)
+- Healy: [8 - Refine your plots](http://socviz.co/refineplots.html#refineplots)
+- Wilke: [21 - Multi-panel figures](https://serialmentor.com/dataviz/multi-panel-figures.html)
+- [The patchwork package](https://patchwork.data-imaginist.com/articles/patchwork.html)
 
-[The patchwork package](https://patchwork.data-imaginist.com/articles/patchwork.html)
+Watch this video:
+
+<p><a href="https://resources.rstudio.com/rstudio-conf-2020/the-glamour-of-graphics-william-chase?wvideo=fhb2ifduim"><img src="https://embedwistia-a.akamaihd.net/deliveries/562228aa30db0e604fc4107f39af9afc.jpg?image_play_button_size=2x&amp;image_crop_resized=960x540&amp;image_play_button=1&amp;image_play_button_color=4287c7e0" width="400" height="225" style="width: 400px; height: 225px;"></a></p><p><a href="https://resources.rstudio.com/rstudio-conf-2020/the-glamour-of-graphics-william-chase?wvideo=fhb2ifduim">The Glamour of Graphics - William Chase</a></p>
+
+Optional readings:
+
+- Check out this [tool](https://github.com/clauswilke/colorblindr) for simulating color blindness.
+- This site tells you everything you should know about fonts: practicaltypography.com
+- How to make a multi-panel [figure with a shared legend](https://wilkelab.org/cowplot/articles/shared_legends.html).
+- [PIMP my Rmd](https://holtzy.github.io/Pimp-my-rmd/)
