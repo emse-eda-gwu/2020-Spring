@@ -28,3 +28,6 @@ year = year(date)
 Ran out of time again :(
 
 Need to spend less time up front, possibly cut the re-typing content since we often do the retyping after reading in data anyway.
+
+
+**Next year, add map image about when joins fail: images/join_fail.jpg
