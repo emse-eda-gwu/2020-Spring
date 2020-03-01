@@ -85,7 +85,8 @@ https://github.com/rstudio-education/arm-workshop-rsc2019
 
 /* Background color for highlighted code */
 .remark-code-line-highlighted {
-  background-color: rgba(253, 255, 50, .5);
+  /*background-color: rgba(253, 255, 50, .5);*/
+  background-color: rgb(206, 233, 255);
 }
 
 /* Color of inline code, i.e. `code` */
