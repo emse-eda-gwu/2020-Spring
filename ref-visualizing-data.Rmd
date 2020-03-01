@@ -45,6 +45,7 @@ You will want to choose different chart types depending on the relationship or m
 
 # Polishing **ggplot2** plots
 
+- [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/index.html)
 - [Customizing colors](http://r-graph-gallery.com/ggplot2-color)
 - [Follow good design rules](https://www.data-to-viz.com/caveats.html)
 
