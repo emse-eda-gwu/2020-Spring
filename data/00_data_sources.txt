@@ -410,6 +410,15 @@ World                 |double |World total annual solar photovoltaics cell produ
 
 
 # ----------------------------------------------------------------------
+Data file: total_gdp_us_inflation_adjusted.csv
+
+Date downloaded: March 2, 2020
+
+Data source: https://www.gapminder.org/data/
+
+
+
+# ----------------------------------------------------------------------
 Data file: us_contagious_diseases.csv
 
 Date downloaded: February 14, 2020
