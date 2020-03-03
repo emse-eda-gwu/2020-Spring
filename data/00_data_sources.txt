@@ -447,7 +447,7 @@ Data file: wildlife_impacts.csv
 
 Date downloaded: January 5, 2020
 
-Description: U.S. Milk production (in pounds) by state from 1970 to 2017
+Description: Impacts of wildlife with aircraft by 4 major US airlines
 
 Source of downloaded file:
 - The Tidy Tuesday challenge here: https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-07-23
