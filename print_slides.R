@@ -19,6 +19,9 @@ file   <- 'slides-6-trends'
 folder <- '7-cleaning-joins'
 file   <- 'slides-7-cleaning-joins'
 
+folder <- '8-polish'
+file   <- 'slides-8-polish'
+
 # Save the slides
 pagedown::chrome_print(
     input  = here('classNotes', folder, paste0(file, '.html')),

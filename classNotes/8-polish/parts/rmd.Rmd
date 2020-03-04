@@ -1,0 +1,36 @@
+<!--
+Most of this material comes from here:
+https://holtzy.github.io/Pimp-my-rmd/#equations
+-->
+
+---
+## Use themes to change global "look"
+
+Check out [Pimp my RMD](https://holtzy.github.io/Pimp-my-rmd/), by Yan Holtz
+
+Change theme in YAML header:
+```
+title: "your title"
+output:
+    html_document:
+        theme: united
+        highlight: tango
+```
+
+[Preview themes here](https://bootswatch.com/)
+
+---
+class: inverse
+
+# Quick practice
+
+Try changing the theme of today's notes Rmd file:
+
+.leftcol[
+Themes:
+-
+]
+.rightcol[
+Highlighting styles:
+-
+]

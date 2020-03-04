@@ -1,0 +1,39 @@
+
+---
+class: inverse
+
+## R tip of the week
+
+### Ever wondered what colors look like _before_ you plot them?
+
+--
+Use `scales::show_col()` to preview them
+
+.leftcol60[.code70[
+Example:
+```{r colors, fig.show='hide'}
+colors <- c('lightblue', 'sienna', 'forestgreen', '#eae9ea')
+scales::show_col(colors)
+```
+]]
+--
+.rightcol40[
+```{r ref.label='colors', echo=FALSE, fig.height=4, fig.width=5, fig.align='center'}
+```
+]
+
+---
+## Today's data
+
+```{r, eval=FALSE}
+wildlife_impacts <- read_csv(here::here('data', 'wildlife_impacts.csv'))
+lotr_words       <- read_csv(here::here('data', 'lotr_words.csv'))
+federal_spending <- read_csv(here::here('data', 'federal_spending_long.csv'))
+milk_production  <- read_csv(here::here('data', 'milk_production.csv'))
+msleep           <- read_csv(here::here('data', 'msleep.csv'))
+```
+
+## New package:
+```{r, eval=FALSE}
+install.packages('hrbrthemes')
+```

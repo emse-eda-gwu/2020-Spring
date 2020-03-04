@@ -1,0 +1,693 @@
+<!--
+Much of the content on adjusting the y axis came from Andrew Heiss's 
+course slides: https://datavizf17.classes.andrewheiss.com/class/06-class/
+-->
+
+```{r, echo=FALSE}
+us_gdp_plot <- ggplot(us_gdp %>% filter(year >= 2007, year <= 2010)) + 
+    geom_line(aes(x = year, y = gdp), 
+              size = 1) + 
+    scale_y_continuous(
+        limits = c(0, 16),
+        labels = scales::dollar, 
+        expand = expand_scale(mult = c(0, 0.05))) +
+    theme_minimal_hgrid(font_family = 'Roboto Condensed') + 
+    labs(x = NULL, y = 'GDP ($ Trillion)', 
+         title = 'U.S. GDP During 2008 Financial Crisis')
+
+mpg_plot <- ggplot(mtcars) +
+    geom_point(aes(x = mpg, y = hp)) +
+    theme_minimal_grid(font_family = 'Source Sans Pro', #<<
+                       font_size = 15) +
+    theme(plot.title = element_text(family = "Roboto Condensed", #<<
+                                    size = 20)) +
+    labs(x = "Fuel efficiency (mpg)", 
+         y = "Power (hp)",
+         title = "Vehicle fuel efficiency vs. power",
+         caption = "Data source: 1974 Motor Trend U.S. magazine.")
+```
+```{r us_gdp, fig.show='hide', echo=FALSE}
+us_gdp_plot
+```
+```{r us_gdp_trimmed, fig.show='hide', echo=FALSE}
+us_gdp_plot +
+    scale_y_continuous(
+        limits = c(14.5, 15.5),
+        labels = scales::dollar, 
+        expand = expand_scale(mult = c(0, 0.05)))
+```
+```{r us_mpg, fig.show='hide', echo=FALSE}
+mpg_plot
+```
+```{r us_mpg0, fig.show='hide', echo=FALSE}
+mpg_plot + 
+    scale_x_continuous(limits = c(0, 35)) + 
+    scale_y_continuous(limits = c(0, 325))
+```
+
+---
+## When is it okay to to truncate an axis?
+
+--
+.leftcol[
+- When small movements matter
+]
+--
+.rightcol[
+```{r ref.label='us_gdp', echo=FALSE, fig.height=3.3, fig.width=5, fig.align='center'}
+```
+
+```{r ref.label='us_gdp_trimmed', echo=FALSE, fig.height=3.3, fig.width=5, fig.align='center'}
+```
+]
+
+---
+## When is it okay to to truncate an axis?
+
+.leftcol[
+- When small movements matter
+- When zero values are impossible
+]
+--
+.rightcol[
+```{r ref.label='us_mpg0', echo=FALSE, fig.height=3.3, fig.width=5, fig.align='center'}
+```
+
+```{r ref.label='us_mpg', echo=FALSE, fig.height=3.3, fig.width=5, fig.align='center'}
+```
+]
+
+---
+## When is it okay to to truncate an axis?
+
+.leftcol[
+- When small movements matter
+- When zero values are impossible
+- When it's normal / a convention
+]
+--
+.rightcol[
+<br>
+<center>
+<img src="images/linkedin_stocks.png">
+</center>
+]
+
+---
+## When is it okay to to truncate an axis?
+
+.leftcol[
+- When small movements matter
+- When zero values are impossible
+- When it's normal / a convention
+- .red[Never on a bar chart]
+]
+.rightcol[
+<br>
+<center>
+<img src="images/fox_news_bars.jpeg">
+</center>
+]
+
+---
+class: inverse, middle, center 
+
+# You are most sensitive to changes<br>in angle close to 45 degrees
+
+---
+class: center
+
+## You are most sensitive to changes<br>in angle close to 45 degrees
+
+.cols3[
+```{r, fig.height=5, fig.width=6, fig.align='center', echo=FALSE}
+df <- data.frame(
+    ct = c(1e6-10000, 1e6, 1e6+15000),
+    dt = as.Date(c("2016-06-01","2016-06-02", "2016-06-03")))
+
+aspect45 <- ggplot(df, aes(dt, ct)) + 
+    geom_line(group = 1) + 
+    geom_point() + 
+    scale_x_date(date_labels = "%b-%d") + 
+    theme_minimal_grid() +
+    labs(y = NULL)
+
+aspect45
+```
+]
+.cols3[
+```{r, fig.height=5, fig.width=6, fig.align='center', echo=FALSE}
+aspect45 + 
+    expand_limits(y=c(800000, 1200000))
+```
+]
+.cols3[
+```{r, fig.height=5, fig.width=6, fig.align='center', echo=FALSE}
+aspect45 + 
+    expand_limits(x = as.Date(c("2016-05-01", "2016-07-01")))
+```
+]
+
+---
+## You are most sensitive to changes<br>in angle close to 45 degrees
+
+.leftcol30[
+Bad
+```{r, echo=FALSE, fig.height=4, fig.width=4}
+delta <- wildlife_impacts %>% 
+    filter(
+        incident_year == 2016,
+        operator == 'DELTA AIR LINES') %>% 
+    count(operator, incident_date) %>% 
+    mutate(incident_date = as.Date(incident_date)) %>% 
+    ggplot() +
+    geom_line(aes(x = incident_date, y = n)) + 
+    scale_x_date(
+        date_breaks = '1 month',
+        date_labels = '%b') +
+    scale_y_continuous(
+        limits = c(0, 12), 
+        breaks = seq(0, 12, 4)) +
+    theme_minimal_grid(font_size = 16) +
+    panel_border() +
+    theme(legend.position = 'none') +
+    labs(x = 'Incident date', 
+         y = 'Number of incidents',
+         title = 'Delta Airlines wildlife impacts, 2016')
+
+delta
+```
+]
+.rightcol70[
+Better
+```{r, echo=FALSE, fig.height=2.5, fig.width=10.5}
+delta
+```
+
+Set image dimensions in R chunk header:
+
+` ```{r, fig.width = 5, fig.height = 3.1}`
+]
+
+---
+class: inverse
+
+### .center[Consider setting dimensions to "Golden Ratio" (1 : 1.618)]
+
+<br>
+
+.leftcol[
+
+<center>
+<img src="images/golden_ratio.jpg">
+</center>
+
+]
+--
+.rightcol[.center[
+
+Approx. to golden ratio:
+
+width  |  height 
+-------|---------
+5      | 3.1
+6      | 3.7
+7      | 4.3
+
+<br>
+
+[Also check out Donald Duck in Mathemagic Land](https://youtu.be/U_ZHsk0-eF0?t=512)
+]]
+
+---
+## Adjust axes with `scale_` functions
+
+.leftcol35[
+Continous variables
+```{r, eval=FALSE}
+scale_x_continuous()
+scale_y_continuous()
+```
+Discrete variables
+```{r, eval=FALSE}
+scale_x_discrete()
+scale_y_discrete()
+```
+Others
+```{r, eval=FALSE}
+scale_x_log10()
+scale_y_log10()
+scale_x_date()
+```
+]
+--
+.rightcol65[
+Common arguments for continuous variables
+```{r, eval=FALSE}
+scale_y_continuous(
+  # Set the lower & upper boundaries
+  limits = c(lower, upper),
+  
+  # Explicitly set the break points
+  breaks = c(break1, break2, etc.) 
+  
+  # Adjust the axis so bars start at 0
+  expand = expand_scale(mult = c(0, 0.05)) 
+)
+```
+]
+
+---
+## Adjusting **continuous** scales
+
+.leftcol55[.code70[
+Summarise the data
+```{r}
+milk_top10states <- milk_production %>%
+    filter(year == 2017) %>%
+    arrange(desc(milk_produced)) %>%
+    slice(1:10) %>% 
+    mutate(
+        milk_produced = milk_produced / 10^9,
+        state = fct_reorder(state, milk_produced))
+```
+Make the plot
+```{r milk_top10, fig.show='hide'}
+ggplot(milk_top10states) + 
+  geom_col(aes(x = state, y = milk_produced)) + 
+  coord_flip() +
+  theme_minimal_vgrid(font_size = 18) + 
+  labs(x = 'Milk produced (billions of lbs)',
+       y = 'State')
+```
+]]
+.rightcol45[
+<br>
+
+```{r ref.label='milk_top10', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+
+---
+## Adjusting **continuous** scales
+
+.leftcol55[.code70[
+Summarise the data
+```{r}
+milk_top10states <- milk_production %>%
+    filter(year == 2017) %>%
+    arrange(desc(milk_produced)) %>%
+    slice(1:10) %>% 
+    mutate(
+        milk_produced = milk_produced / 10^9,
+        state = fct_reorder(state, milk_produced))
+```
+Make the plot
+```{r milk_top10_y, fig.show='hide'}
+ggplot(milk_top10states) + 
+  geom_col(aes(x = state, y = milk_produced)) + 
+  coord_flip() +
+  scale_y_continuous( #<<
+    breaks = c(0, 15, 30, 45), #<<
+    limits = c(0 , 45), #<<
+    expand = expand_scale(mult = c(0, 0.05))) + #<<
+  theme_minimal_vgrid(font_size = 18) + 
+  labs(x = 'Milk produced (billions of lbs)',
+       y = 'State')
+```
+]]
+.rightcol45[
+<br>
+
+```{r ref.label='milk_top10_y', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+
+---
+## Adjusting **discrete** scales
+
+.leftcol55[.code70[
+Summarise the data
+```{r}
+milk_top10states <- milk_production %>%
+    filter(year == 2017) %>%
+    arrange(desc(milk_produced)) %>%
+    slice(1:10) %>% 
+    mutate(
+        milk_produced = milk_produced / 10^9,
+        state = fct_reorder(state, milk_produced))
+```
+Make the plot
+```{r milk_top10_discrete, fig.show='hide'}
+ggplot(milk_top10states) + 
+  geom_col(aes(x = state, y = milk_produced)) + 
+  coord_flip() +
+  scale_x_discrete( #<<
+    breaks = c('California', 'Wisconsin', 'Idaho'), #<<
+    expand = expand_scale(mult = c(0, 0.05))) + #<<
+  theme_minimal_vgrid(font_size = 18) + 
+  labs(x = 'Milk produced (billions of lbs)',
+       y = 'State')
+```
+]]
+.rightcol45[
+<br>
+
+```{r ref.label='milk_top10_discrete', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+
+---
+.leftcol[.code70[
+## Adjusting **log** scales
+
+Regular scaling
+```{r msleep, fig.show='hide'}
+ggplot(msleep) + 
+    geom_point(aes(x = brainwt, y = bodywt)) +
+    theme_half_open() + 
+    labs(x = 'Brain weight (kg)',
+         y = 'Body weight (kg)')
+```
+]]
+.rightcol[
+```{r ref.label='msleep', echo=FALSE, fig.height=4, fig.width=5, fig.align='center'}
+```
+]
+
+---
+.leftcol[.code70[
+## Adjusting **log** scales
+
+Regular scaling
+```{r, eval=FALSE}
+ggplot(msleep) + 
+    geom_point(aes(x = brainwt, y = bodywt)) +
+    theme_half_open() + 
+    labs(x = 'Brain weight (kg)',
+         y = 'Body weight (kg)')
+```
+
+Log scaling
+```{r msleep_log, fig.show='hide'}
+ggplot(msleep) + 
+    geom_point(aes(x = brainwt, y = bodywt)) +
+    scale_x_log10() + #<<
+    scale_y_log10() + #<<
+    theme_half_open() + 
+    labs(x = 'Log brain weight (kg)',
+         y = 'Log body weight (kg)')
+
+```
+]]
+.rightcol[
+```{r ref.label='msleep', echo=FALSE, fig.height=4, fig.width=5, fig.align='center'}
+```
+
+```{r ref.label='msleep_log', echo=FALSE, fig.height=4, fig.width=5, fig.align='center'}
+```
+]
+
+---
+class: inverse, center, middle
+
+# Date scales can be confusing
+
+---
+class: center 
+
+# What's wrong with this chart?
+
+<center>
+<img src="images/utility_bill_1.png" width=700>
+</center>
+
+---
+class: center 
+
+# What's wrong with this chart?
+
+<center>
+<img src="images/utility_bill_3.png" width=700>
+</center>
+
+---
+class: center 
+
+# What's wrong with this chart?
+
+<center>
+<img src="images/utility_bill_4.png" width=700>
+</center>
+
+---
+class: center 
+
+# What's wrong with this chart?
+
+<center>
+<img src="images/utility_bill_5.png" width=700>
+</center>
+
+---
+.leftcol[.code70[
+## Adjusting **date** scales
+
+Summarise the data
+```{r}
+library(lubridate) #<<
+
+wildlife_summary <- wildlife_impacts %>% 
+    filter(incident_year == 2016) %>% 
+    count(operator, incident_date) %>% 
+    mutate(incident_date = ymd(incident_date)) #<<
+```
+Make the plot
+```{r wildlife, fig.show='hide'}
+ggplot(wildlife_summary) + 
+    geom_line(aes(x = incident_date, y = n, 
+                  color = operator)) + 
+    facet_wrap(~operator, ncol = 1) +
+    theme_minimal_grid(font_size = 16) +
+    panel_border() +
+    theme(legend.position = 'none') +
+    labs(x = 'Incident date (2016)', 
+         y = 'Number of incidents')
+```
+]]
+.rightcol[
+<br>
+```{r ref.label='wildlife', echo=FALSE, fig.height=8, fig.width=7, fig.align='center'}
+```
+]
+
+---
+.leftcol[.code70[
+## Adjusting **date** scales
+
+Summarise the data
+```{r}
+library(lubridate) #<<
+
+wildlife_summary <- wildlife_impacts %>% 
+    filter(incident_year == 2016) %>% 
+    count(operator, incident_date) %>% 
+    mutate(incident_date = ymd(incident_date)) #<<
+```
+Make the plot
+```{r wildlife_date, fig.show='hide'}
+ggplot(wildlife_summary) + 
+  geom_line(aes(x = incident_date, y = n, 
+                color = operator, group = operator)) + 
+  facet_wrap(~operator, ncol = 1) +
+  scale_x_date( #<<
+      date_breaks = '1 month', #<<
+      date_labels = '%b') + #<<
+  theme_minimal_grid(font_size = 16) +
+  panel_border() +
+  theme(legend.position = 'none') +
+  labs(x = 'Incident date (2016)', 
+       y = 'Number of incidents')
+```
+]]
+.rightcol[
+<br>
+```{r ref.label='wildlife_date', echo=FALSE, fig.height=8, fig.width=7, fig.align='center'}
+```
+]
+
+---
+## Adjusting **date** scales
+
+```{r, eval=FALSE}
+scale_x_date( 
+  date_breaks = '1 month', 
+  date_labels = '%b')
+```
+.leftcol[
+```{r, eval=FALSE}
+date_breaks = '1 month' 
+```
+
+- '1 day'
+- '10 days'
+- '1 month'
+- '3 months'
+- '1 year'
+- '3 years'
+
+]
+.rightcol[
+```{r, eval=FALSE}
+date_labels = '%b'
+```
+
+Example date: March 04, 2020
+
+- `%Y` = 2020
+- `%y` = 20
+- `%B` = March
+- `%b` = Mar
+- `%D` = 03/04/2020
+- `%d` = 03
+]
+
+---
+class: inverse, center, middle
+
+## Use **scales** library to modify scale **text**
+
+---
+## Use **scales** library to modify scale text
+
+.leftcol[.code70[
+Summarise the data
+```{r}
+federal_spending_2017 <- federal_spending %>%
+    filter(year == 2017) %>% 
+    mutate(department = fct_reorder(
+        department, rd_budget))
+```
+Make the plot 
+```{r fed_spending_2017, fig.show='hide'}
+ggplot(federal_spending_2017) + 
+    geom_col(aes(x = department, y = rd_budget)) + 
+    scale_y_continuous(
+      expand = expand_scale(mult = c(0, 0.05))) +
+    coord_flip() + 
+    theme_minimal_vgrid(font_size = 16) + 
+    labs(x = 'Department', 
+         y = 'R&D spending ($ Millions)')
+```
+]]
+<br>
+
+.rightcol[
+```{r ref.label='fed_spending_2017', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+
+---
+## Use **scales** library to modify scale text
+
+.leftcol[.code70[
+Summarise the data
+```{r}
+federal_spending_2017 <- federal_spending %>%
+    filter(year == 2017) %>% 
+    mutate(department = fct_reorder(
+        department, rd_budget))
+```
+Add comma separation in x-axis labels
+```{r fed_spending_2017_comma, fig.show='hide'}
+ggplot(federal_spending_2017) + 
+    geom_col(aes(x = department, y = rd_budget)) + 
+    scale_y_continuous(
+      labels = scales::comma, #<<
+      expand = expand_scale(mult = c(0, 0.05))) +
+    coord_flip() + 
+    theme_minimal_vgrid(font_size = 16) + 
+    labs(x = 'Department', 
+         y = 'R&D spending ($ Millions)')
+```
+]]
+<br>
+
+.rightcol[
+```{r ref.label='fed_spending_2017_comma', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+
+---
+## Use **scales** library to modify scale text
+
+.leftcol[.code70[
+Summarise the data
+```{r}
+federal_spending_2017 <- federal_spending %>%
+    filter(year == 2017) %>% 
+    mutate(department = fct_reorder(
+        department, rd_budget))
+```
+Add $ sign in x-axis labels
+```{r fed_spending_2017_dollar, fig.show='hide'}
+ggplot(federal_spending_2017) + 
+    geom_col(aes(x = department, y = rd_budget)) + 
+    scale_y_continuous(
+      labels = scales::dollar, #<<
+      expand = expand_scale(mult = c(0, 0.05))) +
+    coord_flip() + 
+    theme_minimal_vgrid(font_size = 16) + 
+    labs(x = 'Department', 
+         y = 'R&D spending ($ Millions)')
+```
+]]
+<br>
+
+.rightcol[
+```{r ref.label='fed_spending_2017_dollar', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+
+---
+class: inverse
+
+## Your turn
+
+```{r wildlife_costs, fig.show='hide', echo=FALSE}
+ggplot(wildlife_costs) + 
+    geom_point(aes(x = incident_date, y = cost)) + 
+    scale_x_date(
+        date_breaks = '3 years',
+        date_labels = "'%y") + 
+    scale_y_continuous(
+        labels = scales::dollar,
+        expand = expand_scale(mult = c(0, 0.05))) +
+    theme_minimal_grid(font_size = 16) + 
+    labs(x = 'Year', 
+         y = 'Cost of incident repairs ($ millions)', 
+         title = 'Repair costs of aircraft impacts with wildlife', 
+         subtitle = 'Top 4 airlines', 
+         caption = 'Data source: https://wildlife.faa.gov/home')
+```
+
+.leftcol[
+Use the `wildlife_costs` data frame to create the following chart. 
+
+Hints:
+
+- Note the x and y axis labels!
+
+```{r, echo=FALSE}
+countdown(minutes = 15,
+          warn_when = 30,
+          update_every = 15,
+          left = 8,
+          bottom = 7,
+          font_size = '2em')
+```
+]
+.rightcol[
+```{r ref.label='wildlife_costs', echo=FALSE, fig.height=5, fig.width=7, fig.align='center'}
+```
+]

@@ -1,0 +1,439 @@
+<!--
+Source of the content on how to change fonts in ggplot2:
+
+https://www.andrewheiss.com/blog/2017/09/27/working-with-r-cairo-graphics-custom-fonts-and-ggplot/
+
+Source of a lot of the slide content on choosing good fonts:
+https://resources.rstudio.com/rstudio-conf-2020/the-glamour-of-graphics-william-chase
+-->
+
+---
+class: inverse, center, middle
+
+.leftcol[
+<center>
+<img src="images/fonts_matter_fast_taco.jpg" width=500>
+</center>
+
+"Fast Taco"
+]
+.rightcol[
+<center>
+<img src="images/fonts_matter_megaflicks.jpg" width=500>
+</center>
+
+"Mega Flicks"
+]
+
+---
+class: inverse, center, middle
+
+<center>
+<img src="images/fonts_matter.jpg" width=500>
+</center>
+
+---
+class: center, middle
+
+## Best resource on fonts:<br><br>practicaltypography.com
+
+---
+## .center[Font families you should consider using]
+
+.leftcol20[&zwj;]
+.cols3[.font120[
+<p style="font-family: Roboto;">Roboto</p>
+
+<p style="font-family: Source;">Source</p>
+
+<p style="font-family: Fira;">Fira</p>
+
+<p style="font-family: Alegreya;">Alegreya</p>
+
+<p style="font-family: Lato;">Lato</p>
+
+<p style="font-family: Exo;">Exo</p>
+]]
+.cols3[
+Download:
+
+- Individually from https://fonts.google.com/
+- All of these with [this zip file](https://github.com/emse-eda-gwu/2020-Spring/raw/master/content/fonts.zip)
+]
+
+---
+## Use fonts to create **hierarchy**
+
+.leftcol[
+```
+# Hierarchy
+
+## Hierarchy
+
+### Hierarchy
+
+#### Hierarchy
+```
+]
+.rightcol[
+# Hierarchy
+
+## Hierarchy
+
+### Hierarchy
+
+#### Hierarchy
+]
+
+---
+.leftcol[
+Title<br>This is some text that goes into detail and explains a lot more about the topic described in the title. Here's some random Latin words: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+]
+
+---
+.leftcol[
+# Size
+
+This is some text that goes into detail and explains a lot more about the topic described in the title. Here's some random Latin words: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+]
+
+---
+.leftcol[
+**Weight**
+
+This is some text that goes into detail and explains a lot more about the topic described in the title. Here's some random Latin words: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+]
+
+---
+.leftcol[
+.red[Color]
+
+This is some text that goes into detail and explains a lot more about the topic described in the title. Here's some random Latin words: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+]
+
+---
+.leftcol[
+Spacing
+
+<br>
+
+This is some text that goes into detail and explains a lot more about the topic described in the title. Here's some random Latin words: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+]
+
+---
+.leftcol[
+<p style="font-family: Alegreya;">Typeface</p>
+
+This is some text that goes into detail and explains a lot more about the topic described in the title. Here's some random Latin words: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+]
+
+---
+.leftcol[
+<h2 style="font-family: Roboto; color: #a5442b;">Title</h2>
+<h3 style="font-family: Alegreya;">Subtitle</h3>
+
+This is some text that goes into detail and explains a lot more about the topic described in the title. Here's some random Latin words: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+]
+
+---
+# .center[Use fonts with **same-height** numbers]
+<br>
+
+.leftcol35[.right[
+
+## "Oldstyle" (bad)
+
+<br>
+
+## Lining (good)
+]]
+.rightcol65[
+<img src="images/font_oldstyle1.jpg" width=500>
+]
+
+---
+# .center[Use fonts with **same-width** numbers]
+<br>
+
+.leftcol40[.right[
+
+## "Proportional" (bad)
+
+<br>
+
+## "Tabular" (good)
+]]
+.rightcol60[
+<img src="images/font_oldstyle2.jpg" width=500>
+]
+
+---
+class: inverse, center, middle
+
+# How to customize fonts in **ggplot**
+
+---
+## 1. Change the whole theme
+
+.leftcol[.code70[
+For "Base R" themes, use `base_family`:
+
+```{r, eval=FALSE}
+theme_minimal(base_family = "Roboto Condensed")
+```
+```{r, eval=FALSE}
+theme_bw(base_family = "Roboto Condensed")
+```
+]]
+.rightcol[.code70[
+For "cowplot" themes, use `font_family`:
+
+```{r, eval=FALSE}
+theme_half_open(font_family = "Roboto Condensed")
+```
+```{r, eval=FALSE}
+theme_minimal_grid(font_family = "Roboto Condensed")
+```
+]]
+
+---
+## 1. Change the whole theme font
+
+.leftcol60[.code70[
+Make the base plot
+```{r mpg, fig.show='hide'}
+mpg_plot <- ggplot(mtcars) +
+  geom_point(aes(x = mpg, y = hp)) +
+  theme_minimal(base_size = 15) + #<<
+  labs(x = "Fuel efficiency (mpg)",
+       y = "Power (hp)",
+       title = "Vehicle fuel efficiency vs. power",
+       caption = "Data source: 1974 Motor Trend U.S. magazine.")
+```
+]]
+
+<br>
+
+.rightcol40[
+```{r, echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+mpg_plot
+```
+]
+
+---
+## 1. Change the whole theme font
+
+.leftcol60[.code70[
+Use `base_family` with base themes
+```{r mpg_base, fig.show='hide'}
+mpg_plot <- ggplot(mtcars) +
+  geom_point(aes(x = mpg, y = hp)) +
+  theme_minimal(base_family = 'Source Sans Pro', #<<
+                base_size = 15) +
+  labs(x = "Fuel efficiency (mpg)",
+       y = "Power (hp)",
+       title = "Vehicle fuel efficiency vs. power",
+       caption = "Data source: 1974 Motor Trend U.S. magazine.")
+```
+]]
+
+<br>
+
+.rightcol40[
+```{r, echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+mpg_plot
+```
+]
+
+---
+## 1. Change the whole theme font
+
+.leftcol60[.code70[
+Use `font_family` with cowplot themes
+```{r mpg_cowplot, fig.show='hide'}
+mpg_plot <- ggplot(mtcars) +
+  geom_point(aes(x = mpg, y = hp)) +
+  theme_minimal_grid(font_family = 'Source Sans Pro', #<<
+                      font_size = 15) +
+  labs(x = "Fuel efficiency (mpg)",
+       y = "Power (hp)",
+       title = "Vehicle fuel efficiency vs. power",
+       caption = "Data source: 1974 Motor Trend U.S. magazine.")
+```
+]]
+
+<br>
+
+.rightcol40[
+```{r, echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+mpg_plot
+```
+]
+
+---
+## 2. Adjust theme elements with `element_text()`
+
+.leftcol60[.code70[
+Use `font_family` with cowplot themes
+```{r mpg_cowplot_title, fig.show='hide'}
+mpg_plot <- ggplot(mtcars) +
+  geom_point(aes(x = mpg, y = hp)) +
+  theme_minimal_grid(font_family = 'Source Sans Pro', #<<
+                      font_size = 15) +
+  theme(plot.title = element_text(family = "Roboto Condensed", #<<
+                                  size = 20)) +
+  labs(x = "Fuel efficiency (mpg)",
+       y = "Power (hp)",
+       title = "Vehicle fuel efficiency vs. power",
+       caption = "Data source: 1974 Motor Trend U.S. magazine.")
+```
+]]
+
+<br>
+
+.rightcol40[
+```{r, echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+mpg_plot
+```
+]
+
+---
+### 3. Adjust annotations:
+
+### `geom_text()`, `geom_label()`, and `annotate()`
+
+.leftcol60[.code70[
+```{r mpg_cowplot_annotate, fig.show='hide'}
+label <- "Higher power engines,
+often come at the expense,
+of fuel economy."
+
+mpg_plot +
+    geom_label(aes(x = 17, y = 270, label = label),
+             lineheight = .8, hjust = 0,
+             family = 'Roboto Condensed') #<<
+```
+]]
+
+.rightcol40[
+```{r ref.label='mpg_cowplot_annotate', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+
+---
+## The [hrbrthemes](https://github.com/hrbrmstr/hrbrthemes) package:
+
+### Great themes + great fonts
+
+.leftcol60[
+```{r mpg_ipsum, fig.show='hide'}
+library(hrbrthemes) #<<
+
+mpg_plot <- ggplot(mtcars) +
+  geom_point(aes(x = mpg, y = hp)) +
+  labs(x = "Fuel efficiency (mpg)",
+       y = "Power (hp)",
+       title = "Vehicle fuel efficiency vs. power",
+       caption = "Data source: 1974 Motor Trend U.S. magazine.")
+
+mpg_plot +
+  theme_ipsum() #<<
+```
+
+]
+.rightcol40[
+```{r ref.label='mpg_ipsum', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+
+---
+## The [hrbrthemes](https://github.com/hrbrmstr/hrbrthemes) package:
+
+### Great themes + great fonts
+
+.cols3[
+```{r, eval=FALSE}
+mpg_plot +
+  theme_ipsum()
+```
+```{r ref.label='mpg_ipsum', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+.cols3[
+```{r mpg_ipsum_rc, fig.show='hide'}
+mpg_plot +
+  theme_ipsum_rc()
+```
+```{r ref.label='mpg_ipsum_rc', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+.cols3[
+```{r mpg_ft_rc, fig.show='hide'}
+mpg_plot +
+  theme_ft_rc()
+```
+```{r ref.label='mpg_ft_rc', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+
+---
+class: inverse
+
+## Your turn
+
+```{r milk_dumbbell, fig.show='hide', echo=FALSE}
+ggplot(milk_summary_dumbbell,
+       aes(x = milk_produced, y = state)) +
+    geom_line(aes(group = state),
+              color = 'lightblue', size = 1) +
+    geom_point(aes(color = year), size = 2.5) +
+    geom_text(aes(x = 9, y = 10.5, label = '1970'),
+             color = 'lightblue', size = 5,
+             family = 'Roboto Condensed') +
+    geom_text(aes(x = 40, y = 10.5, label = '2017'),
+             color = 'steelblue', size = 5,
+             family = 'Roboto Condensed') +
+    scale_x_continuous(limits = c(0, 40)) +
+    scale_color_manual(values = c('lightblue', 'steelblue')) +
+    coord_cartesian(clip = 'off', expand = FALSE) +
+    theme_minimal_vgrid(font_family = 'Roboto Condensed') +
+    theme(axis.line.y = element_blank(),
+          axis.ticks = element_blank(),
+          legend.position = 'none',
+          plot.margin = margin(0.1, 1, 0.1, 0.1, "cm")) +
+    labs(x = 'Milk produced (billion lbs)',
+         y = 'State',
+         color = 'Year',
+         title = 'Top 10 milk producing states')
+```
+
+.leftcol[.font80[
+Use the `milk_summary_dumbbell` data frame to create the following chart.
+
+The main font is `'Roboto Condensed'`.
+
+Once you've recreated the plot, try other fonts and themes, such as:
+
+- The `'Source Sans Pro'` font.
+- The `'Lato'` font.
+- The `theme_ipsum()` theme from the `hrbrthemes` library.
+
+Hints:
+
+- Use `geom_text()` or `annotate()` to insert the year labels:
+    - 1970: `x = 9`, `y = 10.5`
+    - 2017: `x = 40`, `y = 10.5`
+]]
+.rightcol[
+
+```{r, echo=FALSE}
+countdown(minutes = 15,
+          warn_when = 30,
+          update_every = 15,
+          top = 0,
+          font_size = '2em')
+```
+
+```{r ref.label='milk_dumbbell', echo=FALSE, fig.height=5, fig.width=7, fig.align='center'}
+```
+]

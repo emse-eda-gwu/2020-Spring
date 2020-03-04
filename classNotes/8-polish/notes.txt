@@ -1,0 +1,124 @@
+Layout:
+- scales
+- annotation
+- fonts
+- color
+- rmd (w/aspect ratio)
+- multi-panel
+
+General resources:
+- Glamour of graphics: https://resources.rstudio.com/rstudio-conf-2020/the-glamour-of-graphics-william-chase
+
+## 1) Colors
+
+Simulate color blindness: https://github.com/clauswilke/colorblindr
+
+General tips:
+- White around overlapping points
+
+Fine-tuning ggplots (color, labels, etc.):
+https://designing-ggplots.netlify.com/#1
+https://github.com/malcolmbarrett/designing.ggplots
+- Color selection
+
+Great colors:
+https://github.com/jakelawlor/PNWColors/blob/master/README.md
+
+Using markdown to format text in ggplot:
+- Remove legends, use color in title
+https://www.slideshare.net/ClausWilke/spruce-up-your-ggplot2-visualizations-with-formatted-text
+
+
+
+
+## 2) Fonts
+
+https://www.andrewheis.com/blog/2017/09/27/working-with-r-cairo-graphics-custom-fonts-and-ggplot/
+
+https://blog.revolutionanalytics.com/2012/09/how-to-use-your-favorite-fonts-in-r-charts.html
+
+https://github.com/hrbrmstr/hrbrthemes
+
+Different fonts:
+- practicaltypography.com
+Look at slope chart examples
+https://datavizf17.classes.andrewheiss.com/class/05-class/
+
+- Extra fonts: https://www.williamrchase.com/post/custom-fonts-and-plot-quality-with-ggplot-on-windows/
+
+
+## 3) Scales
+
+The y-axis: When is it okay to adjust the y axis?
+- when small movements matter (GDP growth)
+- When zero values are impossible (human temperature, or flight example from Healy)
+- When it's normal / a convention (stock prices)
+
+https://medium.com/compassred-data-blog/10-levels-of-ggplot2-from-basic-to-beautiful-5ce3c4e7624f
+- Show the "scales::comma" functions (comma, dollars, etc.)
+
+Lubridate
+
+
+
+
+## 4) Annotations
+
+https://medium.com/compassred-data-blog/10-levels-of-ggplot2-from-basic-to-beautiful-5ce3c4e7624f
+- Show the "curve" with annotation function
+
+https://designing-ggplots.netlify.com/#1
+- Show the "curve" with annotation function
+- Show how to direct label bar chart
+
+How to draw a rectangle with annotate()
+
+
+
+
+## 5) Multi-panel plots
+
+https://designing-ggplots.netlify.com/#1
+- Show how to merge plots together with patchwork
+
+Shared legends:
+https://wilkelab.org/cowplot/articles/shared_legends.html
+
+
+
+
+
+## 4) Formatting your .Rmd file
+
+https://holtzy.github.io/Pimp-my-rmd/#equations
+
+- Figure dimensions
+- Themes
+
+
+
+OTHER:
+
+Publication ready figures:
+http://www.sthda.com/english/articles/24-ggpubr-publication-ready-plots/81-ggplot2-easy-way-to-mix-multiple-graphs-on-the-same-page/
+
+More themes: https://echarts4r.john-coene.com/articles/themes.html
+
+# ----------------------------------------------------------------------
+Planned outline:
+
+Intro (5 min)
+- R Tip of the day
+
+Single vars (20 min)
+
+Multi vars (30 min)
+
+Break (5 min)
+
+Animation (30 min)
+
+Assignment 4 (5 min)
+
+# ----------------------------------------------------------------------
+# Post-class notes

@@ -1,0 +1,9 @@
+<!--
+https://designing-ggplots.netlify.com/#1
+- Show how to merge plots together with patchwork
+
+Shared legends:
+https://wilkelab.org/cowplot/articles/shared_legends.html
+ -->
+
+---

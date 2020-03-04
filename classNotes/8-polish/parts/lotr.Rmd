@@ -1,0 +1,291 @@
+---
+title: "Week 8: Polishing your charts"
+author: "John Paul Helveston"
+date: March 04, 2020
+output:
+  xaringan::moon_reader:
+    css: ['default', 'https://emse-eda-gwu.github.io/2020-Spring/classNotes/classNotes.css']
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      beforeInit: "https://platform.twitter.com/widgets.js"
+    seal: false
+---
+
+```{r setup, include=FALSE}
+library(here)
+source(here('setup.R'))
+```
+
+---
+class: inverse, center, middle 
+
+# How to customize fonts in **ggplot**
+
+---
+## 1. Change the whole theme
+
+.leftcol[.code70[
+For "Base R" themes, use `base_family`:
+
+```{r, eval=FALSE}
+theme_minimal(base_family = "Roboto Condensed")
+```
+```{r, eval=FALSE}
+theme_bw(base_family = "Roboto Condensed")
+```
+]]
+.rightcol[.code70[
+For "cowplot" themes, use `font_family`:
+
+```{r, eval=FALSE}
+theme_half_open(font_family = "Roboto Condensed")
+```
+```{r, eval=FALSE}
+theme_minimal_grid(font_family = "Roboto Condensed")
+```
+]]
+
+---
+## 1. Change the whole theme font
+
+.leftcol60[.code70[
+Summarise the data
+```{r, eval=FALSE}
+lotr_summary <- lotr_words %>% 
+    gather(key = 'gender', value = 'wordCount', 
+           Female:Male)
+```
+Make the base plot
+```{r lotr, fig.show='hide'}
+lotr_plot <- ggplot(lotr_summary) + 
+    geom_col(aes(x = gender, y = wordCount, 
+                 fill = gender), 
+             width = 0.7) + 
+    facet_wrap(~Race) +
+    scale_y_continuous(
+        labels = scales::comma,
+        expand = expand_scale(mult = c(0, 0.05))) +
+    theme_minimal(base_size = 15) + #<<
+    theme(legend.position = 'none') +
+    labs(x = 'Gender of character',
+         y = 'Number of words spoken', 
+         title = 'Number of words spoken in LOTR trilogy')
+```
+]]
+
+<br>
+
+.rightcol40[
+```{r, echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+lotr_plot
+```
+]
+
+---
+## 1. Change the whole theme font
+
+.leftcol60[.code70[
+Use `base_family` with base themes
+```{r lotr_base, fig.show='hide'}
+lotr_plot <- ggplot(lotr_summary) + 
+    geom_col(aes(x = gender, y = wordCount, 
+                 fill = gender), 
+             width = 0.7) + 
+    facet_wrap(~Race) +
+    scale_y_continuous(
+        labels = scales::comma,
+        expand = expand_scale(mult = c(0, 0.05))) +
+    theme_minimal(base_family = 'Source Sans Pro', #<<
+                  base_size = 15) + 
+    theme(legend.position = 'none') +
+    labs(x = 'Gender of character',
+         y = 'Number of words spoken', 
+         title = 'Number of words spoken in LOTR trilogy')
+```
+]]
+
+<br>
+
+.rightcol40[
+```{r, echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+lotr_plot
+```
+]
+
+---
+## 1. Change the whole theme font
+
+.leftcol60[.code70[
+Use `font_family` with cowplot themes
+```{r lotr_cowplot, fig.show='hide'}
+lotr_plot <- ggplot(lotr_summary) + 
+    geom_col(aes(x = gender, y = wordCount, 
+                 fill = gender), 
+             width = 0.7) + 
+    facet_wrap(~Race) +
+    scale_y_continuous(
+        labels = scales::comma,
+        expand = expand_scale(mult = c(0, 0.05))) +
+    theme_minimal_hgrid(font_family = 'Source Sans Pro', #<<
+                  font_size = 15) +
+    theme(legend.position = 'none') +
+    panel_border() +
+    labs(x = 'Gender of character',
+         y = 'Number of words spoken', 
+         title = 'Number of words spoken in LOTR trilogy')
+```
+]]
+
+<br>
+
+.rightcol40[
+```{r, echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+lotr_plot
+```
+]
+
+---
+## 2. Adjust theme elements with `element_text()`
+
+.leftcol60[.code70[
+Use `font_family` with cowplot themes
+```{r lotr_cowplot_title, fig.show='hide'}
+lotr_plot <- ggplot(lotr_summary) + 
+    geom_col(aes(x = gender, y = wordCount, 
+                 fill = gender), 
+             width = 0.7) + 
+    facet_wrap(~Race) +
+    scale_y_continuous(
+        labels = scales::comma,
+        expand = expand_scale(mult = c(0, 0.05))) +
+    theme_minimal_hgrid(font_family = 'Source Sans Pro',
+                  font_size = 15) +
+    theme(legend.position = 'none',
+          plot.title = element_text(family = "Roboto Condensed", #<<
+                                    size = 20)) + 
+    panel_border() +
+    labs(x = 'Gender of character',
+         y = 'Number of words spoken', 
+         title = 'Number of words spoken in LOTR trilogy')
+```
+]]
+
+<br>
+
+.rightcol40[
+```{r, echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+lotr_plot
+```
+]
+
+---
+### 3. Adjust annotations (`geom_text()` and `annotate()`)
+
+.leftcol60[.code70[
+```{r lotr_cowplot_annotate, fig.show='hide'}
+lotr_plot +
+    # Draw curved arrow
+    geom_curve(
+        data = data.frame(x = 0.8, y = 1200,
+                          xend = 1, yend = 200,
+                          Race = 'Hobbit'),
+        mapping = aes(x = x, y = y, xend = xend, yend = yend),
+        color = "grey75",
+        size = 0.5,
+        curvature = 0.1,
+        arrow = arrow(length = unit(0.01, "npc"), type = "closed")
+    ) +
+    # Add annotation
+    geom_label(
+        data = data.frame(x = 0.47, y = 2000,
+                          label = label, Race = 'Hobbit'),
+        mapping = aes(x = x, y = y, label = label),
+        hjust = 0, 
+        lineheight = .8, 
+        family = 'Roboto Condensed' #<<
+    )
+```
+]]
+
+<br>
+
+.rightcol40[
+```{r ref.label='lotr_cowplot_annotate', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+
+---
+## The [hrbrthemes](https://github.com/hrbrmstr/hrbrthemes) package: 
+
+### Great themes + great fonts
+
+.leftcol[
+```{r mpg_ipsum, fig.show='hide'}
+library(hrbrthemes) #<<
+
+ggplot(mtcars, aes(mpg, wt)) +
+  geom_point() +
+  labs(x="Fuel efficiency (mpg)", y="Weight (tons)",
+       title="Seminal ggplot2 scatterplot example",
+       subtitle="A plot that is only useful for demonstration purposes",
+       caption="Brought to you by the letter 'g'") + 
+  theme_ipsum() #<<
+```
+
+]
+.rightcol[
+```{r ref.label='mpg_ipsum', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+
+---
+## Other great themes that also change the font
+
+### (and a bunch of other stuff)
+
+.leftcol[
+```{r mpg_ipsum_rc, fig.show='hide'}
+library(hrbrthemes) #<<
+
+ggplot(mtcars, aes(mpg, wt)) +
+  geom_point() +
+  labs(x="Fuel efficiency (mpg)", y="Weight (tons)",
+       title="Seminal ggplot2 scatterplot example",
+       subtitle="A plot that is only useful for demonstration purposes",
+       caption="Brought to you by the letter 'g'") + 
+  theme_ipsum_rc() #<<
+```
+
+]
+.rightcol[
+```{r ref.label='mpg_ipsum_rc', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+
+---
+## Other great themese that also change the font
+
+### (and a bunch of other stuff)
+
+.leftcol[
+```{r mpg_ft_rc, fig.show='hide'}
+library(hrbrthemes) #<<
+
+ggplot(mtcars, aes(mpg, wt)) +
+  geom_point() +
+  labs(x="Fuel efficiency (mpg)", y="Weight (tons)",
+       title="Seminal ggplot2 scatterplot example",
+       subtitle="A plot that is only useful for demonstration purposes",
+       caption="Brought to you by the letter 'g'") + 
+  theme_ft_rc() #<<
+```
+
+]
+.rightcol[
+```{r ref.label='mpg_ft_rc', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
