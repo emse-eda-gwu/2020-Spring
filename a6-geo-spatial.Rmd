@@ -10,4 +10,21 @@ output:
 
 **Weight**: This assignment is worth 4% of your final grade.
 
-Coming soon!
+**Purpose**: The purpose of this assignment is to learn how to handle geospatial data and create maps in R.
+
+**Skills & Knowledge**: After completing these exercises, you should be able to:
+
+- Create spatial maps in R.
+- Use the objects from the **sp** and **raster** packages to represent spatial data for analysis in R.
+- Read, explore, and manipulate these objects.
+- Use the **tmap** package to make maps.
+
+**Assessment**: This assignment is graded for completion. Credit will be allocated in proportion to the percentage of the assignment completed by the due date. No more than 2 late days can be used on any one assignment.
+
+**Tasks**:
+
+1. **Read**: Open up a notebook (physical, digital...whatever you take notes in best), and **take notes** while you go through the [readings for this week](r9-maps.html).
+
+2. **Exercises**: Take notes while you complete the entire [Visualizing Geospatial Data in R](https://learn.datacamp.com/courses/working-with-geospatial-data-in-r) course. You should go through all four lessons in the course.
+
+3. **Report**: When you have completed the above exercises, go to the "Assignment Submission" page on Blackboard and write three things from your notes that you learned while going through these readings and exercises.
