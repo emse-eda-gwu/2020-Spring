@@ -11,12 +11,17 @@ rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
 
-Healy: [7 - Draw maps](http://socviz.co/maps.html#maps)
+This week, we will learn some techniques for creating a special type of chart: maps. We will look at different types of maps and how to work with different types of geospatial data. The readings below discuss some concepts to consider when dealing with maps as well as some of the technical details for how to create them in R.
 
-Wilke: [15 - Visualizing geospatial data](https://serialmentor.com/dataviz/geospatial-data.html)
+Read these articles:
 
-[Map projections](https://xkcd.com/977/)
+- Healy: [7 - Draw maps](http://socviz.co/maps.html#maps)
+- Wilke: [15 - Visualizing geospatial data](https://serialmentor.com/dataviz/geospatial-data.html)
 
 Watch [this video](https://www.youtube.com/watch?v=kIID5FDi2JQ):
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/kIID5FDi2JQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+Optional readings:
+
+- [Map projections](https://xkcd.com/977/)
