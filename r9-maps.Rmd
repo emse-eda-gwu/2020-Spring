@@ -15,19 +15,19 @@ This week, we will learn some techniques for creating a special type of chart: m
 
 # Map projections
 
-Read these articles:
-
-- [Map projections](https://xkcd.com/977/)
-- Wilke: [15 - Visualizing geospatial data](https://serialmentor.com/dataviz/geospatial-data.html)
-
 Watch [this video](https://www.youtube.com/watch?v=kIID5FDi2JQ):
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/kIID5FDi2JQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+Read these articles:
+
+- Wilke: [15 - Visualizing geospatial data](https://serialmentor.com/dataviz/geospatial-data.html)
+- [XKCD: Map projections](https://xkcd.com/977/)
+
 # Making maps in R
 
 - Healy: [7 - Draw maps](http://socviz.co/maps.html#maps)
-- Drawing beautiful maps: Part [1](https://www.r-spatial.org/r/2018/10/25/ggplot2-sf.html), [2](https://www.r-spatial.org/r/2018/10/25/ggplot2-sf-2.html), & [3](https://www.r-spatial.org/r/2018/10/25/ggplot2-sf-3.html)
+- Drawing beautiful maps: Parts [one](https://www.r-spatial.org/r/2018/10/25/ggplot2-sf.html), [two](https://www.r-spatial.org/r/2018/10/25/ggplot2-sf-2.html), & [three](https://www.r-spatial.org/r/2018/10/25/ggplot2-sf-3.html)
 
 
 
