@@ -53,6 +53,7 @@ You will want to choose different chart types depending on the relationship or m
 - [Color wheel tool](https://www.sessions.edu/color-calculator/)
 - [ggplot2 book chapter 12](https://ggplot2-book.org/scales.html#scale-colour)
 - [R graph gallery](http://r-graph-gallery.com/ggplot2-color)
+- [Coolors.co](https://coolors.co/) - super nice color palette generator
 
 # Animating **ggplot2** plots
 
