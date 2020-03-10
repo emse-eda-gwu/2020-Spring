@@ -1,0 +1,101 @@
+---
+title: "Week 9: Maps & geospatial data"
+author: "John Paul Helveston"
+date: March 11, 2020
+output:
+  xaringan::moon_reader:
+    css: ['default', 'https://emse-eda-gwu.github.io/2020-Spring/classNotes/classNotes.css']
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      beforeInit: "https://platform.twitter.com/widgets.js"
+    seal: false
+---
+
+```{r setup, include=FALSE}
+source('setup.R')
+```
+
+class: inverse, middle
+
+<center>
+<img src="images/state_borders.png" width=850>
+</center>
+
+---
+class: title-slide, center, middle, inverse
+
+# Week 8: Maps & geospatial data
+
+.large[EMSE 4197 | John Paul Helveston | March 11, 2020]
+
+---
+class: center, inverse, middle
+
+# Quiz 3
+
+<center>
+```{r, echo=FALSE}
+countdown(minutes = 45,
+          warn_when = 30,
+          update_every = 15,
+          font_size = '3em',
+          style = "position: relative; width: min-content;")
+```
+</center>
+
+```{r child = here::here('parts', 'intro.Rmd')}
+```
+
+---
+class: inverse, middle
+
+# Maps & geospatial data
+
+## 1. Plotting maps
+## 2. Adding data to maps
+## 3. Projections
+
+---
+class: inverse, middle
+
+# Maps & geospatial data
+
+## 1. .orange[Plotting maps]
+## 2. Adding data to maps
+## 3. Projections
+
+```{r child = here::here('parts', 'maps.Rmd')}
+```
+
+---
+class: inverse, middle
+
+# Maps & geospatial data
+
+## 1. Plotting maps
+## 2. .orange[Adding data to maps]
+## 3. Projections
+
+```{r child = here::here('parts', 'data.Rmd')}
+```
+
+---
+class: inverse, middle
+
+# Maps & geospatial data
+
+## 1. Plotting maps
+## 2. Adding data to maps
+## 3. .orange[Projections]
+
+```{r child = here::here('parts', 'projections.Rmd')}
+```
+
+---
+class: inverse, middle, center
+
+# Proposals & Assignment 7 
