@@ -1,0 +1,26 @@
+Data file: NHL_Attendance.xlsx
+
+Date downloaded: March 5, 2020
+
+Description: Data on game attendance at NHL hockey games from 2000 - 2018.
+
+Source of downloaded file:
+- The formatted Excel spreadsheet was downloaded from data.world:
+  https://data.world/makeovermonday/2019w1
+- Source of the associated redesign chart:
+  https://nhltoseattle.com/2013/02/10/nhl-attendance-through-feb-9th/
+
+Original source:
+- The primary source is ESPN: http://www.espn.com/nhl/attendance/_/year/2018
+
+Dictionary:
+
+SEASON           | Hockey season
+RANK             | Season rank in highest attendancee 
+TEAM             | Team home city
+HOME GAMES       | Number of home games played
+HOME ATTENDANCE  | Total attendance at all home games
+ROAD GAMES       | Number of away games played
+ROAD ATTENDANCE  | Total attendance at all away games
+TOTAL GAMES      | Total number of games played (home + away games)
+TOTAL ATTENDANCE | Total attendance at all games (home + away games)
