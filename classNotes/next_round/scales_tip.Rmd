@@ -1,0 +1,49 @@
+
+---
+## R Tip of the Week: `scales::percent()`
+
+.leftcol60[
+```{r}
+mpg_percent <- mpg %>% 
+    count(cyl) %>% 
+    mutate(
+        percent = n / sum(n),
+        cyl = fct_reorder(as.factor(cyl), percent))
+
+mpg_percent
+```
+```{r r_tip_decimal, fig.show='hide'}
+ggplot(mpg_percent) +
+    geom_col(aes(x = cyl, y = percent))
+```
+
+]
+.rightcol40[
+```{r ref.label='r_tip_decimal', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+
+---
+## R Tip of the Week: `scales::percent()`
+
+.leftcol60[
+```{r}
+mpg_percent <- mpg %>% 
+    count(cyl) %>% 
+    mutate(
+        percent = n / sum(n),
+        cyl = fct_reorder(as.factor(cyl), percent))
+
+mpg_percent
+```
+```{r r_tip_percent, fig.show='hide'}
+ggplot(mpg_percent) +
+    geom_col(aes(x = cyl, y = percent)) + 
+    scale_y_continuous(label = scales::percent) #<<
+```
+
+]
+.rightcol40[
+```{r ref.label='r_tip_percent', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
