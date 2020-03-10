@@ -191,7 +191,7 @@ sf_china_proj <- ggplot(data = china) +
 ggsave(here::here('images', 'plots', 'sf_china_proj.png'),
        sf_china_proj, width = 6, height = 3.7)
 
-# Choropleth map -------------------------------------------------------
+# Choropleth milk -------------------------------------------------------
 # https://www.r-graph-gallery.com/327-chloropleth-map-from-geojson-with-ggplot2.html
 
 # Milk 2017
@@ -289,6 +289,40 @@ us_milk_anim_plot +
 # Render the animation
 animate(us_milk_anim, end_pause = 10,
         width = 800, height = 600, res = 150)
+
+
+
+# Choropleth internet -------------------------------------------------------
+
+internet_users_2015 <- internet_users %>% 
+    filter(year == 2015)
+
+world <- ne_countries(scale = "medium", returnclass = "sf")
+
+# Join internet user data to world shape file
+world_int <- world %>% 
+    left_join(internet_users_2015, by = c('iso_a3' = 'code')) %>% 
+    filter(iso_a3 != "ATA")  # No internet in Antarctica...sorry penguins.
+
+# Robinson
+sf_world_internet <- ggplot(world_int) +
+    geom_sf(aes(fill = percent), color = NA) +
+    coord_sf(crs = st_crs(54030)) +
+    scale_fill_gradient(
+        low = "#e7e1ef",
+        high = "#dd1c77",
+        na.value = "grey70",
+        limits = c(0, 100)) +
+    guides(fill = guide_colorbar(
+        title.position = "top",
+        title.hjust = 0.5,
+        barwidth = 15, barheight = 0.5)) +
+    theme_void(base_size = 15) +
+    theme(legend.position = 'bottom') +
+    labs(fill = '% of population with internet access')
+
+ggsave(here::here('images', 'plots', 'sf_world_internet.png'),
+       sf_world_internet, width = 6, height = 3.7)
 
 
 

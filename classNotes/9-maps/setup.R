@@ -34,8 +34,9 @@ knitr::opts_chunk$set(
 dplyr.width = Inf
 
 # Read in data
-milk_production  <- read_csv(here::here('data', 'milk_production.csv'))
-us_coffee_shops  <- read_csv(here::here('data', 'us_coffee_shops.csv'))
+milk_production <- read_csv(here::here('data', 'milk_production.csv'))
+internet_users  <- read_csv(here::here('data', 'internet_users_country.csv'))
+us_coffee_shops <- read_csv(here::here('data', 'us_coffee_shops.csv'))
 
 # Filter out coffee shops to continental 48 states
 us_coffee_shops <- us_coffee_shops %>%

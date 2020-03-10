@@ -20,16 +20,4 @@ library(here)
 source('setup.R')
 ```
 
-class: inverse, middle
-
-<center>
-<img src="images/state_borders.png" width=850>
-</center>
-
----
-class: title-slide, center, middle, inverse
-
-# Week 8: Maps & geospatial data
-
-.large[EMSE 4197 | John Paul Helveston | March 11, 2020]
 

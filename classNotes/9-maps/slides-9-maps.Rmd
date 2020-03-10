@@ -95,6 +95,9 @@ class: inverse, middle
 ```{r child = here::here('parts', 'projections.Rmd')}
 ```
 
+```{r child = here::here('parts', 'extra.Rmd')}
+```
+
 ---
 class: inverse, middle, center
 
