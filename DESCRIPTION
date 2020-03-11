@@ -26,4 +26,5 @@ Imports:
     gapminder,
     gsheet,
     kableExtra,
-    cowplot
+    cowplot,
+    janitor

@@ -29,6 +29,18 @@ Dictionary here: https://www.rdocumentation.org/packages/fivethirtyeight/version
 
 
 # ----------------------------------------------------------------------
+Data file: "central_park" folder
+
+Date downloaded: March 10, 2020
+
+Description: Shape files of NYC central park
+
+Source of downloaded file:
+https://github.com/malcolmbarrett/designing_ggplots
+
+
+
+# ----------------------------------------------------------------------
 Data file: college_all_ages.csv
 
 Date downloaded: January 17, 2020
@@ -364,9 +376,58 @@ smoothTemp  | Five-year lowess smooth of the "No_Smoothing" variable
 
 
 # ----------------------------------------------------------------------
+Data file: "natural_earth_countries" folder
+
+Date downloaded: March 10, 2020
+
+Description: Shape files of world nations
+
+Source of downloaded file: http://www.naturalearthdata.com/downloads/50m-cultural-vectors/
+
+
+
+# ----------------------------------------------------------------------
 Data file: north_america_bear_killings.txt
 
-<need to update>
+Date downloaded: January 15, 2020
+
+Description: Bear killings in the U.S.
+
+Source of downloaded file: https://data.world/makeovermonday/2019w21
+
+Original source: The data was collected, prepared, and distributed by Ali Sanne on data.world.
+
+variable        | description
+----------------|----------------------
+Name            | Name of victim
+age             | Age of victim
+gender          | Gender of victim
+Date            | Date of incident
+Month           | Month of incident
+Year            | Year of incident
+Type            |
+Location        | Location of incident
+Description     | Description of incident
+Type of bear    | Type of bear
+Hunter          | Whether the victim was a hunter
+Grizzly         | Whether the bear was a brizzly
+Hikers          | Whether the victim was a hiker
+Only one killed | Whether there was only one victim killed
+
+
+
+# ----------------------------------------------------------------------
+Data file: nyc_squirrels.csv
+
+Date downloaded: March 10, 2020
+
+Description: Census of squirrels in NYC's central park.
+
+Source of downloaded file:
+https://github.com/malcolmbarrett/designing_ggplots
+
+Source of original data: the NYC squirrels census:
+https://www.thesquirrelcensus.com/
 
 
 
@@ -415,6 +476,19 @@ Data file: total_gdp_us_inflation_adjusted.csv
 Date downloaded: March 2, 2020
 
 Data source: https://www.gapminder.org/data/
+
+
+
+# ----------------------------------------------------------------------
+Data file: us_coffee_shops.csv
+
+Date downloaded: March 10, 2020
+
+Description: Data on locations of coffee shops in the U.S. found in this articles
+https://media.thinknum.com/articles/coffee-shops-of-america-an-interactive-map/
+
+Source of downloaded file: File was sent to me by Justin Zhen <jzhen@thinknum.com> of thinknum.com
+
 
 
 

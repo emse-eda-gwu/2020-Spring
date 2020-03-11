@@ -26,7 +26,7 @@ output:
 
 **Tasks**:
 
-For this assignment, you will use the **ggplot2** library in R to redesign the above chart. In this redesign, we are interested in exploring this question: **Which states are leaders in wind energy?** The answer depends on what you consider a "leader" to be. For example, the authors of the above chart clearly viewed the installed capacity as the most important metric to highlight as they used "position on a common scale" to encode this value (albeit along with lots of distracting chart junk). But this chart also contains lots of other data, such as the amount of money each state invested and the number of homes powered by wind in each state. Some states may be leading in other ways, such as the capacity built per dollar of investment. With that in mind, here's what you need to do for this analysis:
+For this assignment, you will use the **ggplot2** library in R to redesign the above chart. In this redesign, we are interested in exploring this question: **Which states are leaders in wind energy?** The answer depends on what you consider a "leader" to be. For example, the authors of the above chart clearly viewed the installed capacity as the most important metric to highlight as they used "position on a common scale" to encode this value (albeit along with lots of distracting chart junk). But this chart also contains lots of other data, such as the amount of money each state invested and the number of homes powered by wind in each state. Some states may be leading in other ways, such as the capacity built per dollar of investment.
 
 With that in mind, here's what you need to do for this analysis:
 

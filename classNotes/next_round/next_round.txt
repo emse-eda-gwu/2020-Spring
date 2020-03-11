@@ -1,0 +1,5 @@
+Consider using memos for exercise assignments, and have the memos be .Rmd files that are compiled to different outputs (html, pdf, etc.).
+
+The memos should say three things they learned, and demonstrate one concept with actual data.
+
+Look up 200306-SEAS-faculty notes for data examples
