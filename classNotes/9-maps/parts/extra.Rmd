@@ -10,7 +10,7 @@ class: inverse
 ## Your turn
 
 .leftcol[.font80[
-Use the `internet_users_country.csv` data and the `world` data frame from the **rnaturalearth** library to create this map of internet acccss by country.
+Use the `internet_users_country.csv` data and the `world` data frame from the **rnaturalearth** library to create this map of internet acccss by country in 2015.
 
 Hints:
 
