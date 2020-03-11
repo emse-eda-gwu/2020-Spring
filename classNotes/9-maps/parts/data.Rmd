@@ -11,7 +11,11 @@ Hexmaps:
 ---
 class: inverse, center, middle
 
-# Choropleth maps
+## Choropleth maps
+
+<center>
+<img src="images/state_abbreviations.png" width=750>
+</center>
 
 ---
 class: center, middle
@@ -23,7 +27,7 @@ class: center, middle
 ---
 class: center, middle
 
-## Number of events != Number of vents **per capita**
+## Number of events != Number of events **per capita**
 
 <center>
 <img src="images/choropleth_ca.png" width=800>
@@ -66,7 +70,8 @@ class: center
 <img src="images/election_map_fakenews.png" width=480>
 </center>
 
-Bottom map is actually the 2012 election map, found [here](http://www-personal.umich.edu/~mejn/election/2012/)
+--
+Bottom map is actually [this map](http://www-personal.umich.edu/~mejn/election/2012/countymaprb1024.png) of the 2012 election
 
 ---
 class: center, middle
@@ -245,7 +250,7 @@ class: center
 
 # For point size, use **area**, not radius
 
-## $Area = \pi r^2$
+# $Area = \pi r^2$
 
 .leftcol[
 ## Radius
@@ -344,11 +349,15 @@ countdown(minutes = 15,
           font_size = '2em')
 ```
 
-Create the following map of squirrels in NYC's central park using the following data:
+.font90[
+Create the following map of squirrels in NYC's central park using the following data from the [Squirrel Census](https://www.thesquirrelcensus.com/):
 
 - The `CentralPark.shp` file in the `data/central_park` folder.
 - The `nyc_squirrels.csv` file in the `data` folder.
 
+Hint: color is the `primary_fur_color` variable
+]
+
 <center>
-<img src="images/plots/sf_central_park_squirrels_facet.png" width=900>
+<img src="images/plots/sf_central_park_squirrels_facet.png" width=850>
 <center>

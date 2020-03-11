@@ -15,6 +15,7 @@ Use the `internet_users_country.csv` data and the `world` data frame from the **
 Hints:
 
 - Use the `iso_a3` variable in the `worlds` data frame to match with the `code` variable in the `internet_users_country.csv` data.
+- This map uses a Robinson projection, CRS: `54030`
 - Use `scale_fill_gradient()` to fill the color:
 
 ```{r, eval=FALSE}

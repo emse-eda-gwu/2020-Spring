@@ -7,22 +7,24 @@ https://www.r-spatial.org/r/2018/10/25/ggplot2-sf-2.html
 -->
 
 ---
-class: middle
+class: center, middle
+
+# What's a map projection?
+
+<center>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kIID5FDi2JQ?start=52" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
+
+---
+# What is the best projection?...it depends
+
+<br>
 
 # 1. [Compare projections](http://metrocosm.com/compare-map-projections.html)
 
 <br>
 
 # 2. [Compare country sizes](https://thetruesize.com/)
-
----
-class: center
-
-# What is the best projection?
-
-<center>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/kIID5FDi2JQ?start=52" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</center>
 
 ---
 ## Using projections
@@ -65,12 +67,25 @@ ggplot(data = world) +
 ]]
 
 ---
+.leftcol[
 ## Common Projections
 
-.leftcol[
-`coord_sf(crs = st_crs(XXXXX))`
+<br>
 
-World Projections
+**Favorites**
+
+- Robinson (World): `54030`
+- Albers (US): `102003`
+
+]
+.rightcol[
+
+ggplot layer:
+```{r, eval=FALSE}
+coord_sf(crs = st_crs(XXXXX))
+```
+
+**World**
 
 Code  | Projection
 ------|---------------------------------------------------
@@ -80,26 +95,14 @@ Code  | Projection
 54009 | Mollweide projection
 54030 | Robinson projection
 
-US Projections
+**United States**
 
 Code   | Projection
 -------|---------------------------------------------------
 102003 | Albers projection
+102004 | Contiguous Lambert Conformal Conic
 4269   | NAD 83
-]
-.rightcol[
-`coord_sf(crs = st_crs(name))`
 
-Name          | Projection
---------------|------------------
-"+proj=merc"  | Mercator
-"+proj=robin" | Robinson
-"+proj=moll"  | Mollweide
-
-My favorites:
-
-- World: Robinson `54030`
-- US: Albers `102003`
 ]
 
 ---

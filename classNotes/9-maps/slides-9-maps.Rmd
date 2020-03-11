@@ -101,4 +101,4 @@ class: inverse, middle
 ---
 class: inverse, middle, center
 
-# Proposals & Assignment 7 
+# Proposals & Assignment 7

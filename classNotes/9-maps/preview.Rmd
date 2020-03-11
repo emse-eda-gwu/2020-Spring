@@ -20,4 +20,18 @@ library(here)
 source('setup.R')
 ```
 
+class: center
 
+# For point size, use **area**, not radius
+
+# $Area = \pi r^2$
+
+.leftcol[
+## Radius
+]
+.rightcol[
+## Area
+]
+<center>
+<img src="images/area.png" width=1000>
+</center>
