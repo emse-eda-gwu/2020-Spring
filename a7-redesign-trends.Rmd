@@ -68,9 +68,23 @@ tb_17 <- tb %>% filter(season == '2017-18')
 
 4. **Summarize** the data. Examine measures of centrality and variability in the important variables relevant to our research question, including the new variables you created in step 3.
 
-5. **Visualize** the data. The original chart is pretty terrible, so we're going to just scratch that and start over. Create an appropriate visualization that highlights the _change_ in NHL game attendance for each team in each season since the 2000-01 season. You are free to use whatever chart type you wish--even an animation if you want! (**Hint**: review the slides from week 6 for some ideas!). Your chart should follow the design principles we have covered in class, and it should be "polished" following the techniques we covered in week 8.
+5. **Visualize** the data. The original chart is pretty terrible, so we're going to just scratch that and start over. Create an appropriate visualization that highlights the _change_ in NHL game attendance for each team in each season since the 2000-01 season. You are free to use whatever chart type you wish. Here are some of the options we covered in week 6:
 
-6. **Visualize** the data (again). While the first visualization highlights the _change_ in NHL game attendance for each team, this second chart should highlight the overall trend across **all** teams. To do this, you will probably need to create a summary data frame from your original one. Again, you are free to use whatever chart type you wish, but your chart should follow the design principles we have covered in class and it should be "polished".
+    - Points
+    - Points + line
+    - Points + smoothed line
+    - Line + area
+    - Bars
+    - Stacked area
+    - Lines with mean line overlay
+    - Heatmap
+    - Seasonal chart
+    - Sankey chart
+    - Animations (yes, you can totally do an animation if you want!)
+
+    Your chart should follow the design principles we have covered in class, and it should be "polished" following the techniques we covered in week 8.
+
+6. **Visualize** the data (again). While the first visualization highlights the change in NHL game attendance for _each team_, this second chart should highlight the overall trend across _all_ teams. To do this, you will probably need to create a summary data frame from your original one. Again, you are free to use whatever chart type you wish, but your chart should follow the design principles we have covered in class and it should be "polished".
 
 7. **Write** a summary of your analysis. I'm specifically looking for a discussion of the following:
 
