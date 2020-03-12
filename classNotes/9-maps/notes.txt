@@ -13,9 +13,11 @@ Assignment 7, Proposal (5 min)
 # ----------------------------------------------------------------------
 # Post-class notes
 
-
-
-
+- Reorganize the quiz structure next year - need a full class period for this.
+- Remove state abb join at the end - it's not needed because the data frame
+  already has abbreviations in it
+- Add a different exercise at the end for mapping points - move the labeling
+  exercise to a different section on adding labels
 
 ---------------------------------------------------------------------------
 Sources:
