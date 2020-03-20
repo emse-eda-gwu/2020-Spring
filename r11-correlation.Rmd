@@ -11,6 +11,30 @@ rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
 
-Wilke: [12 - Visualizing associations](https://serialmentor.com/dataviz/visualizing-associations.html)
+This week, we will learn some methods to recognize and measure the correlation between two variables as well as how to find a "line of best fit" between them. By the end, you will be able to:
 
-R4DS: [23 - Model basics](https://r4ds.had.co.nz/model-basics.html)
+- Recognize when to use correlation.
+- Interpret the magnitude and direction of a correlation.
+- Explain the influence of outliers.
+- Describe the Pearson correlation and the Spearman correlation.
+- Explain the term "line of best fit".
+- Interpret intercept and slope coefficients.
+- Define residuals.
+- Describe the standard error of the estimate.
+- Report the assumptions of linear regression and how to test them.
+- Explain standardized regression and its connection to correlation.
+
+# Videos!
+
+To get started, open up a notebook (physical, digital...whatever you take notes in best), and **take notes** while you watch these two videos to learn about correlation and regression:
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/fmK5YWWobH8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kXDRkUqzD6g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+# Readings!
+
+After watching the above videos, read through the following chapters and **take notes**.
+
+- [R4DS - 23: Model basics](https://r4ds.had.co.nz/model-basics.html): An overview of basic modeling in R.
+- [Wilke - 12: Visualizing associations](https://serialmentor.com/dataviz/visualizing-associations.html): An overview of ways to visualize associations between two or more variables.
