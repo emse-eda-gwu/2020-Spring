@@ -72,6 +72,19 @@ Dictionary here: http://standard.threesixtygiving.org/en/latest/reference/#sprea
 
 
 # ----------------------------------------------------------------------
+Data file: Datasaurus_data.csv
+
+Date downloaded: March 20, 2020
+
+Description: Data used to produce Albert Cairo's "Datasaurus":
+https://www.autodeskresearch.com/publications/samestats
+
+Source of raw data:
+http://www.thefunctionalart.com/2016/08/download-datasaurus-never-trust-summary.html
+
+
+
+# ----------------------------------------------------------------------
 Data files:
 - federal_spending_orig.csv
 - federal_spending_wide.csv
