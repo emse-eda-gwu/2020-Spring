@@ -44,15 +44,24 @@ Using the `wildlife_impacts` data frame:
 2. Create a scatter plot of those two variables. Include an annotation for the Pearson correlation coefficient.
 
 ```{r}
-
-# Write code to find the two most correlated variables
-
+wildlife_impacts %>% 
+    ggcorr(label = TRUE)
 ```
 
 ```{r}
+corLab <- cor(
+    wildlife_impacts$height, wildlife_impacts$speed, 
+    method = 'spearman',
+    use = 'complete.obs')
 
-# Write code to visualize the two most correlated variables
-
+ggplot(wildlife_impacts) + 
+    geom_point(aes(x = speed, y = height)) + 
+    annotate(geom = 'text', x = 50, y = 22000,
+             label = str_c('r = ', round(corLab, 2)), 
+             hjust = 0, size = 5) +
+    theme_minimal_grid() + 
+    labs(x = 'Speed (mph)', 
+         y = 'Height (ft)')
 ```
 
 # 2. Linear models
@@ -66,7 +75,46 @@ Using the `msleep` data frame:
 Bonus: Compare your results to a log-linear relationship by converting the x and y variables to the log of x and y.
 
 ```{r}
+# compute correlation 
+corLab <- cor(
+    msleep$bodywt, msleep$brainwt, 
+    use = 'complete.obs')
 
-# Write code to visualize the brainwt and bodywt variables
+# fit a linear model 
+model_linear <- lm(brainwt ~ bodywt, data = msleep)
+coefs <- round(coef(model_linear), 3)
+eqLabel <- str_c('y = ', coefs[1], ' + ', coefs[2], 'x')
 
+ggplot(msleep, aes(x = bodywt, y = brainwt)) + 
+    geom_point() + 
+    geom_smooth(method = 'lm', se = FALSE) + 
+    annotate(geom = 'text', x = 100, y = 6, hjust = 0, size = 5,
+             label = str_c('r = ', round(corLab, 2))) + 
+    annotate(geom = 'text', x = 100, y = 5.5, 
+             label = eqLabel, hjust = 0, size = 5) + 
+    theme_minimal_grid()
+```
+
+
+```{r}
+# compute correlation 
+corLab <- cor(
+    log(msleep$bodywt), log(msleep$brainwt), 
+    use = 'complete.obs')
+
+# fit a linear model 
+model_log <- lm(log(brainwt) ~ log(bodywt), data = msleep)
+coefs <- round(coef(model_log), 3)
+eqLabel <- str_c('y = ', coefs[1], ' + ', coefs[2], 'x')
+
+ggplot(msleep, aes(x = bodywt, y = brainwt)) + 
+    geom_point() +
+    geom_smooth(method = 'lm', se = FALSE) + 
+    annotate(geom = 'text', x = 100, y = 6, hjust = 0, size = 5,
+             label = str_c('r = ', round(corLab, 2))) + 
+    annotate(geom = 'text', x = 100, y = 5.5, 
+             label = eqLabel, hjust = 0, size = 5) + 
+    theme_minimal_grid() + 
+    scale_x_log10() + 
+    scale_y_log10()
 ```
