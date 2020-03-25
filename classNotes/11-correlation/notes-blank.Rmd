@@ -1,0 +1,72 @@
+---
+title: "Week 11 In Class Notes"
+output:
+    html_document:
+        theme: lumen
+        highlight: tango
+---
+
+Load libraries and settings
+```{r setup, message=FALSE, warning=FALSE}
+# install.packages('HistData')
+# install.packages('GGally')
+
+library(HistData)
+library(GGally)
+library(knitr)
+library(cowplot)
+library(tidyverse)
+library(here)
+options(
+    htmltools.dir.version = FALSE,
+    knitr.table.format = "html",
+    knitr.kable.NA = '',
+    tibble.width = Inf)
+knitr::opts_chunk$set(
+    warning = FALSE,
+    message = FALSE,
+    fig.retina = 3)
+dplyr.width = Inf
+```
+
+Load all the data sets:
+
+```{r}
+wildlife_impacts <- read_csv(here::here('data', 'wildlife_impacts.csv'))
+msleep           <- read_csv(here::here('data', 'msleep.csv'))
+```
+
+# 1. Correlation
+
+Using the `wildlife_impacts` data frame:
+
+1. Find the two variables with the largest correlation in absolute value <br>(i.e. closest to -1 or 1).
+2. Create a scatter plot of those two variables. Include an annotation for the Pearson correlation coefficient.
+
+```{r}
+
+# Write code to find the two most correlated variables
+
+```
+
+```{r}
+
+# Write code to visualize the two most correlated variables
+
+```
+
+# 2. Linear models
+
+Using the `msleep` data frame:
+
+1. Create a scatter plot of `brainwt` versus `bodywt`.
+2. Include an annotation for the Pearson correlation coefficient.
+3. Include an annotation for the best fit line.
+
+Bonus: Compare your results to a log-linear relationship by converting the x and y variables to the log of x and y.
+
+```{r}
+
+# Write code to visualize the brainwt and bodywt variables
+
+```

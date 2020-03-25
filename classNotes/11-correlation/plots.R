@@ -329,7 +329,7 @@ ggplot(msleep, aes(x = bodywt, y = brainwt)) +
              hjust = 0, size = 5) + 
     annotate(geom = 'text', x = 100, y = 5.5, 
              label = eqLabel, hjust = 0,
-             size = 5)
+             size = 5) +
     geom_smooth(method = 'lm', se = FALSE) + 
     theme_minimal_grid()
 
