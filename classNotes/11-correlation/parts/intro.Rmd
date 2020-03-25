@@ -1,0 +1,57 @@
+
+---
+.leftcol[
+## Visualizing coronavirus
+
+**Choropleth maps**
+- [World](https://www.nytimes.com/interactive/2020/world/coronavirus-maps.html), Robinson projection [NY Times]
+- [US](https://www.newsweek.com/coronavirus-us-map-updates-more-6500-infected-across-all-50-states-new-cases-indiana-texas-1493064#slideshow/1574808), Albers projection [Newsweek]
+- [US animation](https://www.nytimes.com/interactive/2020/03/20/us/coronavirus-model-us-outbreak.html), Albers projection [NY Times]
+
+**Bubble maps**
+- [US](https://www.nytimes.com/interactive/2020/us/coronavirus-us-cases.html), Albers projection [NY Times]
+- [US animation](https://www.instagram.com/p/B-AZ0zsn4Rx/?igshid=1vr6xc6hppblu), Albers projection [NY Times]
+]
+.rightcol[
+[**Make good design choices**](https://medium.com/nightingale/ten-considerations-before-you-create-another-chart-about-covid-19-27d3bd691be8)
+
+**Static charts**
+- [The Hammer and the Dance, by Tomas Pueyo](https://medium.com/@tomaspueyo/coronavirus-the-hammer-and-the-dance-be9337092b56)
+- [Heatmap](https://www.npr.org/sections/health-shots/2020/03/16/816707182/map-tracking-the-spread-of-the-coronavirus-in-the-u-s), [NPR]
+- [Log line charts](https://www.ft.com/coronavirus-latest), [Financial Times]
+
+**Dashboards**
+- [ArcGIS dashboard](https://coronavirus.jhu.edu/map.html), Center for Systems Science and Engineering (CSSE), Johns Hopkins U.
+- [R Shiny dashboard](https://chschoenenberger.shinyapps.io/covid19_dashboard/), [Christoph Schönenberger](https://github.com/chschoenenberger/covid19_dashboard)
+]
+.noborder[
+<center>
+<img src="images/cleveland_pattern_recognition_scale.png" width=700>
+</center>
+]
+
+---
+# General proposal feedback
+
+--
+- Your research question should be a question (e.g. "what...?", "why...?", "how...?").
+
+--
+- Your projects are _exploratory_: your goal isn't to "prove" something true or false, but rather to identify evidence that _generates_ hypotheses.
+--
+
+- Testing hypotheses is "confirmatory" analysis, which we won't cover in this class.
+
+---
+## Today's data
+
+```{r, eval=FALSE}
+wildlife_impacts <- read_csv(here::here('data', 'wildlife_impacts.csv'))
+msleep           <- read_csv(here::here('data', 'msleep.csv'))
+```
+
+## New package:
+```{r, eval=FALSE}
+install.packages('HistData')
+install.packages('GGally')
+```

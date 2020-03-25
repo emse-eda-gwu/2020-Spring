@@ -1,0 +1,176 @@
+
+---
+## Visualizing correlations: the scatterplot
+
+.leftcol[
+Compute the correlation
+```{r, eval=FALSE}
+mtcarsCorr <- round(cor(
+  mtcars$mpg, mtcars$hp,
+  method = 'pearson'), 2)
+```
+Make the plot
+```{r, eval=FALSE}
+ggplot(mtcars) +
+    geom_point(aes(x = mpg, y = hp),
+               size = 2, alpha = 0.7) +
+    annotate(geom = 'text', x = 28, y = 310, #<<
+             label = str_c('r = ', mtcarsCorr), #<<
+             hjust = 0, size = 7) + #<<
+    theme_half_open() +
+    labs(x = 'Fuel economy (mpg)',
+         y = 'Engine power (hp)')
+```
+]
+.rightcol[
+<center>
+<img src="images/plots/mtcarsScatterplot.png">
+</center>
+]
+
+---
+## Visualizing correlations: `ggcorr()`
+
+.leftcol[
+```{r, eval=FALSE}
+library('GGally')
+```
+
+```{r, eval=FALSE}
+mtcars %>%
+    ggcorr() #<<
+```
+]
+.rightcol[
+<center>
+<img src="images/plots/ggcor_mtcars.png">
+</center>
+]
+
+---
+## Visualizing correlations: `ggcorr()`
+
+.leftcol[
+```{r, eval=FALSE}
+library('GGally')
+```
+
+```{r, eval=FALSE}
+mtcars %>%
+    ggcorr(label = TRUE, #<<
+           label_size = 3, #<<
+           label_round = 2) #<<
+```
+]
+.rightcol[
+<center>
+<img src="images/plots/ggcor_mtcars_labels.png">
+</center>
+]
+
+---
+## Visualizing correlations: `ggcorr()`
+
+.leftcol[
+```{r, eval=FALSE}
+ggcor_mtcars_final <- mtcars %>%
+    ggcorr(label = TRUE,
+           label_size = 3,
+           label_round = 2,
+           label_color = 'white', #<<
+           nbreaks = 5,  #<<
+           palette = "RdBu") #<<
+```
+]
+.rightcol[
+<center>
+<img src="images/plots/ggcor_mtcars_final.png">
+</center>
+]
+
+---
+.leftcol[
+## .center[Pearson]
+```{r, eval=FALSE}
+mtcars %>%
+    ggcorr(label = TRUE,
+           label_size = 3,
+           label_round = 2,
+           method = c("pairwise", "pearson")) #<<
+```
+<center>
+<img src="images/plots/ggcor_mtcars_pearson.png" width=400>
+</center>
+]
+.rightcol[
+## .center[Spearman]
+```{r, eval=FALSE}
+mtcars %>%
+    ggcorr(label = TRUE,
+           label_size = 3,
+           label_round = 2,
+           method = c("pairwise", "spearman")) #<<
+```
+<center>
+<img src="images/plots/ggcor_mtcars_spearman.png" width=400>
+</center>
+]
+
+---
+## Correlograms: `ggpairs()`
+
+.leftcol40[
+```{r, eval=FALSE}
+library('GGally')
+```
+```{r, eval=FALSE}
+mtcars %>%
+    select(mpg, cyl, disp, hp, wt) %>%
+    ggpairs() #<<
+```
+]
+.rightcol60[
+<center>
+<img src="images/plots/ggpairs_mtcars.png" width=600>
+</center>
+]
+
+---
+## Correlograms: `ggpairs()`
+
+.leftcol40[
+```{r, eval=FALSE}
+library('GGally')
+```
+```{r, eval=FALSE}
+mtcars %>%
+    select(mpg, cyl, disp, hp, wt) %>%
+    ggpairs() +
+    theme_half_open() #<<
+```
+]
+.rightcol60[
+<center>
+<img src="images/plots/ggpairs_mtcars_half_open.png" width=600>
+</center>
+]
+
+---
+class: inverse
+
+## Your turn
+
+```{r, echo=FALSE}
+countdown(minutes = 15,
+          warn_when = 30,
+          update_every = 15,
+          top = 0,
+          font_size = '2em')
+```
+
+.leftcol[.font130[
+Using the `wildlife_impacts` data frame:
+
+1. Find the two variables with the largest correlation in absolute value <br>(i.e. closest to -1 or 1).
+2. Create a scatter plot of those two variables. Include an annotation for the Pearson correlation coefficient.
+]]

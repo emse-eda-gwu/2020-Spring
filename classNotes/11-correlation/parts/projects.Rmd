@@ -1,0 +1,14 @@
+
+---
+class: middle, center
+
+<img src="images/horst_monsters_r_first_then.png">
+
+Art by [Allison Horst](https://github.com/allisonhorst/stats-illustrations)
+
+---
+class: middle, center
+
+<img src="images/horst_gator_error.jpg">
+
+Art by [Allison Horst](https://github.com/allisonhorst/stats-illustrations)

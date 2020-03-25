@@ -1,0 +1,299 @@
+
+---
+## Galton's Height Data
+
+.leftcol[
+We already know that the correlation is 0.32, which means that the midparent height explains about 10% of the variation in the child height.
+]
+.rightcol[
+<center>
+<img src="images/plots/galtonScatterplot.png" width=500>
+</center>
+]
+
+---
+## Galton's Height Data
+
+.leftcol[
+We already know that the correlation is 0.32, which means that the midparent height explains about 10% of the variation in the child height.
+
+<br>
+
+To make predictions, we need to fit a model to these points.
+]
+.rightcol[
+<center>
+<img src="images/plots/galtonScatterplotSmooth.png" width=500>
+</center>
+]
+
+---
+## Modeling basics
+
+.leftcol[
+Two parts to a model:
+1. **Model family**: for example, $y = ax + b$
+2. **Fitted model**: for example, $y = 3x + 7$
+]
+--
+.rightcol[
+Here is some simulated data
+<center>
+<img src="images/sim_base.png">
+</center>
+]
+
+---
+## Modeling basics
+
+.leftcol[
+Two parts to a model:
+1. **Model family**: linear model: $y = ax + b$
+]
+--
+.rightcol[
+There are an infinite number of possible models
+<center>
+<img src="images/sim_models.png">
+</center>
+]
+
+---
+## Modeling basics
+
+.leftcol[
+Two parts to a model:
+1. **Model family**: linear model: $y = ax + b$
+2. **Fitted model**: How to choose the "best" $a$ and $b$?
+]
+.rightcol[
+There are an infinite number of possible models
+<center>
+<img src="images/sim_models.png">
+</center>
+]
+
+---
+## Modeling basics
+
+.leftcol[
+Two parts to a model:
+1. **Model family**: linear model: $y = ax + b$
+2. **Fitted model**: How to choose the "best" $a$ and $b$?
+
+<br>
+We need to come up with some measure of "distance" from the model to the data
+]
+--
+.rightcol[
+Compute the **"residuals"**:<br>The distance between the model line and the data<br><br>
+<center>
+<img src="images/sim_residuals.png">
+</center>
+]
+
+---
+## Residuals
+
+.leftcol[
+### **"residual"**: The distance between the model line and the data
+
+#### residual = $y_i - y_i'$
+]
+.rightcol[
+<center>
+<img src="images/sim_residuals.png">
+</center>
+]
+
+---
+## All the residuals
+
+.leftcol[
+### **"residual"**: The distance between the model line and the data
+
+#### residual = $y_i - y_i'$
+
+<br>
+
+### Sum of squared residuals:
+
+#### $\text{SSR} = \sum_{i = 1}^{n} (y_i - y_i')^2$
+]
+.rightcol[
+<center>
+<img src="images/sim_residuals.png">
+</center>
+]
+
+---
+## Search algorithm
+
+.cols3[
+1): Choose a model:<br>
+$y = ax + b$
+<br>
+<center>
+<img src="images/sim_models.png">
+</center>
+]
+--
+.cols3[
+2): Compute the SSR:<br>
+$\text{SSR} = \sum_{i = 1}^{n} (y_i - y_i')^2$
+<center>
+<img src="images/sim_residuals.png">
+</center>
+]
+--
+.cols3[
+3): Repeat steps 1 & 2 until the smallest SSR is found
+<center>
+<img src="images/sim_best_line.png">
+</center>
+]
+
+---
+## Fitting a linear model in R
+
+```{r, eval=FALSE}
+model <- lm(formula = y ~ x,
+            data = data)
+```
+
+--
+&zwj;Example: Galton's height data
+
+```{r}
+model <- lm(
+  formula = childHeight ~ midparentHeight,
+  data    = GaltonFamilies)
+```
+--
+Get coefficients
+```{r}
+coef(model)
+```
+
+---
+## Fitting a linear model in R
+
+.leftcol[
+```{r, eval=FALSE}
+model <- lm(formula = y ~ x,
+            data = data)
+```
+
+&zwj;Example: Galton's height data
+
+```{r}
+model <- lm(
+  formula = childHeight ~ midparentHeight,
+  data    = GaltonFamilies)
+```
+
+Get coefficients
+```{r}
+coef(model)
+```
+]
+.rightcol[
+<center>
+<img src="images/plots/galtonScatterplotSmooth.png" width=500>
+</center>
+]
+
+---
+class: middle, center
+
+## Interpreting results
+<center>
+<img src="images/horst_dragons_continuous.png" width=700>
+</center>
+Art by [Allison Horst](https://github.com/allisonhorst/stats-illustrations)
+
+---
+## Example write up for Galton's height data
+
+.leftcol[.font130[
+The correlation between midparent height and child height is **0.32**. Therefore, **10%** of the variance in child height is explained by midparent height.
+
+The slope of the best fitting regression line indicates that child height increased by **0.64** inches as midparent height increased by one inch.
+]]
+<br>
+.rightcol[
+<center>
+<img src="images/plots/galtonScatterplotSmooth.png" width=500>
+</center>
+]
+
+---
+## Making predictions
+
+.leftcol[.font130[
+**Interpolation is OK**: You may predict values of $y$ for values of $x$ that were not observed but are within the range of the observed values of $x$.
+]]
+.rightcol[.font130[
+**Extrapolation is BAD**: You should NOT predict values of $y$ using values of $x$ that are outside the observed range of $x$.
+<center>
+<img src="images/extrapolating.png">
+</center>
+.center[[xkcd](https://m.xkcd.com/605/)]
+]]
+
+---
+## Repeat: Extrapolation is BAD
+
+.leftcol[
+Tatem, A. J., Guerra, C. A., Atkinson, P. M., & Hay, S. I. (2004). Momentous sprint at the 2156 Olympics? _Nature_, 431(7008), 525-525. [View online](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3173856/)
+
+"Extrapolation of these trends to the 2008 Olympiad indicates that the women’s 100-metre race could be won in a time of 10.57±0.232 seconds and the men’s event in 9.73±0.144 seconds. **Should these trends continue, the projections will intersect at the 2156 Olympics, when — for the first time ever — the winning women's 100-metre sprint time of 8.079 seconds will be lower than that of the men's winning time of 8.098 seconds (Fig. 1).**"
+]
+.rightcol[
+<center>
+<img src="images/nature_sprint.jpeg">
+</center>
+]
+
+---
+# Symantics
+
+.leftcol[.font130[
+The all mean the same thing:
+- "Use X to predict Y"
+- "Regress Y on X"
+- "Regression of Y on X"
+```{r, eval=FALSE}
+model <- lm(formula = y ~ x,
+            data = data)
+```
+]]
+--
+.rightcol[
+<center>
+<img src="images/plots/galtonScatterplotSmooth.png" width=500>
+</center>
+]
+
+---
+# Symantics
+
+.leftcol[.font130[
+**Y: Dependent variable**
+- Outcome variable
+- Response variable
+- Regressand
+- Left-hand variable
+
+```{r, eval=FALSE}
+model <- lm(formula = y ~ x,
+            data = data)
+```
+]]
+.rightcol[.font130[
+**X: Independent variable**
+- Predictor variable
+- Explanatory variable
+- Regressor
+- Right-hand variable
+]]

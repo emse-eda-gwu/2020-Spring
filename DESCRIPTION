@@ -27,4 +27,6 @@ Imports:
     gsheet,
     kableExtra,
     cowplot,
-    janitor
+    janitor,
+    GGally,
+    HistData

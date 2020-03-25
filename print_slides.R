@@ -25,6 +25,9 @@ file   <- 'slides-8-polish'
 folder <- '9-maps'
 file   <- 'slides-9-maps'
 
+folder <- '11-correlation'
+file   <- 'slides-11-correlation'
+
 # Save the slides
 pagedown::chrome_print(
     input  = here('classNotes', folder, paste0(file, '.html')),

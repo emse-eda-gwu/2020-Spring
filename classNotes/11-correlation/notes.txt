@@ -1,0 +1,23 @@
+Planned outline:
+
+
+# ----------------------------------------------------------------------
+# Post-class notes
+
+
+
+
+# ----------------------------------------------------------------------
+# Resources
+
+Scatterplots - how one variable changes with another
+
+Correlation: https://youtu.be/fmK5YWWobH8
+
+Linear regression: https://youtu.be/kXDRkUqzD6g
+
+Helpful for plots:
+https://datavizf17.classes.andrewheiss.com/class/04-class/
+
+Two axes:
+https://hbr.org/2015/06/beware-spurious-correlations

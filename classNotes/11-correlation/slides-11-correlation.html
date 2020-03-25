@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Week 11: Correlation Analysis</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="John Paul Helveston" />
+    <meta name="date" content="2020-03-25" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/countdown/countdown.css" rel="stylesheet" />
+    <script src="libs/countdown/countdown.js"></script>
+    <link rel="stylesheet" href="https://emse-eda-gwu.github.io/2020-Spring/classNotes/classNotes.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+name: xaringan-title
+class: title-slide, center, middle, inverse
+
+# Week 11: Correlation Analysis
+
+.large[EMSE 4197 | John Paul Helveston | March 25, 2020]
+
+
+
+---
+.leftcol[
+## Visualizing coronavirus
+
+**Choropleth maps**
+- [World](https://www.nytimes.com/interactive/2020/world/coronavirus-maps.html), Robinson projection [NY Times]
+- [US](https://www.newsweek.com/coronavirus-us-map-updates-more-6500-infected-across-all-50-states-new-cases-indiana-texas-1493064#slideshow/1574808), Albers projection [Newsweek]
+- [US animation](https://www.nytimes.com/interactive/2020/03/20/us/coronavirus-model-us-outbreak.html), Albers projection [NY Times]
+
+**Bubble maps**
+- [US](https://www.nytimes.com/interactive/2020/us/coronavirus-us-cases.html), Albers projection [NY Times]
+- [US animation](https://www.instagram.com/p/B-AZ0zsn4Rx/?igshid=1vr6xc6hppblu), Albers projection [NY Times]
+]
+.rightcol[
+[**Make good design choices**](https://medium.com/nightingale/ten-considerations-before-you-create-another-chart-about-covid-19-27d3bd691be8)
+
+**Static charts**
+- [The Hammer and the Dance, by Tomas Pueyo](https://medium.com/@tomaspueyo/coronavirus-the-hammer-and-the-dance-be9337092b56)
+- [Heatmap](https://www.npr.org/sections/health-shots/2020/03/16/816707182/map-tracking-the-spread-of-the-coronavirus-in-the-u-s), [NPR]
+- [Log line charts](https://www.ft.com/coronavirus-latest), [Financial Times]
+
+**Dashboards**
+- [ArcGIS dashboard](https://coronavirus.jhu.edu/map.html), Center for Systems Science and Engineering (CSSE), Johns Hopkins U.
+- [R Shiny dashboard](https://chschoenenberger.shinyapps.io/covid19_dashboard/), [Christoph Schönenberger](https://github.com/chschoenenberger/covid19_dashboard)
+]
+.noborder[
+&lt;center&gt;
+&lt;img src="images/cleveland_pattern_recognition_scale.png" width=700&gt;
+&lt;/center&gt;
+]
+
+---
+# General proposal feedback
+
+--
+- Your research question should be a question (e.g. "what...?", "why...?", "how...?").
+
+--
+- Your projects are _exploratory_: your goal isn't to "prove" something true or false, but rather to identify evidence that _generates_ hypotheses.
+--
+
+- Testing hypotheses is "confirmatory" analysis, which we won't cover in this class.
+
+---
+## Today's data
+
+
+```r
+wildlife_impacts &lt;- read_csv(here::here('data', 'wildlife_impacts.csv'))
+msleep           &lt;- read_csv(here::here('data', 'msleep.csv'))
+```
+
+## New package:
+
+```r
+install.packages('HistData')
+install.packages('GGally')
+```
+
+---
+class: inverse, middle
+
+# Correlation Analysis
+
+## 1. What is correlation?
+## 2. Visualizing correlation
+## 3. Linear models 
+## 4. Visualizing linear models 
+
+---
+class: inverse, middle
+
+# Correlation Analysis
+
+## 1. .orange[What is correlation?]
+## 2. Visualizing correlation
+## 3. Linear models 
+## 4. Visualizing linear models 
+
+
+
+---
+## Origins in [Eugenics](https://en.wikipedia.org/wiki/Eugenics) ("Well Born")
+
+--
+.leftcol[
+[Sir Francis Galton](https://en.wikipedia.org/wiki/Francis_Galton) (1822 - 1911)
+- Charles Darwin's cousin.
+- "Father" of [Eugenics](https://en.wikipedia.org/wiki/Eugenics).
+- Studied correlations between parents &amp; children.
+
+&lt;center&gt;
+&lt;img src="images/Francis_Galton_1850s.jpg" width=220&gt;
+&lt;/center&gt;
+]
+--
+.rightcol[
+[Karl Pearson](https://en.wikipedia.org/wiki/Karl_Pearson) (1857 - 1936)
+
+- Galton's protégé (to the verge of [hero worship](https://en.wikipedia.org/wiki/Apotheosis)).
+- Developed equation for correlation coefficient.
+- "Father" of mathematical statistics.
+
+&lt;center&gt;
+&lt;img src="images/Karl_Pearson.jpg" width=250&gt;
+&lt;center&gt;
+]
+
+---
+.leftcol[
+# Galton's family data
+
+Galton, F. (1886). ["Regression towards mediocrity in hereditary stature"](http://www.stat.ucla.edu/~nchristo/statistics100C/history_regression.pdf). _The Journal of the Anthropological Institute of Great Britain and Ireland_ 15: 246-263.
+
+**Galton's research question**: Does marriage selection indicate a relationship between the heights of husbands and wives?&lt;br&gt;(He called this "assortative mating")
+
+&lt;br&gt;
+Btw, "midparent height" is just a scaled average:
+
+```r
+midparentHeight =  (father + 1.08*mother)/2
+```
+]
+--
+.rightcol[.code70[
+
+```r
+library(HistData)
+
+galtonScatterplot &lt;- ggplot(GaltonFamilies) +
+    geom_point(aes(x = midparentHeight,
+                   y = childHeight),
+               size = 0.5, alpha = 0.7) +
+    theme_half_open() +
+    labs(x = 'Midparent height (inches)',
+         y = 'Child height (inches)')
+```
+&lt;center&gt;
+&lt;img src="images/plots/galtonScatterplot.png" width=450&gt;
+&lt;/center&gt;
+]]
+
+---
+class: center, middle
+
+# How do you measure correlation?
+
+&lt;br&gt;
+
+# Pearson: `\(r = \frac{\text{Cov}(x, y)}{\text{sd}(x) * \text{sd}(y)}\)`
+
+---
+# How do you measure correlation?
+
+.leftcol[
+## `\(r = \frac{\text{Cov}(x, y)}{\text{sd}(x) * \text{sd}(y)}\)`
+
+&lt;br&gt;
+
+.font130[
+Assumptions:
+1. Variables must be interval or ratio
+2. Linear relationship
+]]
+--
+.rightcol[
+&lt;center&gt;
+&lt;img src="images/plots/cor_vstrong_p.png" width=275&gt;
+&lt;/center&gt;
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/plots/cor_quad.png" width=275&gt;
+&lt;/center&gt;
+]
+
+---
+# How do you _interpret_ `\(r\)`?
+
+.leftcol[
+## `\(r = \frac{\text{Cov}(x, y)}{\text{sd}(x) * \text{sd}(y)}\)`
+
+&lt;br&gt;
+
+.font130[
+Interpretation:
+- `\(-1 \le r \le 1\)`
+- Closer to 1 is stronger correlation
+- Closer to 0 is weaker correlation
+]]
+--
+.rightcol[.code70[
+&lt;center&gt;
+&lt;img src="images/plots/galtonScatterplot.png" width=400&gt;
+&lt;/center&gt;
+
+```r
+round(cor(
+    x = GaltonFamilies$midparentHeight,
+    y = GaltonFamilies$childHeight,
+    method = 'pearson'), 2)
+```
+
+```
+## [1] 0.32
+```
+]]
+
+---
+## What does `\(r\)` mean?
+
+.leftcol[.font150[
+
+- `\(\pm 0.1 - 0.3\)`: Weak
+- `\(\pm 0.3 - 0.5\)`: Moderate
+- `\(\pm 0.5 - 0.8\)`: Strong
+- `\(\pm 0.8 - 1.0\)`: Very strong
+]]
+.rightcol[.center[
+&lt;center&gt;
+&lt;img src="images/plots/cor_p.png"&gt;
+&lt;/center&gt;
+]]
+
+---
+class: center,  middle
+
+# Visualizing correlation is...um...easy!
+
+&lt;br&gt;
+
+# [guessthecorrelation.com](http://guessthecorrelation.com/)
+
+---
+class: middle
+
+.leftcol30[
+# The datasaurus
+
+### See more [here](https://www.autodeskresearch.com/publications/samestats)
+]
+.rightcol70[
+&lt;img src="images/datasaurus.png"&gt;
+]
+
+---
+# Coefficient of determination: `\(r^2\)`
+
+.leftcol[.font140[
+Percent of variance in one variable that is explained by the other variable
+
+.noborder[
+&lt;center&gt;
+&lt;img src="images/rsquared_venn.png"&gt;
+&lt;/center&gt;
+]]]
+--
+.rightcol[
+
+`\(r\)` | `\(r^2\)`
+----|------
+0.1 | 0.01
+0.2 | 0.04
+0.3 | 0.09
+0.4 | 0.16
+0.5 | 0.25
+0.6 | 0.36
+0.7 | 0.49
+0.8 | 0.64
+0.9 | 0.81
+1.0 | 1.00
+
+]
+
+---
+## You should report both `\(r\)` and `\(r^2\)`
+
+&lt;br&gt;
+
+### Correlation between parent and child height is 0.32, therefore 10% of the variance in the child height is explained by the parent height.
+
+---
+# Correlation != Causation
+
+### X causes Y
+
+- Training causes improved race performance
+
+### Y causes X
+
+- Race performance causes people to train harder.
+
+### Z causes both X &amp; Y
+
+- Commitment and motivation cause increased training and better race performance.
+
+---
+class: center
+
+# Be weary of dual axes!&lt;br&gt;
+## [They can cause spurious correlations](https://www.tylervigen.com/spurious-correlations)
+
+--
+.leftcol[
+&lt;center&gt;
+&lt;img src="images/hbr_two_axes1.png"&gt;
+&lt;/center&gt;
+]
+--
+.rightcol[
+&lt;center&gt;
+&lt;img src="images/hbr_two_axes2.png"&gt;
+&lt;/center&gt;
+]
+
+---
+class: inverse, center, middle
+
+# Outliers
+
+---
+class: middle
+
+&lt;center&gt;
+&lt;img src="images/plots/pearson_base.png" width=600&gt;
+&lt;/center&gt;
+
+---
+class: middle
+
+&lt;center&gt;
+&lt;img src="images/plots/pearson1.png" width=600&gt;
+&lt;/center&gt;
+
+---
+class: middle
+
+&lt;center&gt;
+&lt;img src="images/plots/pearson2.png" width=600&gt;
+&lt;/center&gt;
+
+---
+class: center, middle
+
+## Pearson correlation is highly sensitive to outliers
+
+&lt;center&gt;
+&lt;img src="images/plots/pearson_grid.png" width=600&gt;
+&lt;/center&gt;
+
+---
+# Spearman's rank-order correlation
+
+# `\(r = \frac{\text{Cov}(x, y)}{\text{sd}(x) * \text{sd}(y)}\)`
+
+--
+.font130[
+- Separately rank the values of X &amp; Y.
+- Use Pearson's correlation on the _ranks_ instead of the `\(x\)` &amp; `\(y\)` values.
+]
+--
+.font130[
+Assumptions:
+- Variables can be ordinal, interval or ratio
+- Relationship must be monotonic (i.e. does not require linearity)
+]
+
+---
+class: center, middle
+
+## Spearman correlation more robust to outliers
+
+&lt;center&gt;
+&lt;img src="images/plots/spearman_grid.png" width=600&gt;
+&lt;/center&gt;
+
+---
+class: center, middle
+
+## Spearman correlation more robust to outliers
+
+.cols3[
+&lt;center&gt;
+&lt;img src="images/plots/pearson_grid.png" width=250&gt;
+&lt;br&gt;
+&lt;img src="images/plots/spearman_grid.png" width=250&gt;
+&lt;/center&gt;
+]
+.cols3[
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; Pearson &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Spearman &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; -0.56 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.53 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 0.39 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.69 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 0.94 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.81 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 0.38 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.76 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 0.81 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.79 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 0.31 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.70 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 0.95 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.81 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 0.51 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.75 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; -0.56 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.53 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+.cols3[
+&lt;center&gt;
+&lt;img src="images/plots/outlier_compare.png"&gt;
+&lt;/center&gt;
+]
+
+---
+## Summary of correlation
+
+.font130[
+- **Pearon's correlation**: Described the strength of a **linear** relationship between two variables that are interval or ratio in nature.
+- **Spearman's rank-order correlation**: Describes the strength of a **monotonic** relationship between two variables that are ordinal, interval, or ratio. **It is more robust to outliers**.
+- The **coefficient of determination** describes the amount of variance in one variable that is explained by the other variable.
+- Correlation != Causation
+]
+
+R command (hint: add `use = "complete.obs"` to drop NA values)
+
+```r
+pearson  &lt;- cor(x, y, method = "pearson", use = "complete.obs")
+spearman &lt;- cor(x, y, method = "spearman", use = "complete.obs")
+```
+
+---
+class: inverse, middle
+
+# Correlation Analysis
+
+## 1. What is correlation?
+## 2. .orange[Visualizing correlation]
+## 3. Linear models
+## 4. Visualizing linear models 
+
+
+
+---
+## Visualizing correlations: the scatterplot
+
+.leftcol[
+Compute the correlation
+
+```r
+mtcarsCorr &lt;- round(cor(
+  mtcars$mpg, mtcars$hp,
+  method = 'pearson'), 2)
+```
+Make the plot
+
+```r
+ggplot(mtcars) +
+    geom_point(aes(x = mpg, y = hp),
+               size = 2, alpha = 0.7) +
+*   annotate(geom = 'text', x = 28, y = 310,
+*            label = str_c('r = ', mtcarsCorr),
+*            hjust = 0, size = 7) +
+    theme_half_open() +
+    labs(x = 'Fuel economy (mpg)',
+         y = 'Engine power (hp)')
+```
+]
+.rightcol[
+&lt;center&gt;
+&lt;img src="images/plots/mtcarsScatterplot.png"&gt;
+&lt;/center&gt;
+]
+
+---
+## Visualizing correlations: `ggcorr()`
+
+.leftcol[
+
+```r
+library('GGally')
+```
+
+
+```r
+mtcars %&gt;%
+*   ggcorr()
+```
+]
+.rightcol[
+&lt;center&gt;
+&lt;img src="images/plots/ggcor_mtcars.png"&gt;
+&lt;/center&gt;
+]
+
+---
+## Visualizing correlations: `ggcorr()`
+
+.leftcol[
+
+```r
+library('GGally')
+```
+
+
+```r
+mtcars %&gt;%
+*   ggcorr(label = TRUE,
+*          label_size = 3,
+*          label_round = 2)
+```
+]
+.rightcol[
+&lt;center&gt;
+&lt;img src="images/plots/ggcor_mtcars_labels.png"&gt;
+&lt;/center&gt;
+]
+
+---
+## Visualizing correlations: `ggcorr()`
+
+.leftcol[
+
+```r
+ggcor_mtcars_final &lt;- mtcars %&gt;%
+    ggcorr(label = TRUE,
+           label_size = 3,
+           label_round = 2,
+*          label_color = 'white',
+*          nbreaks = 5,
+*          palette = "RdBu")
+```
+]
+.rightcol[
+&lt;center&gt;
+&lt;img src="images/plots/ggcor_mtcars_final.png"&gt;
+&lt;/center&gt;
+]
+
+---
+.leftcol[
+## .center[Pearson]
+
+```r
+mtcars %&gt;%
+    ggcorr(label = TRUE,
+           label_size = 3,
+           label_round = 2,
+*          method = c("pairwise", "pearson"))
+```
+&lt;center&gt;
+&lt;img src="images/plots/ggcor_mtcars_pearson.png" width=400&gt;
+&lt;/center&gt;
+]
+.rightcol[
+## .center[Spearman]
+
+```r
+mtcars %&gt;%
+    ggcorr(label = TRUE,
+           label_size = 3,
+           label_round = 2,
+*          method = c("pairwise", "spearman"))
+```
+&lt;center&gt;
+&lt;img src="images/plots/ggcor_mtcars_spearman.png" width=400&gt;
+&lt;/center&gt;
+]
+
+---
+## Correlograms: `ggpairs()`
+
+.leftcol40[
+
+```r
+library('GGally')
+```
+
+```r
+mtcars %&gt;%
+    select(mpg, cyl, disp, hp, wt) %&gt;%
+*   ggpairs()
+```
+]
+.rightcol60[
+&lt;center&gt;
+&lt;img src="images/plots/ggpairs_mtcars.png" width=600&gt;
+&lt;/center&gt;
+]
+
+---
+## Correlograms: `ggpairs()`
+
+.leftcol40[
+
+```r
+library('GGally')
+```
+
+```r
+mtcars %&gt;%
+    select(mpg, cyl, disp, hp, wt) %&gt;%
+    ggpairs() +
+*   theme_half_open()
+```
+]
+.rightcol60[
+&lt;center&gt;
+&lt;img src="images/plots/ggpairs_mtcars_half_open.png" width=600&gt;
+&lt;/center&gt;
+]
+
+---
+class: inverse
+
+## Your turn
+
+<div class="countdown blink-colon noupdate-15" id="timer_5e7b763c" style="top:0;right:0;font-size:2em;" data-warnwhen="30">
+<code class="countdown-time"><span class="countdown-digits minutes">15</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+.leftcol[.font130[
+Using the `wildlife_impacts` data frame:
+
+1. Find the two variables with the largest correlation in absolute value &lt;br&gt;(i.e. closest to -1 or 1).
+2. Create a scatter plot of those two variables. Include an annotation for the Pearson correlation coefficient.
+]]
+
+---
+class: inverse, middle
+
+# Correlation Analysis
+
+## 1. What is correlation?
+## 2. Visualizing correlation
+## 3. .orange[Linear models]
+## 4. Visualizing linear models 
+
+
+
+---
+## Galton's Height Data
+
+.leftcol[
+We already know that the correlation is 0.32, which means that the midparent height explains about 10% of the variation in the child height.
+]
+.rightcol[
+&lt;center&gt;
+&lt;img src="images/plots/galtonScatterplot.png" width=500&gt;
+&lt;/center&gt;
+]
+
+---
+## Galton's Height Data
+
+.leftcol[
+We already know that the correlation is 0.32, which means that the midparent height explains about 10% of the variation in the child height.
+
+&lt;br&gt;
+
+To make predictions, we need to fit a model to these points.
+]
+.rightcol[
+&lt;center&gt;
+&lt;img src="images/plots/galtonScatterplotSmooth.png" width=500&gt;
+&lt;/center&gt;
+]
+
+---
+## Modeling basics
+
+.leftcol[
+Two parts to a model:
+1. **Model family**: for example, `\(y = ax + b\)`
+2. **Fitted model**: for example, `\(y = 3x + 7\)`
+]
+--
+.rightcol[
+Here is some simulated data
+&lt;center&gt;
+&lt;img src="images/sim_base.png"&gt;
+&lt;/center&gt;
+]
+
+---
+## Modeling basics
+
+.leftcol[
+Two parts to a model:
+1. **Model family**: linear model: `\(y = ax + b\)`
+]
+--
+.rightcol[
+There are an infinite number of possible models
+&lt;center&gt;
+&lt;img src="images/sim_models.png"&gt;
+&lt;/center&gt;
+]
+
+---
+## Modeling basics
+
+.leftcol[
+Two parts to a model:
+1. **Model family**: linear model: `\(y = ax + b\)`
+2. **Fitted model**: How to choose the "best" `\(a\)` and `\(b\)`?
+]
+.rightcol[
+There are an infinite number of possible models
+&lt;center&gt;
+&lt;img src="images/sim_models.png"&gt;
+&lt;/center&gt;
+]
+
+---
+## Modeling basics
+
+.leftcol[
+Two parts to a model:
+1. **Model family**: linear model: `\(y = ax + b\)`
+2. **Fitted model**: How to choose the "best" `\(a\)` and `\(b\)`?
+
+&lt;br&gt;
+We need to come up with some measure of "distance" from the model to the data
+]
+--
+.rightcol[
+Compute the **"residuals"**:&lt;br&gt;The distance between the model line and the data&lt;br&gt;&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/sim_residuals.png"&gt;
+&lt;/center&gt;
+]
+
+---
+## Residuals
+
+.leftcol[
+### **"residual"**: The distance between the model line and the data
+
+#### residual = `\(y_i - y_i'\)`
+]
+.rightcol[
+&lt;center&gt;
+&lt;img src="images/sim_residuals.png"&gt;
+&lt;/center&gt;
+]
+
+---
+## All the residuals
+
+.leftcol[
+### **"residual"**: The distance between the model line and the data
+
+#### residual = `\(y_i - y_i'\)`
+
+&lt;br&gt;
+
+### Sum of squared residuals:
+
+#### `\(\text{SSR} = \sum_{i = 1}^{n} (y_i - y_i')^2\)`
+]
+.rightcol[
+&lt;center&gt;
+&lt;img src="images/sim_residuals.png"&gt;
+&lt;/center&gt;
+]
+
+---
+## Search algorithm
+
+.cols3[
+1): Choose a model:&lt;br&gt;
+`\(y = ax + b\)`
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/sim_models.png"&gt;
+&lt;/center&gt;
+]
+--
+.cols3[
+2): Compute the SSR:&lt;br&gt;
+`\(\text{SSR} = \sum_{i = 1}^{n} (y_i - y_i')^2\)`
+&lt;center&gt;
+&lt;img src="images/sim_residuals.png"&gt;
+&lt;/center&gt;
+]
+--
+.cols3[
+3): Repeat steps 1 &amp; 2 until the smallest SSR is found
+&lt;center&gt;
+&lt;img src="images/sim_best_line.png"&gt;
+&lt;/center&gt;
+]
+
+---
+## Fitting a linear model in R
+
+
+```r
+model &lt;- lm(formula = y ~ x,
+            data = data)
+```
+
+--
+&amp;zwj;Example: Galton's height data
+
+
+```r
+model &lt;- lm(
+  formula = childHeight ~ midparentHeight,
+  data    = GaltonFamilies)
+```
+--
+Get coefficients
+
+```r
+coef(model)
+```
+
+```
+##     (Intercept) midparentHeight 
+##      22.6362405       0.6373609
+```
+
+---
+## Fitting a linear model in R
+
+.leftcol[
+
+```r
+model &lt;- lm(formula = y ~ x,
+            data = data)
+```
+
+&amp;zwj;Example: Galton's height data
+
+
+```r
+model &lt;- lm(
+  formula = childHeight ~ midparentHeight,
+  data    = GaltonFamilies)
+```
+
+Get coefficients
+
+```r
+coef(model)
+```
+
+```
+##     (Intercept) midparentHeight 
+##      22.6362405       0.6373609
+```
+]
+.rightcol[
+&lt;center&gt;
+&lt;img src="images/plots/galtonScatterplotSmooth.png" width=500&gt;
+&lt;/center&gt;
+]
+
+---
+class: middle, center
+
+## Interpreting results
+&lt;center&gt;
+&lt;img src="images/horst_dragons_continuous.png" width=700&gt;
+&lt;/center&gt;
+Art by [Allison Horst](https://github.com/allisonhorst/stats-illustrations)
+
+---
+## Example write up for Galton's height data
+
+.leftcol[.font130[
+The correlation between midparent height and child height is **0.32**. Therefore, **10%** of the variance in child height is explained by midparent height.
+
+The slope of the best fitting regression line indicates that child height increased by **0.64** inches as midparent height increased by one inch.
+]]
+&lt;br&gt;
+.rightcol[
+&lt;center&gt;
+&lt;img src="images/plots/galtonScatterplotSmooth.png" width=500&gt;
+&lt;/center&gt;
+]
+
+---
+## Making predictions
+
+.leftcol[.font130[
+**Interpolation is OK**: You may predict values of `\(y\)` for values of `\(x\)` that were not observed but are within the range of the observed values of `\(x\)`.
+]]
+.rightcol[.font130[
+**Extrapolation is BAD**: You should NOT predict values of `\(y\)` using values of `\(x\)` that are outside the observed range of `\(x\)`.
+&lt;center&gt;
+&lt;img src="images/extrapolating.png"&gt;
+&lt;/center&gt;
+.center[[xkcd](https://m.xkcd.com/605/)]
+]]
+
+---
+## Repeat: Extrapolation is BAD
+
+.leftcol[
+Tatem, A. J., Guerra, C. A., Atkinson, P. M., &amp; Hay, S. I. (2004). Momentous sprint at the 2156 Olympics? _Nature_, 431(7008), 525-525. [View online](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3173856/)
+
+"Extrapolation of these trends to the 2008 Olympiad indicates that the women’s 100-metre race could be won in a time of 10.57±0.232 seconds and the men’s event in 9.73±0.144 seconds. **Should these trends continue, the projections will intersect at the 2156 Olympics, when — for the first time ever — the winning women's 100-metre sprint time of 8.079 seconds will be lower than that of the men's winning time of 8.098 seconds (Fig. 1).**"
+]
+.rightcol[
+&lt;center&gt;
+&lt;img src="images/nature_sprint.jpeg"&gt;
+&lt;/center&gt;
+]
+
+---
+# Symantics
+
+.leftcol[.font130[
+The all mean the same thing:
+- "Use X to predict Y"
+- "Regress Y on X"
+- "Regression of Y on X"
+
+```r
+model &lt;- lm(formula = y ~ x,
+            data = data)
+```
+]]
+--
+.rightcol[
+&lt;center&gt;
+&lt;img src="images/plots/galtonScatterplotSmooth.png" width=500&gt;
+&lt;/center&gt;
+]
+
+---
+# Symantics
+
+.leftcol[.font130[
+**Y: Dependent variable**
+- Outcome variable
+- Response variable
+- Regressand
+- Left-hand variable
+
+
+```r
+model &lt;- lm(formula = y ~ x,
+            data = data)
+```
+]]
+.rightcol[.font130[
+**X: Independent variable**
+- Predictor variable
+- Explanatory variable
+- Regressor
+- Right-hand variable
+]]
+
+---
+class: inverse, middle
+
+# Correlation Analysis
+
+## 1. What is correlation?
+## 2. Visualizing correlation
+## 3. Linear models
+## 4. .orange[Visualizing linear models]
+
+
+
+---
+## Visualizing models
+
+.leftcol[
+Compute the correlation
+
+```r
+galtonCorr &lt;- round(cor(
+    GaltonFamilies$mpg, GaltonFamilies$hp,
+    method = 'pearson'), 2)
+```
+Make the plot
+
+```r
+plot &lt;- ggplot(GaltonFamilies) +
+    geom_point(aes(x = midparentHeight,
+                   y = childHeight),
+               size = 0.5, alpha = 0.7) +
+    annotate(geom = 'text', x = 64, y = 79,
+             label = str_c('r = ', galtonCorr),
+             hjust = 0, size = 5) +
+    theme_half_open() +
+    labs(x = 'Midparent height (inches)',
+         y = 'Child height (inches)')
+```
+]
+.rightcol[
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/plots/galtonScatterplot.png"&gt;
+&lt;/center&gt;
+]
+
+---
+## Visualizing models
+
+.leftcol[
+Add linear model with `geom_smooth()`
+
+```r
+plot +
+    geom_smooth(aes(x = midparentHeight,
+                    y = childHeight),
+*               method = 'lm',
+                se = FALSE)
+```
+]
+.rightcol[
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/plots/galtonScatterplotSmooth.png"&gt;
+&lt;/center&gt;
+]
+
+---
+## Visualizing models
+
+.leftcol60[
+Make equation label
+
+```r
+model &lt;- lm(
+  formula = childHeight ~ midparentHeight,
+  data = GaltonFamilies)
+coefs &lt;- round(coef(model), 2)
+eqLabel &lt;- str_c('y = ', coefs[1], ' + ', coefs[2], 'x')
+```
+Add linear model equation with `annotate()`
+
+```r
+plot +
+    geom_smooth(aes(x = midparentHeight,
+                    y = childHeight),
+                method = 'lm',
+                se = FALSE) +
+*   annotate(geom = 'text', x = 64, y = 77,
+*            label = eqLabel, hjust = 0,
+*            size = 5)
+```
+]
+.rightcol40[
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/plots/galtonScatterplotEq.png"&gt;
+&lt;/center&gt;
+]
+
+---
+class: inverse
+
+## Your turn
+
+<div class="countdown blink-colon noupdate-15" id="timer_5e7b7694" style="top:0;right:0;font-size:2em;" data-warnwhen="30">
+<code class="countdown-time"><span class="countdown-digits minutes">15</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+.leftcol[.font130[
+Using the `msleep` data frame:
+
+1. Create a scatter plot of `brainwt` versus `bodywt`.
+2. Include an annotation for the Pearson correlation coefficient.
+3. Include an annotation for the best fit line.
+
+Bonus: Compare your results to a log-linear relationship by converting the x and y variables to the log of x and y.
+]]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

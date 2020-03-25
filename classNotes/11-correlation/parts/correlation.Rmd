@@ -1,0 +1,337 @@
+
+---
+## Origins in [Eugenics](https://en.wikipedia.org/wiki/Eugenics) ("Well Born")
+
+--
+.leftcol[
+[Sir Francis Galton](https://en.wikipedia.org/wiki/Francis_Galton) (1822 - 1911)
+- Charles Darwin's cousin.
+- "Father" of [Eugenics](https://en.wikipedia.org/wiki/Eugenics).
+- Studied correlations between parents & children.
+
+<center>
+<img src="images/Francis_Galton_1850s.jpg" width=220>
+</center>
+]
+--
+.rightcol[
+[Karl Pearson](https://en.wikipedia.org/wiki/Karl_Pearson) (1857 - 1936)
+
+- Galton's protégé (to the verge of [hero worship](https://en.wikipedia.org/wiki/Apotheosis)).
+- Developed equation for correlation coefficient.
+- "Father" of mathematical statistics.
+
+<center>
+<img src="images/Karl_Pearson.jpg" width=250>
+<center>
+]
+
+---
+.leftcol[
+# Galton's family data
+
+Galton, F. (1886). ["Regression towards mediocrity in hereditary stature"](http://www.stat.ucla.edu/~nchristo/statistics100C/history_regression.pdf). _The Journal of the Anthropological Institute of Great Britain and Ireland_ 15: 246-263.
+
+**Galton's research question**: Does marriage selection indicate a relationship between the heights of husbands and wives?<br>(He called this "assortative mating")
+
+<br>
+Btw, "midparent height" is just a scaled average:
+```{r, eval=FALSE}
+midparentHeight =  (father + 1.08*mother)/2
+```
+]
+--
+.rightcol[.code70[
+```{r, eval=FALSE}
+library(HistData)
+
+galtonScatterplot <- ggplot(GaltonFamilies) +
+    geom_point(aes(x = midparentHeight,
+                   y = childHeight),
+               size = 0.5, alpha = 0.7) +
+    theme_half_open() +
+    labs(x = 'Midparent height (inches)',
+         y = 'Child height (inches)')
+```
+<center>
+<img src="images/plots/galtonScatterplot.png" width=450>
+</center>
+]]
+
+---
+class: center, middle
+
+# How do you measure correlation?
+
+<br>
+
+# Pearson: $r = \frac{\text{Cov}(x, y)}{\text{sd}(x) * \text{sd}(y)}$
+
+---
+# How do you measure correlation?
+
+.leftcol[
+## $r = \frac{\text{Cov}(x, y)}{\text{sd}(x) * \text{sd}(y)}$
+
+<br>
+
+.font130[
+Assumptions:
+1. Variables must be interval or ratio
+2. Linear relationship
+]]
+--
+.rightcol[
+<center>
+<img src="images/plots/cor_vstrong_p.png" width=275>
+</center>
+<br>
+<center>
+<img src="images/plots/cor_quad.png" width=275>
+</center>
+]
+
+---
+# How do you _interpret_ $r$?
+
+.leftcol[
+## $r = \frac{\text{Cov}(x, y)}{\text{sd}(x) * \text{sd}(y)}$
+
+<br>
+
+.font130[
+Interpretation:
+- $-1 \le r \le 1$
+- Closer to 1 is stronger correlation
+- Closer to 0 is weaker correlation
+]]
+--
+.rightcol[.code70[
+<center>
+<img src="images/plots/galtonScatterplot.png" width=400>
+</center>
+```{r}
+round(cor(
+    x = GaltonFamilies$midparentHeight,
+    y = GaltonFamilies$childHeight,
+    method = 'pearson'), 2)
+```
+]]
+
+---
+## What does $r$ mean?
+
+.leftcol[.font150[
+
+- $\pm 0.1 - 0.3$: Weak
+- $\pm 0.3 - 0.5$: Moderate
+- $\pm 0.5 - 0.8$: Strong
+- $\pm 0.8 - 1.0$: Very strong
+]]
+.rightcol[.center[
+<center>
+<img src="images/plots/cor_p.png">
+</center>
+]]
+
+---
+class: center,  middle
+
+# Visualizing correlation is...um...easy!
+
+<br>
+
+# [guessthecorrelation.com](http://guessthecorrelation.com/)
+
+---
+class: middle
+
+.leftcol30[
+# The datasaurus
+
+### See more [here](https://www.autodeskresearch.com/publications/samestats)
+]
+.rightcol70[
+<img src="images/datasaurus.png">
+]
+
+---
+# Coefficient of determination: $r^2$
+
+.leftcol[.font140[
+Percent of variance in one variable that is explained by the other variable
+
+.noborder[
+<center>
+<img src="images/rsquared_venn.png">
+</center>
+]]]
+--
+.rightcol[
+
+$r$ | $r^2$
+----|------
+0.1 | 0.01
+0.2 | 0.04
+0.3 | 0.09
+0.4 | 0.16
+0.5 | 0.25
+0.6 | 0.36
+0.7 | 0.49
+0.8 | 0.64
+0.9 | 0.81
+1.0 | 1.00
+
+]
+
+---
+## You should report both $r$ and $r^2$
+
+<br>
+
+### Correlation between parent and child height is 0.32, therefore 10% of the variance in the child height is explained by the parent height.
+
+---
+# Correlation != Causation
+
+### X causes Y
+
+- Training causes improved race performance
+
+### Y causes X
+
+- Race performance causes people to train harder.
+
+### Z causes both X & Y
+
+- Commitment and motivation cause increased training and better race performance.
+
+---
+class: center
+
+# Be weary of dual axes!<br>
+## [They can cause spurious correlations](https://www.tylervigen.com/spurious-correlations)
+
+--
+.leftcol[
+<center>
+<img src="images/hbr_two_axes1.png">
+</center>
+]
+--
+.rightcol[
+<center>
+<img src="images/hbr_two_axes2.png">
+</center>
+]
+
+---
+class: inverse, center, middle
+
+# Outliers
+
+---
+class: middle
+
+<center>
+<img src="images/plots/pearson_base.png" width=600>
+</center>
+
+---
+class: middle
+
+<center>
+<img src="images/plots/pearson1.png" width=600>
+</center>
+
+---
+class: middle
+
+<center>
+<img src="images/plots/pearson2.png" width=600>
+</center>
+
+---
+class: center, middle
+
+## Pearson correlation is highly sensitive to outliers
+
+<center>
+<img src="images/plots/pearson_grid.png" width=600>
+</center>
+
+---
+# Spearman's rank-order correlation
+
+# $r = \frac{\text{Cov}(x, y)}{\text{sd}(x) * \text{sd}(y)}$
+
+--
+.font130[
+- Separately rank the values of X & Y.
+- Use Pearson's correlation on the _ranks_ instead of the $x$ & $y$ values.
+]
+--
+.font130[
+Assumptions:
+- Variables can be ordinal, interval or ratio
+- Relationship must be monotonic (i.e. does not require linearity)
+]
+
+---
+class: center, middle
+
+## Spearman correlation more robust to outliers
+
+<center>
+<img src="images/plots/spearman_grid.png" width=600>
+</center>
+
+---
+class: center, middle
+
+## Spearman correlation more robust to outliers
+
+.cols3[
+<center>
+<img src="images/plots/pearson_grid.png" width=250>
+<br>
+<img src="images/plots/spearman_grid.png" width=250>
+</center>
+]
+.cols3[
+```{r, echo=FALSE}
+tribble(
+    ~Pearson, ~Spearman,
+    -0.56,    0.53,
+    0.39,     0.69,
+    0.94,     0.81,
+    0.38,     0.76,
+    0.81,     0.79,
+    0.31,     0.70,
+    0.95,     0.81,
+    0.51,     0.75,
+    -0.56,    0.53) %>%
+    kable()
+```
+]
+.cols3[
+<center>
+<img src="images/plots/outlier_compare.png">
+</center>
+]
+
+---
+## Summary of correlation
+
+.font130[
+- **Pearon's correlation**: Described the strength of a **linear** relationship between two variables that are interval or ratio in nature.
+- **Spearman's rank-order correlation**: Describes the strength of a **monotonic** relationship between two variables that are ordinal, interval, or ratio. **It is more robust to outliers**.
+- The **coefficient of determination** describes the amount of variance in one variable that is explained by the other variable.
+- Correlation != Causation
+]
+
+R command (hint: add `use = "complete.obs"` to drop NA values)
+```{r, eval=FALSE}
+pearson  <- cor(x, y, method = "pearson", use = "complete.obs")
+spearman <- cor(x, y, method = "spearman", use = "complete.obs")
+```
