@@ -37,6 +37,8 @@ navbar:
         - text: "9: Maps & geospatial data"
           href: r9-maps.html
         - text: "11: Correlation analysis"
+        - text: "12: Shiny apps"
+          href: r12-shiny-apps.html
           href: r11-correlation.html
         - text: "13: Communicating your results"
           href: r13-communicating.html

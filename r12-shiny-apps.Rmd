@@ -1,0 +1,23 @@
+---
+title: "Week 12: Shiny Apps"
+output:
+  html_document:
+    number_sections: false
+    toc: no
+---
+
+```{r setup, echo=FALSE, message=FALSE, warning=FALSE}
+rm(list=objects()) # start with a clean workspace
+source("knitr_setup.R")
+```
+
+This week we will learn about how to make interactive web applications using the [R Shiny package](https://shiny.rstudio.com/). Take a look at some examples of impressive apps built using Shiny:
+
+- [Shiny COVID-19 tracker](https://shiny.rstudio.com/gallery/covid19-tracker.html)
+- [A Dashboard for Conference Tweets](https://shiny.rstudio.com/gallery/conference-tweet-dashboard.html)
+- [Medcare spending map](https://tychobra.shinyapps.io/medicare-map/)
+
+
+View more examples at the [RStudio Showcase](https://shiny.rstudio.com/gallery/) and on [Tychobra.com](https://www.tychobra.com/shiny/).
+
+Want to build your own Shiny app? The best place to start an learn more about how to build your own Shiny apps is the [RStudio documentation](https://shiny.rstudio.com/tutorial/).
