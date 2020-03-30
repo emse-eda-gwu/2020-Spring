@@ -38,8 +38,6 @@ navbar:
           href: r9-maps.html
         - text: "11: Correlation analysis"
           href: r11-correlation.html
-        - text: "12: Cluster analysis"
-          href: r12-clusters.html
         - text: "13: Communicating your results"
           href: r13-communicating.html
     - text: "Assignments"
