@@ -13,6 +13,7 @@ Encoding: UTF-8
 Imports:
     rmarkdown,
     knitr,
+    yaml,
     tidyverse,
     testthat,
     devtools,
