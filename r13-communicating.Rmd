@@ -11,7 +11,10 @@ rm(list=objects()) # start with a clean workspace
 source("knitr_setup.R")
 ```
 
-Video: [How to start a speech](https://www.youtube.com/watch?v=w82a1FT5o88)
+For our final class, we will focus on how to communicate the results of your analyses to others. We will look at strategies for giving effective presentations / speeches as well as best practices for designing slides.
 
-Wilke: [29 - Telling a story and making a point](https://serialmentor.com/dataviz/telling-a-story.html)
+To get started, open up a notebook (physical, digital...whatever you take notes in best), and **take notes** while you watch [this short video](https://www.youtube.com/watch?v=w82a1FT5o88) on how to start a speech:
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/w82a1FT5o88" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+After watching the above video, read through [Wilke Chapter 29 - Telling a story and making a point](https://serialmentor.com/dataviz/telling-a-story.html).
