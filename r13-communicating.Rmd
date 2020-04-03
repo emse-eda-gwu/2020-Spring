@@ -17,4 +17,6 @@ To get started, open up a notebook (physical, digital...whatever you take notes 
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/w82a1FT5o88" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+<br>
+
 After watching the above video, read through [Wilke Chapter 29 - Telling a story and making a point](https://serialmentor.com/dataviz/telling-a-story.html).
