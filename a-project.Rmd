@@ -27,8 +27,8 @@ To make the overall project more manageable, it is broken down into separate "mi
 Item            | Weight towards<br>final grade | Due Date<br>(by 11pm)
 ----------------|----------------------------|--------------------
 Proposal        | 6 %    | March 13
-Progress Report | 8 %    | April 10
-Peer Review     | 5 %    | April 17
+Progress Report | 8 %    | April 12
+Peer Review     | 5 %    | April 19
 Presentation    | 8 %    | April 28
 Final Report    | 16 %   | May 6
 </div>
@@ -84,76 +84,71 @@ Write a 1-2 page proposal of an exploratory data analysis that you plan to condu
 
 ---
 
-
-
-**Tasks**:
-
-Your final report should be a fully reproducible product and available online as a html webpage. It should include text, data, code, and plots. Below is a list of specific items your final report should include - the % in brackets indicates points towards this assignment grade:
-
-
 # Progress Report
 
-**Due**: April 10 by 11:00 pm
+**Due**: April 12 by 11:00 pm
 
 **Weight**: This assignment is worth 8% of your final grade.
 
-**Submission Details**: Your progress report should be written as a .Rmd file that compiles to a html webpage. **Click [here](a-project-template.html) for a template to use for your analysis.** Submit your entire project folder (including your .Rmd file, data files, .RProj file, etc.) as a single .zip file on Blackboard by the due date.
+**Submission Details**: **Use [this template](a-project-template.html) for your analysis and report.** Your progress report should be written as a .Rmd file that compiles to a html webpage. Submit your entire project folder (including your .Rmd file, data files, .RProj file, etc.) as a single .zip file on Blackboard by the due date. For students in teams, **only one person from your team should submit the report.**
+
+**Assessment**: We will use [this rubric](assignments/project/progress_report_rubric.pdf) to grade your progress report.
 
 **Tasks**:
 
-Write a report summarizing progress you have made towards your project thus far, including summary statistics of your data and preliminary charts. You should have already identified data source(s) for your project and begun exploring the data.
+Write a report summarizing progress you have made towards your project thus far, including summary statistics of your data and preliminary charts. You should have already identified data source(s) for your project and begun exploring the data. **Students working in teams must submit individual short reviews of their teammates' contributions** to help ensure that the workload and grading for team members are equitable (see task 6 below). Below is a list of specific items your progress report should include (check the rubric to see their relative weighting).
 
-Alongside this report, **students working in teams must submit a short review of their teammates' contributions** to help ensure that the workload and grading for team members are equitable. The link to the team feedback form is listed on the Blackboard submission page for this assignment.
-
-Below is a list of specific items your progress report should include - the % in brackets indicates points towards this assignment grade:
-
-1. [10%] Follow these formatting rules:
+1. Follow these formatting rules:
 
     - As the report will compile to a html webpage, there is no length requirement; your report should be sufficiently detailed to address the requirements listed below and sufficiently concise such that it is expressed in the fewest necessary words.
     - In your markdown YAML header, include the project title and the name(s) of student(s) involved in the project such that they appear at the top of the rendered html page.
     - Your report should be written in a narrative format (i.e. using coherent pargraphs rather than a series of bullet points). You may use headings where appropriate to break up your report into sections.
 
-2. [20%] State a clear research question. This can (and probably should) be a revised question from your proposal. Again, follow [these guidelines](https://writingcenter.gmu.edu/guides/how-to-write-a-research-question).
+2. State a clear research question. This can (and almost certainly should) be a revised question from your proposal. Again, follow [these guidelines](https://writingcenter.gmu.edu/guides/how-to-write-a-research-question).
 
-3. [20%] Discuss the data source(s) you are using for your analysis:
+3. Discuss the data source(s) you are using for your analysis:
 
     - Describe them and include urls or references to the sources.
     - Discuss the validity of the source(s) - for each data source, is the data available the _original_ data, or has it been processed? If not, what is the original source? How was the data collected?
     - For each dataset, provide a data dictionary in an appendix at the end of your report that contains a table of each the name, type, and description of each variable. The appendix does not count towards your page limit.
 
-4. [20%] Evaluate your proposal expectations:
+4. Evaluate your proposal expectations:
 
-    - Do you find support for your original proposal expectation about how one variable might be distributed? If that variable doesn't exist in your data, discuss one key variables and how it is distributed.
-    - Do you find support for your original proposal expectation about how the variables you chose are related? If those variables don't exist in your data, discuss one key relationship that you have identified between two or more variables.
+    - Do you find support for your original proposal expectation about how one variable might be distributed? Show it by looking at summaries of the variable. If that variable doesn't exist in your data, discuss another key variable instead and how it is distributed.
+    - Do you find support for your original proposal expectation about how the variables you chose are related? Show it. If those variables don't exist in your data, discuss one key relationship that you have identified between two or more variables.
 
-5. [30%] Include at least two preliminary charts:
+5. Include at least two preliminary charts:
 
     - Your charts should either support or oppose your research question, or they should illustrate what else you might need to address your research question.
-    - You may choose whatever plot types you wish, but your choices should highlight the point you want to make or should clearly show the relationship you want to emphasize.
-    - Your charts should follow the design principles we have covered in class. Use of default colors and themes is discouraged as they often include distracting non-data ink.
+    - You may choose whatever chart types you wish, but your choices should highlight the point you want to make or should clearly show the relationship you want to emphasize. Consider [these resources](ref-visualizing-data.html) when choosing your charts.
+    - Your charts should follow the design principles we have covered in class. They do not have to be fully polished yet, but at a minimum they should be accurate (i.e. not misleading) and they should not include distracting non-data ink.
+
+6. **For students working in teams**: On Blackboard under the assignment titled `"Team Member Review [Progress Report]"`, submit a short description of the specific contributions of each team member in your team. For example, "Student A identified the data source and wrote the documentation for it. Student B led the data cleaning process and did much of the initial data exploration. Student C helped write code for the main visualizations." These reviews will be kept confidential and compared to assess that the workload and grading for team members are equitable. Team members who do not make meaningful contributions to their projects will receive a lower grade than that of their team mates. **If you are having any disputes amongst team members, please contact Professor Helveston so we can find a resolution.**
 
 ---
 
 # Peer Review
 
-**Due**: April 17 by 11:00 pm
+**Due**: April 19 by 11:00 pm
 
 **Weight**: This assignment is worth 5% of your final grade.
 
-**Submission Details**: Submit your progress report as a PDF document on Blackboard by the due date.
+**Submission Details**: Submit your peer reviews as a PDF document on Blackboard by the due date.
+
+**Assessment**: We will use [this rubric](assignments/project/peer_review.pdf) to grade your peer review.
 
 **Tasks**:
 
-Each student will be randomly assigned to review the progress reports of one of their classmate's projects. This is an **individual assignment**, so students in teams must individually write their own reviews. Students in teams will each be assigned different projects to review. The reviews will be returned to the project teams as further feedback to consider as they revise their analyses and prepare for their final presentation and report. Below is a list of specific items your peer review should include - the % in brackets indicates points towards this assignment grade:
+Each student will be randomly assigned one progress report of their classmate's projects to review. This is an **individual assignment**, so students in teams must individually write their own reviews. Students in teams will each be assigned different projects to review. The reviews will be returned to the project teams as further feedback to consider as they revise their analyses and prepare for their final presentation and report. Below is a list of specific items your peer review should include (check the rubric to see their relative weighting).
 
-1. [10%] Follow these formatting rules:
+1. Follow these formatting rules:
 
     - Be between 1 and 3 pages in length, including all images.
     - 12 point font, 1 inch margins.
     - Write your name as the reviewer at the top of the document (e.g. "**Reviewer:** John Helveston").
     - Write the title of the project being reviewed below your name (e.g. **Project Being Reviewed**: `<insert project title>`)
 
-2. [30%] Evaluate their research question according to these qualitites:
+2. Evaluate their research question according to these qualitites:
 
     - **Clear**: it provides enough specifics that your audience can easily understand its purpose without needing additional explanation.
     - **Focused**: it is narrow enough that it can be addressed thoroughly with the data available and within the limits of the final project report.
@@ -161,7 +156,7 @@ Each student will be randomly assigned to review the progress reports of one of 
     - **Complex**: it is not answerable with a simple "yes" or "no," but rather requires synthesis and analysis of data.
     - **Arguable**: its potential answers are open to debate rather than accepted facts.
 
-3. [30%] Evaluate the description of their data source(s):
+3. Evaluate the description of their data source(s):
 
     - Are the data appropriate for the research question?
     - Are the data sources well-described? Do you know the source and the original source?
@@ -169,12 +164,12 @@ Each student will be randomly assigned to review the progress reports of one of 
     - Is there a data dictionary available in an appendix for each data set?
     - Provide one suggestion to help further clarify any questions you have about the data source(s).
 
-4. [30%] Evaluate their preliminary results:
+4. Evaluate their preliminary results:
 
     - Are there at least two charts provided in the analysis?
     - Are the charts relevant to the research question posed?
     - Do the charts support or oppose the research question or illustrate what else might be needed to address the research question?
-    - Do the charts follow the design principles (to a reasonable degree) that we have covered in class?
+    - Do the charts follow the design principles (to a reasonable degree) that we have covered in class (i.e. they are not misleading, and they do not include distracting non-data ink)?
     - Provide at least two suggestions to improve the charts.
 
 ---
@@ -187,11 +182,13 @@ Each student will be randomly assigned to review the progress reports of one of 
 
 **Submission Details**: Submit your slides as a PDF or .pptx file (whichever you feel most comfortable presenting with) on Blackboard by the due date.
 
+**Assessment**: We will use [this rubric](assignments/project/presentation.pdf) to grade your presentation.
+
 **Tasks**:
 
-You will present your analysis with your teammates in class on April 29. Your slides do not need to include the code used to conduct your analysis (that should be able to be obtained from your report). Instead, your presentation should be a short explanation of 1) what you studied and why it matters, 2) what data you used, and 3) what you found. Below is a list of specific items your presentation should include - the % in brackets indicates points towards this assignment grade:
+You will present your analysis with your teammates in class on April 29. Your slides do not need to include the code used to conduct your analysis (that should be able to be obtained from your report). Instead, your presentation should be a short explanation of 1) what you studied and why it matters, 2) what data you used, and 3) what you found. Below is a list of specific items your presentation should include (check the rubric to see their relative weighting).
 
-1. [10%] Follow these formatting rules:
+1. Follow these formatting rules:
 
     - Your presentation should be no longer than 10 minutes in length (practice! time yourself!)
     - Each team member must present at least one slide.
@@ -199,19 +196,19 @@ You will present your analysis with your teammates in class on April 29. Your sl
     - Your title slide should include the project title, team member names, and the presentation date (April 29, 2020).
     - All slides should be numbered in the bottom-left or bottom-right corners.
 
-2. [20%] State your research question and explain why we should care (you don't necessarily need a slide with the question written out on it).
+2. State your research question and explain why we should care (you don't necessarily need a slide with the question written out on it).
 
-3. [20%] Discuss the data source(s) you used for your analysis:
+3. Discuss the data source(s) you used for your analysis:
 
     - Describe them and display the names of the sources on your slide. You do not need the full urls to the raw data files, just the organization name (e.g. `"**Data source**: U.S. Centers for Disease Control and Prevention"`).
     - Discuss the validity of your source(s) - for each data source, was the data available the _original_ data, or has it been processed? If not, what is the original source? How was the data collected?
-
-4. [20%] Describe your data:
+    
+4. Describe your data:
 
     - Articulate the main variables of interest in your project, and justify your choice of variables.
     - Provide descriptive statistics for all your relevant variables. These can be a mix of graphs and summary tables.
 
-5. [30%] Describe your results:
+5. Describe your results:
 
     - Display charts that either support or oppose your research question, or illustrate what else you might need to address your research question.
     - Your plot type choices should highlight the point you want to make or clearly show the relationship you want to emphasize - basically, what do the data say about your research question?
@@ -225,36 +222,40 @@ You will present your analysis with your teammates in class on April 29. Your sl
 
 **Weight**: This assignment is worth 16% of your final grade.
 
-**Submission Details**: Your final report should be written as a .Rmd file that compiles to a html webpage. **Click [here](a-project-template.html) for a template to use for your analysis.** Publish your compiled page online (e.g. via RPubs, Github, etc.), then submit your entire project folder (including your .Rmd file, data files, .RProj file, etc.) as a single .zip file on Blackboard by the due date. Also include a link to the published report page in your Blackboard submission.
+**Submission Details**: **Use [this template](a-project-template.html) for your final analysis and report.** Your progress report should be written as a .Rmd file that compiles to a html webpage. Publish your compiled page online (e.g. via RPubs, Github, etc.), then submit your entire project folder (including your .Rmd file, data files, .RProj file, etc.) as a single .zip file on Blackboard by the due date. Also include a link to the published report page in your Blackboard submission. For students in teams, **only one person from your team should submit the report.**
+
+**Assessment**: We will use [this rubric](assignments/project/final_report.pdf) to grade your report.
 
 **Tasks**:
 
-Your final report should be a fully reproducible product and available online as a html webpage. It should include text, data, code, and plots. Below is a list of specific items your final report should include - the % in brackets indicates points towards this assignment grade:
+Your final report should be a fully reproducible product and available online as a html webpage. It should include text, data, code, and plots. **Students working in teams must submit a short review of their teammates' contributions** to help ensure that the workload and grading for team members are equitable (see task 6 below). Below is a list of specific items your report should include (check the rubric to see their relative weighting).
 
-1. [10%] Follow these formatting rules:
+1. Follow these formatting rules:
 
     - As the report will compile to a html webpage, there is no length requirement; your report should be sufficiently detailed to address the requirements listed below and sufficiently concise such that it is expressed in the fewest necessary words.
     - In your markdown YAML header, include the project title and the name(s) of student(s) involved in the project such that they appear at the top of the rendered html page.
     - Your report should be written in a narrative format (i.e. using coherent pargraphs rather than a series of bullet points). You may use headings where appropriate to break up your report into sections.
 
-2. [20%] State your research question and explain why we should care.
+2. State your research question and explain why we should care.
 
-3. [20%] Describe your data source(s) you used for your analysis:
+3. Describe your data source(s) you used for your analysis:
 
     - Describe them and include urls or references to the sources.
     - Discuss the validity of the source(s) - for each data source, is the data available the _original_ data, or has it been processed? If not, what is the original source? How was the data collected?
     - Provide a data dictionary in an appendix at the end of your report that contains a table of each the name, type, and description of each variable in your data. Include a dictionary for each dataset used.
 
-4. [20%] Describe your data:
+4. Describe your data:
 
     - Articulate the main variables of interest in your project, and justify your choice of variables.
     - Provide descriptive statistics for all your relevant variables. These can be a mix of graphs and summary tables.
 
-5. [30%] Describe your results:
+5. Describe your results:
 
     - Display charts that either support or oppose your research question, or illustrate what else you might need to address your research question.
     - Your plot type choices should highlight the point you want to make or clearly show the relationship you want to emphasize - basically, what do the data say about your research question?
     - Your charts should be polished, following the design principles we have covered in class.
+
+6. **For students working in teams**: On Blackboard under the assignment titled `"Team Member Review [Final Report]"`, submit a short description of the specific contributions of each team member in your team. For example, "Student A identified the data source and wrote the documentation for it. Student B led the data cleaning process and did much of the initial data exploration. Student C helped write code for the main visualizations." These reviews will be kept confidential and compared to assess that the workload and grading for team members are equitable. Team members who do not make meaningful contributions to their projects will receive a lower grade than that of their team mates.
 
 ---
 
