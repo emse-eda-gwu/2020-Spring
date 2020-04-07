@@ -1,0 +1,27 @@
+
+---
+class: inverse
+
+# [Final projects](http://eda.seas.gwu.edu/2020-Spring/a-project.html) timeline
+
+.leftcol60[.font120[
+- 4/14 - 17: .green[Team calls with Prof. Helveston].
+- 4/20 - 5/01: .blue[Push on analyses & polishing results]. .green[Virtual office hours on Mondays]
+- 4/22: .red[Project reports due].
+- 4/29: .red[Peer reviews due].
+- 5/04: .red[Final reports due by 11:00pm].
+- 5/05: .red[Slides due by 11:00pm].
+- 5/06: .red[Team presentations].
+
+**No late days on project assignments**
+
+]]
+.rightcol40[.font140[
+S  | M  | T  | W  | Th | F  | Sa
+---|----|----|----|----|----|---
+   |    |    | **08** | 09 | 10 | 11
+12 | 13 | .green[14] | .green[15] | .green[16] | .green[17] | 18
+19 | .green[20] | .blue[21] | .red[22] | .blue[23] | .blue[24] | 25
+26 | .green[27] | .blue[28] | .red[29] | .blue[30] | .blue[01] | 02
+03 | .red[04] | 05 | .red[06] | |  |
+]]

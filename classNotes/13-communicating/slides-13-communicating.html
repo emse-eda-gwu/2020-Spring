@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Week 13: Communicating results</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="John Paul Helveston" />
+    <meta name="date" content="2020-04-08" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/countdown/countdown.css" rel="stylesheet" />
+    <script src="libs/countdown/countdown.js"></script>
+    <link rel="stylesheet" href="https://emse-eda-gwu.github.io/2020-Spring/classNotes/classNotes.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+name: xaringan-title
+class: title-slide, center, middle, inverse
+
+# Week 13: Communicating results
+
+.large[EMSE 4197 | John Paul Helveston | April 08, 2020]
+
+
+
+---
+class: inverse
+
+# [Final projects](http://eda.seas.gwu.edu/2020-Spring/a-project.html) timeline
+
+.leftcol60[.font120[
+- 4/14 - 17: .green[Team calls with Prof. Helveston].
+- 4/20 - 5/01: .blue[Push on analyses &amp; polishing results]. .green[Virtual office hours on Mondays]
+- 4/22: .red[Project reports due].
+- 4/29: .red[Peer reviews due].
+- 5/04: .red[Final reports due by 11:00pm].
+- 5/05: .red[Slides due by 11:00pm].
+- 5/06: .red[Team presentations].
+
+**No late days on project assignments**
+
+]]
+.rightcol40[.font140[
+S  | M  | T  | W  | Th | F  | Sa
+---|----|----|----|----|----|---
+   |    |    | **08** | 09 | 10 | 11
+12 | 13 | .green[14] | .green[15] | .green[16] | .green[17] | 18
+19 | .green[20] | .blue[21] | .red[22] | .blue[23] | .blue[24] | 25
+26 | .green[27] | .blue[28] | .red[29] | .blue[30] | .blue[01] | 02
+03 | .red[04] | 05 | .red[06] | |  |
+]]
+---
+class: inverse, middle
+
+# Communicating results
+
+## 1. Telling a story
+## 2. Designing slides
+## 3. Giving a talk
+
+---
+class: inverse, middle
+
+# Communicating results
+
+## 1. .orange[Telling a story]
+## 2. Designing slides
+## 3. Giving a talk
+
+
+
+---
+class: inverse, middle
+
+# What is a story?
+
+--
+&gt; ## A story is a set of observations, facts, or events...that are presented in a specific order such that they create an .orange[**emotional reaction**] in the audience.&lt;br&gt;- Clause O. Wilke (2019), Chp. 29
+
+---
+class: middle, center
+
+&lt;center&gt;
+&lt;img src="images/kv-01.png" width=800&gt;
+&lt;/center&gt;
+[source](https://sivers.org/drama)
+
+---
+class: middle, center
+
+&lt;center&gt;
+&lt;img src="images/kv-02.png" width=800&gt;
+&lt;/center&gt;
+[source](https://sivers.org/drama)
+
+---
+class: middle, center
+
+&lt;center&gt;
+&lt;img src="images/kv-03.png" width=800&gt;
+&lt;/center&gt;
+[source](https://sivers.org/drama)
+
+---
+class: inverse, middle, center
+
+## [Freytag's Pyramid](https://en.wikipedia.org/wiki/Gustav_Freytag)
+
+&lt;center&gt;
+&lt;img src="images/freytag_pyramid.png" width=800&gt;
+&lt;/center&gt;
+
+---
+class: center
+
+## Freytag's Pyramid: [King Kong](https://en.wikipedia.org/wiki/King_Kong)
+
+&lt;center&gt;
+&lt;img src="images/freytag_pyramid_king_kong.jpg" width=800&gt;
+&lt;/center&gt;
+[source](http://writinghorrorfiction.blogspot.com/2011/03/putting-freytags-pyramid-to-use-in.html)
+
+---
+class: center
+
+## Freytag's Pyramid: Research Project
+
+&lt;center&gt;
+&lt;img src="images/freytag_pyramid_research.png" width=1000&gt;
+&lt;/center&gt;
+
+---
+class: inverse, middle
+
+&gt; ## "A single (static) visualization will rarely tell an entire story"&lt;br&gt;- Clause O. Wilke (2019), Chp. 29
+
+---
+class: center
+
+## Freytag's Pyramid: Research Project
+
+&lt;center&gt;
+&lt;img src="images/freytag_pyramid_research_charts.png" width=1000&gt;
+&lt;/center&gt;
+
+---
+class: center
+
+## Use **layers** to build tension / provide context
+
+--
+&lt;center&gt;
+&lt;img src="images/pevSales1.png" width=900&gt;
+&lt;/center&gt;
+
+---
+class: center
+
+## Use **layers** to build tension / provide context
+
+&lt;center&gt;
+&lt;img src="images/pevSales2.png" width=900&gt;
+&lt;/center&gt;
+
+---
+class: center
+
+## Use **layers** to build tension / provide context
+
+&lt;center&gt;
+&lt;img src="images/pevSales3.png" width=900&gt;
+&lt;/center&gt;
+
+---
+class: center
+
+## Use **animation** to build tension / provide context
+
+&lt;center&gt;
+&lt;img src="images/unemployment_chart_vox.jpg" width=900&gt;
+&lt;/center&gt;
+[source](https://www.vox.com/2020/4/2/21203850/unemployment-initial-claims-march-28)
+
+---
+class: center
+
+## Use **animation** to build tension / provide context
+
+&lt;center&gt;
+&lt;img src="images/unemployment_chart.gif"&gt;
+&lt;/center&gt;
+[source](https://twitter.com/maoam_guy/status/1245887052027232256)
+
+---
+class: center
+
+## Make charts for the generals
+### (i.e. keep it simple)
+
+--
+&lt;center&gt;
+&lt;img src="images/wilke-generals-1.png" width=700&gt;
+&lt;/center&gt;
+[source](https://serialmentor.com/dataviz/telling-a-story.html#make-a-figure-for-the-generals)
+
+---
+class: center
+
+## Make charts for the generals
+### (i.e. keep it simple)
+
+.leftcol[
+&lt;center&gt;
+&lt;img src="images/wilke-generals-2.png"&gt;
+&lt;/center&gt;
+[source](https://serialmentor.com/dataviz/telling-a-story.html#make-a-figure-for-the-generals)
+]
+--
+.rightcol[
+&lt;center&gt;
+&lt;img src="images/wilke-generals-3.png"&gt;
+&lt;/center&gt;
+[source](https://serialmentor.com/dataviz/telling-a-story.html#make-a-figure-for-the-generals)
+]
+
+---
+class: center
+
+# Build up towards complex figures
+
+--
+&lt;center&gt;
+&lt;img src="images/wilke-complex-1.png" width=400&gt;
+&lt;/center&gt;
+[source](https://serialmentor.com/dataviz/telling-a-story.html#build-up-towards-complex-figures)
+
+---
+class: center
+
+# Build up towards complex figures
+
+&lt;center&gt;
+&lt;img src="images/wilke-complex-2.png" width=1100&gt;
+&lt;/center&gt;
+[source](https://serialmentor.com/dataviz/telling-a-story.html#build-up-towards-complex-figures)
+
+---
+class: center
+
+## Be consistent, but don't be repetitive
+
+--
+.leftcol[
+&lt;center&gt;
+&lt;img src="images/wilke-repetitive-1.png" width=500&gt;
+&lt;/center&gt;
+[source](https://serialmentor.com/dataviz/telling-a-story.html#be-consistent-but-dont-be-repetitive)
+]
+--
+.rightcol[
+&lt;center&gt;
+&lt;img src="images/wilke-repetitive-2.png" width=500&gt;
+&lt;/center&gt;
+[source](https://serialmentor.com/dataviz/telling-a-story.html#be-consistent-but-dont-be-repetitive)
+]
+
+---
+
+.leftcol30[
+## Summary:&lt;br&gt;Telling a story
+]
+.rightcol70[
+"A single (static) visualization will rarely tell an entire story"&lt;br&gt;- Clause O. Wilke (2019), Chp. 29
+
+&lt;center&gt;
+&lt;img src="images/freytag_pyramid_research_charts.png"&gt;
+&lt;/center&gt;
+
+- Use **layers** or **animation** to build tension / provide context
+- Make charts for the generals (i.e. keep it simple)
+- Build up towards complex figures
+- Be consistent, but don't be repetitive
+
+]
+
+---
+class: inverse, middle
+
+# Communicating results
+
+## 1. Telling a story
+## 2. .orange[Designing slides]
+## 3. Giving a talk
+
+
+
+---
+class: inverse, middle, center
+
+# Hitchcock's rule
+
+&lt;center&gt;
+&lt;img src="images/Visual-Storytelling-Rules-The-Hitchcock-Rule-1.png" width=900&gt;
+&lt;/center&gt;
+
+---
+class: inverse, middle
+
+# Hitchcock's rule
+
+&gt; ## The size of any object in your frame should be proportional to its importance to the story at that moment
+
+[example](https://youtu.be/E1LzhiCcOY0?t=174)
+
+
+---
+...and finally you will read this
+
+&lt;br&gt;&lt;br&gt;
+&lt;div style='font-size: 70pt; text-align: center;'&gt;You will read this first&lt;/div&gt;
+&lt;br&gt;&lt;br&gt;
+&lt;div style='font-size: 40pt; text-align: center;'&gt;and then you will read this&lt;/div&gt;
+
+---
+class: center
+
+# State the main point of the slide in the title
+
+---
+class: center
+
+# Except for Tesla, EV adoption is **flat**
+
+&lt;center&gt;
+&lt;img src="images/pevSales3.png" width=900&gt;
+&lt;/center&gt;
+
+---
+class: middle, center
+
+# Use handouts&lt;br&gt;(1-2 pages)
+
+---
+class: center
+
+&lt;p style="font-size:40pt;"&gt;&gt; 40pt font for titles&lt;/p&gt;
+&lt;p style="font-size:24pt;"&gt;&gt; 24pt font for all other text&lt;/p&gt;
+&lt;br&gt;
+--
+&lt;p style="font-size:24pt; color:red; font-style: italic;"&gt;Think of fonts as pre-attentive attributes&lt;/p&gt;
+&lt;br&gt;
+--
+&lt;center&gt;
+&lt;div style="padding: 10px; margin: 10px; width: 300px; font-size: 24pt;"&gt;
+Use san-serif fonts&lt;br&gt;for most text
+&lt;/div&gt;
+&lt;div style="background-color: #FFF; padding: 10px; margin: 10px; width: 300px; font-size:24pt; font-style:italic; font-family: serif;"&gt;
+Use italic, serif fonts for quotes
+&lt;/div&gt;
+&lt;/center&gt;
+
+---
+class: middle, center
+
+# Use a light-colored background&lt;br&gt;(tan / gray)
+&lt;br&gt;
+## (avoid solid white or black)
+
+---
+class: middle, center
+
+&lt;center&gt;
+&lt;div class="wrapper" style="width: 50vw; height: 60vh;"&gt;
+.top-left[
+&lt;div style="background-color: #FFF; padding: 50px; margin: 0px; width: 300px; font-size: 28pt;"&gt;
+Dark text on a light background works best
+&lt;/div&gt;
+]
+.top-right[
+&lt;div style="background-color: #000; color: #FFF; padding: 50px; margin: 0px; width: 300px; font-size: 28pt;"&gt;
+Light text on a dark background also works well
+&lt;/div&gt;
+]
+.bottom-left[
+&lt;div style="background-color: #FFF; color: #ffef01; padding: 50px; margin: 0px; width: 300px; font-size: 28pt;"&gt;
+Yellow text on a white background works poorly
+&lt;/div&gt;
+]
+.bottom-right[
+&lt;div style="background-color: #000; color: #0000ff; padding: 50px; margin: 0px; width: 300px; font-size: 28pt;"&gt;
+Blue text on a black background is horrible
+&lt;/div&gt;
+]
+&lt;/div&gt;&lt;/center&gt;
+
+---
+class: center, middle
+
+# NEVER EVER use
+&lt;br&gt;
+&lt;div style='font-family: "Comic Sans MS"; font-size: 40pt'&gt;Comic Sans&lt;/div&gt;
+&lt;br&gt;
+&lt;div style='font-family: "Papyrus"; font-size: 40pt'&gt;Papyrus&lt;/div&gt;
+&lt;br&gt;
+&lt;br&gt;
+## They make your work look terrible and amateurish
+
+---
+class: middle, center
+
+# Break up main points into multiple slides
+## (1 slide, 1 idea)
+
+---
+class: middle, center
+
+# Number your slides!
+
+---
+class: middle, center
+
+.noborder[
+&lt;center&gt;
+&lt;img src="images/slide_junk.png"&gt;
+&lt;/center&gt;
+]
+
+---
+class: center, middle
+
+# An acceptable slide footer
+
+&lt;div class="footer-small"&gt;&lt;span&gt;Data source: http://somesourceofdata.com &amp;emsp;&amp;emsp; © John Paul Helveston, GWU, Apr. 2019&lt;/span&gt;&lt;/div&gt;
+
+---
+class: middle
+
+.rightcol80[
+# Slide design guidelines
+
+.font120[
+- Use handouts
+- Use a light-colored background (tan / gray)
+- Slide titles: A single statement about what slide means
+- Slide numbers: bottom-left or bottom-right
+- Remove “chart junk”: logos, footers, etc. (exception: ©)
+- Use large font sizes (&gt;40 titles, &gt;24 text)
+- San-serif fonts for all text (italic serif for quotes)
+]]
+
+---
+class: inverse, middle
+
+# Communicating results
+
+## 1. Telling a story
+## 2. Designing slides
+## 3. .orange[Giving a talk]
+
+
+
+---
+class: middle, inverse, center
+
+# What are the first words&lt;br&gt;you should say in a speech?
+
+--
+## Watch [this video](https://youtu.be/w82a1FT5o88) to find out
+
+<div class="countdown blink-colon noupdate-15" id="timer_5e8ceab7" style="right:0;bottom:0;font-size:2em;" data-warnwhen="30">
+<code class="countdown-time"><span class="countdown-digits minutes">10</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+---
+# How to start a speech
+
+--
+### 3. With a question that matters to the audience ("Have you...?")
+
+--
+### 2. With a shocking factoid ("There are more people alive today than have ever lived...").
+
+--
+### 1. Tell a story, talk about **people** ("Imagine...")
+
+---
+class: inverse, middle, center
+
+&lt;center&gt;
+&lt;img src="images/helveston_talk.png"&gt;
+&lt;/center&gt;
+
+---
+class: middle
+
+## How to start a speech
+
+.leftcol[
+3) With a question that matters to the audience:
+
+&gt; "What's the current federal subsidy for buying an electric car in the US?"
+
+2) With a shocking factoid
+
+&gt; "Chinese automakers make one out of every two electric vehicles in the world."
+
+1) Tell a story, talk about **people**
+
+&gt; "Whenever I talk with people about electric cars, they usually ask about Tesla..."
+
+]
+.rightcol[
+&lt;center&gt;
+&lt;img src="images/helveston_talk.png"&gt;
+&lt;/center&gt;
+]
+
+---
+# For team meetings next week
+
+Have the following ready:
+
+- Your revised research question.
+- Your data sources.
+- A draft of your opening sentence for your presentation (I will ask you to say it).
+- Working code / data files.
+- Questions for me.
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
