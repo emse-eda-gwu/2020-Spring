@@ -27,10 +27,10 @@ To make the overall project more manageable, it is broken down into separate "mi
 Item            | Weight towards<br>final grade | Due Date<br>(by 11pm)
 ----------------|----------------------------|--------------------
 Proposal        | 6 %    | March 13
-Progress Report | 8 %    | April 12
-Peer Review     | 5 %    | April 19
-Final Report    | 16 %   | May 4
-Presentation    | 8 %    | May 6
+Progress Report | 8 %    | April 22
+Peer Review     | 5 %    | April 29
+Final Report    | 16 %   | May 04
+Presentation    | 8 %    | May 06
 </div>
 
 **Purpose**: The skills covered in this course are rooted in design rules and principles rather than formulas and equations. As such, the _application_ of these principles to a real data problem is one of the best ways to learn and assess mastery of these skills. I guarantee you one day you will need to apply these principles to communicate an idea to colleagues, so let's make sure you have at least one chance to practice before the [stakes are higher](https://emse6574-gwu.github.io/2019-Fall/challengerExplosion.html).
@@ -86,7 +86,7 @@ Write a 1-2 page proposal of an exploratory data analysis that you plan to condu
 
 # Progress Report
 
-**Due**: April 12 by 11:00 pm
+**Due**: April 22 by 11:00 pm
 
 **Weight**: This assignment is worth 8% of your final grade.
 
@@ -129,7 +129,7 @@ Write a report summarizing progress you have made towards your project thus far,
 
 # Peer Review
 
-**Due**: April 19 by 11:00 pm
+**Due**: April 29 by 11:00 pm
 
 **Weight**: This assignment is worth 5% of your final grade.
 
