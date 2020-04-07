@@ -135,20 +135,20 @@ Write a report summarizing progress you have made towards your project thus far,
 
 **Submission Details**: Submit your peer reviews as a PDF document on Blackboard by the due date.
 
-**Assessment**: We will use [this rubric](assignments/project/peer_review.pdf) to grade your peer review.
+**Assessment**: Your peer review will be graded for completion.
 
 **Tasks**:
 
-Each student will be randomly assigned one progress report of their classmate's projects to review. This is an **individual assignment**, so students in teams must individually write their own reviews. Students in teams will each be assigned different projects to review. The reviews will be returned to the project teams as further feedback to consider as they revise their analyses and prepare for their final presentation and report. Below is a list of specific items your peer review should include (check the rubric to see their relative weighting).
+Each student will be randomly assigned one progress report of their classmate's projects to review. This is an **individual assignment**, so students in teams must individually write their own reviews. Students in teams will each be assigned different projects to review. The reviews will be returned to the project teams as further feedback to consider as they revise their analyses and prepare for their final report and presentation. Below is a list of specific items your peer review should include (check the rubric to see their relative weighting).
 
 1. Follow these formatting rules:
 
     - Be between 1 and 3 pages in length, including all images.
     - 12 point font, 1 inch margins.
-    - Write your name as the reviewer at the top of the document (e.g. "**Reviewer:** John Helveston").
-    - Write the title of the project being reviewed below your name (e.g. **Project Being Reviewed**: `<insert project title>`)
+    - Write the title of the project being reviewed from the progress report (e.g. **Review of**: `<insert project title>`)
+    - Do **not** put your name on your review - these will be anonymous reviews returned to each team.
 
-2. Evaluate their research question according to these qualitites:
+2. Evaluate their research question according to these qualities:
 
     - **Clear**: it provides enough specifics that your audience can easily understand its purpose without needing additional explanation.
     - **Focused**: it is narrow enough that it can be addressed thoroughly with the data available and within the limits of the final project report.
@@ -209,9 +209,10 @@ Your final report should be a fully reproducible product and available online as
 
 5. Describe your results:
 
-    - Display charts that either support or oppose your research question, or illustrate what else you might need to address your research question.
+    - Display charts that either support or oppose your research question or illustrate what else you might need to address your research question.
     - Your plot type choices should highlight the point you want to make or clearly show the relationship you want to emphasize - basically, what do the data say about your research question?
     - Your charts should be polished, following the design principles we have covered in class.
+    - You must include at least three polished charts / animations; alternatively, you can build an interactive shiny app with at least two dynamic charts. If you built a shiny app, include a link to your app and screenshots of your app in your final report.
 
 6. **For students working in teams**: On Blackboard under the assignment titled `"Team Member Review [Final Report]"`, submit a short description of the specific contributions of each team member in your team. For example, "Student A identified the data source and wrote the documentation for it. Student B led the data cleaning process and did much of the initial data exploration. Student C helped write code for the main visualizations." These reviews will be kept confidential and compared to assess that the workload and grading for team members are equitable. Team members who do not make meaningful contributions to their projects will receive a lower grade than that of their team mates.
 
@@ -229,14 +230,14 @@ Your final report should be a fully reproducible product and available online as
 
 **Tasks**:
 
-You will present your analysis with your teammates in class on April 29. Your slides do not need to include the code used to conduct your analysis (that should be able to be obtained from your report). Instead, your presentation should be a short explanation of 1) what you studied and why it matters, 2) what data you used, and 3) what you found. Below is a list of specific items your presentation should include (check the rubric to see their relative weighting).
+You will present your analysis with your teammates in class on May 06. Your slides do not need to include the code used to conduct your analysis (that should be able to be obtained from your report). Instead, your presentation should be a short explanation of 1) what you studied and why it matters, 2) what data you used, and 3) what you found. Below is a list of specific items your presentation should include (check the rubric to see their relative weighting).
 
 1. Follow these formatting rules:
 
     - Your presentation should be no longer than 10 minutes in length (practice! time yourself!)
     - Each team member must present at least one slide.
     - You should have between 6 and 8 slides total, including your title slide.
-    - Your title slide should include the project title, team member names, and the presentation date (April 29, 2020).
+    - Your title slide should include the project title, team member names, and the presentation date (May 06, 2020).
     - All slides should be numbered in the bottom-left or bottom-right corners.
 
 2. State your research question and explain why we should care (you don't necessarily need a slide with the question written out on it).
