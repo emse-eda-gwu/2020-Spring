@@ -29,8 +29,8 @@ Item            | Weight towards<br>final grade | Due Date<br>(by 11pm)
 Proposal        | 6 %    | March 13
 Progress Report | 8 %    | April 12
 Peer Review     | 5 %    | April 19
-Presentation    | 8 %    | April 28
-Final Report    | 16 %   | May 6
+Final Report    | 16 %   | May 4
+Presentation    | 8 %    | May 6
 </div>
 
 **Purpose**: The skills covered in this course are rooted in design rules and principles rather than formulas and equations. As such, the _application_ of these principles to a real data problem is one of the best ways to learn and assess mastery of these skills. I guarantee you one day you will need to apply these principles to communicate an idea to colleagues, so let's make sure you have at least one chance to practice before the [stakes are higher](https://emse6574-gwu.github.io/2019-Fall/challengerExplosion.html).
@@ -174,51 +174,9 @@ Each student will be randomly assigned one progress report of their classmate's 
 
 ---
 
-# Presentation
-
-**Due**: Slides due by April 28 by 11:00 pm; presentations will be in class on April 29.
-
-**Weight**: This assignment is worth 8% of your final grade: 4% for your slides & slide design, and 4% for effectively presenting them in class.
-
-**Submission Details**: Submit your slides as a PDF or .pptx file (whichever you feel most comfortable presenting with) on Blackboard by the due date.
-
-**Assessment**: We will use [this rubric](assignments/project/presentation.pdf) to grade your presentation.
-
-**Tasks**:
-
-You will present your analysis with your teammates in class on April 29. Your slides do not need to include the code used to conduct your analysis (that should be able to be obtained from your report). Instead, your presentation should be a short explanation of 1) what you studied and why it matters, 2) what data you used, and 3) what you found. Below is a list of specific items your presentation should include (check the rubric to see their relative weighting).
-
-1. Follow these formatting rules:
-
-    - Your presentation should be no longer than 10 minutes in length (practice! time yourself!)
-    - Each team member must present at least one slide.
-    - You should have between 6 and 8 slides total, including your title slide.
-    - Your title slide should include the project title, team member names, and the presentation date (April 29, 2020).
-    - All slides should be numbered in the bottom-left or bottom-right corners.
-
-2. State your research question and explain why we should care (you don't necessarily need a slide with the question written out on it).
-
-3. Discuss the data source(s) you used for your analysis:
-
-    - Describe them and display the names of the sources on your slide. You do not need the full urls to the raw data files, just the organization name (e.g. `"**Data source**: U.S. Centers for Disease Control and Prevention"`).
-    - Discuss the validity of your source(s) - for each data source, was the data available the _original_ data, or has it been processed? If not, what is the original source? How was the data collected?
-    
-4. Describe your data:
-
-    - Articulate the main variables of interest in your project, and justify your choice of variables.
-    - Provide descriptive statistics for all your relevant variables. These can be a mix of graphs and summary tables.
-
-5. Describe your results:
-
-    - Display charts that either support or oppose your research question, or illustrate what else you might need to address your research question.
-    - Your plot type choices should highlight the point you want to make or clearly show the relationship you want to emphasize - basically, what do the data say about your research question?
-    - Your charts should be polished, following the design principles we have covered in class.
-
----
-
 # Final Report
 
-**Due**: May 6 by 11:00 pm
+**Due**: May 04 by 11:00 pm
 
 **Weight**: This assignment is worth 16% of your final grade.
 
@@ -256,6 +214,48 @@ Your final report should be a fully reproducible product and available online as
     - Your charts should be polished, following the design principles we have covered in class.
 
 6. **For students working in teams**: On Blackboard under the assignment titled `"Team Member Review [Final Report]"`, submit a short description of the specific contributions of each team member in your team. For example, "Student A identified the data source and wrote the documentation for it. Student B led the data cleaning process and did much of the initial data exploration. Student C helped write code for the main visualizations." These reviews will be kept confidential and compared to assess that the workload and grading for team members are equitable. Team members who do not make meaningful contributions to their projects will receive a lower grade than that of their team mates.
+
+---
+
+# Presentation
+
+**Due**: Slides due by May 05 by 11:00 pm; presentations will be in class on May 06.
+
+**Weight**: This assignment is worth 8% of your final grade: 4% for your slides & slide design, and 4% for effectively presenting them in class.
+
+**Submission Details**: Submit your slides as a PDF or .pptx file (whichever you feel most comfortable presenting with) on Blackboard by the due date.
+
+**Assessment**: We will use [this rubric](assignments/project/presentation.pdf) to grade your presentation.
+
+**Tasks**:
+
+You will present your analysis with your teammates in class on April 29. Your slides do not need to include the code used to conduct your analysis (that should be able to be obtained from your report). Instead, your presentation should be a short explanation of 1) what you studied and why it matters, 2) what data you used, and 3) what you found. Below is a list of specific items your presentation should include (check the rubric to see their relative weighting).
+
+1. Follow these formatting rules:
+
+    - Your presentation should be no longer than 10 minutes in length (practice! time yourself!)
+    - Each team member must present at least one slide.
+    - You should have between 6 and 8 slides total, including your title slide.
+    - Your title slide should include the project title, team member names, and the presentation date (April 29, 2020).
+    - All slides should be numbered in the bottom-left or bottom-right corners.
+
+2. State your research question and explain why we should care (you don't necessarily need a slide with the question written out on it).
+
+3. Discuss the data source(s) you used for your analysis:
+
+    - Describe them and display the names of the sources on your slide. You do not need the full urls to the raw data files, just the organization name (e.g. `"**Data source**: U.S. Centers for Disease Control and Prevention"`).
+    - Discuss the validity of your source(s) - for each data source, was the data available the _original_ data, or has it been processed? If not, what is the original source? How was the data collected?
+
+4. Describe your data:
+
+    - Articulate the main variables of interest in your project, and justify your choice of variables.
+    - Provide descriptive statistics for all your relevant variables. These can be a mix of graphs and summary tables.
+
+5. Describe your results:
+
+    - Display charts that either support or oppose your research question, or illustrate what else you might need to address your research question.
+    - Your plot type choices should highlight the point you want to make or clearly show the relationship you want to emphasize - basically, what do the data say about your research question?
+    - Your charts should be polished, following the design principles we have covered in class.
 
 ---
 
