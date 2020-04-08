@@ -1,5 +1,10 @@
 
 ---
+class: inverse, middle, center
+
+# Redesign solutions
+
+---
 class: inverse
 
 # [Final projects](http://eda.seas.gwu.edu/2020-Spring/a-project.html) timeline

@@ -60,6 +60,43 @@ class: middle
 ]
 
 ---
+class: inverse
+
+## Your turn
+
+```{r, echo=FALSE}
+countdown(minutes = 6,
+          warn_when = 30,
+          update_every = 15,
+          top = 0,
+          font_size = '2em')
+```
+
+.leftcol[
+Share with your teammates different strategies for how to start your presentation for your projects:
+
+1. Tell a story, talk about **people** ("Imagine...").
+2. With a shocking factoid ("There are more people alive today than have ever lived...").
+3. With a question that matters to the audience ("Have you...?").
+
+Afterwards, we will go around the "room" and one person from each team will practice giving their start to their presentation.
+]
+.rightcol[.font80[
+Project teams:
+1. Home Mortgage Disclosure Act [Alyssa Cristobal]
+2. Investing in Ridesharing Companies [Emily Aprigliano, Beth Ellinport, Allison Forsyth]
+3. Gender Representation in Films [Sarah Cassway, Alexa Solomon, Caroline Walton]
+4. Crude oil and employment [Alp Can Eryorulmaz, Azamat Kulzhanov, Diing Manyang]
+5. FEMA Disaster Relief [Bugra Kardas, Blake Ripp, Derek Ripp]
+6. Flight comfort, passenger height [Yumna Dahab, Olivia O'Hearn, Bruna Stamer Janikian]
+7. The Limits of Healthcare [Javier Langarica]
+8. Virginia Presidential Elections [Jenny Kim]
+9. Game Attendance in Major League Baseball [Saramarie Puzzanghera]
+10. Diversity & Inclusion in the U.S. Military [William Stricklett]
+11. EV sustainability [William Stein]
+]]
+
+---
 # For team meetings next week
 
 Have the following ready:
