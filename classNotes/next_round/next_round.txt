@@ -6,6 +6,10 @@ Look up 200306-SEAS-faculty notes for data examples
 
 Add new Horst monster images
 
+2-eda:
+Automated EDA:
+https://twitter.com/beeonaposy/status/1245824406783430660?s=19
+
 3-visualizing-information:
 Add trump_covid.jpg image on directly labeling lines
 
