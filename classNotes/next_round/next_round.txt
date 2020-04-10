@@ -6,6 +6,10 @@ Look up 200306-SEAS-faculty notes for data examples
 
 Add new Horst monster images
 
+3-visualizing-information:
+Add trump_covid.jpg image on directly labeling lines
 
-Maps class:
+9-maps:
 - NYT misleading coronavirus map comparison: https://twitter.com/oliviacpaschal/status/1245711609890320386?s=20
+
+
