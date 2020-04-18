@@ -75,7 +75,7 @@ The course [schedule](schedule.html) is your roadmap for the semester. Visit it 
 
 # Communication & Help
 
-This can be a challenging class - don't suffer in silence! Look at the ["Getting Help"](getting-help.html) page, come to office hours, send me a message on Slack.
+This can be a challenging class - don't suffer in silence! Look at the ["Getting Help"](ref-getting-help.html) page, come to office hours, send me a message on Slack.
 
 # Readings!
 
