@@ -77,7 +77,7 @@ navbar:
           icon: fa-terminal
           href: ref-programming.html
         - text: "R Markdown"
-          icon: fa-markdown
+          icon: fa-feather-alt
           href: ref-rmarkdown.html
         - text: "Other"
           icon: fa-ellipsis-h
