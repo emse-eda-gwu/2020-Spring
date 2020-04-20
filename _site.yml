@@ -74,8 +74,11 @@ navbar:
           icon: fa-chart-bar
           href: ref-visualizing-data.html
         - text: "Programming in R"
-          icon: fa-code
+          icon: fa-terminal
           href: ref-programming.html
+        - text: "R Markdown"
+          icon: fa-markdown
+          href: ref-rmarkdown.html
         - text: "Other"
           icon: fa-ellipsis-h
           href: ref-other.html
