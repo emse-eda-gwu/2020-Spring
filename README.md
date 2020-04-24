@@ -8,7 +8,7 @@ This course provides students with a foundation in exploring data using the [R p
 
 For more details, please see the [course website](http://eda.seas.gwu.edu/2020-Spring/).
 
-### Acknowledgements
+### Acknowledgments
 
 This course was inspired by many other courses / resources that cover similar material - see the course [about page](http://eda.seas.gwu.edu/2020-Spring/about.html) for more details.
 
