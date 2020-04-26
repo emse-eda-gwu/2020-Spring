@@ -6,6 +6,12 @@ Look up 200306-SEAS-faculty notes for data examples
 
 Add new Horst monster images
 
+Revise grading rubrics to look for effectiveness of design choices:
+- chart communicates key message
+- chart choice appropriate to show relationship / comparison
+- design elements are clear and not confusing
+- annotations are appropriate
+
 2-eda:
 Automated EDA:
 https://twitter.com/beeonaposy/status/1245824406783430660?s=19
