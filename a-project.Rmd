@@ -182,7 +182,7 @@ Each student will be randomly assigned one progress report of their classmate's 
 
 **Submission Details**: **Use [this template](a-project-template.html) for your final analysis and report.** Your progress report should be written as a .Rmd file that compiles to a html webpage. Publish your compiled page online (e.g. via RPubs, Github, etc.), then submit your entire project folder (including your .Rmd file, data files, .RProj file, etc.) as a single .zip file on Blackboard by the due date. Also include a link to the published report page in your Blackboard submission. For students in teams, **only one person from your team should submit the report.**
 
-**Assessment**: We will use [this rubric](assignments/project/final_report.pdf) to grade your report.
+**Assessment**: We will use [this rubric](assignments/project/final_report_rubric.pdf) to grade your report.
 
 **Tasks**:
 
