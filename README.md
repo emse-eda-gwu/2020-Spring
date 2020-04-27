@@ -1,6 +1,8 @@
 ## EMSE 4197: Exploratory Data Analysis - Spring 2020
 
-[![Build Status](https://travis-ci.org/emse-eda-gwu/2020-Spring.svg?branch=master)](https://travis-ci.org/emse-eda-gwu/2020-Spring) [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+![Render & Deploy Site](https://github.com/emse-eda-gwu/2020-Spring/workflows/Render%20&%20Deploy%20Site/badge.svg)
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/) 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ### Description
 
