@@ -1,0 +1,105 @@
+
+---
+## Visualizing models
+
+.leftcol[
+Compute the correlation
+```{r, eval=FALSE}
+galtonCorr <- round(cor(
+    GaltonFamilies$mpg, GaltonFamilies$hp,
+    method = 'pearson'), 2)
+```
+Make the plot
+```{r, eval=FALSE}
+plot <- ggplot(GaltonFamilies) +
+    geom_point(aes(x = midparentHeight,
+                   y = childHeight),
+               size = 0.5, alpha = 0.7) +
+    annotate(geom = 'text', x = 64, y = 79,
+             label = str_c('r = ', galtonCorr),
+             hjust = 0, size = 5) +
+    theme_half_open() +
+    labs(x = 'Midparent height (inches)',
+         y = 'Child height (inches)')
+```
+]
+.rightcol[
+<br>
+<center>
+<img src="images/plots/galtonScatterplot.png">
+</center>
+]
+
+---
+## Visualizing models
+
+.leftcol[
+Add linear model with `geom_smooth()`
+```{r, eval=FALSE}
+plot +
+    geom_smooth(aes(x = midparentHeight,
+                    y = childHeight),
+                method = 'lm', #<<
+                se = FALSE)
+```
+]
+.rightcol[
+<br>
+<center>
+<img src="images/plots/galtonScatterplotSmooth.png">
+</center>
+]
+
+---
+## Visualizing models
+
+.leftcol60[
+Make equation label
+```{r, eval=FALSE}
+model <- lm(
+  formula = childHeight ~ midparentHeight,
+  data = GaltonFamilies)
+coefs <- round(coef(model), 2)
+eqLabel <- str_c('y = ', coefs[1], ' + ', coefs[2], 'x')
+```
+Add linear model equation with `annotate()`
+```{r, eval=FALSE}
+plot +
+    geom_smooth(aes(x = midparentHeight,
+                    y = childHeight),
+                method = 'lm',
+                se = FALSE) +
+    annotate(geom = 'text', x = 64, y = 77, #<<
+             label = eqLabel, hjust = 0, #<<
+             size = 5) #<<
+```
+]
+.rightcol40[
+<br>
+<center>
+<img src="images/plots/galtonScatterplotEq.png">
+</center>
+]
+
+---
+class: inverse
+
+## Your turn
+
+```{r, echo=FALSE}
+countdown(minutes = 15,
+          warn_when = 30,
+          update_every = 15,
+          top = 0,
+          font_size = '2em')
+```
+
+.leftcol[.font130[
+Using the `msleep` data frame:
+
+1. Create a scatter plot of `brainwt` versus `bodywt`.
+2. Include an annotation for the Pearson correlation coefficient.
+3. Include an annotation for the best fit line.
+
+Bonus: Compare your results to a log-linear relationship by converting the x and y variables to the log of x and y.
+]]

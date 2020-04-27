@@ -1,0 +1,322 @@
+<!--
+How to do it:
+https://www.r-graph-gallery.com/map.html
+-->
+
+---
+# How to make a map
+
+.leftcol[
+Step 1: Load a shape file
+
+a. Use a library
+
+b. Read in a shape file
+]
+--
+.rightcol[
+Step 2: Plot the shape file
+
+a. `geom_polygon()`
+
+b. `geom_sf()`
+]
+
+---
+## Polygon maps
+
+.leftcol60[.code70[
+Get the "World" shape file
+```{r}
+library(ggplot2)
+
+world <- map_data("world") #<<
+head(world)
+```
+]]
+
+---
+## Polygon maps
+
+.leftcol60[.code70[
+Get the "World" shape file
+```{r}
+library(ggplot2)
+
+world <- map_data("world") #<<
+```
+Make the plot with `geom_polygon()`
+```{r, eval=FALSE}
+ggplot(world) +
+    geom_polygon(aes(x = long, y = lat, group = group), #<<
+                 fill = "grey90", color = "grey60")
+```
+]]
+.rightcol40[
+<br>
+<center>
+<img src="images/plots/polygon_world.png">
+<center>
+]
+
+---
+## Polygon maps
+
+.leftcol60[.code70[
+Get the "US States" shape file
+```{r}
+library(ggplot2)
+
+us_states <- map_data("state") #<<
+```
+Make the plot with `geom_polygon()`
+```{r, eval=FALSE}
+ggplot(us_states) +
+    geom_polygon(aes(x = long, y = lat, group = group), #<<
+                 fill = "grey90", color = "grey60")
+```
+]]
+.rightcol40[
+<br>
+<center>
+<img src="images/plots/polygon_us.png">
+<center>
+]
+
+---
+## Simple Features (sf) maps
+
+.leftcol60[.code70[
+Library data from [Natural Earth](http://www.naturalearthdata.com/downloads/50m-cultural-vectors/)
+```{r}
+library(rnaturalearth) #<<
+library(rnaturalearthdata) #<<
+
+world <- ne_countries(scale = "medium", #<<
+                      returnclass = "sf") #<<
+
+world %>%
+    select(name, geometry) %>%
+    head()
+```
+]]
+
+---
+## Simple Features (sf) maps
+
+.leftcol60[.code70[
+Get the "World" shape file
+```{r}
+library(rnaturalearth)
+library(rnaturalearthdata)
+
+world <- ne_countries(scale = "medium", #<<
+                      returnclass = "sf") #<<
+```
+Make the plot with `geom_sf()`
+```{r, eval=FALSE}
+library(sf)
+
+ggplot(data = world) +
+    geom_sf(fill = "grey90", color = "grey60") #<<
+```
+]]
+.rightcol40[
+<br>
+<center>
+<img src="images/plots/sf_world.png">
+<center>
+]
+
+---
+## Simple Features (sf) maps
+
+.leftcol60[.code70[
+Get the "US States" shape file
+```{r}
+library(rnaturalearth)
+library(rnaturalearthdata)
+
+us_states <- ne_states( #<<
+    country = 'united states of america', #<<
+    returnclass = 'sf')
+```
+]]
+
+---
+## Simple Features (sf) maps
+
+.leftcol60[.code70[
+Get the "US States" shape file
+```{r}
+library(rnaturalearth)
+library(rnaturalearthdata)
+
+us_states <- ne_states( #<<
+    country = 'united states of america', #<<
+    returnclass = 'sf')
+```
+Make the plot with `geom_sf()`
+```{r, eval=FALSE}
+library(sf)
+
+ggplot(data = us_states) +
+    geom_sf(fill = "grey90", color = "grey60") #<<
+```
+]]
+.rightcol40[
+<br>
+<center>
+<img src="images/plots/sf_us.png">
+<center>
+]
+
+---
+## Simple Features (sf) maps
+
+.leftcol60[.code70[
+Get the **Continental** "US States" shape file
+```{r}
+library(rnaturalearth)
+library(rnaturalearthdata)
+
+us_states_cont <- ne_states(
+    country = 'united states of america',
+    returnclass = 'sf') %>%
+    filter(! name %in% c('Alaska', 'Hawaii')) #<<
+```
+Make the plot with `geom_sf()`
+```{r, eval=FALSE}
+library(sf)
+
+ggplot(data = us_states_cont) +
+    geom_sf(fill = "grey90", color = "grey60") #<<
+```
+]]
+.rightcol40[
+<br>
+<center>
+<img src="images/plots/sf_us_cont.png">
+<center>
+]
+
+---
+## The `maps` package
+
+.leftcol60[.code70[
+Includes data on:
+- World: world, world.cities, lakes
+- US: states, county, state, usa
+- France: france
+- Italy: italy
+- New zealand: nz
+
+Example:
+```{r, eval=FALSE}
+library(maps)
+
+us_counties <- st_as_sf( #<<
+    map("county", plot = FALSE, fill = TRUE)) #<<
+
+ggplot(data = us_counties) +
+    geom_sf(fill = 'grey90', color = 'grey60') #<<
+```
+]]
+.rightcol40[
+<br>
+<center>
+<img src="images/plots/sf_us_counties.png">
+<center>
+]
+
+---
+## Simple Features (sf) maps: `st_read()`
+
+.leftcol60[.code70[
+Read in the "World" shape file from [Natural Earth](http://www.naturalearthdata.com/downloads/50m-cultural-vectors/)
+```{r, message=FALSE}
+library(sf)
+
+world <- st_read(here::here( #<<
+    'data', 'natural_earth_countries',
+    'ne_50m_admin_0_countries.shp')) %>%
+    clean_names()
+```
+]]
+
+---
+## Simple Features (sf) maps: `st_read()`
+
+.leftcol60[.code70[
+Read in the "World" shape file
+```{r, message=FALSE}
+library(sf)
+
+world <- st_read(here::here( #<<
+    'data', 'natural_earth_countries',
+    'ne_50m_admin_0_countries.shp')) %>%
+    clean_names()
+```
+```{r, eval=FALSE}
+ggplot(data = world) +
+    geom_sf(fill = "grey90", color = "grey60") #<<
+```
+]]
+.rightcol40[
+<br>
+<center>
+<img src="images/plots/sf_world.png">
+<center>
+]
+
+---
+## Simple Features (sf) maps: `st_read()`
+
+.leftcol60[.code70[
+Read in the "Central Park" shape file [[source]](https://github.com/malcolmbarrett/designing_ggplots)
+
+```{r, message=FALSE}
+library(sf)
+
+central_park <- st_read(here::here(
+    'data', 'central_park', 'CentralPark.shp'))
+```
+```{r, eval=FALSE}
+ggplot(data = central_park) +
+    geom_sf(color = 'grey75')
+```
+]]
+.rightcol40[
+<br>
+<center>
+<img src="images/plots/sf_central_park.png">
+<center>
+]
+
+---
+class: inverse
+
+## Your turn
+
+```{r, echo=FALSE}
+countdown(minutes = 10,
+          warn_when = 30,
+          update_every = 15,
+          top = 0,
+          font_size = '2em')
+```
+
+Use the **rnaturalearth** library to extract and plot the shape files for China and Africa:
+
+<br>
+
+.leftcol[
+<center>
+<img src="images/plots/sf_china.png">
+</center>
+]
+.rightcol[
+<center>
+<img src="images/plots/sf_africa.png">
+</center>
+]

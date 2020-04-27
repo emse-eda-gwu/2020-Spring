@@ -1,0 +1,6 @@
+labeling clusters in a plot with geom_dl:
+http://statseducation.com/Introduction-to-R/modules/graphics/labeling/
+
+
+Corona clusters:
+https://medium.com/@tomaspueyo/coronavirus-the-hammer-and-the-dance-be9337092b56

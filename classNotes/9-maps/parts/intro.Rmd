@@ -1,0 +1,18 @@
+
+---
+## Today's data
+
+```{r, eval=FALSE}
+milk_production  <- read_csv(here::here('data', 'milk_production.csv'))
+us_coffee_shops  <- read_csv(here::here('data', 'us_coffee_shops.csv'))
+```
+
+## New package:
+```{r, eval=FALSE}
+install.packages('maps')
+install.packages('sf')
+install.packages('rgeos')
+install.packages('rnaturalearth')
+devtools::install_github("ropensci/rnaturalearthhires")
+devtools::install_github("ropensci/rnaturalearthdata")
+```

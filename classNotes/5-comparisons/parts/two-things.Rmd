@@ -1,0 +1,675 @@
+<!--
+Comparing two things (dodged bars, slope chart, dumbbell chart)
+
+- dodged comparisons are fine, but really no more than 2 things.
+- Using facets to break up 3-4 groups of 2 is okay.
+- A better approach for multiple categories:
+    - slope charts
+    - dumbbell charts -->
+
+---
+## When comparing **only 2** things,<br>dodged bars are a good starting point
+
+.leftcol[.code70[
+```{r milk_compare}
+milk_compare <- milk_production %>%
+  filter(year %in% c(1970, 2017)) %>%
+  mutate(state = fct_other(state,
+    keep = c('California', 'Wisconsin'))) %>%
+  group_by(year, state) %>%
+  summarise(milk_produced = sum(milk_produced) / 10^9)
+
+milk_compare
+```
+```{r milk_compare_dodged, fig.show='hide', echo=FALSE}
+ggplot(milk_compare) +
+  geom_col(aes(x = state, y = milk_produced,
+             fill = as.factor(year)),
+           width = 0.7, alpha = 0.8,
+           position = 'dodge') +
+  scale_fill_manual(
+      values = c('grey', 'steelblue'),
+      guide  = guide_legend(reverse = TRUE)) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid() +
+  labs(
+    x    = 'State',
+    y    = 'Milk produced (billion lbs)',
+    fill = 'Year')
+```
+]]
+.rightcol[
+```{r ref.label='milk_compare_dodged', echo=FALSE, fig.height=5, fig.width=7, fig.align='center'}
+```
+]
+
+---
+## When comparing **only 2** things,<br>dodged bars are a good starting point<br>...and facets can be helpful
+
+.leftcol[
+```{r ref.label='milk_compare_dodged', echo=FALSE, fig.height=5, fig.width=7, fig.align='center'}
+```
+]
+.rightcol[
+```{r milk_compare_dodged_facet, fig.show='hide', echo=FALSE}
+ggplot(milk_compare) +
+  geom_col(aes(x = as.factor(year), y = milk_produced,
+             fill = as.factor(year)),
+           width = 0.7, alpha = 0.8) +
+  scale_fill_manual(values = c('grey', 'steelblue')) +
+  facet_wrap(~state) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  theme_minimal_hgrid() +
+  panel_border() +
+  theme(legend.position = 'none') +
+  labs(
+    x    = 'Year',
+    y    = 'Milk produced (billion lbs)')
+```
+```{r ref.label='milk_compare_dodged_facet', echo=FALSE, fig.height=5, fig.width=7, fig.align='center'}
+```
+]
+
+---
+## With **more than 2** things,<br>dodged bars start to get confusing
+
+.leftcol[.center[
+Still comparing 2 time periods,<br>but in groups of **3**]
+```{r milk_compare_dodged_bad, fig.show='hide', echo=FALSE}
+ggplot(milk_compare) +
+  geom_col(aes(x = as.factor(year), y = milk_produced,
+             fill = state),
+           width = 0.7, alpha = 0.8,
+           position = 'dodge') +
+  scale_fill_manual(values = c('grey', 'steelblue', 'sienna')) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  theme_minimal_hgrid() +
+  labs(
+    x    = 'Year',
+    y    = 'Milk produced (billion lbs)')
+```
+```{r ref.label='milk_compare_dodged_bad', echo=FALSE, fig.height=5, fig.width=7, fig.align='center'}
+```
+]
+--
+.rightcol[.center[
+Still comparing 2 time periods,<br>but across **10** categories]
+```{r milk_compare_toomany, echo=FALSE}
+top10states <- milk_production %>%
+    filter(year == 2017) %>%
+    arrange(desc(milk_produced)) %>%
+    slice(1:10)
+
+milk_compare_toomany <- milk_production %>%
+  filter(
+        year %in% c(1970, 2017),
+        state %in% top10states$state) %>%
+    mutate(
+        milk_produced = milk_produced / 10^9,
+        state = fct_reorder(state, milk_produced))
+```
+```{r milk_compare_dodged_toomany, fig.show='hide', echo=FALSE}
+ggplot(milk_compare_toomany) +
+  geom_col(aes(x = state, y = milk_produced,
+             fill = as.factor(year)),
+           width = 0.7, alpha = 0.8,
+           position = 'dodge') +
+  scale_fill_manual(
+      values = c('grey', 'steelblue'),
+      guide  = guide_legend(reverse = TRUE)) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid() +
+  labs(
+    x    = 'State',
+    y    = 'Milk produced (billion lbs)',
+    fill = 'Year')
+```
+```{r ref.label='milk_compare_dodged_toomany', echo=FALSE, fig.height=5, fig.width=7, fig.align='center'}
+```
+]
+
+---
+class: center
+
+### Charts for comparing change between 2 things<br>across _more than_ 2 categories
+
+--
+.leftcol[
+### Dumbbell chart
+```{r milk_summary_dumbbell, echo=FALSE}
+top10states <- milk_production %>%
+    filter(year == 2017) %>%
+    arrange(desc(milk_produced)) %>%
+    slice(1:10)
+
+milk_summary_dumbbell <- milk_production %>%
+    filter(
+        year %in% c(1970, 2017),
+        state %in% top10states$state) %>%
+    mutate(
+        # Reorder state variables to follow top 10 states
+        state = fct_relevel(state, rev(top10states$state)),
+        # Convert year to discrete variable
+        year = as.factor(year),
+        # Modify the units
+        milk_produced = milk_produced / 10^9)
+```
+```{r milk_dumbbell_chart, fig.show='hide', echo=FALSE}
+ggplot(milk_summary_dumbbell,
+       aes(x = milk_produced, y = state)) +
+  geom_line(aes(group = state),
+            color = 'lightblue', size = 1) +
+  geom_point(aes(color = year), size = 2.5) +
+  scale_color_manual(values = c('lightblue', 'steelblue')) +
+  theme_minimal_vgrid() +
+  # Remove y axis line
+  theme(axis.line.y = element_blank()) +
+  labs(x = 'Milk produced (billion lbs)',
+       y = 'State',
+       color = 'Year',
+       title = 'Top 10 milk producing states (1970 - 2017)')
+```
+```{r ref.label='milk_dumbbell_chart', echo=FALSE, fig.height=6, fig.width=6, fig.align='center'}
+```
+]
+--
+.rightcol[
+### Slope chart
+```{r milk_summary_slope, echo=FALSE}
+top10states <- milk_production %>%
+    filter(year == 2017) %>%
+    arrange(desc(milk_produced)) %>%
+    slice(1:10)
+
+milk_summary_slope <- milk_production %>%
+    filter(
+        year %in% c(1970, 2017),
+        state %in% top10states$state) %>%
+    mutate(
+        state = fct_relevel(state, rev(top10states$state)),
+        milk_produced = milk_produced / 10^9,
+        year = as.factor(year),
+        lineColor = if_else(
+            state == 'California', 'CA', 'other'),
+        label = str_c(state, ' (',
+                      round(milk_produced), ')'),
+        label_left = ifelse(year == 1970, label, NA),
+        label_right = ifelse(year == 2017, label, NA))
+```
+```{r milk_slope_chart, fig.show='hide', echo=FALSE}
+ggplot(milk_summary_slope,
+       aes(x = as.factor(year), y = milk_produced,
+           group = state)) +
+    geom_line(aes(color = lineColor), size = 1) +
+    # Add 1970 labels (left side)
+    geom_text_repel(aes(label = label_left),
+                    hjust = 1, nudge_x = -0.05,
+                    direction = 'y',
+                    segment.color = 'grey') +
+    # Add 2017 labels (right side)
+    geom_text_repel(aes(label = label_right),
+                    hjust = 0, nudge_x = 0.05,
+                    direction = 'y',
+                    segment.color = 'grey') +
+    # Move year labels to top, modify line colors
+    scale_x_discrete(position = 'top') +
+    scale_color_manual(values = c('red', 'black')) +
+    # Annotate & adjust theme
+    labs(x = NULL,
+         y = 'Milk produced (billion lbs)',
+         title = 'Top 10 milk producing states (1970 - 2017)') +
+    theme_minimal_grid() +
+    theme(panel.grid  = element_blank(),
+          axis.text.y = element_blank(),
+          axis.ticks = element_blank(),
+          legend.position = 'none')
+```
+```{r ref.label='milk_slope_chart', echo=FALSE, fig.height=6, fig.width=6, fig.align='center'}
+```
+]
+
+---
+.leftcol[
+Dumbbell charts highlight...
+
+- ...change in _magnitudes_ across two periods / groups
+
+```{r ref.label='milk_dumbbell_chart', echo=FALSE, fig.height=6, fig.width=6, fig.align='center'}
+```
+]
+--
+.rightcol[
+Slope charts highlight...
+
+- ...change in _ranking_ across two periods / groups
+- ...how one thing is different from another
+
+```{r ref.label='milk_slope_chart', echo=FALSE, fig.height=6, fig.width=6, fig.align='center'}
+```
+]
+
+---
+## How to make a **Dumbbell chart**
+
+.leftcol[.code70[
+Create data frame for plotting
+```{r, eval=FALSE}
+# Identify the top 10 states (by 2017 production)
+top10states <- milk_production %>%
+    filter(year == 2017) %>%
+    arrange(desc(milk_produced)) %>%
+    slice(1:10)
+
+# Now make the plot data frame
+milk_summary_dumbbell <- milk_production %>%
+    filter(
+        year %in% c(1970, 2017),
+        state %in% top10states$state) %>%
+    mutate(
+        # Reorder state variables
+        state = fct_relevel(
+            state, rev(top10states$state)),
+        # Convert year to discrete variable
+        year = as.factor(year),
+        # Modify the units
+        milk_produced = milk_produced / 10^9)
+```
+]]
+.rightcol[.code70[
+```{r ref.label='milk_dumbbell_chart', echo=FALSE, fig.height=6, fig.width=6, fig.align='center'}
+```
+]]
+
+---
+## How to make a **Dumbbell chart**
+
+.leftcol[.code70[
+Make the plot
+
+Start with points:
+```{r milk_dumbbell_chart1, fig.show='hide'}
+ggplot(milk_summary_dumbbell,
+       aes(x = milk_produced, y = state)) + #<<
+  geom_point(aes(color = year), size = 2.5) #<<
+```
+]]
+.rightcol[.code70[
+```{r ref.label='milk_dumbbell_chart1', echo=FALSE, fig.height=6, fig.width=6, fig.align='center'}
+```
+]]
+
+---
+## How to make a **Dumbbell chart**
+
+.leftcol[.code70[
+Add lines - note the `group` variable:
+```{r milk_dumbbell_chart2, fig.show='hide'}
+ggplot(milk_summary_dumbbell,
+       aes(x = milk_produced, y = state)) +
+  geom_line(aes(group = state), #<<
+            color = 'lightblue', size = 1) + #<<
+  geom_point(aes(color = year), size = 2.5)
+```
+]]
+.rightcol[.code70[
+```{r ref.label='milk_dumbbell_chart2', echo=FALSE, fig.height=6, fig.width=6, fig.align='center'}
+```
+]]
+
+---
+## How to make a **Dumbbell chart**
+
+.leftcol[.code70[
+Change the colors:
+```{r milk_dumbbell_chart3, fig.show='hide'}
+ggplot(milk_summary_dumbbell,
+       aes(x = milk_produced, y = state)) +
+  geom_line(aes(group = state),
+            color = 'lightblue', size = 1) +
+  geom_point(aes(color = year), size = 2.5) +
+  scale_color_manual( #<<
+      values = c('lightblue', 'steelblue')) #<<
+```
+]]
+.rightcol[.code70[
+```{r ref.label='milk_dumbbell_chart3', echo=FALSE, fig.height=6, fig.width=6, fig.align='center'}
+```
+]]
+
+---
+## How to make a **Dumbbell chart**
+
+.leftcol[.code70[
+Adjust the theme and annotate:
+```{r, eval=FALSE}
+ggplot(milk_summary_dumbbell,
+       aes(x = milk_produced, y = state)) +
+  geom_line(aes(group = state),
+            color = 'lightblue', size = 1) +
+  geom_point(aes(color = year), size = 2.5) +
+  scale_color_manual(
+      values = c('lightblue', 'steelblue')) +
+  theme_minimal_vgrid() + #<<
+  # Remove y axis line
+  theme(axis.line.y = element_blank()) + #<<
+  labs(x = 'Milk produced (billion lbs)', #<<
+       y = 'State', #<<
+       color = 'Year', #<<
+       title = 'Top 10 milk producing states (1970 - 2017)') #<<
+```
+]]
+.rightcol[.code70[
+```{r ref.label='milk_dumbbell_chart', echo=FALSE, fig.height=6, fig.width=6, fig.align='center'}
+```
+]]
+
+---
+.leftcol[.code60[
+Create data frame for plotting
+```{r, eval=FALSE}
+# Identify the top 10 states (by 2017 production)
+top10states <- milk_production %>%
+    filter(year == 2017) %>%
+    arrange(desc(milk_produced)) %>%
+    slice(1:10)
+
+# Now make the plot data frame
+milk_summary_slope <- milk_production %>%
+    filter(
+        year %in% c(1970, 2017),
+        state %in% top10states$state) %>%
+    mutate(
+        # Modify the units
+        milk_produced = milk_produced / 10^9,
+        # Reorder state variables to follow top 10 states
+        state = fct_relevel(state, rev(top10states$state)),
+        # Make year a factor
+        year = as.factor(year),
+        # Create variable for the line color
+        lineColor = if_else(
+            state == 'California', 'CA', 'other'))
+        # Create labels
+        label = str_c(state, ' (', #<<
+                      round(milk_produced), ')'), #<<
+        label_left = ifelse(year == 1970, label, NA), #<<
+        label_right = ifelse(year == 2017, label, NA)) #<<
+```
+]]
+.rightcol[.code50[
+## .center[How to make a<br>**Slope chart**]
+
+```{r ref.label='milk_slope_chart', echo=FALSE, fig.height=6, fig.width=6, fig.align='center'}
+```
+]]
+
+---
+.leftcol[.code60[
+Create data frame for plotting
+```{r, eval=FALSE}
+# Identify the top 10 states (by 2017 production)
+top10states <- milk_production %>%
+    filter(year == 2017) %>%
+    arrange(desc(milk_produced)) %>%
+    slice(1:10)
+
+# Now make the plot data frame
+milk_summary_slope <- milk_production %>%
+    filter(
+        year %in% c(1970, 2017),
+        state %in% top10states$state) %>%
+    mutate(
+        # Modify the units
+        milk_produced = milk_produced / 10^9,
+        # Reorder state variables to follow top 10 states
+        state = fct_relevel(state, rev(top10states$state)),
+        # Make year a factor
+        year = as.factor(year),
+        # Create variable for the line color
+        lineColor = if_else(
+            state == 'California', 'CA', 'other'))
+        # Create labels
+        label = str_c(state, ' (', #<<
+                      round(milk_produced), ')'), #<<
+        label_left = ifelse(year == 1970, label, NA), #<<
+        label_right = ifelse(year == 2017, label, NA)) #<<
+```
+]]
+.rightcol[.code50[
+## .center[How to make a<br>**Slope chart**]
+
+```{r}
+milk_summary_slope %>%
+    select(state, year, milk_produced, label, lineColor)
+```
+]]
+
+---
+## How to make a **Slope chart**
+
+.leftcol[.code70[
+Start with a line plot - note the `group` variable:
+```{r milk_slope_chart1, fig.show='hide'}
+ggplot(milk_summary_slope,
+       aes(x = year, y = milk_produced, #<<
+           group = state)) + #<<
+    geom_line(aes(color = lineColor)) #<<
+```
+]]
+.rightcol[.code70[
+```{r ref.label='milk_slope_chart1', echo=FALSE, fig.height=6, fig.width=6, fig.align='center'}
+```
+]]
+
+---
+## How to make a **Slope chart**
+
+.leftcol[.code70[
+Add labels:
+```{r milk_slope_chart2, fig.show='hide'}
+ggplot(milk_summary_slope,
+       aes(x = year, y = milk_produced,
+           group = state)) +
+    geom_line(aes(color = lineColor)) +
+    # Add 1970 labels (left side)
+    geom_text(aes(label = label_left), #<<
+                hjust = 1, nudge_x = -0.05) + #<<
+    # Add 2017 labels (right side)
+    geom_text(aes(label = label_right), #<<
+                    hjust = 0, nudge_x = 0.05) #<<
+```
+]]
+.rightcol[.code70[
+```{r ref.label='milk_slope_chart2', echo=FALSE, fig.height=6, fig.width=6, fig.align='center'}
+```
+]]
+
+---
+class: center, middle
+
+## Overlapping labels?<br>**ggrepel** library to the rescue!
+
+<center>
+<img src="images/horst_monsters_ggrepel.jpg" width=600>
+</center>
+
+---
+## How to make a **Slope chart**
+
+.leftcol[.code70[
+Align labels so they don't overlap:
+```{r milk_slope_chart3, fig.show='hide'}
+library(ggrepel) #<<
+
+ggplot(milk_summary_slope,
+       aes(x = year, y = milk_produced,
+           group = state)) +
+    geom_line(aes(color = lineColor)) +
+    # Add 1970 labels (left side)
+    geom_text_repel(aes(label = label_left), #<<
+                    hjust = 1, nudge_x = -0.05,
+                    direction = 'y', #<<
+                    segment.color = 'grey') + #<<
+    # Add 2017 labels (right side)
+    geom_text_repel(aes(label = label_right), #<<
+                    hjust = 0, nudge_x = 0.05,
+                    direction = 'y', #<<
+                    segment.color = 'grey') #<<
+```
+]]
+.rightcol[.code70[
+```{r ref.label='milk_slope_chart3', echo=FALSE, fig.height=6, fig.width=7, fig.align='center'}
+```
+]]
+
+---
+## How to make a **Slope chart**
+
+.leftcol[.code70[
+Adjust colors:
+```{r milk_slope_chart4, fig.show='hide'}
+ggplot(milk_summary_slope,
+       aes(x = year, y = milk_produced,
+           group = state)) +
+    geom_line(aes(color = lineColor)) +
+    # Add 1970 labels (left side)
+    geom_text_repel(aes(label = label_left),
+                    hjust = 1, nudge_x = -0.05,
+                    direction = 'y',
+                    segment.color = 'grey') +
+    # Add 2017 labels (right side)
+    geom_text_repel(aes(label = label_right),
+                    hjust = 0, nudge_x = 0.05,
+                    direction = 'y',
+                    segment.color = 'grey') +
+    # Move year labels to top, modify line colors
+    scale_x_discrete(position = 'top') + #<<
+    scale_color_manual(values = c('red', 'black')) #<<
+```
+]]
+.rightcol[.code70[
+```{r ref.label='milk_slope_chart4', echo=FALSE, fig.height=6, fig.width=7, fig.align='center'}
+```
+]]
+
+---
+.leftcol[.code60[
+Adjust the theme and annotate
+
+```{r, eval=FALSE}
+ggplot(milk_summary_slope,
+       aes(x = year, y = milk_produced,
+           group = state)) +
+    geom_line(aes(color = lineColor)) +
+    # Add 1970 labels (left side)
+    geom_text_repel(aes(label = label_left),
+                    hjust = 1, nudge_x = -0.05,
+                    direction = 'y',
+                    segment.color = 'grey') +
+    # Add 2017 labels (right side)
+    geom_text_repel(aes(label = label_right),
+                    hjust = 0, nudge_x = 0.05,
+                    direction = 'y',
+                    segment.color = 'grey') +
+    # Move year labels to top, modify line colors
+    scale_x_discrete(position = 'top') +
+    scale_color_manual(values = c('red', 'black')) +
+    # Annotate & adjust theme
+    labs(x = NULL,
+         y = 'Milk produced (billion lbs)',
+         title = 'Top 10 milk producing states (1970 - 2017)') +
+    theme_minimal_grid() + #<<
+    theme(panel.grid  = element_blank(), #<<
+          axis.text.y = element_blank(), #<<
+          axis.ticks = element_blank(), #<<
+          legend.position = 'none') #<<
+```
+]]
+.rightcol[.code70[
+## .center[How to make a<br>**Slope chart**]
+
+```{r ref.label='milk_slope_chart', echo=FALSE, fig.height=6, fig.width=6, fig.align='center'}
+```
+]]
+
+---
+class: inverse
+
+### Your turn
+
+Use the `federal_spending_long.csv` data to create the following charts.
+
+.leftcol[
+```{r, echo=FALSE}
+federal_spending_summary <- federal_spending %>%
+    filter(year %in% c(1976, 2017)) %>%
+    mutate(
+      rd_budget = rd_budget / 10^3,
+      department = fct_reorder2(department, year, desc(rd_budget)),         year = as.factor(year))
+```
+```{r federal_spending_dumbbell, fig.show='hide', echo=FALSE}
+ggplot(federal_spending_summary,
+       aes(x = rd_budget, y = department)) +
+    geom_line(aes(group = department),
+              color = 'lightblue', size = 1) +
+    geom_point(aes(color = year), size = 2.5) +
+    scale_color_manual(values = c('lightblue', 'steelblue')) +
+    theme_minimal_vgrid() +
+    # Remove y axis line
+    theme(axis.line.y = element_blank()) +
+    labs(x = 'R&D Budget (Billions $USD)',
+         y = 'Department',
+         color = 'Year',
+         title = 'Change in R&D budget of\nU.S. government departments (1976 - 2017)')
+```
+```{r ref.label='federal_spending_dumbbell', echo=FALSE, fig.height=6, fig.width=6, fig.align='center'}
+```
+]
+.rightcol[
+```{r, echo=FALSE}
+federal_spending_summary <- federal_spending %>%
+    filter(year %in% c(1976, 2017)) %>%
+    mutate(
+      rd_budget = rd_budget / 10^3,
+      department = fct_reorder2(department, year, desc(rd_budget)),
+      year = as.factor(year),
+      label = str_c(department, ' (',
+                    round(rd_budget), ')'),
+      label_left = ifelse(year == 1976, label, NA),
+      label_right = ifelse(year == 2017, label, NA))
+```
+```{r federal_spending_slope, fig.show='hide', echo=FALSE}
+ggplot(federal_spending_summary,
+       aes(x = year, y = rd_budget,
+           group = department)) +
+    geom_line(size = 1) +
+    # Add 1952 labels (left side)
+    geom_text_repel(aes(label = label_left),
+                    hjust = 1, nudge_x = -0.05,
+                    direction = 'y',
+                    segment.color = 'grey') +
+    # Add 2007 labels (right side)
+    geom_text_repel(aes(label = label_right),
+                    hjust = 0, nudge_x = 0.05,
+                    direction = 'y',
+                    segment.color = 'grey') +
+    # Move year labels to top
+    scale_x_discrete(position = 'top') +
+    # Annotate & adjust theme
+    theme_minimal_grid() +
+    theme(panel.grid  = element_blank(),
+          axis.text.y = element_blank(),
+          axis.ticks = element_blank(),
+          legend.position = 'none') +
+    labs(x = NULL,
+         y = 'R&D Budget (Billions $USD)',
+         title = 'Change in R&D budget of\nU.S. government departments (1976 - 2017)')
+```
+```{r ref.label='federal_spending_slope', echo=FALSE, fig.height=6, fig.width=6, fig.align='center'}
+```
+]

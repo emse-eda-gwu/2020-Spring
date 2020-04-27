@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+  <head>
+    <title>Week 1</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="John Paul Helveston" />
+    <meta name="date" content="2020-01-15" />
+    <link href="slides-1-intro_files/remark-css/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://emse-eda-gwu.github.io/2020-Spring/classNotes/classNotes.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+name: xaringan-title
+class: title-slide, center, middle, inverse
+
+# Week 1: Exploratory Data Analysis
+
+.large[EMSE 4197 | John Paul Helveston | January 15, 2020]
+
+---
+# Meet your instructor!
+
+.leftcol30[
+&lt;img src="images/helveston.jpg" width="250"&gt;
+]
+.rightcol70[
+**Dr. John Helveston**
+
+Assistant Professor in Engineering Management &amp; Systems Engineering
+
+**Background**:
+
+- 2016 PhD in Engineering &amp; Public Policy at Carnegie Mellon University
+- 2015 MS in Engineering &amp; Public Policy at Carnegie Mellon University
+- 2010 BS in Engineering Science &amp; Mechanics at Virginia Tech
+
+**Research**:
+
+- Modeling conusmer preferences
+- Electric vehicle adoption &amp; diffusion
+- China
+]
+
+---
+class: center
+
+## Meet your tutors!
+
+.leftcol[
+### Yanjie He
+
+Masters student in Data Analytics
+
+&lt;center&gt;
+&lt;img src="images/yanjie.jpg" width="300"&gt;
+&lt;/center&gt;
+]
+
+.rightcol[
+### Lingmei Zhao
+
+Masters student in Statistics
+
+&lt;center&gt;
+&lt;img src="images/lingmei.jpg" width="300"&gt;
+&lt;/center&gt;
+]
+
+---
+class: center
+
+# **Class goal**: translate _data_ into _information_
+
+--
+.leftcol[
+**Data**
+
+Student engagement scores
+
+ Class       | School Type | Male | Female
+ ------------|-------------|------|-------
+ Special Ed. | Charter     | 643  | 793
+ Special Ed. | Public      | 735  | 928
+ General Ed. | Charter     | 590  | 724
+ General Ed. | Public      | 863  | 662
+
+]
+--
+.rightcol[
+**Information**
+
+&lt;img src="slides-1-intro_files/figure-html/unnamed-chunk-1-1.png" width="432" /&gt;
+]
+
+---
+# Data exploration: an iterative process
+
+--
+.leftcol[
+Encode data:
+
+.code60[
+
+```r
+engagement_data &lt;- data.frame(
+    Male   = c(643, 735, 590, 863),
+    Female = c(793, 928, 724, 662),
+    School = c('Special Ed., Charter', 'Special Ed., Public',
+               'General Ed., Charter', 'General Ed., Public'))
+engagement_data
+```
+
+```
+##   Male Female               School
+## 1  643    793 Special Ed., Charter
+## 2  735    928  Special Ed., Public
+## 3  590    724 General Ed., Charter
+## 4  863    662  General Ed., Public
+```
+]]
+--
+.rightcol[
+Re-format data for plotting:
+
+.code60[
+
+```r
+engagement_data &lt;- engagement_data %&gt;%
+    gather(Gender, Engagement, Male:Female) %&gt;%
+    mutate(Gender = fct_relevel(
+      Gender, c('Male', 'Female')))
+engagement_data
+```
+
+```
+##                 School Gender Engagement
+## 1 Special Ed., Charter   Male        643
+## 2  Special Ed., Public   Male        735
+## 3 General Ed., Charter   Male        590
+## 4  General Ed., Public   Male        863
+## 5 Special Ed., Charter Female        793
+## 6  Special Ed., Public Female        928
+## 7 General Ed., Charter Female        724
+## 8  General Ed., Public Female        662
+```
+]]
+
+---
+# Data exploration: an iterative process
+
+.leftcol[
+Initial exploratory plotting:
+
+.code60[
+
+```r
+engagement_data %&gt;%
+    ggplot() +
+    geom_bar(aes(x = School, y = Engagement,
+                 fill = Gender), stat = 'identity',
+             position = 'dodge') +
+    coord_flip()
+```
+
+&lt;img src="slides-1-intro_files/figure-html/unnamed-chunk-4-1.png" width="432" /&gt;
+]]
+--
+.rightcol[
+More exploratory plotting - highlight difference:
+
+&lt;img src="slides-1-intro_files/figure-html/unnamed-chunk-5-1.png" width="432" /&gt;
+]
+
+---
+# Data exploration: an iterative process
+
+.leftcol[
+Directly label figure:
+
+&lt;img src="slides-1-intro_files/figure-html/unnamed-chunk-6-1.png" width="432" /&gt;
+]
+--
+.rightcol[
+
+Remove unnecessary axes &amp; format colors:
+
+&lt;img src="slides-1-intro_files/figure-html/unnamed-chunk-7-1.png" width="432" /&gt;
+]
+
+---
+
+.leftcol[
+
+Code:
+
+.code40[
+
+```r
+data.frame(
+    Male   = c(643, 735, 590, 863),
+    Female = c(793, 928, 724, 662),
+    School = c('Special Ed., Charter', 'Special Ed., Public',
+               'General Ed., Charter', 'General Ed., Public'),
+    Highlight = c(0, 0, 0, 1)) %&gt;%
+    gather(Gender, Engagement, Male:Female) %&gt;%
+    mutate(
+      Gender = fct_relevel(Gender, c('Male', 'Female')),
+      Highlight = as.factor(Highlight),
+      x = ifelse(Gender == 'Female', 1, 0)) %&gt;%
+    ggplot(aes(x = x, y = Engagement, group = School, color = Highlight)) +
+    geom_point() +
+    geom_line() +
+    scale_color_manual(values = c('#757575', '#ed573e')) +
+    labs(x = 'Sex', y = 'Engagement',
+         title = paste0('Female students in public, general education\n',
+                        'schools have surprisingly low engagement')) +
+    scale_x_continuous(limits = c(-1.2, 1.2), labels = c('Male', 'Female'),
+                       breaks = c(0, 1)) +
+    geom_text_repel(aes(label = Engagement, color = as.factor(Highlight)),
+                    data          = subset(engagement, Gender == 'Female'),
+                    size          = 5,
+                    nudge_x       = 0.1,
+                    segment.color = NA) +
+    geom_text_repel(aes(label = Engagement, color = as.factor(Highlight)),
+                    data          = subset(engagement, Gender == 'Male'),
+                    size          = 5,
+                    nudge_x       = -0.1,
+                    segment.color = NA) +
+    geom_text_repel(aes(label = School, color = as.factor(Highlight)),
+                    data          = subset(engagement, Gender == 'Male'),
+                    size          = 5,
+                    nudge_x       = -0.25,
+                    hjust         = 1,
+                    segment.color = NA) +
+    theme_cowplot() +
+    background_grid(major = 'x') +
+    theme(axis.line = element_blank(),
+          axis.title.x = element_blank(),
+          axis.title.y = element_blank(),
+          axis.text.y = element_blank(),
+          axis.ticks = element_blank(),
+          legend.position = 'none')
+```
+]]
+.rightcol[
+
+Chart:
+
+&lt;img src="slides-1-intro_files/figure-html/unnamed-chunk-9-1.png" width="432" /&gt;
+
+### **A fully reproducible analysis**
+
+]
+
+---
+## Course 1: [Programming for Analytics](https://emse6574-gwu.github.io/2019-Fall/)
+
+**"Computational Literacy"**
+
+- Programming: Conditionals (if/else), loops, functions, testing, data types.
+- Analytics: Data structures, import / export, basic data manipulation &amp; visualization.
+
+&lt;br&gt;
+--
+
+## Course 2: [Exploratory Data Analysis](https://emse-eda-gwu.github.io/2020-Spring/)
+
+**"Data Literacy"**
+
+- Strategies for systematically exploring data.
+- Design principles for visualizing and communicating information contained in data.
+- Reproducibility: Reports that contain code, equations, visualizations, and narrative text.
+
+---
+# Course orientation
+
+- Course website (link also in Blackboard): https://emse-eda-gwu.github.io/2020-Spring/index.html
+
+--
+- The [schedule](https://emse-eda-gwu.github.io/2020-Spring/schedule.html) is the best starting point
+
+--
+- **Prerequisites**: [Programming for Analytics](https://emse6574-gwu.github.io/2019-Fall/) - look at [Assignment 0](https://emse-eda-gwu.github.io/2020-Spring/assignment0.html)
+
+--
+- For help, look under the ["Resources"](https://emse-eda-gwu.github.io/2020-Spring/getting-help.html) tab
+
+  - Use Slack to ask questions.
+  - Go to Office hours / tutor sessions
+
+---
+# Course policies
+
+.leftcol[
+
+### Basic policies
+
+- **BE NICE**
+- **BE HONEST**
+- **DON'T CHEAT** (Translate: Write your own code!)
+
+]
+
+--
+.rightcol[
+
+### Late submissions
+
+- **5** late days - use them however you want.
+- You can't use more than **2** late days on any one assignment.
+
+]
+
+---
+# Assignments
+
+--
+1) Online exercises
+
+  - Example: [Assignment 1](https://emse-eda-gwu.github.io/2020-Spring/assignment1.html)
+  - [DataCamp](https://www.datacamp.com/enterprise/emse-4197-exploratory-data-analysis) tour
+
+&lt;br&gt;
+
+--
+2) Mini projects
+
+&lt;br&gt;
+
+--
+3) [Final Project](https://emse-eda-gwu.github.io/2020-Spring/assignment-final.html)
+
+  - Teams of 1 - 3 students
+  - 5 separate deliverables
+
+&lt;br&gt;
+
+--
+**There is no final exam - the final project is the final exam**
+
+---
+class: center
+
+### Grades
+
+Item                          | Weight | Notes
+------------------------------|--------|-------------------------------------
+Attendance &amp; Participation    | 10 %   |
+Quizzes                       | 15 %   | Lowest quiz grade is dropped
+Assignment 1                  | 5 %    | Exercises
+Assignment 2                  | 5 %    | Exercises
+Assignment 3                  | 10 %   | Mini Project
+Assignment 4                  | 10 %   | Mini Project
+Assignment 5                  | 5 %    | Exercises
+Final Project Proposal        | 5 %    |
+Final Project Progress Report | 5 %    |
+Final Project Peer Review     | 5 %    |
+Final Project Presentation    | 10 %   |
+Final Project Report          | 15 %   |
+
+---
+### **Course Mantras**
+
+.leftcol[
+### 1) Embrace **plain text**
+&lt;img src="images/text_types.png" width="450"&gt;
+]
+
+--
+.rightcol[
+### 2) Embrace **reproducibility**.
+
+RMarkdown -&gt; HTML
+
+**Example**:
+
+This presentation was generated from R code!
+]
+
+---
+# How to succeed in this class
+
+--
+- **Take notes** - in class, doing assignments...basically all the time :)
+
+--
+- Start assignments early!
+
+--
+- Don't cheat!
+
+--
+- Come to office hours / tutor sessions!
+
+---
+class: center
+
+# Life is complicated
+
+--
+.leftcol[
+
+No class on 4/15 &amp; 4/22...
+
+...because this is happening on 4/13
+
+&lt;center&gt;
+&lt;img src = "images/gummy.jpg" width = 400&gt;
+&lt;/center&gt;
+
+]
+
+--
+.rightcol[
+
+...but nothing in life in certain
+
+&lt;center&gt;
+&lt;img src = "images/birth_weeks.png" width = 450&gt;
+&lt;/center&gt;
+
+Graph from [this analysis](https://towardsdatascience.com/are-first-babies-more-likely-to-be-late-1b099b5796b6)
+
+Data includes 31,906 births in the U.S.
+
+]
+
+---
+class: inverse
+
+# [Getting Started](https://emse-eda-gwu.github.io/2020-Spring/L1-course-introduction.html#6_setup)
+
+1. Sign up for [Slack](https://emse-eda-s20.slack.com) - link in Blackboard announcement
+
+--
+2. Install Slack app and **turn notifications on**
+
+--
+3. Sign up for [DataCamp](https://www.datacamp.com/) - **you must use your @gwu.edu email**
+
+--
+4. Sign up for [RStudio Cloud](https://login.rstudio.cloud/register).
+
+--
+5. [Download and install R](https://cloud.r-project.org)
+
+--
+6. [Download and install RStudio](https://rstudio.com/products/rstudio/download/) (Desktop version)
+
+---
+# Workflow
+
+.leftcol[
+
+1) Use R Projects to organize your analysis
+
+&lt;img src = "images/fileStructure.png" width = "400"&gt;
+
+First example: go to the "classroom" channel in Slack
+
+]
+
+--
+.rightcol[
+
+2) Use the `here` package to create file paths
+
+3) Use these functions to import data:
+
+.table-blank[
+Data file type | Import function  | Library
+---------------|------------------|----------
+`.csv`         | `read_csv()`     | **readr**
+`.txt`         | `read.table()`   | **readr**
+`.xlsx`        | `read_excel()`   | **readxl**
+]
+]
+
+---
+### **Data Import Examples**
+
+--
+Read in `.csv` files with `read_csv()`:
+
+.code60[
+
+```r
+library(tidyverse)
+library(here)
+
+csvPath &lt;- here('data', 'milk_production.csv')
+milk_production &lt;- read_csv(csvPath)
+```
+]
+
+--
+
+Read in `.txt` files with `read.table()`:
+
+.code60[
+
+```r
+txtPath &lt;- here('data', 'nasa_global_temps.txt')
+global_temps &lt;- read.table(txtPath, skip = 5)
+```
+]
+
+--
+
+Read in `.xlsx` files with `read_excel()`:
+
+.code60[
+
+```r
+library(readxl)
+
+xlsxPath &lt;- here('data', 'pv_cell_production.xlsx')
+pv_cells &lt;- read_excel(xlsxPath, sheet = 'Cell Prod by Country', skip = 2)
+```
+]
+
+---
+class: inverse
+
+# Your turn
+
+Write code to import the following data files from the "`data`" folder:
+
+- `wildlife_impacts.csv`
+- `north_america_bear_killings.txt`
+- `pc_sales_2018.xlsx`
+
+
+
+---
+### Data provenance - It matters where you get your data
+
+--
+- **Validity**:
+
+  - Is this data trustworthy? Is it authentic?
+  - Where did the data come from?
+  - How has the data been changed / managed over time?
+  - Is the data complete?
+
+&lt;br&gt;
+
+--
+- **Comprehension**:
+
+  - Is this data accurate?
+  - Can you explain your results?
+  - Are you using the _right_ data to answer your question?
+
+&lt;br&gt;
+
+--
+
+- **Reproducibility**: The data source is the start of the reproducibility chain.
+
+---
+## **Document your source like a museum curator**
+
+[**Example**: View "`data_sources.txt`" file]
+
+Whenever you download data, you should **at a minimum** record the following:
+
+  - The name of the file you are describing.
+  - The date you downloaded the file (i.e. today's date).
+  - The original name of the downloaded file (often times you'll rename the original file name).
+  - The url to the site you downloaded the data from.
+  - The source of the _original_ data (often different from where you downloaded the data).
+  - A short description of the data and how they were collected.
+  - A dictionary for the data.
+
+---
+class: inverse
+
+# Your turn - in 3 groups
+
+Go to the site listed in the `notes.R` file and add the following information about the data to the "`data_sources.txt`" file:
+
+- The name of the downloaded file in the "`data`" folder.
+- The date you downloaded the file (i.e. today's date).
+- The url to the site you downloaded the data from.
+- The source of the _original_ data (if different from where you downloaded the data).
+- A short description of the data and how they were collected.
+- A dictionary for the data (if available).
+
+
+
+---
+class: inverse
+
+# [5 minute](https://www.youtube.com/watch?v=_W0bSen8Qjg) break!
+
+## Stand up
+
+## Move around
+
+## Stretch!
+
+---
+# Variables, values, and observations
+
+- **Variable**: A quantity, quality, or property that you can measure.
+- **Value**: The state of a variable when you measure it.
+- **Observation**: A set of measurements that are made under similar conditions
+
+--
+.leftcol[
+Table 1
+
+
+```
+## # A tibble: 6 x 4
+##   country      year  cases population
+##   &lt;chr&gt;       &lt;int&gt;  &lt;int&gt;      &lt;int&gt;
+## 1 Afghanistan  1999    745   19987071
+## 2 Afghanistan  2000   2666   20595360
+## 3 Brazil       1999  37737  172006362
+## 4 Brazil       2000  80488  174504898
+## 5 China        1999 212258 1272915272
+## 6 China        2000 213766 1280428583
+```
+]
+
+--
+.rightcol[
+Table 2
+
+
+```
+## # A tibble: 6 x 4
+##   country      year type           count
+##   &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;          &lt;int&gt;
+## 1 Afghanistan  1999 cases            745
+## 2 Afghanistan  1999 population  19987071
+## 3 Afghanistan  2000 cases           2666
+## 4 Afghanistan  2000 population  20595360
+## 5 Brazil       1999 cases          37737
+## 6 Brazil       1999 population 172006362
+```
+]
+
+---
+# Tidy data
+
+Tidy data follows the following three rules:
+
+- Each **variable** has its own **column**.
+- Each **observation** has its own **row**.
+- Each **value** has its own **cell**.
+
+&lt;center&gt;
+&lt;img src="images/tidy-data.png" width = "850"&gt;
+&lt;/center&gt;
+
+---
+# Tidy data
+
+- **Variable**: A quantity, quality, or property that you can measure.
+- **Value**: The state of a variable when you measure it.
+- **Observation**: A set of measurements that are made under similar conditions
+
+.leftcol[
+Tidy
+
+
+```
+## # A tibble: 6 x 4
+##   country      year  cases population
+##   &lt;chr&gt;       &lt;int&gt;  &lt;int&gt;      &lt;int&gt;
+## 1 Afghanistan  1999    745   19987071
+## 2 Afghanistan  2000   2666   20595360
+## 3 Brazil       1999  37737  172006362
+## 4 Brazil       2000  80488  174504898
+## 5 China        1999 212258 1272915272
+## 6 China        2000 213766 1280428583
+```
+]
+
+.rightcol[
+Un-tidy
+
+
+```
+## # A tibble: 6 x 4
+##   country      year type           count
+##   &lt;chr&gt;       &lt;int&gt; &lt;chr&gt;          &lt;int&gt;
+## 1 Afghanistan  1999 cases            745
+## 2 Afghanistan  1999 population  19987071
+## 3 Afghanistan  2000 cases           2666
+## 4 Afghanistan  2000 population  20595360
+## 5 Brazil       1999 cases          37737
+## 6 Brazil       1999 population 172006362
+```
+]
+
+---
+# Tidy data:
+
+- **Variable**: A quantity, quality, or property that you can measure.
+- **Value**: The state of a variable when you measure it.
+- **Observation**: A set of measurements that are made under similar conditions
+
+Example: PV Solar Cell Production Data
+
+--
+.leftcol60[
+Un-tidy format:
+
+
+.code60[
+
+```r
+head(pv_cells)
+```
+
+```
+## # A tibble: 6 x 10
+##   Year  China Taiwan Japan Malaysia Germany `South Korea` `United States` Others
+##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;                   &lt;dbl&gt; &lt;chr&gt; 
+## 1 1995  NA    NA      16.4 NA       NA      NA                       34.8 NA    
+## 2 1996  NA    NA      21.2 NA       NA      NA                       38.8 NA    
+## 3 1997  NA    NA      35   NA       NA      NA                       51   NA    
+## 4 1998  NA    NA      49   NA       NA      NA                       53.7 NA    
+## 5 1999  NA    NA      80   NA       NA      NA                       60.8 NA    
+## 6 2000  2.5   NA     129.  NA       22.5    NA                       75   48.20…
+## # … with 1 more variable: World &lt;dbl&gt;
+```
+]]
+
+--
+.rightcol40[
+Tidy format:
+
+
+.code60[
+
+```r
+head(pv_cells_tidy)
+```
+
+```
+## # A tibble: 6 x 3
+##   Year  Country nPVCells
+##   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   
+## 1 1995  China   NA      
+## 2 1996  China   NA      
+## 3 1997  China   NA      
+## 4 1998  China   NA      
+## 5 1999  China   NA      
+## 6 2000  China   2.5
+```
+]]
+
+---
+## Re-shaping from "wide" to "long" (tidy)
+
+.leftcol60[
+`gather(data, key = "", value = "", ...)`
+
+.code60[
+
+```
+## # A tibble: 6 x 10
+##   Year  China Taiwan Japan Malaysia Germany `South Korea` `United States` Others
+##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;                   &lt;dbl&gt; &lt;chr&gt; 
+## 1 1995  NA    NA      16.4 NA       NA      NA                       34.8 NA    
+## 2 1996  NA    NA      21.2 NA       NA      NA                       38.8 NA    
+## 3 1997  NA    NA      35   NA       NA      NA                       51   NA    
+## 4 1998  NA    NA      49   NA       NA      NA                       53.7 NA    
+## 5 1999  NA    NA      80   NA       NA      NA                       60.8 NA    
+## 6 2000  2.5   NA     129.  NA       22.5    NA                       75   48.20…
+## # … with 1 more variable: World &lt;dbl&gt;
+```
+
+```r
+pv_cells_long &lt;- pv_cells %&gt;%
+    gather(key = 'Country', value = 'nPVCells', China:World)
+```
+
+```
+## # A tibble: 6 x 3
+##   Year  Country nPVCells
+##   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   
+## 1 1995  China   NA      
+## 2 1996  China   NA      
+## 3 1997  China   NA      
+## 4 1998  China   NA      
+## 5 1999  China   NA      
+## 6 2000  China   2.5
+```
+]]
+
+.rightcol40[
+&lt;img src="images/tidy-wide-long-edit2.png"&gt;
+]
+
+---
+class: inverse
+
+# Your turn
+
+.leftcol[
+
+1. Read in the `lotr_words.csv` data file.
+2. Use `gather()` to "tidy" the data into four columns: `Film`, `Race`, `Gender`, `Words`.
+3. Use `write_csv()` and `here()` to save your file at `lotr_words_tidy.csv` in the `data` folder.
+4. Use your "tidy" formatted data to create the plot to the right.
+
+]
+
+.rightcol[
+&lt;img src="slides-1-intro_files/figure-html/unnamed-chunk-26-1.png" width="504" /&gt;
+]
+
+---
+## Re-shaping from "long" to "wide" (un-tidy)
+
+.leftcol60[
+`spread(data, key = "", value = "")`
+
+.code60[
+
+```
+## # A tibble: 6 x 3
+##   Year  Country nPVCells
+##   &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt;   
+## 1 1995  China   NA      
+## 2 1996  China   NA      
+## 3 1997  China   NA      
+## 4 1998  China   NA      
+## 5 1999  China   NA      
+## 6 2000  China   2.5
+```
+
+```r
+pv_cells_wide &lt;- pv_cells_long %&gt;%
+    spread(key = Country, value = nPVCells)
+```
+
+```
+## # A tibble: 6 x 10
+##   Year  China Germany Japan Malaysia Others `South Korea` Taiwan `United States`
+##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;          
+## 1 1995  NA    NA      16.4  NA       NA     NA            NA     34.75          
+## 2 1996  NA    NA      21.2  NA       NA     NA            NA     38.85          
+## 3 1997  NA    NA      35    NA       NA     NA            NA     51             
+## 4 1998  NA    NA      49    NA       NA     NA            NA     53.7           
+## 5 1999  NA    NA      80    NA       NA     NA            NA     60.8           
+## 6 2000  2.5   22.5    128.6 NA       48.20… NA            NA     75             
+## # … with 1 more variable: World &lt;chr&gt;
+```
+]]
+
+.rightcol40[
+&lt;img src="images/tidy-wide-long-edit2.png"&gt;
+]
+
+---
+class: inverse
+
+# Your turn
+
+.leftcol[
+
+1. Read in the `lotr_words_tidy.csv` data file.
+2. Use `spread()` to convert the "tidy" data back into it's untidy format with the columns: `Film`, `Race`, `Female`, `Male`
+3. Use your "wide" format data and to compute the percentage of words spoken by Female characters (regardless of race) in each film:
+
+]
+.rightcol[.code60[
+
+```
+## # A tibble: 3 x 4
+##   Film                       Female  Male percentFemale
+##   &lt;chr&gt;                       &lt;dbl&gt; &lt;dbl&gt;         &lt;dbl&gt;
+## 1 The Fellowship Of The Ring   1243  6610         15.8 
+## 2 The Return Of The King        453  5642          7.43
+## 3 The Two Towers                732  6565         10.0
+```
+
+]]
+
+---
+# Writing a research question
+
+Follow [these guidelines](https://writingcenter.gmu.edu/guides/how-to-write-a-research-question).
+
+Your question should be:
+
+--
+- **Clear**: your audience can easily understand its purpose without additional explanation.
+
+--
+- **Focused**: it is narrow enough that it can be addressed thoroughly with the data available and within the limits of the final project report.
+
+--
+- **Concise**: it is expressed in the fewest possible words.
+
+--
+- **Complex**: it is not answerable with a simple "yes" or "no," but rather requires synthesis and analysis of data.
+
+--
+- **Arguable**: its potential answers are open to debate rather than accepted facts (do others care about it?)
+
+---
+# Writing a research question
+
+--
+**Bad question: Why are social networking sites harmful?**
+
+- Unclear: it does not specify _which_ social networking sites or state what harm is being caused; assumes that "harm" exists.
+
+&lt;br&gt;
+
+--
+**Improved question: How are online users experiencing or addressing privacy issues on such social networking sites as Facebook and Twitter?**
+
+- Specifies the sites (Facebook and Twitter), type of harm (privacy issues), and who is harmed (online users).
+
+&lt;br&gt;
+
+--
+**Other good examples**: See the [Final Project Assignment](https://emse-eda-gwu.github.io/2020-Spring/assignment-project.html#examples) page
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

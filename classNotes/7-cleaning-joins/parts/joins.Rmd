@@ -1,0 +1,171 @@
+
+---
+## Joins
+
+1. `inner_join()`
+2. `left_join()` / `right_join()`
+3. `full_join()`
+
+
+--
+&zwj;Example: `band_members` & `band_instruments`
+
+.leftcol[
+```{r}
+band_members
+```
+]
+.rightcol[
+```{r}
+band_instruments
+```
+]
+
+---
+.leftcol[
+## `inner_join()`
+
+```{r}
+band_members %>%
+    inner_join(band_instruments)
+```
+]
+.rightcol[
+<br>
+<center>
+<img src="images/inner_join.gif">
+</center>
+]
+
+---
+.leftcol[
+## `full_join()`
+
+```{r}
+band_members %>%
+    full_join(band_instruments)
+```
+]
+.rightcol[
+<br>
+<center>
+<img src="images/full_join.gif">
+</center>
+]
+
+---
+.leftcol[
+## `left_join()`
+
+```{r}
+band_members %>%
+    left_join(band_instruments)
+```
+]
+.rightcol[
+<br>
+<center>
+<img src="images/left_join.gif">
+</center>
+]
+
+---
+.leftcol[
+## `right_join()`
+
+```{r}
+band_members %>%
+    right_join(band_instruments)
+```
+]
+.rightcol[
+<br>
+<center>
+<img src="images/right_join.gif">
+</center>
+]
+
+---
+## Specify the joining variable name
+
+.leftcol[
+```{r}
+band_members %>%
+    left_join(band_instruments)
+```
+]
+.rightcol[
+```{r}
+band_members %>%
+    left_join(band_instruments,
+              by = 'name') #<<
+```
+]
+
+---
+## Specify the joining variable name
+
+If the names differ, use `by = c("left_name" = "joining_name")`
+
+.leftcol[
+```{r}
+band_members
+```
+```{r}
+band_instruments2
+```
+]
+--
+.rightcol[
+```{r}
+band_members %>%
+    left_join(band_instruments2,
+              by = c("name" = "artist")) #<<
+```
+]
+
+---
+class: inverse
+
+.leftcol[.font90[
+## Your turn
+```{r, echo=FALSE}
+countdown(minutes = 15,
+          warn_when = 30,
+          update_every = 15,
+          left = 8,
+          font_size = '1.5em')
+```
+
+1) Create a data frame called `state_data`:
+
+a) Join the `states_abbs` data frame to the `milk_production` data frame.
+
+b) Select the three variables `region`, `state_name`, `state_abb`.
+
+.code70[
+```{r, include=FALSE}
+state_data <- milk_production %>%
+    left_join(state_abbs, by = c('state' = 'state_name')) %>%
+    select(region, state_name = state, state_abb) %>%
+    distinct()
+```
+```{r}
+head(state_data)
+```
+]]]
+--
+.rightcol[.font90[
+2) Create the data frame `wildlife_impacts2` by joining the `state_data` data frame to the `wildlife_impacts` data frame, adding the variables `region` and `state_name`.
+
+```{r, include=FALSE}
+wildlife_impacts2 <- wildlife_impacts %>%
+    left_join(state_data, by = c('state' = 'state_abb')) %>%
+    rename(state_abb = state) %>%
+    mutate(state_abb = ifelse(state_abb == 'N/A', NA, state_abb))
+```
+.code50[
+```{r}
+glimpse(wildlife_impacts2)
+```
+]]]

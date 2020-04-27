@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Week 9: Maps &amp; geospatial data</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="John Paul Helveston" />
+    <meta name="date" content="2020-03-11" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/countdown/countdown.css" rel="stylesheet" />
+    <script src="libs/countdown/countdown.js"></script>
+    <link rel="stylesheet" href="https://emse-eda-gwu.github.io/2020-Spring/classNotes/classNotes.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+class: inverse, middle
+
+&lt;center&gt;
+&lt;img src="images/state_borders.png" width=850&gt;
+&lt;/center&gt;
+
+---
+class: title-slide, center, middle, inverse
+
+# Week 8: Maps &amp; geospatial data
+
+.large[EMSE 4197 | John Paul Helveston | March 11, 2020]
+
+---
+class: center, inverse, middle
+
+# Quiz 3
+
+&lt;center&gt;
+<div class="countdown blink-colon noupdate-15" id="timer_5e68dc84" style="right:0;bottom:0;font-size:3em;position: relative; width: min-content;" data-warnwhen="30">
+<code class="countdown-time"><span class="countdown-digits minutes">45</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+&lt;/center&gt;
+
+
+
+---
+## Today's data
+
+
+```r
+milk_production  &lt;- read_csv(here::here('data', 'milk_production.csv'))
+us_coffee_shops  &lt;- read_csv(here::here('data', 'us_coffee_shops.csv'))
+```
+
+## New package:
+
+```r
+install.packages('maps')
+install.packages('sf')
+install.packages('rgeos')
+install.packages('rnaturalearth')
+devtools::install_github("ropensci/rnaturalearthhires")
+devtools::install_github("ropensci/rnaturalearthdata")
+```
+
+---
+class: inverse, middle
+
+# Maps &amp; geospatial data
+
+## 1. Plotting maps
+## 2. Adding data to maps
+## 3. Projections
+
+---
+class: inverse, middle
+
+# Maps &amp; geospatial data
+
+## 1. .orange[Plotting maps]
+## 2. Adding data to maps
+## 3. Projections
+
+
+&lt;!--
+How to do it:
+https://www.r-graph-gallery.com/map.html
+--&gt;
+
+---
+# How to make a map
+
+.leftcol[
+Step 1: Load a shape file
+
+a. Use a library
+
+b. Read in a shape file
+]
+--
+.rightcol[
+Step 2: Plot the shape file
+
+a. `geom_polygon()`
+
+b. `geom_sf()`
+]
+
+---
+## Polygon maps
+
+.leftcol60[.code70[
+Get the "World" shape file
+
+```r
+library(ggplot2)
+
+*world &lt;- map_data("world")
+head(world)
+```
+
+```
+##        long      lat group order region subregion
+## 1 -69.89912 12.45200     1     1  Aruba      &lt;NA&gt;
+## 2 -69.89571 12.42300     1     2  Aruba      &lt;NA&gt;
+## 3 -69.94219 12.43853     1     3  Aruba      &lt;NA&gt;
+## 4 -70.00415 12.50049     1     4  Aruba      &lt;NA&gt;
+## 5 -70.06612 12.54697     1     5  Aruba      &lt;NA&gt;
+## 6 -70.05088 12.59707     1     6  Aruba      &lt;NA&gt;
+```
+]]
+
+---
+## Polygon maps
+
+.leftcol60[.code70[
+Get the "World" shape file
+
+```r
+library(ggplot2)
+
+*world &lt;- map_data("world")
+```
+Make the plot with `geom_polygon()`
+
+```r
+ggplot(world) +
+*   geom_polygon(aes(x = long, y = lat, group = group),
+                 fill = "grey90", color = "grey60")
+```
+]]
+.rightcol40[
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/plots/polygon_world.png"&gt;
+&lt;center&gt;
+]
+
+---
+## Polygon maps
+
+.leftcol60[.code70[
+Get the "US States" shape file
+
+```r
+library(ggplot2)
+
+*us_states &lt;- map_data("state")
+```
+Make the plot with `geom_polygon()`
+
+```r
+ggplot(us_states) +
+*   geom_polygon(aes(x = long, y = lat, group = group),
+                 fill = "grey90", color = "grey60")
+```
+]]
+.rightcol40[
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/plots/polygon_us.png"&gt;
+&lt;center&gt;
+]
+
+---
+## Simple Features (sf) maps
+
+.leftcol60[.code70[
+Library data from [Natural Earth](http://www.naturalearthdata.com/downloads/50m-cultural-vectors/)
+
+```r
+*library(rnaturalearth)
+*library(rnaturalearthdata)
+
+*world &lt;- ne_countries(scale = "medium",
+*                     returnclass = "sf")
+
+world %&gt;%
+    select(name, geometry) %&gt;%
+    head()
+```
+
+```
+## Simple feature collection with 6 features and 1 field
+## geometry type:  MULTIPOLYGON
+## dimension:      XY
+## bbox:           xmin: -73.36621 ymin: -22.40205 xmax: 109.4449 ymax: 41.9062
+## epsg (SRID):    4326
+## proj4string:    +proj=longlat +datum=WGS84 +no_defs
+##        name                       geometry
+## 0  Zimbabwe MULTIPOLYGON (((31.28789 -2...
+## 1    Zambia MULTIPOLYGON (((30.39609 -1...
+## 2     Yemen MULTIPOLYGON (((53.08564 16...
+## 3   Vietnam MULTIPOLYGON (((104.064 10....
+## 4 Venezuela MULTIPOLYGON (((-60.82119 9...
+## 5   Vatican MULTIPOLYGON (((12.43916 41...
+```
+]]
+
+---
+## Simple Features (sf) maps
+
+.leftcol60[.code70[
+Get the "World" shape file
+
+```r
+library(rnaturalearth)
+library(rnaturalearthdata)
+
+*world &lt;- ne_countries(scale = "medium",
+*                     returnclass = "sf")
+```
+Make the plot with `geom_sf()`
+
+```r
+library(sf)
+
+ggplot(data = world) +
+*   geom_sf(fill = "grey90", color = "grey60")
+```
+]]
+.rightcol40[
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/plots/sf_world.png"&gt;
+&lt;center&gt;
+]
+
+---
+## Simple Features (sf) maps
+
+.leftcol60[.code70[
+Get the "US States" shape file
+
+```r
+library(rnaturalearth)
+library(rnaturalearthdata)
+
+*us_states &lt;- ne_states(
+*   country = 'united states of america',
+    returnclass = 'sf')
+```
+]]
+
+---
+## Simple Features (sf) maps
+
+.leftcol60[.code70[
+Get the "US States" shape file
+
+```r
+library(rnaturalearth)
+library(rnaturalearthdata)
+
+*us_states &lt;- ne_states(
+*   country = 'united states of america',
+    returnclass = 'sf')
+```
+Make the plot with `geom_sf()`
+
+```r
+library(sf)
+
+ggplot(data = us_states) +
+*   geom_sf(fill = "grey90", color = "grey60")
+```
+]]
+.rightcol40[
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/plots/sf_us.png"&gt;
+&lt;center&gt;
+]
+
+---
+## Simple Features (sf) maps
+
+.leftcol60[.code70[
+Get the **Continental** "US States" shape file
+
+```r
+library(rnaturalearth)
+library(rnaturalearthdata)
+
+us_states_cont &lt;- ne_states(
+    country = 'united states of america',
+    returnclass = 'sf') %&gt;%
+*   filter(! name %in% c('Alaska', 'Hawaii'))
+```
+Make the plot with `geom_sf()`
+
+```r
+library(sf)
+
+ggplot(data = us_states_cont) +
+*   geom_sf(fill = "grey90", color = "grey60")
+```
+]]
+.rightcol40[
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/plots/sf_us_cont.png"&gt;
+&lt;center&gt;
+]
+
+---
+## The `maps` package
+
+.leftcol60[.code70[
+Includes data on:
+- World: world, world.cities, lakes
+- US: states, county, state, usa
+- France: france
+- Italy: italy
+- New zealand: nz
+
+Example:
+
+```r
+library(maps)
+
+*us_counties &lt;- st_as_sf(
+*   map("county", plot = FALSE, fill = TRUE))
+
+ggplot(data = us_counties) +
+*   geom_sf(fill = 'grey90', color = 'grey60')
+```
+]]
+.rightcol40[
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/plots/sf_us_counties.png"&gt;
+&lt;center&gt;
+]
+
+---
+## Simple Features (sf) maps: `st_read()`
+
+.leftcol60[.code70[
+Read in the "World" shape file from [Natural Earth](http://www.naturalearthdata.com/downloads/50m-cultural-vectors/)
+
+```r
+library(sf)
+
+*world &lt;- st_read(here::here(
+    'data', 'natural_earth_countries',
+    'ne_50m_admin_0_countries.shp')) %&gt;%
+    clean_names()
+```
+
+```
+## Reading layer `ne_50m_admin_0_countries' from data source `/Users/jhelvy/gh/2020-Spring/classNotes/9-maps/data/natural_earth_countries/ne_50m_admin_0_countries.shp' using driver `ESRI Shapefile'
+## Simple feature collection with 241 features and 94 fields
+## geometry type:  MULTIPOLYGON
+## dimension:      XY
+## bbox:           xmin: -180 ymin: -89.99893 xmax: 180 ymax: 83.59961
+## epsg (SRID):    4326
+## proj4string:    +proj=longlat +datum=WGS84 +no_defs
+```
+]]
+
+---
+## Simple Features (sf) maps: `st_read()`
+
+.leftcol60[.code70[
+Read in the "World" shape file
+
+```r
+library(sf)
+
+*world &lt;- st_read(here::here(
+    'data', 'natural_earth_countries',
+    'ne_50m_admin_0_countries.shp')) %&gt;%
+    clean_names()
+```
+
+```
+## Reading layer `ne_50m_admin_0_countries' from data source `/Users/jhelvy/gh/2020-Spring/classNotes/9-maps/data/natural_earth_countries/ne_50m_admin_0_countries.shp' using driver `ESRI Shapefile'
+## Simple feature collection with 241 features and 94 fields
+## geometry type:  MULTIPOLYGON
+## dimension:      XY
+## bbox:           xmin: -180 ymin: -89.99893 xmax: 180 ymax: 83.59961
+## epsg (SRID):    4326
+## proj4string:    +proj=longlat +datum=WGS84 +no_defs
+```
+
+```r
+ggplot(data = world) +
+*   geom_sf(fill = "grey90", color = "grey60")
+```
+]]
+.rightcol40[
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/plots/sf_world.png"&gt;
+&lt;center&gt;
+]
+
+---
+## Simple Features (sf) maps: `st_read()`
+
+.leftcol60[.code70[
+Read in the "Central Park" shape file [[source]](https://github.com/malcolmbarrett/designing_ggplots)
+
+
+```r
+library(sf)
+
+central_park &lt;- st_read(here::here(
+    'data', 'central_park', 'CentralPark.shp'))
+```
+
+```
+## Reading layer `CentralPark' from data source `/Users/jhelvy/gh/2020-Spring/classNotes/9-maps/data/central_park/CentralPark.shp' using driver `ESRI Shapefile'
+## Simple feature collection with 2550 features and 6 fields
+## geometry type:  LINESTRING
+## dimension:      XY
+## bbox:           xmin: -73.99249 ymin: 40.7625 xmax: -73.93922 ymax: 40.8051
+## epsg (SRID):    4326
+## proj4string:    +proj=longlat +datum=WGS84 +no_defs
+```
+
+```r
+ggplot(data = central_park) +
+    geom_sf(color = 'grey75')
+```
+]]
+.rightcol40[
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/plots/sf_central_park.png"&gt;
+&lt;center&gt;
+]
+
+---
+class: inverse
+
+## Your turn
+
+<div class="countdown blink-colon noupdate-15" id="timer_5e68da74" style="top:0;right:0;font-size:2em;" data-warnwhen="30">
+<code class="countdown-time"><span class="countdown-digits minutes">10</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+Use the **rnaturalearth** library to extract and plot the shape files for China and Africa:
+
+&lt;br&gt;
+
+.leftcol[
+&lt;center&gt;
+&lt;img src="images/plots/sf_china.png"&gt;
+&lt;/center&gt;
+]
+.rightcol[
+&lt;center&gt;
+&lt;img src="images/plots/sf_africa.png"&gt;
+&lt;/center&gt;
+]
+
+---
+class: inverse, middle
+
+# Maps &amp; geospatial data
+
+## 1. Plotting maps
+## 2. .orange[Adding data to maps]
+## 3. Projections
+
+
+&lt;!--
+Squirrels and dogs plots:
+https://designing-ggplots.netlify.com/#71
+
+Hexmaps:
+- Use https://www.r-graph-gallery.com/hexbin-map.html
+- https://www.r-graph-gallery.com/328-hexbin-map-of-the-usa.html
+- Practice with wind data?
+--&gt;
+
+---
+class: inverse, center, middle
+
+## Choropleth maps
+
+&lt;center&gt;
+&lt;img src="images/state_abbreviations.png" width=750&gt;
+&lt;/center&gt;
+
+---
+class: center, middle
+
+&lt;center&gt;
+&lt;img src="images/xkcd_heatmap.png" width=600&gt;
+&lt;/center&gt;
+
+---
+class: center, middle
+
+## Number of events != Number of events **per capita**
+
+&lt;center&gt;
+&lt;img src="images/choropleth_ca.png" width=800&gt;
+&lt;/center&gt;
+
+---
+# Choropleth maps are easily misleading
+
+&lt;center&gt;
+&lt;img src="images/choropleth_hispanic.png"&gt;
+&lt;/center&gt;
+
+---
+# Choropleth maps are easily misleading
+
+Election maps from: http://www-personal.umich.edu/~mejn/election/2016/
+
+.cols3[
+&lt;center&gt;
+&lt;img src="images/election_2016_ec.png"&gt;
+&lt;/center&gt;
+]
+.cols3[
+&lt;center&gt;
+&lt;img src="images/election_2016_county.png"&gt;
+&lt;/center&gt;
+]
+.cols3[
+&lt;center&gt;
+&lt;img src="images/election_2016_proportion.png"&gt;
+&lt;/center&gt;
+]
+
+---
+class: center
+
+## Actual fakenews in dumb memes
+
+&lt;center&gt;
+&lt;img src="images/election_map_fakenews.png" width=480&gt;
+&lt;/center&gt;
+
+--
+Bottom map is actually [this map](http://www-personal.umich.edu/~mejn/election/2012/countymaprb1024.png) of the 2012 election
+
+---
+class: center, middle
+
+## (here is what actual crime rates look like)
+
+.leftcol[
+2016 Election map [[source]](http://www-personal.umich.edu/~mejn/election/2016/)
+&lt;center&gt;
+&lt;img src="images/election_2016_county.png"&gt;
+&lt;/center&gt;
+]
+.rightcol[
+2014 Crime map [[source]](https://www.washingtonpost.com/graphics/national/crime-rates-by-county/)
+&lt;center&gt;
+&lt;img src="images/crime_map.jpeg"&gt;
+&lt;/center&gt;
+]
+
+---
+class: center
+
+# Another alternative: hex maps
+
+.leftcol[
+1994 Simpson Diversity Index in US Schools
+&lt;center&gt;
+&lt;img src="images/Hexagons_SchoolDiversity_hex_1994.png"&gt;
+&lt;/center&gt;
+https://github.com/malcolmbarrett/designing_ggplots
+]
+.rightcol[
+2016 Electoral College
+&lt;center&gt;
+&lt;img src="images/election_2016_chartograph.png" width=450&gt;
+&lt;/center&gt;
+https://fivethirtyeight.com/
+]
+
+---
+class: center
+
+# Another alternative: hex maps
+
+&lt;center&gt;
+&lt;img src="images/map_obamacare.png" width=750&gt;
+&lt;center&gt;
+
+---
+## How to make a choropleth map
+
+.leftcol60[.code70[
+Get the "fill" data
+
+```r
+milk_2017 &lt;- milk_production %&gt;%
+    filter(year == 2017) %&gt;%
+    select(name = state, milk_produced) %&gt;%
+    mutate(milk_produced = milk_produced / 10^9)
+```
+Get the "map" data
+
+```r
+us_states &lt;- ne_states(
+    country = 'united states of america',
+    returnclass = 'sf') %&gt;%
+    filter(! name %in% c('Alaska', 'Hawaii')) %&gt;%
+*   left_join(milk_2017, by = 'name')
+```
+]]
+--
+.rightcol40[
+
+```r
+us_states %&gt;%
+    select(name, milk_produced) %&gt;%
+    head()
+```
+
+```
+## Simple feature collection with 6 features and 2 fields
+## geometry type:  MULTIPOLYGON
+## dimension:      XY
+## bbox:           xmin: -124.7346 ymin: 41.69681 xmax: -82.4146 ymax: 49.36949
+## epsg (SRID):    4326
+## proj4string:    +proj=longlat +datum=WGS84 +no_defs
+##           name milk_produced                       geometry
+## 1    Minnesota         9.864 MULTIPOLYGON (((-95.16057 4...
+## 2   Washington         6.526 MULTIPOLYGON (((-122.6533 4...
+## 3        Idaho        14.627 MULTIPOLYGON (((-117.0382 4...
+## 4      Montana         0.288 MULTIPOLYGON (((-116.0482 4...
+## 5 North Dakota         0.345 MULTIPOLYGON (((-104.0476 4...
+## 6     Michigan        11.231 MULTIPOLYGON (((-84.4913 46...
+```
+]
+
+---
+## How to make a choropleth map
+
+.leftcol60[.code70[
+
+```r
+milk_2017 &lt;- milk_production %&gt;%
+    filter(year == 2017) %&gt;%
+    select(name = state, milk_produced) %&gt;%
+    mutate(milk_produced = milk_produced / 10^9)
+
+us_states &lt;- ne_states(
+    country = 'united states of america',
+    returnclass = 'sf') %&gt;%
+    filter(! name %in% c('Alaska', 'Hawaii')) %&gt;%
+*   left_join(milk_2017, by = 'name')
+```
+Make the plot
+
+```r
+ggplot(us_states) +
+*   geom_sf(aes(fill = milk_produced)) +
+    scale_fill_viridis(
+        option = "plasma",
+        limits = c(0, 40)) +
+    theme_void(base_size = 15) +
+    theme(legend.position = 'bottom') +
+    labs(fill = 'Milk produced\n(billions lbs)',
+         title = 'Milk Production by State in 2017')
+```
+]]
+.rightcol40[
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/plots/sf_us_milk_2017.png"&gt;
+&lt;center&gt;
+]
+
+---
+## How to make a choropleth map
+
+.leftcol60[.code70[
+
+```r
+milk_2017 &lt;- milk_production %&gt;%
+    filter(year == 2017) %&gt;%
+    select(name = state, milk_produced) %&gt;%
+    mutate(milk_produced = milk_produced / 10^9)
+
+us_states &lt;- ne_states(
+    country = 'united states of america',
+    returnclass = 'sf') %&gt;%
+    filter(! name %in% c('Alaska', 'Hawaii')) %&gt;%
+    left_join(milk_2017, by = 'name')
+```
+Make the plot
+
+```r
+ggplot(us_states) +
+    geom_sf(aes(fill = milk_produced)) +
+    scale_fill_viridis(
+*       trans = 'sqrt',
+        option = "plasma",
+        limits = c(0, 40)) +
+    theme_void(base_size = 15) +
+    theme(legend.position = 'bottom') +
+    labs(fill = 'Milk produced\n(billions lbs)',
+         title = 'Milk Production by State in 2017')
+```
+]]
+.rightcol40[
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/plots/sf_us_milk_2017_quad.png"&gt;
+&lt;center&gt;
+]
+
+---
+class: inverse, center, middle
+
+# Points
+
+---
+class: center
+
+# Points as locations
+
+&lt;center&gt;
+&lt;img src="images/plots/uk_cities.png" width=450&gt;
+&lt;/center&gt;
+
+---
+class: center
+
+# Points encoding a variable
+
+&lt;center&gt;
+&lt;img src="images/plots/uk_pop_area.png" width=450&gt;
+&lt;/center&gt;
+
+---
+class: center
+
+# For point size, use **area**, not radius
+
+# `\(Area = \pi r^2\)`
+
+.leftcol[
+## Radius
+]
+.rightcol[
+## Area
+]
+&lt;center&gt;
+&lt;img src="images/area.png" width=1000&gt;
+&lt;/center&gt;
+
+---
+class: center
+
+.leftcol[
+## Radius
+&lt;center&gt;
+&lt;img src="images/plots/uk_pop_radius.png" width=500&gt;
+&lt;/center&gt;
+]
+.rightcol[
+## Area
+&lt;center&gt;
+&lt;img src="images/plots/uk_pop_area.png" width=500&gt;
+&lt;/center&gt;
+]
+
+---
+## How to add points to a map
+
+.leftcol60[.code70[
+Load the continental US shape file
+
+```r
+us_states_cont &lt;- ne_states(
+    country = 'united states of america',
+    returnclass = 'sf') %&gt;%
+    filter(! name %in% c('Alaska', 'Hawaii'))
+```
+Read in the coffee shop data
+
+```r
+us_coffee_shops  &lt;- read_csv(here::here(
+    'data', 'us_coffee_shops.csv'))
+
+# Only keep data in continental US
+us_coffee_shops &lt;- us_coffee_shops %&gt;%
+    filter(lat &gt; 22,    lat &lt; 50,
+           long &gt; -150, long &lt; -66)
+```
+]]
+
+---
+## How to add points to a map
+
+.leftcol60[.code70[
+Load the continental US shape file &amp; coffee shop data
+
+```r
+us_states_cont &lt;- ne_states(
+    country = 'united states of america',
+    returnclass = 'sf') %&gt;%
+    filter(! name %in% c('Alaska', 'Hawaii'))
+
+us_coffee_shops &lt;- us_coffee_shops %&gt;%
+    filter(lat &gt; 22,    lat &lt; 50,
+           long &gt; -150, long &lt; -66)
+```
+Plot coffee shop locations over map
+
+```r
+ggplot() +
+    geom_sf(data = us_states_cont) +
+*   geom_point(data = us_coffee_shops,
+*              aes(x = long, y = lat, color = name)) +
+    theme_void(base_size = 15) +
+    theme(legend.position = 'bottom') +
+    guides(color = guide_legend(title.position = "top")) +
+    labs(color = 'Coffee shop',
+         title = 'Coffee Shops in the US')
+```
+]]
+.rightcol40[
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/plots/sf_us_coffee.png"&gt;
+&lt;center&gt;
+]
+
+---
+class: inverse
+
+## Your turn
+
+<div class="countdown blink-colon noupdate-15" id="timer_5e68da42" style="top:0;right:0;font-size:2em;" data-warnwhen="30">
+<code class="countdown-time"><span class="countdown-digits minutes">15</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+.font90[
+Create the following map of squirrels in NYC's central park using the following data from the [Squirrel Census](https://www.thesquirrelcensus.com/):
+
+- The `CentralPark.shp` file in the `data/central_park` folder.
+- The `nyc_squirrels.csv` file in the `data` folder.
+
+Hint: color is the `primary_fur_color` variable
+]
+
+&lt;center&gt;
+&lt;img src="images/plots/sf_central_park_squirrels_facet.png" width=850&gt;
+&lt;center&gt;
+
+---
+class: inverse, middle
+
+# Maps &amp; geospatial data
+
+## 1. Plotting maps
+## 2. Adding data to maps
+## 3. .orange[Projections]
+
+
+&lt;!--
+Content from Andrew's slides:
+https://datavizf17.classes.andrewheiss.com/class/07-class/
+
+Centroids with labels:
+https://www.r-spatial.org/r/2018/10/25/ggplot2-sf-2.html
+--&gt;
+
+---
+class: center, middle
+
+# What's a map projection?
+
+&lt;center&gt;
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/kIID5FDi2JQ?start=52" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
+&lt;/center&gt;
+
+---
+# What is the best projection?...it depends
+
+&lt;br&gt;
+
+# 1. [Compare projections](http://metrocosm.com/compare-map-projections.html)
+
+&lt;br&gt;
+
+# 2. [Compare country sizes](https://thetruesize.com/)
+
+---
+## Using projections
+
+To modify the projection of a map, use `coord_sf(crs = st_crs(XXXX))`
+
+```r
+world &lt;- ne_countries(scale = "medium", returnclass = "sf")
+```
+.cols3[.code70[
+Default (long-lat)
+
+```r
+ggplot(data = world) +
+    geom_sf()
+```
+&lt;center&gt;
+&lt;img src="images/plots/sf_world.png"&gt;
+&lt;center&gt;
+]]
+.cols3[.code70[
+Robinson projection
+
+```r
+ggplot(data = world) +
+    geom_sf() +
+*   coord_sf(crs = st_crs(54030))
+```
+&lt;center&gt;
+&lt;img src="images/plots/sf_world_robinson.png"&gt;
+&lt;center&gt;
+]]
+.cols3[.code70[
+Mollweide projection
+
+```r
+ggplot(data = world) +
+    geom_sf() +
+*   coord_sf(crs = st_crs(54009))
+```
+&lt;center&gt;
+&lt;img src="images/plots/sf_world_mollweide.png"&gt;
+&lt;center&gt;
+]]
+
+---
+.leftcol[
+## Common Projections
+
+&lt;br&gt;
+
+**Favorites**
+
+- Robinson (World): `54030`
+- Albers (US): `102003`
+
+]
+.rightcol[
+
+ggplot layer:
+
+```r
+coord_sf(crs = st_crs(XXXXX))
+```
+
+**World**
+
+Code  | Projection
+------|---------------------------------------------------
+54002 | Equidistant cylindrical projection
+54004 | Mercator projection
+54008 | Sinusoidal projection
+54009 | Mollweide projection
+54030 | Robinson projection
+
+**United States**
+
+Code   | Projection
+-------|---------------------------------------------------
+102003 | Albers projection
+102004 | Contiguous Lambert Conformal Conic
+4269   | NAD 83
+
+]
+
+---
+## US projections
+
+
+```r
+us_states_cont &lt;- ne_states(country = 'united states of america',
+    returnclass = 'sf') %&gt;%
+    filter(! name %in% c('Alaska', 'Hawaii'))
+```
+.cols3[.code70[
+NAD 83 projection
+
+```r
+ggplot(data = world) +
+    geom_sf() +
+*   coord_sf(crs = st_crs(4269))
+```
+&lt;center&gt;
+&lt;img src="images/plots/sf_us_cont.png"&gt;
+&lt;center&gt;
+]]
+.cols3[.code70[
+Albers projection
+
+```r
+ggplot(data = us_states_cont) +
+    geom_sf() +
+*   coord_sf(crs = st_crs(102003))
+```
+&lt;center&gt;
+&lt;img src="images/plots/sf_us_cont_albers.png"&gt;
+&lt;center&gt;
+]]
+.cols3[.code70[
+Robinson projection
+
+```r
+ggplot(data = world) +
+    geom_sf() +
+*   coord_sf(crs = st_crs(54030))
+```
+&lt;center&gt;
+&lt;img src="images/plots/sf_us_cont_robinson.png"&gt;
+&lt;center&gt;
+]]
+
+---
+## Mapping data to projections - choropleth map
+
+.leftcol60[.code70[
+
+```r
+milk_2017 &lt;- milk_production %&gt;%
+    filter(year == 2017) %&gt;%
+    select(name = state, milk_produced) %&gt;%
+    mutate(milk_produced = milk_produced / 10^9)
+
+us_states &lt;- ne_states(
+    country = 'united states of america',
+    returnclass = 'sf') %&gt;%
+    filter(! name %in% c('Alaska', 'Hawaii')) %&gt;%
+*   left_join(milk_2017, by = 'name')
+```
+Make the plot
+
+```r
+ggplot(us_states) +
+*   geom_sf(aes(fill = milk_produced)) +
+    scale_fill_viridis(
+        option = "plasma",
+        limits = c(0, 40)) +
+    theme_void(base_size = 15) +
+    theme(legend.position = 'bottom') +
+    labs(fill = 'Milk produced\n(billions lbs)',
+         title = 'Milk Production by State in 2017')
+```
+]]
+.rightcol40[
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/plots/sf_us_milk_2017.png"&gt;
+&lt;center&gt;
+]
+
+---
+## Mapping data to projections - choropleth map
+
+.leftcol60[.code70[
+
+```r
+milk_2017 &lt;- milk_production %&gt;%
+    filter(year == 2017) %&gt;%
+    select(name = state, milk_produced) %&gt;%
+    mutate(milk_produced = milk_produced / 10^9)
+
+us_states &lt;- ne_states(
+    country = 'united states of america',
+    returnclass = 'sf') %&gt;%
+    filter(! name %in% c('Alaska', 'Hawaii')) %&gt;%
+    left_join(milk_2017, by = 'name')
+```
+Make the plot
+
+```r
+ggplot(us_states) +
+    geom_sf(aes(fill = milk_produced)) +
+*   coord_sf(crs = st_crs(102003)) +
+    scale_fill_viridis(
+        option = "plasma",
+        limits = c(0, 40)) +
+    theme_void(base_size = 15) +
+    theme(legend.position = 'bottom') +
+    labs(fill = 'Milk produced\n(billions lbs)',
+         title = 'Milk Production by State in 2017')
+```
+]]
+.rightcol40[
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/plots/sf_us_milk_2017_albers.png"&gt;
+&lt;center&gt;
+]
+
+---
+## Mapping data to projections - points
+
+.leftcol60[.code70[
+
+```r
+us_states_cont &lt;- ne_states(
+    country = 'united states of america',
+    returnclass = 'sf') %&gt;%
+    filter(! name %in% c('Alaska', 'Hawaii'))
+
+us_coffee_shops &lt;- us_coffee_shops %&gt;%
+    filter(lat &gt; 22,    lat &lt; 50,
+           long &gt; -150, long &lt; -66)
+```
+Plot coffee shop locations over map
+
+```r
+ggplot() +
+    geom_sf(data = us_states_cont) +
+*   geom_point(data = us_coffee_shops,
+*              aes(x = long, y = lat, color = name)) +
+    theme_void(base_size = 15) +
+    theme(legend.position = 'bottom') +
+    guides(color = guide_legend(title.position = "top")) +
+    labs(color = 'Coffee shop',
+         title = 'Coffee Shops in the US')
+```
+]]
+.rightcol40[
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/plots/sf_us_coffee.png"&gt;
+&lt;center&gt;
+]
+
+---
+## Mapping data to projections - points
+
+.leftcol60[.code70[
+
+```r
+us_states_cont &lt;- ne_states(
+    country = 'united states of america',
+    returnclass = 'sf') %&gt;%
+    filter(! name %in% c('Alaska', 'Hawaii'))
+
+us_coffee_shops &lt;- us_coffee_shops %&gt;%
+    filter(lat &gt; 22,    lat &lt; 50,
+           long &gt; -150, long &lt; -66)
+```
+Plot coffee shop locations over map...fail!
+
+```r
+ggplot() +
+    geom_sf(data = us_states_cont) +
+    geom_point(data = us_coffee_shops,
+               aes(x = long, y = lat, color = name)) +
+*   coord_sf(crs = st_crs(102003)) +
+    theme_void(base_size = 15) +
+    theme(legend.position = 'bottom') +
+    guides(color = guide_legend(title.position = "top")) +
+    labs(color = 'Coffee shop',
+         title = 'Coffee Shops in the US')
+```
+]]
+.rightcol40[
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/plots/sf_us_coffee_albers_bad.png"&gt;
+&lt;center&gt;
+]
+
+---
+## Mapping data to projections - points
+
+.leftcol60[.code70[
+First match `us_coffee_shops` crs to `us_states_cont`
+
+```r
+us_states_cont &lt;- ne_states(
+    country = 'united states of america',
+    returnclass = 'sf') %&gt;%
+    filter(! name %in% c('Alaska', 'Hawaii'))
+
+us_coffee_shops &lt;- us_coffee_shops %&gt;%
+    filter(lat &gt; 22,    lat &lt; 50,
+           long &gt; -150, long &lt; -66)
+
+*us_coffee_shops_sf &lt;- st_as_sf(us_coffee_shops,
+*   coords = c("long", "lat"),
+*   crs = st_crs(us_states_cont))
+```
+]]
+
+---
+## Mapping data to projections - points
+
+.leftcol60[.code70[
+First match `us_coffee_shops` crs to `us_states_cont`
+
+```r
+us_coffee_shops_sf &lt;- st_as_sf(us_coffee_shops,
+    coords = c("long", "lat"),
+    crs = st_crs(us_states_cont))
+```
+Plot coffee shop locations over map with `geom_sf()`
+
+```r
+ggplot() +
+    geom_sf(data = us_states_cont) +
+*   geom_sf(data = us_coffee_shops_sf,
+*            aes(fill = name),
+*           shape = 21, stroke = FALSE) +
+*   coord_sf(crs = st_crs(102003)) +
+    theme_void(base_size = 15) +
+    theme(legend.position = 'bottom') +
+    guides(fill = guide_legend(title.position = "top")) +
+    labs(fill = 'Coffee shop',
+         title = 'Coffee Shops in the US')
+```
+]]
+.rightcol40[
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/plots/sf_us_coffee_albers.png"&gt;
+&lt;center&gt;
+]
+
+---
+## Mapping data to projections - points
+
+.leftcol60[.code70[
+First match `us_coffee_shops` crs to `us_states_cont`
+
+```r
+us_coffee_shops_sf &lt;- st_as_sf(us_coffee_shops,
+    coords = c("long", "lat"),
+    crs = st_crs(us_states_cont))
+```
+Plot coffee shop locations over map with `geom_sf()`
+
+```r
+ggplot() +
+    geom_sf(data = us_states_cont) +
+    geom_sf(data = us_coffee_shops_sf,
+             aes(fill = name),
+            shape = 21, stroke = FALSE) +
+*   coord_sf(crs = st_crs(102004)) +
+    theme_void(base_size = 15) +
+    theme(legend.position = 'bottom') +
+    guides(fill = guide_legend(title.position = "top")) +
+    labs(fill = 'Coffee shop',
+         title = 'Coffee Shops in the US')
+```
+]]
+.rightcol40[
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/plots/sf_us_coffee_lcc.png"&gt;
+&lt;center&gt;
+]
+
+---
+class: inverse
+
+## Your turn
+
+<div class="countdown blink-colon noupdate-15" id="timer_5e68da4c" style="top:0;right:0;font-size:2em;" data-warnwhen="30">
+<code class="countdown-time"><span class="countdown-digits minutes">15</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+Use the `us_states_cont` data frame and the `state_abbs` data frame to create a labeled map of the U.S.:
+
+&lt;br&gt;
+
+&lt;img src="images/plots/sf_us_labeled.png" width=600&gt;
+
+
+
+---
+class: inverse, middle, center
+
+# Extra practice
+
+---
+class: inverse
+
+## Your turn
+
+.leftcol[.font80[
+Use the `internet_users_country.csv` data and the `world` data frame from the **rnaturalearth** library to create this map of internet acccss by country.
+
+Hints:
+
+- Use the `iso_a3` variable in the `worlds` data frame to match with the `code` variable in the `internet_users_country.csv` data.
+- This map uses a Robinson projection, CRS: `54030`
+- Use `scale_fill_gradient()` to fill the color:
+
+
+```r
+    scale_fill_gradient(
+        low = "#e7e1ef",
+        high = "#dd1c77",
+        na.value = "grey70",
+        limits = c(0, 100))
+```
+]]
+.rightcol[
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/plots/sf_world_internet.png"&gt;
+&lt;center&gt;
+]
+
+---
+class: inverse, middle, center
+
+# Proposals &amp; Assignment 7
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

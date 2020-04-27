@@ -1,0 +1,64 @@
+Planned outline:
+
+Quiz 3 - 45 minutes
+
+Maps (25 min)
+
+Data (35 min)
+
+Projections (30 min)
+
+Assignment 7, Proposal (5 min)
+
+# ----------------------------------------------------------------------
+# Post-class notes
+
+- Reorganize the quiz structure next year - need a full class period for this.
+- Remove state abb join at the end - it's not needed because the data frame
+  already has abbreviations in it
+- Add a different exercise at the end for mapping points - move the labeling
+  exercise to a different section on adding labels
+
+---------------------------------------------------------------------------
+Sources:
+
+Definitely using:
+https://ggplot2-book.org/maps.html
+https://www.r-spatial.org/r/2018/10/25/ggplot2-sf.html
+https://www.r-spatial.org/r/2018/10/25/ggplot2-sf-2.html
+https://www.r-spatial.org/r/2018/10/25/ggplot2-sf-3.html
+
+
+https://designing-ggplots.netlify.com/#1
+
+---------------------------------------------------------------------------
+
+https://www.rspatial.org/
+
+30 days of r maps:
+https://github.com/Z3tt/30DayMapChallenge/blob/master/README.md
+
+Awesome R maps:
+https://timogrossenbacher.ch/2019/04/bivariate-maps-with-ggplot2-and-sf/
+
+Slides on maps:
+https://nowosad.github.io/whyr_19/#1
+
+
+Mapping - coffee shops example: https://media.thinknum.com/articles/coffee-shops-of-america-an-interactive-map/
+
+Animations over time:
+internet usage example: https://ourworldindata.org/internet
+
+
+https://ggplot2-book.org/maps.html
+
+
+Drawing beautiful maps:
+https://www.r-spatial.org/r/2018/10/25/ggplot2-sf.html
+https://www.r-spatial.org/r/2018/10/25/ggplot2-sf-2.html
+https://www.r-spatial.org/r/2018/10/25/ggplot2-sf-3.html
+
+
+Leaflet:
+https://rstudio.github.io/leaflet/

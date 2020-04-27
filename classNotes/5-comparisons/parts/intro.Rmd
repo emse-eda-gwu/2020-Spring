@@ -1,0 +1,51 @@
+
+---
+class: middle, inverse, center
+
+# R tip of the week
+
+---
+class: middle, inverse
+
+## 1) Quick shortcuts
+
+.leftcol[
+Insert a `<-` operator:
+
+- **Windows**: `ALT` + `-`
+- **Mac**: `OPTION` + `-`
+]
+--
+.rightcol[
+Insert a `%>%` operator:
+
+- **Windows**: `CTRL` + `SHIFT` + `M`
+- **Mac**: `COMMAND` + `SHIFT` + `M`
+]
+
+---
+class: middle, inverse
+
+## 2) Edit multiple lines of code at once
+
+1. Press and hold `ALT` (Windows) or `OPTION` (Mac)
+2. Select multiple lines of code
+
+https://twitter.com/i/status/995394452821721088
+
+---
+class: middle, inverse
+
+> ## "At the heart of quantitative reasoning<br>is a single question: Compared to what?"
+> ## -- Edward Tufte
+
+---
+## Today's data
+
+```{r, eval=FALSE}
+college_all_ages <- read_csv(here('data', 'college_all_ages.csv'))
+federal_spending <- read_csv(here('data', 'federal_spending_long.csv'))
+gapminder        <- read_csv(here('data', 'gapminder.csv'))
+marathon         <- read_csv(here('data', 'marathon.csv'))
+milk_production  <- read_csv(here('data', 'milk_production.csv'))
+```

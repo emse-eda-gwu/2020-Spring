@@ -1,0 +1,66 @@
+
+---
+class: inverse, middle, center
+
+# Extra practice
+
+---
+class: inverse
+
+## Your turn
+
+```{r lotr, fig.show='hide', echo=FALSE}
+label <- "Across 3 films,
+only 16 words were
+spoken by a
+female hobbit."
+
+ggplot(lotr_summary) +
+    geom_col(aes(x = Race, y = wordCount, fill = gender),
+             width = 0.7, color = 'white') +
+    facet_wrap(~gender) +
+    geom_curve(
+        data = data.frame(x = 1.2, xend = 1,
+                          y = 1300, yend = 200,
+                          gender = 'Female'),
+        mapping = aes(x = x, y = y, xend = xend, yend = yend),
+        color = 'grey75', size = 0.5, curvature = 0.1,
+        arrow = arrow(length = unit(0.01, 'npc'), type = 'closed')) +
+    geom_label(
+        data = data.frame(x = 0.6, y = 2100,
+                          label = label, gender = 'Female'),
+        mapping = aes(x = x, y = y, label = label),
+        hjust = 0, lineheight = .8, 
+        family = 'Fira Sans Condensed') +
+    scale_y_continuous(
+        labels = scales::comma,
+        expand = expand_scale(mult = c(0, 0.05))) +
+    theme_minimal_hgrid(
+        font_family = 'Fira Sans Condensed',
+        font_size = 18) +
+    theme(legend.position = 'none') +
+    panel_border() +
+    labs(x = 'Race of character',
+         y = 'Number of words spoken',
+         title = 'Number of words spoken in LOTR trilogy',
+         subtitle = 'by character gender')
+```
+
+.leftcol[
+Use the `lotr_summary` data frame to create the following chart.
+
+Hints:
+- The main font is `"Fira Sans Condensed"`
+- For the `geom_label()`, use these points:
+    - `x = 0.6`
+    - `y = 2100`
+- For the `geom_curve()`, use these points:
+    - `x = 1.2`
+    - `xend = 1`
+    - `y = 1300`
+    - `yend = 200`
+]
+.rightcol[
+```{r ref.label='lotr', echo=FALSE, fig.height=6, fig.width=7, fig.align='center'}
+```
+]

@@ -1,0 +1,23 @@
+
+---
+class: middle, inverse, center
+
+## R tip of the week: Code outline in RStudio
+
+---
+## Today's data
+
+Old:
+```{r, eval=FALSE}
+gapminder        <- read_csv(here::here('data', 'gapminder.csv'))
+milk_production  <- read_csv(here::here('data', 'milk_production.csv'))
+global_temps     <- read_csv(here::here('data', 'nasa_global_temps.csv'))
+```
+
+New:
+```{r, eval=FALSE}
+internet_country <- read_csv(here::here('data', 'internet_users_country.csv'))
+internet_region  <- read_csv(here::here('data', 'internet_users_region.csv'))
+hotdogs          <- read_csv(here::here('data', 'hot_dog_winners.csv'))
+us_diseases      <- read_csv(here::here('data', 'us_contagious_diseases.csv'))
+```

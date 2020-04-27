@@ -1,0 +1,381 @@
+<!-- Comparing distributions
+
+- Box plots
+- Transparent histograms & densities (good for maybe 2 categories)
+- Ridgeline plots (good for lots of categories)
+
+Ridgeline plots: https://wilkelab.org/ggridges/ -->
+
+<!-- Helpful:
+https://datavizf17.classes.andrewheiss.com/files/example_2017-09-19.Rmd -->
+
+---
+class: center
+## Overlapping histograms have issues
+
+```{r marathon_histogram_overlap, fig.show='hide', echo=FALSE}
+ggplot(marathon) +
+  geom_histogram(aes(x = Age, fill = `M/F`),
+                 alpha = 0.7, color = 'white',
+                 position = 'identity') +
+  scale_fill_manual(values = c('sienna', 'steelblue')) +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.05))) +
+  theme_minimal_hgrid()
+```
+```{r marathon_density_overlap, fig.show='hide', echo=FALSE}
+ggplot(marathon, aes(x = Age, y = ..count..)) +
+  geom_density(aes(fill = `M/F`), alpha = 0.7) +
+  scale_fill_manual(values = c('sienna', 'steelblue')) +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.05))) +
+  theme_minimal_hgrid()
+```
+
+.leftcol[
+### Bad
+
+```{r ref.label='marathon_histogram_overlap', echo=FALSE, fig.height=5, fig.width=7, fig.align='center'}
+```
+]
+--
+.rightcol[
+### Slightly better
+
+```{r ref.label='marathon_density_overlap', echo=FALSE, fig.height=5, fig.width=7, fig.align='center'}
+```
+]
+
+---
+class: center
+
+## Good when # categories **small**
+
+```{r marathon_density_facet, fig.show='hide', echo=FALSE}
+base <- ggplot(marathon, aes(x = Age, y = ..count..)) +
+  geom_density(fill = 'grey', alpha = 0.7) +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.05))) +
+  theme_minimal_hgrid()
+
+male <- base +
+  geom_density(data = marathon %>% filter(`M/F` == 'M'),
+               aes(fill = `M/F`), alpha = 0.7) +
+  scale_fill_manual(values = 'steelblue') +
+  theme(legend.position = 'none')
+
+female <- base +
+  geom_density(data = marathon %>% filter(`M/F` == 'F'),
+               aes(fill = `M/F`), alpha = 0.7) +
+  scale_fill_manual(values = 'sienna') +
+  theme(legend.position = 'none')
+
+plot_grid(male, female, labels = c('Male', 'Female'))
+```
+
+```{r marathon_diverging_histograms, fig.show='hide', echo=FALSE}
+ggplot(marathon, aes(x = Age)) +
+    # Add histogram for Female runners:
+    geom_histogram(data = marathon %>%
+                       filter(`M/F` == 'F'),
+                   aes(fill = `M/F`, y=..count..),
+                   alpha = 0.7, color = 'white') +
+    # Add negative histogram for Male runners:
+    geom_histogram(data = marathon %>%
+                       filter(`M/F` == 'M'),
+                   aes(fill = `M/F`, y=..count..*(-1)),
+                   alpha = 0.7, color = 'white') +
+    scale_fill_manual(values = c('sienna', 'steelblue')) +
+    coord_flip() +
+    theme_minimal_hgrid() +
+    labs(fill = 'Gender',
+         y = 'Count')
+```
+
+.leftcol[
+### Density facets
+
+```{r ref.label='marathon_density_facet', echo=FALSE, fig.height=3, fig.width=7, fig.align='center'}
+```
+]
+--
+.rightcol[
+### Diverging histograms
+
+```{r ref.label='marathon_diverging_histograms', echo=FALSE, fig.height=5, fig.width=7, fig.align='center'}
+```
+]
+
+---
+class: center
+
+## Good when # categories **large**
+
+```{r college_boxplot, fig.show='hide', echo=FALSE}
+college_summary <- college_all_ages %>%
+    mutate(
+        major_category = fct_reorder(major_category, median))
+
+ggplot(college_summary) +
+    geom_boxplot(aes(x = major_category, y = median)) +
+    coord_flip() +
+    theme_minimal_vgrid() +
+    labs(x = 'Major category',
+         y = 'Median income ($)')
+```
+```{r college_ridgeplot, fig.show='hide', echo=FALSE}
+ggplot(college_summary) +
+  geom_density_ridges(aes(x = median, y = major_category),
+                      scale = 4, alpha = 0.7) +
+  scale_y_discrete(expand = c(0, 0)) +
+  scale_x_continuous(expand = c(0, 0)) +
+  coord_cartesian(clip = "off") +
+  theme_ridges() +
+  labs(x = 'Median income ($)',
+       y = 'Major category')
+```
+
+.leftcol[
+### Boxplot
+
+```{r ref.label='college_boxplot', echo=FALSE, fig.height=5, fig.width=7, fig.align='center'}
+```
+]
+--
+.rightcol[
+### Ridgeplot
+
+```{r ref.label='college_ridgeplot', echo=FALSE, fig.height=5, fig.width=7, fig.align='center'}
+```
+]
+
+---
+.leftcol[.code70[
+## How to make density facets
+
+You can use `facet_wrap()`,<br>but you won't get the full density overlay
+```{r density_facet_nofull, fig.show='hide'}
+ggplot(marathon,
+       aes(x = Age, y = ..count.., fill = `M/F`)) +
+    geom_density(alpha = 0.7) + #<<
+    facet_wrap(~`M/F`) + #<<
+    scale_fill_manual(
+        values = c('sienna', 'steelblue')) +
+    scale_y_continuous(
+        expand = expand_scale(mult = c(0, 0.05))) +
+    theme_minimal_hgrid()
+```
+]]
+.rightcol[
+```{r ref.label='density_facet_nofull', echo=FALSE, fig.height=3, fig.width=7, fig.align='center'}
+```
+]
+--
+.rightcol[
+.center[If you want the full density overlay,<br>you have to hand-make the facets]
+```{r ref.label='marathon_density_facet', echo=FALSE, fig.height=3, fig.width=7, fig.align='center'}
+```
+]
+
+---
+## How to make density facets
+
+.leftcol[.code70[
+Make the full density plot first
+
+```{r}
+base <- ggplot(marathon,
+               aes(x = Age, y = ..count..)) + #<<
+    geom_density(fill = 'grey', alpha = 0.7) + #<<
+    scale_y_continuous(
+        expand = expand_scale(mult = c(0, 0.05))) +
+    theme_minimal_hgrid()
+```
+]]
+.rightcol[
+```{r density_facet_base, echo=FALSE, fig.height=5, fig.width=7, fig.align='center'}
+base
+```
+]
+
+---
+## How to make density facets
+
+.leftcol[.code70[
+Separately create each sub-plot
+
+```{r}
+male <- base +
+  geom_density(data = marathon %>% #<<
+                   filter(`M/F` == 'M'), #<<
+               fill = 'steelblue', alpha = 0.7) +
+  theme(legend.position = 'none')
+```
+```{r}
+female <- base +
+  geom_density(data = marathon %>% #<<
+                   filter(`M/F` == 'F'), #<<
+               fill = 'sienna', alpha = 0.7) +
+  theme(legend.position = 'none')
+```
+]]
+.rightcol[
+```{r density_facet_male, echo=FALSE, fig.height=3, fig.width=4, fig.align='center'}
+male
+```
+
+```{r density_facet_female, echo=FALSE, fig.height=3, fig.width=4, fig.align='center'}
+female
+```
+]
+
+---
+## How to make density facets
+
+.leftcol[.code70[
+Combine into single plot
+
+```{r, eval=FALSE}
+plot_grid(male, female,
+          labels = c('Male', 'Female'))
+```
+]]
+.rightcol[
+```{r ref.label='marathon_density_facet', echo=FALSE, fig.height=3, fig.width=7, fig.align='center'}
+```
+]
+
+---
+## How to make diverging histograms
+
+.leftcol[.code70[
+Make the histograms by filtering the data
+
+```{r marathon_diverging_histograms1, fig.show='hide'}
+ggplot(marathon, aes(x = Age)) +
+    # Add histogram for Female runners:
+    geom_histogram(data = marathon %>% #<<
+                       filter(`M/F` == 'F'), #<<
+                   aes(fill = `M/F`, y=..count..), #<<
+                   alpha = 0.7, color = 'white') +
+    # Add negative histogram for Male runners:
+    geom_histogram(data = marathon %>%
+                       filter(`M/F` == 'M'),
+                   aes(fill = `M/F`, y=..count..*(-1)), #<<
+                   alpha = 0.7, color = 'white')
+```
+]]
+.rightcol[
+```{r ref.label='marathon_diverging_histograms1', echo=FALSE, fig.height=5, fig.width=7, fig.align='center'}
+```
+]
+
+---
+## How to make diverging histograms
+
+.leftcol[.code70[
+Rotate, adjust colors, theme, and annotate
+
+```{r, eval=FALSE}
+ggplot(marathon, aes(x = Age)) +
+    # Add histogram for Female runners:
+    geom_histogram(data = marathon %>%
+                       filter(`M/F` == 'F'),
+                   aes(fill = `M/F`, y=..count..),
+                   alpha = 0.7, color = 'white') +
+    # Add negative histogram for Male runners:
+    geom_histogram(data = marathon %>%
+                       filter(`M/F` == 'M'),
+                   aes(fill = `M/F`, y=..count..*(-1)),
+                   alpha = 0.7, color = 'white') +
+    scale_fill_manual( #<<
+        values = c('sienna', 'steelblue')) + #<<
+    coord_flip() + #<<
+    theme_minimal_hgrid() + #<<
+    labs(fill = 'Gender', #<<
+         y    = 'Count') #<<
+```
+]]
+.rightcol[
+```{r ref.label='marathon_diverging_histograms', echo=FALSE, fig.height=5, fig.width=7, fig.align='center'}
+```
+]
+
+---
+## How to make ridgeplots
+
+.leftcol[.code70[
+Reorder `major_category` variable
+
+```{r, eval=FALSE}
+college_summary <- college_all_ages %>%
+    mutate(
+        major_category = fct_reorder(
+            major_category, median))
+```
+
+Make the ridgeplot using the **ggridges** library
+
+```{r, eval=FALSE}
+library(ggridges) #<<
+
+ggplot(college_summary) +
+  geom_density_ridges(aes(x = median, #<<
+                          y = major_category), #<<
+                      scale = 4, alpha = 0.7) + #<<
+  scale_y_discrete(expand = c(0, 0)) +
+  scale_x_continuous(expand = c(0, 0)) +
+  coord_cartesian(clip = "off") +  #<<
+  theme_ridges() +  #<<
+  labs(x = 'Median income ($)',
+       y = 'Major category')
+```
+]]
+.rightcol[
+```{r ref.label='college_ridgeplot', echo=FALSE, fig.height=5, fig.width=7, fig.align='center'}
+```
+]
+
+---
+class: inverse
+
+## Your turn
+
+Use the `gapminder.csv` data to create the following charts comparing the distribution of life expectancy across countries in continents in 2007.
+
+.leftcol[
+```{r, echo=FALSE}
+gapminder_2007 <- gapminder %>%
+  filter(year == 2007) %>%
+  mutate(continent = fct_reorder(continent, lifeExp))
+```
+```{r gapminder_densities, fig.show='hide', echo=FALSE}
+ggplot(gapminder_2007) +
+  geom_density(aes(x = lifeExp, y = ..count..,
+                   fill = continent), alpha = 0.7) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  scale_fill_brewer(palette = 'Accent') +
+  theme_minimal_hgrid() +
+  labs(x = 'Life expectancy (years)',
+       y = 'Count',
+       fill = 'Continent',
+       title = 'Distribution of life expectancy across\ncountries in continent in 2007')
+```
+```{r ref.label='gapminder_densities', echo=FALSE, fig.height=4.5, fig.width=6.5, fig.align='center'}
+```
+]
+.rightcol[
+```{r gapminder_ridges, fig.show='hide', echo=FALSE}
+ggplot(gapminder_2007 %>% filter(continent != 'Oceania')) +
+    geom_density_ridges(aes(x = lifeExp,
+                            y = continent),
+                        scale = 1.5, alpha = 0.7) +
+    scale_y_discrete(expand = c(0, 0)) +
+    scale_x_continuous(expand = c(0, 0)) +
+    coord_cartesian(clip = "off") +
+    theme_ridges() +
+    labs(x = 'Life expectancy (years)',
+         y = 'Continent',
+         title = 'Distribution of life expectancy across\ncountries in continent in 2007')
+```
+```{r ref.label='gapminder_ridges', echo=FALSE, fig.height=4.5, fig.width=6.5, fig.align='center'}
+```
+]

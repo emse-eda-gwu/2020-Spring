@@ -1,0 +1,37 @@
+---
+title: "Week #: Title"
+author: "John Paul Helveston"
+date: Month 00, 2020
+output:
+  xaringan::moon_reader:
+    css: ['default', 'https://emse-eda-gwu.github.io/2020-Spring/classNotes/classNotes.css']
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      beforeInit: "https://platform.twitter.com/widgets.js"
+    seal: false
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+library(here)
+library(fontawesome) # from github: https://github.com/rstudio/fontawesome
+options(
+    htmltools.dir.version = FALSE,
+    knitr.table.format = "html",
+    knitr.kable.NA = '')
+knitr::opts_chunk$set(
+    warning = FALSE,
+    message = FALSE,
+    fig.retina = 3)
+```
+
+name: xaringan-title
+class: title-slide, center, middle, inverse
+
+# Week ##: Title
+
+.large[EMSE 4197 | John Paul Helveston | Month 00, 2020]

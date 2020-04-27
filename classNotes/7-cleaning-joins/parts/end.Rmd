@@ -1,0 +1,29 @@
+
+---
+class: inverse, middle
+
+## If you haven't already, now would be a good time to start working on your projects
+
+<br>
+
+## **You have 2 weeks until proposals are due**
+
+---
+# Writing a research question
+
+Following [these guidelines](https://writingcenter.gmu.edu/guides/how-to-write-a-research-question), your question should be:
+
+- **Clear**: your audience can easily understand its purpose without additional explanation.
+- **Focused**: it is narrow enough that it can be addressed thoroughly with the data available and within the limits of the final project report.
+- **Concise**: it is expressed in the fewest possible words.
+- **Complex**: it is not answerable with a simple "yes" or "no," but rather requires synthesis and analysis of data.
+- **Arguable**: its potential answers are open to debate rather than accepted facts (do others care about it?)
+
+---
+class: inverse, middle, center
+
+# This is an iterative process
+
+<center>
+<img src="images/rq_iteration.png" width=500>
+</center>

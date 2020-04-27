@@ -1,0 +1,22 @@
+# ----------------------------------------------------------------------
+Data file: wildlife_impacts.csv
+
+Date downloaded: January 5, 2020
+
+Description: Observations of self-reported wildlife impacts with aircraft from 1990 to 2018 from the biggest 4 airlines: American Airlines, Delta, Southwest, and United (as they account for ~ 70% of passengers in the USA).
+
+Source of downloaded file:
+- Tidy tuesday repo: https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-07-23
+
+Original data source:
+- Original data is from the FAA Wildlife Strike Database: https://wildlife.faa.gov/
+
+Dictionary:
+Available here:
+https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-07-23
+
+
+# ----------------------------------------------------------------------
+# Post-class notes
+
+- Need more practice time to work with "tidy" data and converting from long to wide formats

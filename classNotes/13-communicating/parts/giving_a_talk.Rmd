@@ -1,0 +1,108 @@
+
+---
+class: middle, inverse, center
+
+# What are the first words<br>you should say in a speech?
+
+--
+## Watch [this video](https://youtu.be/w82a1FT5o88) to find out
+
+```{r, echo=FALSE}
+countdown(minutes = 10,
+          warn_when = 30,
+          update_every = 15,
+          bottom = 0,
+          font_size = '2em')
+```
+
+---
+# How to start a speech
+
+--
+### 3. With a question that matters to the audience ("Have you...?")
+
+--
+### 2. With a shocking factoid ("There are more people alive today than have ever lived...").
+
+--
+### 1. Tell a story, talk about **people** ("Imagine...")
+
+---
+class: inverse, middle, center
+
+<center>
+<img src="images/helveston_talk.png">
+</center>
+
+---
+class: middle
+
+## How to start a speech
+
+.leftcol[
+3) With a question that matters to the audience:
+
+> "What's the current federal subsidy for buying an electric car in the US?"
+
+2) With a shocking factoid
+
+> "Chinese automakers make one out of every two electric vehicles in the world."
+
+1) Tell a story, talk about **people**
+
+> "Whenever I talk with people about electric cars, they usually ask about Tesla..."
+
+]
+.rightcol[
+<center>
+<img src="images/helveston_talk.png">
+</center>
+]
+
+---
+class: inverse
+
+## Your turn
+
+```{r, echo=FALSE}
+countdown(minutes = 6,
+          warn_when = 30,
+          update_every = 15,
+          top = 0,
+          font_size = '2em')
+```
+
+.leftcol[
+Share with your teammates different strategies for how to start your presentation for your projects:
+
+1. Tell a story, talk about **people** ("Imagine...").
+2. With a shocking factoid ("There are more people alive today than have ever lived...").
+3. With a question that matters to the audience ("Have you...?").
+
+Afterwards, we will go around the "room" and one person from each team will practice giving their start to their presentation.
+]
+.rightcol[.font80[
+Project teams:
+1. Home Mortgage Disclosure Act [Alyssa Cristobal]
+2. Investing in Ridesharing Companies [Emily Aprigliano, Beth Ellinport, Allison Forsyth]
+3. Gender Representation in Films [Sarah Cassway, Alexa Solomon, Caroline Walton]
+4. Crude oil and employment [Alp Can Eryorulmaz, Azamat Kulzhanov, Diing Manyang]
+5. FEMA Disaster Relief [Bugra Kardas, Blake Ripp, Derek Ripp]
+6. Flight comfort, passenger height [Yumna Dahab, Olivia O'Hearn, Bruna Stamer Janikian]
+7. The Limits of Healthcare [Javier Langarica]
+8. Virginia Presidential Elections [Jenny Kim]
+9. Game Attendance in Major League Baseball [Saramarie Puzzanghera]
+10. Diversity & Inclusion in the U.S. Military [William Stricklett]
+11. EV sustainability [William Stein]
+]]
+
+---
+# For team meetings next week
+
+Have the following ready:
+
+- Your revised research question.
+- Your data sources.
+- A draft of your opening sentence for your presentation (I will ask you to say it).
+- Working code / data files.
+- Questions for me.

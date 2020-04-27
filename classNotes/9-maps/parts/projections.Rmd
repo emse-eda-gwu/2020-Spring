@@ -1,0 +1,394 @@
+<!--
+Content from Andrew's slides:
+https://datavizf17.classes.andrewheiss.com/class/07-class/
+
+Centroids with labels:
+https://www.r-spatial.org/r/2018/10/25/ggplot2-sf-2.html
+-->
+
+---
+class: center, middle
+
+# What's a map projection?
+
+<center>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kIID5FDi2JQ?start=52" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
+
+---
+# What is the best projection?...it depends
+
+<br>
+
+# 1. [Compare projections](http://metrocosm.com/compare-map-projections.html)
+
+<br>
+
+# 2. [Compare country sizes](https://thetruesize.com/)
+
+---
+## Using projections
+
+To modify the projection of a map, use `coord_sf(crs = st_crs(XXXX))`
+```{r, eval=FALSE}
+world <- ne_countries(scale = "medium", returnclass = "sf")
+```
+.cols3[.code70[
+Default (long-lat)
+```{r, eval=FALSE}
+ggplot(data = world) +
+    geom_sf()
+```
+<center>
+<img src="images/plots/sf_world.png">
+<center>
+]]
+.cols3[.code70[
+Robinson projection
+```{r, eval=FALSE}
+ggplot(data = world) +
+    geom_sf() +
+    coord_sf(crs = st_crs(54030)) #<<
+```
+<center>
+<img src="images/plots/sf_world_robinson.png">
+<center>
+]]
+.cols3[.code70[
+Mollweide projection
+```{r, eval=FALSE}
+ggplot(data = world) +
+    geom_sf() +
+    coord_sf(crs = st_crs(54009)) #<<
+```
+<center>
+<img src="images/plots/sf_world_mollweide.png">
+<center>
+]]
+
+---
+.leftcol[
+## Common Projections
+
+<br>
+
+**Favorites**
+
+- Robinson (World): `54030`
+- Albers (US): `102003`
+
+]
+.rightcol[
+
+ggplot layer:
+```{r, eval=FALSE}
+coord_sf(crs = st_crs(XXXXX))
+```
+
+**World**
+
+Code  | Projection
+------|---------------------------------------------------
+54002 | Equidistant cylindrical projection
+54004 | Mercator projection
+54008 | Sinusoidal projection
+54009 | Mollweide projection
+54030 | Robinson projection
+
+**United States**
+
+Code   | Projection
+-------|---------------------------------------------------
+102003 | Albers projection
+102004 | Contiguous Lambert Conformal Conic
+4269   | NAD 83
+
+]
+
+---
+## US projections
+
+```{r, eval=FALSE}
+us_states_cont <- ne_states(country = 'united states of america',
+    returnclass = 'sf') %>%
+    filter(! name %in% c('Alaska', 'Hawaii'))
+```
+.cols3[.code70[
+NAD 83 projection
+```{r, eval=FALSE}
+ggplot(data = world) +
+    geom_sf() +
+    coord_sf(crs = st_crs(4269)) #<<
+```
+<center>
+<img src="images/plots/sf_us_cont.png">
+<center>
+]]
+.cols3[.code70[
+Albers projection
+```{r, eval=FALSE}
+ggplot(data = us_states_cont) +
+    geom_sf() +
+    coord_sf(crs = st_crs(102003)) #<<
+```
+<center>
+<img src="images/plots/sf_us_cont_albers.png">
+<center>
+]]
+.cols3[.code70[
+Robinson projection
+```{r, eval=FALSE}
+ggplot(data = world) +
+    geom_sf() +
+    coord_sf(crs = st_crs(54030)) #<<
+```
+<center>
+<img src="images/plots/sf_us_cont_robinson.png">
+<center>
+]]
+
+---
+## Mapping data to projections - choropleth map
+
+.leftcol60[.code70[
+```{r, eval=FALSE}
+milk_2017 <- milk_production %>%
+    filter(year == 2017) %>%
+    select(name = state, milk_produced) %>%
+    mutate(milk_produced = milk_produced / 10^9)
+
+us_states <- ne_states(
+    country = 'united states of america',
+    returnclass = 'sf') %>%
+    filter(! name %in% c('Alaska', 'Hawaii')) %>%
+    left_join(milk_2017, by = 'name') #<<
+```
+Make the plot
+```{r, eval=FALSE}
+ggplot(us_states) +
+    geom_sf(aes(fill = milk_produced)) + #<<
+    scale_fill_viridis(
+        option = "plasma",
+        limits = c(0, 40)) +
+    theme_void(base_size = 15) +
+    theme(legend.position = 'bottom') +
+    labs(fill = 'Milk produced\n(billions lbs)',
+         title = 'Milk Production by State in 2017')
+```
+]]
+.rightcol40[
+<br>
+<center>
+<img src="images/plots/sf_us_milk_2017.png">
+<center>
+]
+
+---
+## Mapping data to projections - choropleth map
+
+.leftcol60[.code70[
+```{r, eval=FALSE}
+milk_2017 <- milk_production %>%
+    filter(year == 2017) %>%
+    select(name = state, milk_produced) %>%
+    mutate(milk_produced = milk_produced / 10^9)
+
+us_states <- ne_states(
+    country = 'united states of america',
+    returnclass = 'sf') %>%
+    filter(! name %in% c('Alaska', 'Hawaii')) %>%
+    left_join(milk_2017, by = 'name')
+```
+Make the plot
+```{r, eval=FALSE}
+ggplot(us_states) +
+    geom_sf(aes(fill = milk_produced)) +
+    coord_sf(crs = st_crs(102003)) + #<<
+    scale_fill_viridis(
+        option = "plasma",
+        limits = c(0, 40)) +
+    theme_void(base_size = 15) +
+    theme(legend.position = 'bottom') +
+    labs(fill = 'Milk produced\n(billions lbs)',
+         title = 'Milk Production by State in 2017')
+```
+]]
+.rightcol40[
+<br>
+<center>
+<img src="images/plots/sf_us_milk_2017_albers.png">
+<center>
+]
+
+---
+## Mapping data to projections - points
+
+.leftcol60[.code70[
+```{r, eval=FALSE}
+us_states_cont <- ne_states(
+    country = 'united states of america',
+    returnclass = 'sf') %>%
+    filter(! name %in% c('Alaska', 'Hawaii'))
+
+us_coffee_shops <- us_coffee_shops %>%
+    filter(lat > 22,    lat < 50,
+           long > -150, long < -66)
+```
+Plot coffee shop locations over map
+```{r, eval=FALSE}
+ggplot() +
+    geom_sf(data = us_states_cont) +
+    geom_point(data = us_coffee_shops, #<<
+               aes(x = long, y = lat, color = name)) + #<<
+    theme_void(base_size = 15) +
+    theme(legend.position = 'bottom') +
+    guides(color = guide_legend(title.position = "top")) +
+    labs(color = 'Coffee shop',
+         title = 'Coffee Shops in the US')
+```
+]]
+.rightcol40[
+<br>
+<center>
+<img src="images/plots/sf_us_coffee.png">
+<center>
+]
+
+---
+## Mapping data to projections - points
+
+.leftcol60[.code70[
+```{r, eval=FALSE}
+us_states_cont <- ne_states(
+    country = 'united states of america',
+    returnclass = 'sf') %>%
+    filter(! name %in% c('Alaska', 'Hawaii'))
+
+us_coffee_shops <- us_coffee_shops %>%
+    filter(lat > 22,    lat < 50,
+           long > -150, long < -66)
+```
+Plot coffee shop locations over map...fail!
+```{r, eval=FALSE}
+ggplot() +
+    geom_sf(data = us_states_cont) +
+    geom_point(data = us_coffee_shops,
+               aes(x = long, y = lat, color = name)) +
+    coord_sf(crs = st_crs(102003)) + #<<
+    theme_void(base_size = 15) +
+    theme(legend.position = 'bottom') +
+    guides(color = guide_legend(title.position = "top")) +
+    labs(color = 'Coffee shop',
+         title = 'Coffee Shops in the US')
+```
+]]
+.rightcol40[
+<br>
+<center>
+<img src="images/plots/sf_us_coffee_albers_bad.png">
+<center>
+]
+
+---
+## Mapping data to projections - points
+
+.leftcol60[.code70[
+First match `us_coffee_shops` crs to `us_states_cont`
+```{r, eval=FALSE}
+us_states_cont <- ne_states(
+    country = 'united states of america',
+    returnclass = 'sf') %>%
+    filter(! name %in% c('Alaska', 'Hawaii'))
+
+us_coffee_shops <- us_coffee_shops %>%
+    filter(lat > 22,    lat < 50,
+           long > -150, long < -66)
+
+us_coffee_shops_sf <- st_as_sf(us_coffee_shops, #<<
+    coords = c("long", "lat"), #<<
+    crs = st_crs(us_states_cont)) #<<
+```
+]]
+
+---
+## Mapping data to projections - points
+
+.leftcol60[.code70[
+First match `us_coffee_shops` crs to `us_states_cont`
+```{r, eval=FALSE}
+us_coffee_shops_sf <- st_as_sf(us_coffee_shops,
+    coords = c("long", "lat"),
+    crs = st_crs(us_states_cont))
+```
+Plot coffee shop locations over map with `geom_sf()`
+```{r, eval=FALSE}
+ggplot() +
+    geom_sf(data = us_states_cont) +
+    geom_sf(data = us_coffee_shops_sf, #<<
+             aes(fill = name), #<<
+            shape = 21, stroke = FALSE) + #<<
+    coord_sf(crs = st_crs(102003)) + #<<
+    theme_void(base_size = 15) +
+    theme(legend.position = 'bottom') +
+    guides(fill = guide_legend(title.position = "top")) +
+    labs(fill = 'Coffee shop',
+         title = 'Coffee Shops in the US')
+```
+]]
+.rightcol40[
+<br>
+<center>
+<img src="images/plots/sf_us_coffee_albers.png">
+<center>
+]
+
+---
+## Mapping data to projections - points
+
+.leftcol60[.code70[
+First match `us_coffee_shops` crs to `us_states_cont`
+```{r, eval=FALSE}
+us_coffee_shops_sf <- st_as_sf(us_coffee_shops,
+    coords = c("long", "lat"),
+    crs = st_crs(us_states_cont))
+```
+Plot coffee shop locations over map with `geom_sf()`
+```{r, eval=FALSE}
+ggplot() +
+    geom_sf(data = us_states_cont) +
+    geom_sf(data = us_coffee_shops_sf,
+             aes(fill = name),
+            shape = 21, stroke = FALSE) +
+    coord_sf(crs = st_crs(102004)) + #<<
+    theme_void(base_size = 15) +
+    theme(legend.position = 'bottom') +
+    guides(fill = guide_legend(title.position = "top")) +
+    labs(fill = 'Coffee shop',
+         title = 'Coffee Shops in the US')
+```
+]]
+.rightcol40[
+<br>
+<center>
+<img src="images/plots/sf_us_coffee_lcc.png">
+<center>
+]
+
+---
+class: inverse
+
+## Your turn
+
+```{r, echo=FALSE}
+countdown(minutes = 15,
+          warn_when = 30,
+          update_every = 15,
+          top = 0,
+          font_size = '2em')
+```
+
+Use the `us_states_cont` data frame and the `state_abbs` data frame to create a labeled map of the U.S.:
+
+<br>
+
+<img src="images/plots/sf_us_labeled.png" width=600>

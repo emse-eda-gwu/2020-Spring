@@ -1,0 +1,75 @@
+---
+title: "Week 13: Communicating results"
+author: "John Paul Helveston"
+date: April 08, 2020
+output:
+  xaringan::moon_reader:
+    css: ['default', 'https://emse-eda-gwu.github.io/2020-Spring/classNotes/classNotes.css']
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      beforeInit: "https://platform.twitter.com/widgets.js"
+    seal: false
+---
+
+```{r setup, include=FALSE}
+library(here)
+source(here('setup.R'))
+```
+
+name: xaringan-title
+class: title-slide, center, middle, inverse
+
+# Week 13: Communicating results
+
+.large[EMSE 4197 | John Paul Helveston | April 08, 2020]
+
+```{r child = here('parts', 'intro.Rmd')}
+```
+---
+class: inverse, middle
+
+# Communicating results
+
+## 1. Telling a story
+## 2. Designing slides
+## 3. Giving a talk
+
+---
+class: inverse, middle
+
+# Communicating results
+
+## 1. .orange[Telling a story]
+## 2. Designing slides
+## 3. Giving a talk
+
+```{r child = here('parts', 'telling_story.Rmd')}
+```
+
+---
+class: inverse, middle
+
+# Communicating results
+
+## 1. Telling a story
+## 2. .orange[Designing slides]
+## 3. Giving a talk
+
+```{r child = here('parts', 'designing_slides.Rmd')}
+```
+
+---
+class: inverse, middle
+
+# Communicating results
+
+## 1. Telling a story
+## 2. Designing slides
+## 3. .orange[Giving a talk]
+
+```{r child = here('parts', 'giving_a_talk.Rmd')}
+```

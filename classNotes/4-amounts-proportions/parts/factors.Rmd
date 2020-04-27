@@ -1,0 +1,390 @@
+
+---
+class: inverse, middle
+
+# Topics
+
+## 1. Making a (good) ggplot
+## 2. Using facets
+## 3. .orange[Manipulating factors]
+## 4. Graphing proportions
+
+---
+class: inverse
+
+# Common situations:
+
+### 1. What if the factor order doesn't follow another variable?
+### 2. What if the factors are too long?
+### 3. What if there are too many levels?
+
+---
+### 1. What if the factor order doesn't follow another variable?
+
+.leftcol[.code70[
+```{r}
+lotr_long <- lotr_words %>%
+  gather(key = 'gender', value = 'wordCount',
+         Female:Male)
+```
+```{r lotr_bars, fig.show='hide'}
+ggplot(lotr_long) +
+  geom_col(aes(x = Film, y = wordCount),
+           width = 0.7, alpha = 0.8) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid()
+```
+]]
+.rightcol[
+```{r ref.label='lotr_bars', echo=FALSE, fig.height=4, fig.width=7, fig.align='center'}
+```
+]
+
+---
+### 1. What if the factor order doesn't follow another variable?
+
+.leftcol[.code70[
+
+Use `fct_relevel()` to manually change the order
+
+```{r}
+lotr_long <- lotr_words %>%
+  gather(key = 'gender', value = 'wordCount',
+         Female:Male) %>%
+  mutate( #<<
+    Film = fct_relevel(Film, levels = c( #<<
+      'The Fellowship Of The Ring', #<<
+      'The Two Towers', #<<
+      'The Return Of The King'))) #<<
+```
+```{r lotr_bars_relevel, fig.show='hide'}
+ggplot(lotr_long) +
+  geom_col(aes(x = Film, y = wordCount),
+           width = 0.7, alpha = 0.8) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid()
+```
+]]
+.rightcol[
+```{r ref.label='lotr_bars_relevel', echo=FALSE, fig.height=4, fig.width=7, fig.align='center'}
+```
+]
+
+---
+### 2. What if the factors are too long?
+
+.leftcol[.code70[
+
+```{r}
+lotr_long <- lotr_words %>%
+  gather(key = 'gender', value = 'wordCount',
+         Female:Male)
+```
+```{r, eval=FALSE}
+ggplot(lotr_long) +
+  geom_col(aes(x = Film, y = wordCount),
+           width = 0.7, alpha = 0.8) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid()
+```
+]]
+.rightcol[
+```{r ref.label='lotr_bars', echo=FALSE, fig.height=4, fig.width=7, fig.align='center'}
+```
+]
+
+---
+### 2. What if the factors are too long?
+
+.leftcol55[.code60[
+
+Use `fct_recode()` to manually change the levels
+
+```{r}
+lotr_long <- lotr_words %>%
+  gather(key = 'gender', value = 'wordCount',
+         Female:Male) %>%
+  mutate( #<<
+    Film = fct_recode(Film, #<<
+      'The Fellowship\nof the Ring' = 'The Fellowship Of The Ring', #<<
+      'The Return\nof the King' = 'The Return Of The King'))  #<<
+```
+```{r lotr_bars_recode, fig.show='hide'}
+ggplot(lotr_long) +
+  geom_col(aes(x = Film, y = wordCount),
+           width = 0.7, alpha = 0.8) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid()
+```
+]]
+.rightcol45[
+```{r ref.label='lotr_bars_recode', echo=FALSE, fig.height=4, fig.width=7, fig.align='center'}
+```
+]
+
+---
+### 2. What if the factors are too long?
+
+.leftcol55[.code60[
+
+Use `fct_recode()` to manually change the levels
+
+...and don't forget to also update the order
+
+```{r}
+lotr_long <- lotr_words %>%
+  gather(key = 'gender', value = 'wordCount',
+         Female:Male) %>%
+  mutate(
+    Film = fct_recode(Film,
+      'The Fellowship\nof the Ring' = 'The Fellowship Of The Ring',
+      'The Return\nof the King' = 'The Return Of The King'),
+    Film = fct_relevel(Film,  c( #<<
+      'The Fellowship\nof the Ring', 'The Two Towers', #<<
+      'The Return\nof the King')))  #<<
+```
+```{r lotr_bars_recode_reorder, fig.show='hide'}
+ggplot(lotr_long) +
+  geom_col(aes(x = Film, y = wordCount),
+           width = 0.7, alpha = 0.8) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid()
+```
+]]
+.rightcol45[
+```{r ref.label='lotr_bars_recode_reorder', echo=FALSE, fig.height=4, fig.width=7, fig.align='center'}
+```
+]
+
+---
+### 3. What if there are too many levels?
+
+.leftcol55[.code70[
+```{r}
+federal_spending_summary <- federal_spending %>%
+  group_by(department) %>%
+  summarise(rd_budget = sum(rd_budget)) %>%
+  mutate(
+    department = fct_reorder(department, rd_budget))
+```
+```{r federal_spending, fig.show='hide'}
+ggplot(federal_spending_summary) +
+  geom_col(aes(x = department, y = rd_budget),
+           width = 0.7, alpha = 0.8) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid()
+```
+]]
+.rightcol45[
+```{r ref.label='federal_spending', echo=FALSE, fig.height=8, fig.width=8}
+```
+]
+
+---
+
+### 3. What if there are too many levels?
+
+.leftcol55[.code70[
+
+Keep top N, use `fct_other()` to merge rest into "Other"
+
+```{r}
+federal_spending_summary <- federal_spending %>%
+  mutate( #<<
+    department = fct_other(department, #<<
+      keep = c('DOD', 'HHS', 'NIH', 'NASA', 'DOE'))) %>% #<<
+  group_by(department) %>%
+  summarise(rd_budget = sum(rd_budget)) %>%
+  mutate(
+    department = fct_reorder(department, rd_budget))
+```
+```{r federal_spending_top5, fig.show='hide'}
+ggplot(federal_spending_summary) +
+  geom_col(aes(x = department, y = rd_budget),
+           width = 0.7, alpha = 0.8) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid()
+```
+]]
+.rightcol45[
+```{r ref.label='federal_spending_top5', echo=FALSE, fig.height=6, fig.width=8}
+```
+]
+
+---
+### 3. What if there are _really_ too many levels?
+
+.leftcol[.code70[
+
+```{r}
+avengers <- avengers %>%
+  mutate(name_alias =
+         fct_reorder(name_alias, appearances))
+```
+```{r avengers_bar, fig.show='hide'}
+ggplot(avengers) +
+  geom_col(aes(x = name_alias, y = appearances),
+           width = 0.7, alpha = 0.8) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid()
+```
+]]
+.rightcol[
+```{r ref.label='avengers_bar', echo=FALSE, fig.height=8, fig.width=8}
+```
+]
+
+---
+### 3. What if there are _really_ too many levels?
+
+.leftcol[.code70[
+
+Keep top N, drop the rest
+
+```{r}
+avengers_top10 <- avengers %>%
+  mutate(name_alias =
+         fct_reorder(name_alias, appearances)) %>%
+  arrange(desc(appearances)) %>% #<<
+  slice(1:10) #<<
+```
+```{r avengers_top10, fig.show='hide'}
+ggplot(avengers_top10) +
+  geom_col(aes(x = name_alias, y = appearances),
+           width = 0.7, alpha = 0.8) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid()
+```
+]]
+.rightcol[
+```{r ref.label='avengers_top10', echo=FALSE, fig.height=8, fig.width=8}
+```
+]
+
+---
+### 3. What if there are _really_ too many levels?
+
+.leftcol[.code70[
+
+Keep top N, drop the rest
+
+```{r}
+avengers_top10 <- avengers %>%
+  mutate(name_alias =
+         fct_reorder(name_alias, appearances)) %>%
+  arrange(desc(appearances)) %>%
+  group_by(gender) %>% #<<
+  slice(1:10)
+```
+```{r avengers_top10_gender, fig.show='hide'}
+ggplot(avengers_top10) +
+  geom_col(aes(x = name_alias, y = appearances,
+               fill = gender), #<<
+           width = 0.7, alpha = 0.8) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid() +
+  labs('Top 10 male and female avengers\nin order of appearances')
+```
+]]
+.rightcol[
+```{r ref.label='avengers_top10_gender', echo=FALSE, fig.height=8, fig.width=8}
+```
+]
+
+---
+### 3. What if there are _really_ too many levels?
+
+.leftcol[.code70[
+
+Keep top N, drop the rest
+
+```{r}
+avengers_top10 <- avengers %>%
+  mutate(name_alias =
+         fct_reorder(name_alias, appearances)) %>%
+  arrange(desc(appearances)) %>%
+  group_by(gender) %>%
+  slice(1:10)
+```
+```{r avengers_top10_gender_facet, fig.show='hide'}
+ggplot(avengers_top10) +
+  geom_col(aes(x = name_alias, y = appearances),
+           width = 0.7, alpha = 0.8) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  facet_wrap(~gender, ncol = 1, #<<
+             scales = 'free_y', #<<
+             strip.position = 'right') + #<<
+  coord_flip() +
+  theme_minimal_vgrid()
+```
+]]
+.rightcol[
+```{r ref.label='avengers_top10_gender_facet', echo=FALSE, fig.height=8, fig.width=8}
+```
+]
+
+---
+class: inverse
+
+.leftcol[
+## Your turn
+
+Use the `milk_production.csv` data to create the following plots
+
+```{r milk_state_summary, echo=FALSE, fig.width=10, fig.height=8}
+milk_state_summary <- milk_production %>%
+  group_by(state) %>%
+  summarise(milk_produced = sum(milk_produced)) %>%
+  mutate(state = fct_reorder(state, milk_produced))
+
+ggplot(milk_state_summary) +
+  geom_col(aes(x = state, y = milk_produced),
+           width = 0.7, alpha = 0.8) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid() +
+  labs(title = 'Total milk production (in lbs) by U.S. state (1970 - 2017)')
+```
+]
+.rightcol[
+<br>
+
+**Hint**: You'll need to use `summarise()` to get the total milk production for each state between 1970 - 2017
+
+```{r milk_top10, echo=FALSE, fig.width=8, fig.height=6.5}
+milk_top10 <- milk_state_summary %>%
+  arrange(desc(milk_produced)) %>%
+  slice(1:10)
+
+ggplot(milk_top10) +
+  geom_col(aes(x = state, y = milk_produced),
+           width = 0.7, alpha = 0.8) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid() +
+  labs(title = 'Milk production (in lbs) of top 10 U.S. states (1970 - 2017)')
+```
+]

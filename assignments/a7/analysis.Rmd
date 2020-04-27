@@ -1,0 +1,70 @@
+---
+title: "Assignment 7: Hockey Trends Redesign"
+author: First Last
+output: html_document
+---
+
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(
+    warning    = FALSE,
+    message    = FALSE,
+    fig.align  = "center")
+library(tidyverse)
+library(readxl)
+library(here)
+library(cowplot)
+library(readxl)
+library(janitor)
+options(dplyr.width = Inf)
+```
+
+# Clean the data
+
+```{r}
+
+# Write code here
+
+```
+
+Write a few sentences here describing any modifications you made to the original data and why you did it.
+
+# Create new variables
+
+```{r}
+
+# Write code here
+
+```
+
+# Summarize the data
+
+```{r}
+
+# Write code here
+
+```
+
+Write a few sentences explaining your summary measures and what you learned from them.
+
+# Data visualization 1
+
+```{r}
+
+# Write code here
+
+```
+
+# Data visualization 2
+
+```{r}
+
+# Write code here
+
+```
+
+# Summary of analysis
+
+Write a summary of your analysis. I'm specifically looking for a discussion of the following:
+
+    - What was wrong with the original chart? Discuss specific design principles we have covered in class.
+    - Discuss the message you intended to convey with each of your charts and how your design choices draw attention to that message.

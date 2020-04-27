@@ -1,0 +1,246 @@
+
+---
+class: middle, inverse
+
+# Before we start
+
+## 1. Course site updates
+## 2. R tip of the week
+## 3. Refresher: Tidy data & the `gather()` function
+
+---
+## Check out the `fcuk` package
+
+.leftcol70[
+Install:
+
+```{r, eval=FALSE}
+install.packages("fcuk")
+```
+
+Error message without the `fcuk` package:
+
+```{r eval=FALSE}
+maen(c(1, 2, 3, 4, 5))
+```
+```
+Error in maen(c(1, 2, 3, 4, 5)) : could not find function "maen"
+```
+]
+.rightcol30[.noborder[
+<center>
+<img src="images/fcuk-hex-thinkr.png" width="300">
+</center>
+]]
+
+---
+
+## Check out the `fcuk` package
+
+.leftcol70[
+Install:
+
+```{r, eval=FALSE}
+install.packages("fcuk")
+```
+
+Error message **with** the `fcuk` package:
+
+```{r eval=FALSE}
+library(fcuk)
+
+maen(c(1, 2, 3, 4, 5))
+```
+```
+Error in maen(c(1, 2, 3, 4, 5)) : could not find function "maen"
+
+Did you mean : mean or rename ?
+```
+]
+.rightcol30[.noborder[
+<center>
+<img src="images/fcuk-hex-thinkr.png" width="300">
+</center>
+]]
+--
+.leftcol70[
+Automatically load:
+
+```{r eval=FALSE}
+fcuk::add_fcuk_to_rprofile()
+```
+]
+
+---
+class: inverse, middle, center
+
+# Bonus tip:
+
+## Check out [this site](http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html) on how to
+## make the 50 most common plots
+
+---
+## Tidy-ing your data with `gather()`
+
+.leftcol60[
+```{r, eval=FALSE}
+dataPath <- here('data', 'federal_spending_wide.csv')
+spending_wide <- read_csv(dataPath)
+
+head(spending_wide)
+```
+.code60[
+```{r, echo=FALSE}
+dataPath <- here('data', 'federal_spending_wide.csv')
+spending_wide <- read_csv(dataPath)
+
+head(spending_wide)
+```
+]]
+--
+.rightcol40[
+```{r}
+spending_long <- spending_wide %>%
+    gather(key = "department",
+           value = "rd_budget",
+           DHS:VA)
+
+head(spending_long)
+```
+]
+
+---
+## Tidy tricks
+
+### `key` = "name of header", `value` = "name of cells"
+
+.leftcol60[
+```{r, eval=FALSE}
+dataPath <- here('data', 'federal_spending_wide.csv')
+spending_wide <- read_csv(dataPath)
+
+head(spending_wide)
+```
+.code60[
+```{r, echo=FALSE}
+head(spending_wide)
+```
+]]
+--
+.rightcol40[
+```{r}
+spending_long <- spending_wide %>%
+    gather(key = "department",
+           value = "rd_budget",
+           DHS:VA)
+
+head(spending_long)
+```
+]
+
+---
+## Tidy tricks
+
+### `key` = "name of header", `value` = "name of cells"
+
+.leftcol40[
+```{r}
+head(spending_long)
+```
+]
+--
+.rightcol60[
+```{r, eval=FALSE}
+spending_wide <- spending_long %>%
+    spread(key = "department",
+           value = "rd_budget")
+
+head(spending_wide)
+```
+.code60[
+```{r, echo=FALSE}
+spending_wide <- spending_long %>%
+    spread(key = "department",
+           value = "rd_budget")
+
+head(spending_wide)
+```
+]]
+
+---
+## Are your data tidy?
+
+### "is `cell value` a `column name`?"
+
+.leftcol60[
+```{r, eval=FALSE}
+head(spending_wide)
+```
+.code60[
+```{r, echo=FALSE}
+head(spending_wide)
+```
+]]
+--
+.rightcol40[
+```{r}
+spending_long <- spending_wide %>%
+    gather(key = "department",
+           value = "rd_budget",
+           DHS:VA)
+
+head(spending_long)
+```
+]
+
+---
+## Why do we need tidy data?
+
+.leftcol45[
+
+Tidyverse was built for tidy data
+
+.code70[
+```{r, echo=FALSE}
+spending_long <- spending_long %>%
+  mutate(department = fct_reorder(department, rd_budget))
+```
+```{r}
+head(spending_long)
+```
+```{r spending_bars, fig.show='hide'}
+ggplot(spending_long) +
+  geom_col(aes(x = department, y = rd_budget), #<<
+           width = 0.7, alpha = 0.8) +
+  coord_flip()
+```
+]]
+.rightcol55[
+
+<br>
+
+```{r ref.label='spending_bars', echo=FALSE, fig.height=5, fig.width=7, fig.align='center'}
+```
+]
+
+---
+class: inverse, middle
+
+# Topics
+
+## 1. Making a (good) ggplot
+## 2. Using facets
+## 3. Manipulating factors
+## 4. Graphing proportions
+
+---
+## Read in the data
+
+```{r}
+wildlife_impacts <- read_csv(here('data', 'wildlife_impacts.csv'))
+college_all_ages <- read_csv(here('data', 'college_all_ages.csv'))
+lotr_words       <- read_csv(here('data', 'lotr_words.csv'))
+federal_spending <- read_csv(here('data', 'federal_spending_long.csv'))
+avengers         <- read_csv(here('data', 'avengers.csv'))
+milk_production  <- read_csv(here('data', 'milk_production.csv'))
+```

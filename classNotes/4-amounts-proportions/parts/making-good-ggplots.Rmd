@@ -1,0 +1,402 @@
+
+---
+class: inverse, middle
+
+# Topics
+
+## 1. .orange[Making a (good) ggplot]
+## 2. Using facets
+## 3. Manipulating factors
+## 4. Graphing proportions
+
+---
+.leftcol[
+## Making a (good) ggplot
+
+1. Format data frame
+2. Add main geoms
+3. (Flip coordinate)
+4. (Reorder factors)
+5. Adjust scales
+6. Adjust theme
+7. Annotate
+
+]
+.rightcol[
+Before:
+```{r birds_before, echo=FALSE, fig.height=3.5, fig.width=4}
+wildlife_summary <- wildlife_impacts %>%
+  count(operator)
+
+ggplot(wildlife_summary) +
+  geom_col(aes(x = operator, y = n),
+           width = 0.7, alpha = 0.8)
+```
+
+After:
+```{r birds_after, echo=FALSE, fig.height=3.5}
+wildlife_summary <- wildlife_impacts %>%
+  count(operator) %>%
+  mutate(
+    operator = fct_reorder(operator, n))
+
+ggplot(wildlife_summary) +
+  geom_col(aes(x = operator, y = n),
+           width = 0.7, alpha = 0.8) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid() +
+  labs(
+    x = 'Airline',
+    y = 'Count' )
+```
+
+]
+
+---
+## 1) Format data frame + 2) add main geoms
+
+.leftcol[.code70[
+
+Method 1: Use `geom_bar()`
+
+```{r birds_geom_bar, fig.show='hide'}
+ggplot(wildlife_impacts) + #<<
+  geom_bar(aes(x = operator), #<<
+           width = 0.7, alpha = 0.8)
+```
+]]
+.rightcol[
+```{r ref.label='birds_geom_bar', echo=FALSE, fig.height=5, fig.width=5, fig.align='center'}
+```
+]
+
+---
+## 1) Format data frame + 2) add main geoms
+
+.leftcol[.code70[
+
+Method 2: Summarize the data first
+
+```{r}
+wildlife_summary <- wildlife_impacts %>%
+  count(operator)
+
+wildlife_summary
+```
+
+...then use `geom_col()`
+
+```{r birds_geom_col, fig.show='hide'}
+ggplot(wildlife_summary) +
+  geom_col(aes(x = operator, y = n), #<<
+           width = 0.7, alpha = 0.8)
+```
+]]
+.rightcol[
+```{r ref.label='birds_geom_col', echo=FALSE, fig.height=5, fig.width=5, fig.align='center'}
+```
+]
+
+---
+## 3) Flip coordinates
+
+.leftcol[.code70[
+```{r, eval=FALSE}
+wildlife_summary <- wildlife_impacts %>%
+  count(operator)
+```
+```{r birds_coord_flip, fig.show='hide'}
+ggplot(wildlife_summary) +
+  geom_col(aes(x = operator, y = n),
+           width = 0.7, alpha = 0.8) +
+  coord_flip() #<<
+```
+]]
+.rightcol[
+```{r ref.label='birds_coord_flip', echo=FALSE, fig.height=4, fig.width=6, fig.align='center'}
+```
+]
+
+---
+## 4) Reorder factors with `fct_reorder()`
+
+.leftcol[.code70[
+```{r}
+wildlife_summary <- wildlife_impacts %>%
+  count(operator) %>%
+  mutate( #<<
+    operator = fct_reorder(operator, n)) #<<
+```
+```{r birds_fct_reorder, fig.show='hide'}
+ggplot(wildlife_summary) +
+  geom_col(aes(x = operator, y = n),
+           width = 0.7, alpha = 0.8) +
+  coord_flip()
+```
+]]
+.rightcol[
+```{r ref.label='birds_fct_reorder', echo=FALSE, fig.height=4, fig.width=6.5, fig.align='center'}
+```
+]
+
+---
+## 5) Adjust scales
+
+.leftcol[.code70[
+
+```{r, eval=FALSE}
+wildlife_summary <- wildlife_impacts %>%
+  count(operator) %>%
+  mutate(
+    operator = fct_reorder(operator, n))
+```
+
+Set y axis limit to 0
+```{r birds_scales1, fig.show='hide'}
+ggplot(wildlife_summary) +
+  geom_col(aes(x = operator, y = n),
+           width = 0.7, alpha = 0.8) +
+  coord_flip() +
+  scale_y_continuous( #<<
+    expand = expand_scale(mult = c(0, 0.05))) #<<
+```
+]]
+.rightcol[
+```{r ref.label='birds_scales1', echo=FALSE, fig.height=4, fig.width=6.5, fig.align='center'}
+```
+]
+
+---
+## 5) Adjust scales
+
+.leftcol[.code70[
+
+```{r, eval=FALSE}
+wildlife_summary <- wildlife_impacts %>%
+  count(operator) %>%
+  mutate(
+    operator = fct_reorder(operator, n))
+```
+
+Customize y-axis break points
+```{r birds_scales2, fig.show='hide'}
+ggplot(wildlife_summary) +
+  geom_col(aes(x = operator, y = n),
+           width = 0.7, alpha = 0.8) +
+  coord_flip() +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05)),
+    breaks = c(0, 10000, 20000), #<<
+    limits = c(0, 20000)) #<<
+```
+]]
+.rightcol[
+```{r ref.label='birds_scales2', echo=FALSE, fig.height=4, fig.width=6.5, fig.align='center'}
+```
+]
+
+---
+## 6) Adjust theme
+
+<br>
+
+### 4 `cowplot` themes you should know
+
+```{r, echo=FALSE, fig.width=15, fig.height=4}
+df <- data.frame(x = seq(5), y = seq(5))
+half_open <- ggplot(df, aes(x = x, y = y)) +
+  theme_half_open() +
+  labs(title = "theme_half_open()")
+minimal_grid <- ggplot(df, aes(x = x, y = y)) +
+  theme_minimal_grid() +
+  labs(title = "theme_minimal_grid()")
+minimal_vgrid <- ggplot(df, aes(x = x, y = y)) +
+  scale_x_continuous(expand = expand_scale(mult = c(0, 0.05))) +
+  theme_minimal_vgrid() +
+  labs(title = "theme_minimal_vgrid()")
+minimal_hgrid <- ggplot(df, aes(x = x, y = y)) +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.05))) +
+  theme_minimal_hgrid() +
+  labs(title = "theme_minimal_hgrid()")
+plot_grid(half_open, minimal_grid, minimal_hgrid, minimal_vgrid, nrow=1)
+```
+
+---
+## 6) Adjust theme
+
+.leftcol[.code70[
+
+For horizontal bars, add only vertical grid
+
+```{r, eval=FALSE}
+wildlife_summary <- wildlife_impacts %>%
+  count(operator) %>%
+  mutate(
+    operator = fct_reorder(operator, n))
+```
+```{r birds_theme, fig.show='hide'}
+library(cowplot) #<<
+
+ggplot(wildlife_summary) +
+  geom_col(aes(x = operator, y = n),
+           width = 0.7, alpha = 0.8) +
+  coord_flip() +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  theme_minimal_vgrid() #<<
+```
+]]
+.rightcol[
+
+`theme_minimal_vgrid()`
+
+```{r ref.label='birds_theme', echo=FALSE, fig.height=4, fig.width=6.5, fig.align='center'}
+```
+]
+
+---
+## 7) Annotate
+
+.leftcol[.code70[
+```{r, eval=FALSE}
+wildlife_summary <- wildlife_impacts %>%
+  count(operator) %>%
+  mutate(
+    operator = fct_reorder(operator, n))
+```
+```{r birds_annotate, fig.show='hide'}
+ggplot(wildlife_summary) +
+  geom_col(aes(x = operator, y = n),
+           width = 0.7, alpha = 0.8) +
+  coord_flip() +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  theme_minimal_vgrid() +
+  labs( #<<
+    x = 'Airline', #<<
+    y = 'Count' ) #<<
+```
+]]
+.rightcol[
+```{r ref.label='birds_annotate', echo=FALSE, fig.height=4, fig.width=6.5, fig.align='center'}
+```
+]
+
+---
+## 7) Annotate - Can also just remove y axis
+
+.leftcol[.code70[
+```{r, eval=FALSE}
+wildlife_summary <- wildlife_impacts %>%
+  count(operator) %>%
+  mutate(
+    operator = fct_reorder(operator, n))
+```
+```{r birds_annotate_noaxis, fig.show='hide'}
+ggplot(wildlife_summary) +
+  geom_col(aes(x = operator, y = n),
+           width = 0.7, alpha = 0.8) +
+  geom_text(aes(x = operator, y = n, label = n), #<<
+            hjust = 1, color = 'white', #<<
+            nudge_y = -500, size = 7) + #<<
+  coord_flip() +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  theme_minimal_vgrid() +
+  theme( #<<
+    line = element_blank(), #<<
+    axis.title.x = element_blank(), #<<
+    axis.text.x = element_blank()) + #<<
+  labs(
+    x = 'Airline',
+    y = 'Count' )
+```
+]]
+.rightcol[
+```{r ref.label='birds_annotate_noaxis', echo=FALSE, fig.height=4, fig.width=6.5, fig.align='center'}
+```
+]
+
+---
+### Making a (good) ggplot
+
+.leftcol60[.code60[
+
+Data frame:
+```{r eval=FALSE}
+wildlife_summary <- wildlife_impacts %>%         # 1. Format data frame
+  count(operator) %>%
+  mutate(
+    operator = fct_reorder(operator, n))         # 4. (Reorder factors)
+```
+Plot:
+```{r eval=FALSE}
+ggplot(wildlife_summary) +                       # 2. Add main geoms
+  geom_col(aes(x = operator, y = n),
+           width = 0.7, alpha = 0.8) +
+```
+```{r eval=FALSE}
+  coord_flip() +                                 # 3. (Flip coordinates)
+```
+```{r eval=FALSE}
+  scale_y_continuous(                            # 5. Adjust scales
+    expand = expand_scale(mult = c(0, 0.05))) +
+```
+```{r eval=FALSE}
+  theme_minimal_vgrid() +                        # 6. Adjust theme
+```
+```{r eval=FALSE}
+  labs(                                          # 7. Annotate
+    x = 'Airline',
+    y = 'Count' )
+```
+]]
+.rightcol40[
+Final product
+
+```{r ref.label='birds_after', echo=FALSE, fig.height=4, fig.align='center'}
+```
+]
+
+---
+class: inverse
+
+## Your turn
+
+.leftcol40[
+Use the `college_all_ages.csv` data to create the following plot
+
+**Hint**: You'll need to compute the median income for each category of major
+
+Making a (good) ggplot:
+
+1. Format data frame
+2. Add main geoms
+3. (Flip coordinate)
+4. (Reorder factors)
+5. Adjust scales
+6. Adjust theme
+7. Annotate
+
+]
+.rightcol60[
+```{r college_bars, echo=FALSE, fig.width=10}
+college_major_summary <- college_all_ages %>%
+  group_by(major_category) %>%
+  summarise(category_median = median(median)) %>%
+  mutate(major_category = fct_reorder(major_category, category_median))
+
+ggplot(college_major_summary) +
+  geom_col(aes(x = major_category, y = category_median),
+           width = 0.7, alpha = 0.8) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid() +
+  labs(
+    x = 'Category of college major',
+    y = 'Median income')
+```
+]

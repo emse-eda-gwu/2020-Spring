@@ -1,0 +1,12 @@
+
+---
+class: middle, inverse
+
+## R tip of the week
+
+---
+## You can preview colors!
+
+Colors:
+scales::show_col() let's you see what the palette looks like
+https://t.co/XfCzkOH7xR

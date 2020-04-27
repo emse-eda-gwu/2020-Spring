@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Week 1: Course Introduction</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link rel="icon" href="images/favicon.ico">
+<style type="text/css">
+
+/* Text */
+
+h1{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 60px;
+}
+h2{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 50px;
+}
+h3{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  line-height: 40px;
+}
+body {
+  font-size: 16px;
+  line-height: 26px;
+}
+blockquote{
+  background-color: #ecf0f1;
+  padding: 20px;
+  border: 0;
+  border-radius: 5px;
+}
+
+/* Images */
+
+img {
+  padding-bottom: 10px;
+}
+
+/* Tables */
+
+table {
+  border-collapse: collapse;
+  margin-bottom:10px;
+}
+thead {
+  border-top: solid #DCDCDC;
+  border-bottom: solid #DCDCDC;
+}
+tr.odd {
+  background-color: #F8F8F8;
+}
+tr:first-child {
+  border-top: solid #DCDCDC;
+}
+tr:last-child {
+  border-bottom: solid #DCDCDC;
+}
+
+</style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">EDA - Spring 2020</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="syllabus.html">
+    <span class="fa fa-map-ok"></span>
+     
+    Syllabus
+  </a>
+</li>
+<li>
+  <a href="schedule.html">Schedule</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Readings
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="r0-course-prep.html">0: Course prep</a>
+    </li>
+    <li>
+      <a href="r1-course-introduction.html">1: Course introduction</a>
+    </li>
+    <li>
+      <a href="r2-exploring-data.html">2: Exploring data</a>
+    </li>
+    <li>
+      <a href="r3-visualizing-information.html">3: Visualizing information</a>
+    </li>
+    <li>
+      <a href="r4-amounts-proportions.html">4: Graphing amounts &amp; proportions</a>
+    </li>
+    <li>
+      <a href="r5-comparisons.html">5: Graphing comparisons</a>
+    </li>
+    <li>
+      <a href="r6-trends.html">6: Graphing trends</a>
+    </li>
+    <li>
+      <a href="r7-cleaning-joins.html">7: Data cleaning &amp; joins</a>
+    </li>
+    <li>
+      <a href="r8-polish.html">8: Polishing your charts</a>
+    </li>
+    <li>
+      <a href="r9-maps.html">9: Maps &amp; geospatial data</a>
+    </li>
+    <li>
+      <a href="r11-correlation.html">11: Correlation analysis</a>
+    </li>
+    <li>
+      <a href="r12-shiny-apps.html">12: Shiny apps</a>
+    </li>
+    <li>
+      <a href="r13-communicating.html">13: Communicating your results</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Assignments
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="a0-course-prereqs.html">0: Class prerequisites</a>
+    </li>
+    <li>
+      <a href="a1-exploring-data.html">1: Exploring data</a>
+    </li>
+    <li>
+      <a href="a2-plotting.html">2: Plotting with ggplot2</a>
+    </li>
+    <li>
+      <a href="a3-factors.html">3: Plotting with factors</a>
+    </li>
+    <li>
+      <a href="a4-redesign-amounts.html">4: Wind power redesign</a>
+    </li>
+    <li>
+      <a href="a5-data-cleaning.html">5: Data cleaning &amp; joins</a>
+    </li>
+    <li>
+      <a href="a6-geo-spatial.html">6: Maps &amp; geo-spatial data</a>
+    </li>
+    <li>
+      <a href="a7-redesign-trends.html">7: Redesign 2</a>
+    </li>
+    <li>
+      <a href="a-project.html">Final project</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Resources
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="ref-getting-help.html">
+        <span class="fa fa-question-circle"></span>
+         
+        Getting Help
+      </a>
+    </li>
+    <li>
+      <a href="ref-finding-data.html">
+        <span class="fa fa-database"></span>
+         
+        Finding Data
+      </a>
+    </li>
+    <li>
+      <a href="ref-visualizing-data.html">
+        <span class="fa fa-chart-bar"></span>
+         
+        Visualizing Data
+      </a>
+    </li>
+    <li>
+      <a href="ref-programming.html">
+        <span class="fa fa-terminal"></span>
+         
+        Programming in R
+      </a>
+    </li>
+    <li>
+      <a href="ref-rmarkdown.html">
+        <span class="fa fa-feather-alt"></span>
+         
+        R Markdown
+      </a>
+    </li>
+    <li>
+      <a href="ref-other.html">
+        <span class="fa fa-ellipsis-h"></span>
+         
+        Other
+      </a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    About
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="about.html">
+        <span class="fa fa-info-circle"></span>
+         
+        About
+      </a>
+    </li>
+    <li>
+      <a href="LICENSE.html">
+        <span class="fa fa-gavel"></span>
+         
+        License
+      </a>
+    </li>
+    <li>
+      <a href="datacamp.html">
+        <span class="fa fa-graduation-cap"></span>
+         
+        DataCamp
+      </a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="https://emse-eda-s20.slack.com">
+    <span class="fa fa-slack"></span>
+     
+    Slack
+  </a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    <span class="fa fa-bars"></span>
+     
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="mailto:jph@gwu.edu">
+        <span class="fa fa-envelope"></span>
+         
+        Contact
+      </a>
+    </li>
+    <li>
+      <a href="https://github.com/emse-eda-gwu/2020-Spring">
+        <span class="fa fa-github"></span>
+         
+        GitHub
+      </a>
+    </li>
+  </ul>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Week 1: Course Introduction</h1>
+
+</div>
+
+
+<div id="teaching-team" class="section level1">
+<h1><span class="header-section-number">1</span> Teaching Team</h1>
+<div id="meet-your-instructor" class="section level2">
+<h2><span class="header-section-number">1.1</span> Meet your instructor!</h2>
+<p>Dr. John Helveston, Assistant Professor in Engineering Management &amp; Systems Engineering</p>
+<p><img src="images/helveston.jpg" width="250" /></p>
+<p>Background:</p>
+<ul>
+<li>2016 PhD in Engineering &amp; Public Policy at Carnegie Mellon University</li>
+<li>2015 MS in Engineering &amp; Public Policy at Carnegie Mellon University</li>
+<li>2010 BS in Engineering Science &amp; Mechanics at Virginia Tech</li>
+</ul>
+</div>
+<div id="meet-your-tutors" class="section level2">
+<h2><span class="header-section-number">1.2</span> Meet your tutors!</h2>
+<table>
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Yanjie He, Masters student in Data Analytics</th>
+<th>Lingmei Zhao, Masters student in Statistics</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><img src="images/yanjie.jpg" width="250" /></td>
+<td><img src="images/lingmei.jpg" width="250" /></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="for-new-students" class="section level1">
+<h1><span class="header-section-number">2</span> For new students</h1>
+<p>Students should have taken <a href="https://emse-p4a-gwu.github.io/">Programming for Analytics</a> or have experience with at least one programming language. If you’re not sure whether you have the necessary prerequisite skills, you can try and get up to speed by completing <a href="a0-course-prereqs.html">Assignment 0</a> <strong>before classes start</strong>. Once classes start, it may be difficult to keep up without this background, and it may be more beneficial to wait and take this course next year after taking Programming for Analytics in the coming Fall.</p>
+</div>
+<div id="course-prep" class="section level1">
+<h1><span class="header-section-number">3</span> Course prep</h1>
+<p>For this class, you’ll need to install some software and register for some websites. Go to the <a href="L0-course-prep.html">course prep</a> page to get setup.</p>
+</div>
+<div id="whats-new" class="section level1">
+<h1><span class="header-section-number">4</span> What’s new?</h1>
+<p>Students taking this course should have already taken <a href="https://emse-p4a-gwu.github.io/">Programming for Analytics</a>. If you haven’t, I <strong>strongly</strong> recommend you review the lessons and assignments on the <a href="https://emse6574-gwu.github.io/2019-Fall/">previous semester website</a>. You can also get up to speed by completing <a href="assignment0.html">Assignment 0</a>.</p>
+<p>While this course follows a similar structure as P4A, there will be several key distinctions:</p>
+<ol style="list-style-type: decimal">
+<li>Whereas in P4A we worked with nice, tidy data sets, in this course we will be working more with messier, “raw” data that often needs to be significantly processed before being able to explore it.</li>
+<li>Rather than solve puzzles (e.g. write the function <code>isPrime()</code>), assignments will involve more real-world data problems that often have multiple, subjective solutions.</li>
+<li>Style and aesthetics will matter - consider your assignments and your final project to be professional data products that you would want to show off to future employers.</li>
+</ol>
+</div>
+<div id="course-mantras" class="section level1">
+<h1><span class="header-section-number">5</span> Course mantras</h1>
+<p>Here are some philosophies that will get you far in data analytic work. We will be revisiting these over and over again.</p>
+<p><strong>1) Embrace plain text</strong></p>
+<p>You will write code to produce rich outputs that include text and graphics. While your output may have lots of different formatting, your code will be written in <a href="https://en.wikipedia.org/wiki/Plain_text"><strong>plain text</strong></a>.</p>
+<p><strong>2) Embrace reproducibility</strong></p>
+<p>Everything you produce in this course will be a <a href="https://en.wikipedia.org/wiki/Reproducibility">reproducible</a> output. That is, you should be able to reproduce your output from the raw data and code. For example, This webpage was generated from <a href="https://raw.githubusercontent.com/emse-eda-gwu/2020-Spring/master/L1.1-course-introduction.Rmd">this markdown source file</a> on GitHub.</p>
+<p>If you want to generate this very HTML page, download the <code>.Rmd</code> file, then open it in RStudio and run the following code:</p>
+<pre class="r"><code>rmarkdown::render(&#39;L1.1-course-introduction.Rmd&#39;)</code></pre>
+</div>
+<div id="the-syllabus" class="section level1">
+<h1><span class="header-section-number">6</span> The syllabus</h1>
+<p>The <a href="syllabus.html">syllabus</a> is lengthy, but I do expect you to look through each section. If any changes need to be made, you’ll be notified through Slack.</p>
+</div>
+<div id="the-schedule" class="section level1">
+<h1><span class="header-section-number">7</span> The schedule</h1>
+<p>The course <a href="schedule.html">schedule</a> is your roadmap for the semester. Visit it often to make sure you are well-prepared for class and aware of upcoming assignment / quiz dates.</p>
+</div>
+<div id="communication-help" class="section level1">
+<h1><span class="header-section-number">8</span> Communication &amp; Help</h1>
+<p>This can be a challenging class - don’t suffer in silence! Look at the <a href="ref-getting-help.html">“Getting Help”</a> page, come to office hours, send me a message on Slack.</p>
+</div>
+<div id="readings" class="section level1">
+<h1><span class="header-section-number">9</span> Readings!</h1>
+<div id="workflow" class="section level2">
+<h2><span class="header-section-number">9.1</span> Workflow</h2>
+<p>Now that you’ve got R and RStudio installed, read the <a href="http://socviz.co/gettingstarted.html">“Getting Started”</a> lesson in <a href="http://socviz.co/">Healy</a>. We will follow the conventions laid out in this chapter throughout the class, including:</p>
+<ul>
+<li>Using <a href="https://r4ds.had.co.nz/workflow-projects.html">RStudio Projects</a> to stay organized.</li>
+<li>Working in plain text.</li>
+<li>Using RMarkdown to conduct and report on our analyses.</li>
+</ul>
+</div>
+<div id="reading-in-data" class="section level2">
+<h2><span class="header-section-number">9.2</span> Reading in Data</h2>
+<p>Check out the <a href="https://readr.tidyverse.org/articles/readr.html"><strong>readr</strong></a> and <a href="https://readxl.tidyverse.org/"><strong>readxl</strong></a> packages - we’ll be using these throughout the semester to import data into R.</p>
+</div>
+<div id="tidy-data" class="section level2">
+<h2><span class="header-section-number">9.3</span> Tidy Data</h2>
+<p>We’ll cover the concept of “tidy” data in class on day 1. To get familiar with it, read <a href="https://r4ds.had.co.nz/tidy-data.html">Chapter 12</a> in R4DS, and take a look at these <a href="https://github.com/gadenbuie/tidyexplain#tidy-data">Tidy data explanations</a>.</p>
+</div>
+<div id="writing-a-research-question" class="section level2">
+<h2><span class="header-section-number">9.4</span> Writing a research question</h2>
+<p>Read through <a href="https://writingcenter.gmu.edu/guides/how-to-write-a-research-question">this guide</a> from GMU on how to write a research question. We’ll come back to these ideas again later when you start working on your <a href="a-project.html">final projects</a>, but it’s a good idea to start thinking about your research question early.</p>
+</div>
+</div>
+
+
+<hr>
+
+<div>
+<center>
+    EMSE 4197 (CRN 78916): Exploratory Data Analysis - Spring 2020
+    <br>
+    <a href="https://www.gwu.edu/">George Washington University</a> |
+    <a href="https://www.seas.gwu.edu/">School of Engineering & Applied Science</a>
+    <br>
+    <a href="https://www.jhelvy.com"><i class="fas fa-user"></i> Dr. John Paul Helveston</a> |
+    <a href="mailto:jph@gwu.edu"><i class="fas fa-envelope"></i> jph@gwu.edu</a> |
+    <i class="far fa-calendar-alt"></i> Wednesdays |
+    <i class="far fa-clock"></i> 12:45–3:15 PM |
+    <i class="fas fa-university"></i> District House B205 |
+    <a href="https://twitter.com/JohnHelveston"><i class="fab fa-twitter"></i></a> |
+    <a href="https://github.com/emse-eda-gwu/2020-Spring"><i class="fab fa-github"></i></a>
+    <br>
+    This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+    <br>
+    See the <a href="LICENSE.html">licensing</a> page for more details about copyright information.
+    <br>
+    Content <i class="fab fa-creative-commons"></i> 2020 <a href="https://www.jhelvy.com">John Paul Helveston</a>
+</center>
+</div>
+
+<!-- Add function to open links to external links in new tab, from: -->
+<!-- https://yihui.name/en/2018/09/target-blank/ -->
+
+<script src="js/external-link.js"></script>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = false;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,214 @@
+
+---
+class: inverse, middle
+
+# What is a story?
+
+--
+> ## A story is a set of observations, facts, or events...that are presented in a specific order such that they create an .orange[**emotional reaction**] in the audience.<br>- Clause O. Wilke (2019), Chp. 29
+
+---
+class: middle, center
+
+<center>
+<img src="images/kv-01.png" width=800>
+</center>
+[source](https://sivers.org/drama)
+
+---
+class: middle, center
+
+<center>
+<img src="images/kv-02.png" width=800>
+</center>
+[source](https://sivers.org/drama)
+
+---
+class: middle, center
+
+<center>
+<img src="images/kv-03.png" width=800>
+</center>
+[source](https://sivers.org/drama)
+
+---
+class: inverse, middle, center
+
+## [Freytag's Pyramid](https://en.wikipedia.org/wiki/Gustav_Freytag)
+
+<center>
+<img src="images/freytag_pyramid.png" width=800>
+</center>
+
+---
+class: center
+
+## Freytag's Pyramid: [King Kong](https://en.wikipedia.org/wiki/King_Kong)
+
+<center>
+<img src="images/freytag_pyramid_king_kong.jpg" width=800>
+</center>
+[source](http://writinghorrorfiction.blogspot.com/2011/03/putting-freytags-pyramid-to-use-in.html)
+
+---
+class: center
+
+## Freytag's Pyramid: Research Project
+
+<center>
+<img src="images/freytag_pyramid_research.png" width=1000>
+</center>
+
+---
+class: inverse, middle
+
+> ## "A single (static) visualization will rarely tell an entire story"<br>- Clause O. Wilke (2019), Chp. 29
+
+---
+class: center
+
+## Freytag's Pyramid: Research Project
+
+<center>
+<img src="images/freytag_pyramid_research_charts.png" width=1000>
+</center>
+
+---
+class: center
+
+## Use **layers** to build tension / provide context
+
+--
+<center>
+<img src="images/pevSales1.png" width=900>
+</center>
+
+---
+class: center
+
+## Use **layers** to build tension / provide context
+
+<center>
+<img src="images/pevSales2.png" width=900>
+</center>
+
+---
+class: center
+
+## Use **layers** to build tension / provide context
+
+<center>
+<img src="images/pevSales3.png" width=900>
+</center>
+
+---
+class: center
+
+## Use **animation** to build tension / provide context
+
+<center>
+<img src="images/unemployment_chart_vox.jpg" width=900>
+</center>
+[source](https://www.vox.com/2020/4/2/21203850/unemployment-initial-claims-march-28)
+
+---
+class: center
+
+## Use **animation** to build tension / provide context
+
+<center>
+<img src="images/unemployment_chart.gif">
+</center>
+[source](https://twitter.com/maoam_guy/status/1245887052027232256)
+
+---
+class: center
+
+## Make charts for the generals
+### (i.e. keep it simple)
+
+--
+<center>
+<img src="images/wilke-generals-1.png" width=700>
+</center>
+[source](https://serialmentor.com/dataviz/telling-a-story.html#make-a-figure-for-the-generals)
+
+---
+class: center
+
+## Make charts for the generals
+### (i.e. keep it simple)
+
+.leftcol[
+<center>
+<img src="images/wilke-generals-2.png">
+</center>
+[source](https://serialmentor.com/dataviz/telling-a-story.html#make-a-figure-for-the-generals)
+]
+--
+.rightcol[
+<center>
+<img src="images/wilke-generals-3.png">
+</center>
+[source](https://serialmentor.com/dataviz/telling-a-story.html#make-a-figure-for-the-generals)
+]
+
+---
+class: center
+
+# Build up towards complex figures
+
+--
+<center>
+<img src="images/wilke-complex-1.png" width=400>
+</center>
+[source](https://serialmentor.com/dataviz/telling-a-story.html#build-up-towards-complex-figures)
+
+---
+class: center
+
+# Build up towards complex figures
+
+<center>
+<img src="images/wilke-complex-2.png" width=1100>
+</center>
+[source](https://serialmentor.com/dataviz/telling-a-story.html#build-up-towards-complex-figures)
+
+---
+class: center
+
+## Be consistent, but don't be repetitive
+
+--
+.leftcol[
+<center>
+<img src="images/wilke-repetitive-1.png" width=500>
+</center>
+[source](https://serialmentor.com/dataviz/telling-a-story.html#be-consistent-but-dont-be-repetitive)
+]
+--
+.rightcol[
+<center>
+<img src="images/wilke-repetitive-2.png" width=500>
+</center>
+[source](https://serialmentor.com/dataviz/telling-a-story.html#be-consistent-but-dont-be-repetitive)
+]
+
+---
+
+.leftcol30[
+## Summary:<br>Telling a story
+]
+.rightcol70[
+"A single (static) visualization will rarely tell an entire story"<br>- Clause O. Wilke (2019), Chp. 29
+
+<center>
+<img src="images/freytag_pyramid_research_charts.png">
+</center>
+
+- Use **layers** or **animation** to build tension / provide context
+- Make charts for the generals (i.e. keep it simple)
+- Build up towards complex figures
+- Be consistent, but don't be repetitive
+
+]

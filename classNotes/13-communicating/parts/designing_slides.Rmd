@@ -1,0 +1,154 @@
+
+---
+class: inverse, middle, center
+
+# Hitchcock's rule
+
+<center>
+<img src="images/Visual-Storytelling-Rules-The-Hitchcock-Rule-1.png" width=900>
+</center>
+
+---
+class: inverse, middle
+
+# Hitchcock's rule
+
+> ## The size of any object in your frame should be proportional to its importance to the story at that moment
+
+[example](https://youtu.be/E1LzhiCcOY0?t=174)
+
+
+---
+...and finally you will read this
+
+<br><br>
+<div style='font-size: 70pt; text-align: center;'>You will read this first</div>
+<br><br>
+<div style='font-size: 40pt; text-align: center;'>and then you will read this</div>
+
+---
+class: center
+
+# State the main point of the slide in the title
+
+---
+class: center
+
+# Except for Tesla, EV adoption is **flat**
+
+<center>
+<img src="images/pevSales3.png" width=900>
+</center>
+
+---
+class: middle, center
+
+# Use handouts<br>(1-2 pages)
+
+---
+class: center
+
+<p style="font-size:40pt;">> 40pt font for titles</p>
+<p style="font-size:24pt;">> 24pt font for all other text</p>
+<br>
+--
+<p style="font-size:24pt; color:red; font-style: italic;">Think of fonts as pre-attentive attributes</p>
+<br>
+--
+<center>
+<div style="padding: 10px; margin: 10px; width: 300px; font-size: 24pt;">
+Use san-serif fonts<br>for most text
+</div>
+<div style="background-color: #FFF; padding: 10px; margin: 10px; width: 300px; font-size:24pt; font-style:italic; font-family: serif;">
+Use italic, serif fonts for quotes
+</div>
+</center>
+
+---
+class: middle, center
+
+# Use a light-colored background<br>(tan / gray)
+<br>
+## (avoid solid white or black)
+
+---
+class: middle, center
+
+<center>
+<div class="wrapper" style="width: 50vw; height: 60vh;">
+.top-left[
+<div style="background-color: #FFF; padding: 50px; margin: 0px; width: 300px; font-size: 28pt;">
+Dark text on a light background works best
+</div>
+]
+.top-right[
+<div style="background-color: #000; color: #FFF; padding: 50px; margin: 0px; width: 300px; font-size: 28pt;">
+Light text on a dark background also works well
+</div>
+]
+.bottom-left[
+<div style="background-color: #FFF; color: #ffef01; padding: 50px; margin: 0px; width: 300px; font-size: 28pt;">
+Yellow text on a white background works poorly
+</div>
+]
+.bottom-right[
+<div style="background-color: #000; color: #0000ff; padding: 50px; margin: 0px; width: 300px; font-size: 28pt;">
+Blue text on a black background is horrible
+</div>
+]
+</div></center>
+
+---
+class: center, middle
+
+# NEVER EVER use
+<br>
+<div style='font-family: "Comic Sans MS"; font-size: 40pt'>Comic Sans</div>
+<br>
+<div style='font-family: "Papyrus"; font-size: 40pt'>Papyrus</div>
+<br>
+<br>
+## They make your work look terrible and amateurish
+
+---
+class: middle, center
+
+# Break up main points into multiple slides
+## (1 slide, 1 idea)
+
+---
+class: middle, center
+
+# Number your slides!
+
+---
+class: middle, center
+
+.noborder[
+<center>
+<img src="images/slide_junk.png">
+</center>
+]
+
+---
+class: center, middle
+
+# An acceptable slide footer
+
+<div class="footer-small"><span>Data source: http://somesourceofdata.com &emsp;&emsp; © John Paul Helveston, GWU, Apr. 2019</span></div>
+
+---
+class: middle
+
+.rightcol80[
+# Slide design guidelines
+
+.font120[
+- Use handouts
+- Use a light-colored background (tan / gray)
+- Slide titles: A single statement about what slide means
+- Slide numbers: bottom-left or bottom-right
+- Remove “chart junk”: logos, footers, etc. (exception: ©)
+- Use large font sizes (>40 titles, >24 text)
+- San-serif fonts for all text (italic serif for quotes)
+]]

@@ -1,0 +1,1948 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Week 4: Graphing Amounts &amp; Proportions</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="John Paul Helveston" />
+    <meta name="date" content="2020-02-05" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://emse-eda-gwu.github.io/2020-Spring/classNotes/classNotes.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+name: xaringan-title
+class: title-slide, center, middle, inverse
+
+# Week 4: Graphing Amounts &amp; Proportions
+
+.large[EMSE 4197 | John Paul Helveston | February 05, 2020]
+
+
+
+---
+class: middle, inverse
+
+# Before we start
+
+## 1. Course site updates
+## 2. R tip of the week
+## 3. Refresher: Tidy data &amp; the `gather()` function
+
+---
+## Check out the `fcuk` package
+
+.leftcol70[
+Install:
+
+
+```r
+install.packages("fcuk")
+```
+
+Error message without the `fcuk` package:
+
+
+```r
+maen(c(1, 2, 3, 4, 5))
+```
+```
+Error in maen(c(1, 2, 3, 4, 5)) : could not find function "maen"
+```
+]
+.rightcol30[.noborder[
+&lt;center&gt;
+&lt;img src="images/fcuk-hex-thinkr.png" width="300"&gt;
+&lt;/center&gt;
+]]
+
+---
+
+## Check out the `fcuk` package
+
+.leftcol70[
+Install:
+
+
+```r
+install.packages("fcuk")
+```
+
+Error message **with** the `fcuk` package:
+
+
+```r
+library(fcuk)
+
+maen(c(1, 2, 3, 4, 5))
+```
+```
+Error in maen(c(1, 2, 3, 4, 5)) : could not find function "maen"
+
+Did you mean : mean or rename ?
+```
+]
+.rightcol30[.noborder[
+&lt;center&gt;
+&lt;img src="images/fcuk-hex-thinkr.png" width="300"&gt;
+&lt;/center&gt;
+]]
+--
+.leftcol70[
+Automatically load:
+
+
+```r
+fcuk::add_fcuk_to_rprofile()
+```
+]
+
+---
+class: inverse, middle, center
+
+# Bonus tip:
+
+## Check out [this site](http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html) on how to
+## make the 50 most common plots
+
+---
+## Tidy-ing your data with `gather()`
+
+.leftcol60[
+
+```r
+dataPath &lt;- here('data', 'federal_spending_wide.csv')
+spending_wide &lt;- read_csv(dataPath)
+
+head(spending_wide)
+```
+.code60[
+
+```
+## # A tibble: 6 x 15
+##    year   DHS   DOC   DOD   DOE   DOT   EPA   HHS Interior  NASA   NIH   NSF
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  1976     0   819 35696 10882  1142   968  9226     1152 12513  8025  2372
+## 2  1977     0   837 37967 13741  1095   966  9507     1082 12553  8214  2395
+## 3  1978     0   871 37022 15663  1156  1175 10533     1125 12516  8802  2446
+## 4  1979     0   952 37174 15612  1004  1102 10127     1176 13079  9243  2404
+## 5  1980     0   945 37005 15226  1048   903 10045     1082 13837  9093  2407
+## 6  1981     0   829 41737 14798   978   901  9644      990 13276  8580  2300
+##   Other  USDA    VA
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  1191  1837   404
+## 2  1280  1796   374
+## 3  1237  1962   356
+## 4  2321  2054   353
+## 5  2468  1887   359
+## 6  1925  1964   382
+```
+]]
+--
+.rightcol40[
+
+```r
+spending_long &lt;- spending_wide %&gt;%
+    gather(key = "department",
+           value = "rd_budget",
+           DHS:VA)
+
+head(spending_long)
+```
+
+```
+## # A tibble: 6 x 3
+##    year department rd_budget
+##   &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt;
+## 1  1976 DHS                0
+## 2  1977 DHS                0
+## 3  1978 DHS                0
+## 4  1979 DHS                0
+## 5  1980 DHS                0
+## 6  1981 DHS                0
+```
+]
+
+---
+## Tidy tricks
+
+### `key` = "name of header", `value` = "name of cells"
+
+.leftcol60[
+
+```r
+dataPath &lt;- here('data', 'federal_spending_wide.csv')
+spending_wide &lt;- read_csv(dataPath)
+
+head(spending_wide)
+```
+.code60[
+
+```
+## # A tibble: 6 x 15
+##    year   DHS   DOC   DOD   DOE   DOT   EPA   HHS Interior  NASA   NIH   NSF
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  1976     0   819 35696 10882  1142   968  9226     1152 12513  8025  2372
+## 2  1977     0   837 37967 13741  1095   966  9507     1082 12553  8214  2395
+## 3  1978     0   871 37022 15663  1156  1175 10533     1125 12516  8802  2446
+## 4  1979     0   952 37174 15612  1004  1102 10127     1176 13079  9243  2404
+## 5  1980     0   945 37005 15226  1048   903 10045     1082 13837  9093  2407
+## 6  1981     0   829 41737 14798   978   901  9644      990 13276  8580  2300
+##   Other  USDA    VA
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  1191  1837   404
+## 2  1280  1796   374
+## 3  1237  1962   356
+## 4  2321  2054   353
+## 5  2468  1887   359
+## 6  1925  1964   382
+```
+]]
+--
+.rightcol40[
+
+```r
+spending_long &lt;- spending_wide %&gt;%
+    gather(key = "department",
+           value = "rd_budget",
+           DHS:VA)
+
+head(spending_long)
+```
+
+```
+## # A tibble: 6 x 3
+##    year department rd_budget
+##   &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt;
+## 1  1976 DHS                0
+## 2  1977 DHS                0
+## 3  1978 DHS                0
+## 4  1979 DHS                0
+## 5  1980 DHS                0
+## 6  1981 DHS                0
+```
+]
+
+---
+## Tidy tricks
+
+### `key` = "name of header", `value` = "name of cells"
+
+.leftcol40[
+
+```r
+head(spending_long)
+```
+
+```
+## # A tibble: 6 x 3
+##    year department rd_budget
+##   &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt;
+## 1  1976 DHS                0
+## 2  1977 DHS                0
+## 3  1978 DHS                0
+## 4  1979 DHS                0
+## 5  1980 DHS                0
+## 6  1981 DHS                0
+```
+]
+--
+.rightcol60[
+
+```r
+spending_wide &lt;- spending_long %&gt;%
+    spread(key = "department",
+           value = "rd_budget")
+
+head(spending_wide)
+```
+.code60[
+
+```
+## # A tibble: 6 x 15
+##    year   DHS   DOC   DOD   DOE   DOT   EPA   HHS Interior  NASA   NIH   NSF
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  1976     0   819 35696 10882  1142   968  9226     1152 12513  8025  2372
+## 2  1977     0   837 37967 13741  1095   966  9507     1082 12553  8214  2395
+## 3  1978     0   871 37022 15663  1156  1175 10533     1125 12516  8802  2446
+## 4  1979     0   952 37174 15612  1004  1102 10127     1176 13079  9243  2404
+## 5  1980     0   945 37005 15226  1048   903 10045     1082 13837  9093  2407
+## 6  1981     0   829 41737 14798   978   901  9644      990 13276  8580  2300
+##   Other  USDA    VA
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  1191  1837   404
+## 2  1280  1796   374
+## 3  1237  1962   356
+## 4  2321  2054   353
+## 5  2468  1887   359
+## 6  1925  1964   382
+```
+]]
+
+---
+## Are your data tidy?
+
+### "is `cell value` a `column name`?"
+
+.leftcol60[
+
+```r
+head(spending_wide)
+```
+.code60[
+
+```
+## # A tibble: 6 x 15
+##    year   DHS   DOC   DOD   DOE   DOT   EPA   HHS Interior  NASA   NIH   NSF
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  1976     0   819 35696 10882  1142   968  9226     1152 12513  8025  2372
+## 2  1977     0   837 37967 13741  1095   966  9507     1082 12553  8214  2395
+## 3  1978     0   871 37022 15663  1156  1175 10533     1125 12516  8802  2446
+## 4  1979     0   952 37174 15612  1004  1102 10127     1176 13079  9243  2404
+## 5  1980     0   945 37005 15226  1048   903 10045     1082 13837  9093  2407
+## 6  1981     0   829 41737 14798   978   901  9644      990 13276  8580  2300
+##   Other  USDA    VA
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  1191  1837   404
+## 2  1280  1796   374
+## 3  1237  1962   356
+## 4  2321  2054   353
+## 5  2468  1887   359
+## 6  1925  1964   382
+```
+]]
+--
+.rightcol40[
+
+```r
+spending_long &lt;- spending_wide %&gt;%
+    gather(key = "department",
+           value = "rd_budget",
+           DHS:VA)
+
+head(spending_long)
+```
+
+```
+## # A tibble: 6 x 3
+##    year department rd_budget
+##   &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt;
+## 1  1976 DHS                0
+## 2  1977 DHS                0
+## 3  1978 DHS                0
+## 4  1979 DHS                0
+## 5  1980 DHS                0
+## 6  1981 DHS                0
+```
+]
+
+---
+## Why do we need tidy data?
+
+.leftcol45[
+
+Tidyverse was built for tidy data
+
+.code70[
+
+
+```r
+head(spending_long)
+```
+
+```
+## # A tibble: 6 x 3
+##    year department rd_budget
+##   &lt;dbl&gt; &lt;fct&gt;          &lt;dbl&gt;
+## 1  1976 DHS                0
+## 2  1977 DHS                0
+## 3  1978 DHS                0
+## 4  1979 DHS                0
+## 5  1980 DHS                0
+## 6  1981 DHS                0
+```
+
+```r
+ggplot(spending_long) +
+* geom_col(aes(x = department, y = rd_budget),
+           width = 0.7, alpha = 0.8) +
+  coord_flip()
+```
+]]
+.rightcol55[
+
+&lt;br&gt;
+
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-25-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+class: inverse, middle
+
+# Topics
+
+## 1. Making a (good) ggplot
+## 2. Using facets
+## 3. Manipulating factors
+## 4. Graphing proportions
+
+---
+## Read in the data
+
+
+```r
+wildlife_impacts &lt;- read_csv(here('data', 'wildlife_impacts.csv'))
+college_all_ages &lt;- read_csv(here('data', 'college_all_ages.csv'))
+lotr_words       &lt;- read_csv(here('data', 'lotr_words.csv'))
+federal_spending &lt;- read_csv(here('data', 'federal_spending_long.csv'))
+avengers         &lt;- read_csv(here('data', 'avengers.csv'))
+milk_production  &lt;- read_csv(here('data', 'milk_production.csv'))
+```
+
+
+
+---
+class: inverse, middle
+
+# Topics
+
+## 1. .orange[Making a (good) ggplot]
+## 2. Using facets
+## 3. Manipulating factors
+## 4. Graphing proportions
+
+---
+.leftcol[
+## Making a (good) ggplot
+
+1. Format data frame
+2. Add main geoms
+3. (Flip coordinate)
+4. (Reorder factors)
+5. Adjust scales
+6. Adjust theme
+7. Annotate
+
+]
+.rightcol[
+Before:
+&lt;img src="slides-4-amounts-proportions_files/figure-html/birds_before-1.png" width="288" /&gt;
+
+After:
+&lt;img src="slides-4-amounts-proportions_files/figure-html/birds_after-1.png" width="504" /&gt;
+
+]
+
+---
+## 1) Format data frame + 2) add main geoms
+
+.leftcol[.code70[
+
+Method 1: Use `geom_bar()`
+
+
+```r
+*ggplot(wildlife_impacts) +
+* geom_bar(aes(x = operator),
+           width = 0.7, alpha = 0.8)
+```
+]]
+.rightcol[
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-27-1.png" width="360" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## 1) Format data frame + 2) add main geoms
+
+.leftcol[.code70[
+
+Method 2: Summarize the data first
+
+
+```r
+wildlife_summary &lt;- wildlife_impacts %&gt;%
+  count(operator)
+
+wildlife_summary
+```
+
+```
+## # A tibble: 4 x 2
+##   operator               n
+##   &lt;chr&gt;              &lt;int&gt;
+## 1 AMERICAN AIRLINES  14887
+## 2 DELTA AIR LINES     9005
+## 3 SOUTHWEST AIRLINES 17970
+## 4 UNITED AIRLINES    15116
+```
+
+...then use `geom_col()`
+
+
+```r
+ggplot(wildlife_summary) +
+* geom_col(aes(x = operator, y = n),
+           width = 0.7, alpha = 0.8)
+```
+]]
+.rightcol[
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-29-1.png" width="360" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## 3) Flip coordinates
+
+.leftcol[.code70[
+
+```r
+wildlife_summary &lt;- wildlife_impacts %&gt;%
+  count(operator)
+```
+
+```r
+ggplot(wildlife_summary) +
+  geom_col(aes(x = operator, y = n),
+           width = 0.7, alpha = 0.8) +
+* coord_flip()
+```
+]]
+.rightcol[
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-31-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## 4) Reorder factors with `fct_reorder()`
+
+.leftcol[.code70[
+
+```r
+wildlife_summary &lt;- wildlife_impacts %&gt;%
+  count(operator) %&gt;%
+* mutate(
+*   operator = fct_reorder(operator, n))
+```
+
+```r
+ggplot(wildlife_summary) +
+  geom_col(aes(x = operator, y = n),
+           width = 0.7, alpha = 0.8) +
+  coord_flip()
+```
+]]
+.rightcol[
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-33-1.png" width="468" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## 5) Adjust scales
+
+.leftcol[.code70[
+
+
+```r
+wildlife_summary &lt;- wildlife_impacts %&gt;%
+  count(operator) %&gt;%
+  mutate(
+    operator = fct_reorder(operator, n))
+```
+
+Set y axis limit to 0
+
+```r
+ggplot(wildlife_summary) +
+  geom_col(aes(x = operator, y = n),
+           width = 0.7, alpha = 0.8) +
+  coord_flip() +
+* scale_y_continuous(
+*   expand = expand_scale(mult = c(0, 0.05)))
+```
+]]
+.rightcol[
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-35-1.png" width="468" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## 5) Adjust scales
+
+.leftcol[.code70[
+
+
+```r
+wildlife_summary &lt;- wildlife_impacts %&gt;%
+  count(operator) %&gt;%
+  mutate(
+    operator = fct_reorder(operator, n))
+```
+
+Customize y-axis break points
+
+```r
+ggplot(wildlife_summary) +
+  geom_col(aes(x = operator, y = n),
+           width = 0.7, alpha = 0.8) +
+  coord_flip() +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05)),
+*   breaks = c(0, 10000, 20000),
+*   limits = c(0, 20000))
+```
+]]
+.rightcol[
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-37-1.png" width="468" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## 6) Adjust theme
+
+&lt;br&gt;
+
+### 4 `cowplot` themes you should know
+
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-38-1.png" width="1080" /&gt;
+
+---
+## 6) Adjust theme
+
+.leftcol[.code70[
+
+For horizontal bars, add only vertical grid
+
+
+```r
+wildlife_summary &lt;- wildlife_impacts %&gt;%
+  count(operator) %&gt;%
+  mutate(
+    operator = fct_reorder(operator, n))
+```
+
+```r
+*library(cowplot)
+
+ggplot(wildlife_summary) +
+  geom_col(aes(x = operator, y = n),
+           width = 0.7, alpha = 0.8) +
+  coord_flip() +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+* theme_minimal_vgrid()
+```
+]]
+.rightcol[
+
+`theme_minimal_vgrid()`
+
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-40-1.png" width="468" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## 7) Annotate
+
+.leftcol[.code70[
+
+```r
+wildlife_summary &lt;- wildlife_impacts %&gt;%
+  count(operator) %&gt;%
+  mutate(
+    operator = fct_reorder(operator, n))
+```
+
+```r
+ggplot(wildlife_summary) +
+  geom_col(aes(x = operator, y = n),
+           width = 0.7, alpha = 0.8) +
+  coord_flip() +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  theme_minimal_vgrid() +
+* labs(
+*   x = 'Airline',
+*   y = 'Count' )
+```
+]]
+.rightcol[
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-42-1.png" width="468" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## 7) Annotate - Can also just remove y axis
+
+.leftcol[.code70[
+
+```r
+wildlife_summary &lt;- wildlife_impacts %&gt;%
+  count(operator) %&gt;%
+  mutate(
+    operator = fct_reorder(operator, n))
+```
+
+```r
+ggplot(wildlife_summary) +
+  geom_col(aes(x = operator, y = n),
+           width = 0.7, alpha = 0.8) +
+* geom_text(aes(x = operator, y = n, label = n),
+*           hjust = 1, color = 'white',
+*           nudge_y = -500, size = 7) +
+  coord_flip() +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  theme_minimal_vgrid() +
+* theme(
+*   line = element_blank(),
+*   axis.title.x = element_blank(),
+*   axis.text.x = element_blank()) +
+  labs(
+    x = 'Airline',
+    y = 'Count' )
+```
+]]
+.rightcol[
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-44-1.png" width="468" style="display: block; margin: auto;" /&gt;
+]
+
+---
+### Making a (good) ggplot
+
+.leftcol60[.code60[
+
+Data frame:
+
+```r
+wildlife_summary &lt;- wildlife_impacts %&gt;%         # 1. Format data frame
+  count(operator) %&gt;%
+  mutate(
+    operator = fct_reorder(operator, n))         # 4. (Reorder factors)
+```
+Plot:
+
+```r
+ggplot(wildlife_summary) +                       # 2. Add main geoms
+  geom_col(aes(x = operator, y = n),
+           width = 0.7, alpha = 0.8) +
+```
+
+```r
+  coord_flip() +                                 # 3. (Flip coordinates)
+```
+
+```r
+  scale_y_continuous(                            # 5. Adjust scales
+    expand = expand_scale(mult = c(0, 0.05))) +
+```
+
+```r
+  theme_minimal_vgrid() +                        # 6. Adjust theme
+```
+
+```r
+  labs(                                          # 7. Annotate
+    x = 'Airline',
+    y = 'Count' )
+```
+]]
+.rightcol40[
+Final product
+
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-51-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+class: inverse
+
+## Your turn
+
+.leftcol40[
+Use the `college_all_ages.csv` data to create the following plot
+
+**Hint**: You'll need to compute the median income for each category of major
+
+Making a (good) ggplot:
+
+1. Format data frame
+2. Add main geoms
+3. (Flip coordinate)
+4. (Reorder factors)
+5. Adjust scales
+6. Adjust theme
+7. Annotate
+
+]
+.rightcol60[
+&lt;img src="slides-4-amounts-proportions_files/figure-html/college_bars-1.png" width="720" /&gt;
+]
+
+
+
+---
+class: inverse, middle
+
+# Topics
+
+## 1. Making a (good) ggplot
+## 2. .orange[Using facets]
+## 3. Manipulating factors
+## 4. Graphing proportions
+
+---
+class: center, middle
+
+## When # of categories is large, consider facets
+
+.leftcol[
+&lt;img src="slides-4-amounts-proportions_files/figure-html/diamonds_bars_stacked-1.png" width="504" /&gt;
+]
+.rightcol[
+&lt;img src="slides-4-amounts-proportions_files/figure-html/diamonds_bars_dodged-1.png" width="504" /&gt;
+]
+
+---
+## When # of categories is large, consider facets
+
+.leftcol60[
+
+```r
+diamonds_summary &lt;- diamonds %&gt;%
+  count(clarity, cut)
+```
+
+```r
+ggplot(diamonds_summary) +
+  geom_col(aes(x = clarity, y = n)) +
+* facet_wrap(~cut, nrow = 1) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  theme_minimal_hgrid()
+```
+]
+
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-53-1.png" width="1080" /&gt;
+
+---
+.leftcol[.code70[
+## When # of categories is large, consider facets
+
+
+```r
+diamonds_summary &lt;- diamonds %&gt;%
+  count(clarity, cut)
+```
+
+```r
+ggplot(diamonds_summary) +
+  geom_col(aes(x = clarity, y = n)) +
+* facet_wrap(~cut, ncol = 2) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  theme_minimal_hgrid()
+```
+]]
+.rightcol[
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-55-1.png" width="576" style="display: block; margin: auto;" /&gt;
+]
+
+---
+class: inverse
+
+.leftcol60[
+## Your turn
+
+Create the following charts. For this exercise, you can remove `NA` values.
+
+**Hint**: You may need to reshape and / or summarize the data before plotting!
+
+Data: `lotr_words.csv`
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-56-1.png" width="504" /&gt;
+]
+.rightcol40[
+
+Data: `wildlife_impacts.csv`
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-57-1.png" width="360" /&gt;
+]
+
+---
+class: inverse
+
+# [5 minute](https://www.youtube.com/watch?v=_W0bSen8Qjg) break!
+
+## Stand up
+
+## Move around
+
+## Stretch!
+
+
+
+---
+class: inverse, middle
+
+# Topics
+
+## 1. Making a (good) ggplot
+## 2. Using facets
+## 3. .orange[Manipulating factors]
+## 4. Graphing proportions
+
+---
+class: inverse
+
+# Common situations:
+
+### 1. What if the factor order doesn't follow another variable?
+### 2. What if the factors are too long?
+### 3. What if there are too many levels?
+
+---
+### 1. What if the factor order doesn't follow another variable?
+
+.leftcol[.code70[
+
+```r
+lotr_long &lt;- lotr_words %&gt;%
+  gather(key = 'gender', value = 'wordCount',
+         Female:Male)
+```
+
+```r
+ggplot(lotr_long) +
+  geom_col(aes(x = Film, y = wordCount),
+           width = 0.7, alpha = 0.8) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid()
+```
+]]
+.rightcol[
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-59-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+### 1. What if the factor order doesn't follow another variable?
+
+.leftcol[.code70[
+
+Use `fct_relevel()` to manually change the order
+
+
+```r
+lotr_long &lt;- lotr_words %&gt;%
+  gather(key = 'gender', value = 'wordCount',
+         Female:Male) %&gt;%
+* mutate(
+*   Film = fct_relevel(Film, levels = c(
+*     'The Fellowship Of The Ring',
+*     'The Two Towers',
+*     'The Return Of The King')))
+```
+
+```r
+ggplot(lotr_long) +
+  geom_col(aes(x = Film, y = wordCount),
+           width = 0.7, alpha = 0.8) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid()
+```
+]]
+.rightcol[
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-61-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+### 2. What if the factors are too long?
+
+.leftcol[.code70[
+
+
+```r
+lotr_long &lt;- lotr_words %&gt;%
+  gather(key = 'gender', value = 'wordCount',
+         Female:Male)
+```
+
+```r
+ggplot(lotr_long) +
+  geom_col(aes(x = Film, y = wordCount),
+           width = 0.7, alpha = 0.8) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid()
+```
+]]
+.rightcol[
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-64-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+### 2. What if the factors are too long?
+
+.leftcol55[.code60[
+
+Use `fct_recode()` to manually change the levels
+
+
+```r
+lotr_long &lt;- lotr_words %&gt;%
+  gather(key = 'gender', value = 'wordCount',
+         Female:Male) %&gt;%
+* mutate(
+*   Film = fct_recode(Film,
+*     'The Fellowship\nof the Ring' = 'The Fellowship Of The Ring',
+*     'The Return\nof the King' = 'The Return Of The King'))
+```
+
+```r
+ggplot(lotr_long) +
+  geom_col(aes(x = Film, y = wordCount),
+           width = 0.7, alpha = 0.8) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid()
+```
+]]
+.rightcol45[
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-66-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+### 2. What if the factors are too long?
+
+.leftcol55[.code60[
+
+Use `fct_recode()` to manually change the levels
+
+...and don't forget to also update the order
+
+
+```r
+lotr_long &lt;- lotr_words %&gt;%
+  gather(key = 'gender', value = 'wordCount',
+         Female:Male) %&gt;%
+  mutate(
+    Film = fct_recode(Film,
+      'The Fellowship\nof the Ring' = 'The Fellowship Of The Ring',
+      'The Return\nof the King' = 'The Return Of The King'),
+*   Film = fct_relevel(Film,  c(
+*     'The Fellowship\nof the Ring', 'The Two Towers',
+*     'The Return\nof the King')))
+```
+
+```r
+ggplot(lotr_long) +
+  geom_col(aes(x = Film, y = wordCount),
+           width = 0.7, alpha = 0.8) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid()
+```
+]]
+.rightcol45[
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-68-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+### 3. What if there are too many levels?
+
+.leftcol55[.code70[
+
+```r
+federal_spending_summary &lt;- federal_spending %&gt;%
+  group_by(department) %&gt;%
+  summarise(rd_budget = sum(rd_budget)) %&gt;%
+  mutate(
+    department = fct_reorder(department, rd_budget))
+```
+
+```r
+ggplot(federal_spending_summary) +
+  geom_col(aes(x = department, y = rd_budget),
+           width = 0.7, alpha = 0.8) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid()
+```
+]]
+.rightcol45[
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-70-1.png" width="576" /&gt;
+]
+
+---
+
+### 3. What if there are too many levels?
+
+.leftcol55[.code70[
+
+Keep top N, use `fct_other()` to merge rest into "Other"
+
+
+```r
+federal_spending_summary &lt;- federal_spending %&gt;%
+* mutate(
+*   department = fct_other(department,
+*     keep = c('DOD', 'HHS', 'NIH', 'NASA', 'DOE'))) %&gt;%
+  group_by(department) %&gt;%
+  summarise(rd_budget = sum(rd_budget)) %&gt;%
+  mutate(
+    department = fct_reorder(department, rd_budget))
+```
+
+```r
+ggplot(federal_spending_summary) +
+  geom_col(aes(x = department, y = rd_budget),
+           width = 0.7, alpha = 0.8) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid()
+```
+]]
+.rightcol45[
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-72-1.png" width="576" /&gt;
+]
+
+---
+### 3. What if there are _really_ too many levels?
+
+.leftcol[.code70[
+
+
+```r
+avengers &lt;- avengers %&gt;%
+  mutate(name_alias =
+         fct_reorder(name_alias, appearances))
+```
+
+```r
+ggplot(avengers) +
+  geom_col(aes(x = name_alias, y = appearances),
+           width = 0.7, alpha = 0.8) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid()
+```
+]]
+.rightcol[
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-74-1.png" width="576" /&gt;
+]
+
+---
+### 3. What if there are _really_ too many levels?
+
+.leftcol[.code70[
+
+Keep top N, drop the rest
+
+
+```r
+avengers_top10 &lt;- avengers %&gt;%
+  mutate(name_alias =
+         fct_reorder(name_alias, appearances)) %&gt;%
+* arrange(desc(appearances)) %&gt;%
+* slice(1:10)
+```
+
+```r
+ggplot(avengers_top10) +
+  geom_col(aes(x = name_alias, y = appearances),
+           width = 0.7, alpha = 0.8) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid()
+```
+]]
+.rightcol[
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-76-1.png" width="576" /&gt;
+]
+
+---
+### 3. What if there are _really_ too many levels?
+
+.leftcol[.code70[
+
+Keep top N, drop the rest
+
+
+```r
+avengers_top10 &lt;- avengers %&gt;%
+  mutate(name_alias =
+         fct_reorder(name_alias, appearances)) %&gt;%
+  arrange(desc(appearances)) %&gt;%
+* group_by(gender) %&gt;%
+  slice(1:10)
+```
+
+```r
+ggplot(avengers_top10) +
+  geom_col(aes(x = name_alias, y = appearances,
+*              fill = gender),
+           width = 0.7, alpha = 0.8) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  coord_flip() +
+  theme_minimal_vgrid() +
+  labs('Top 10 male and female avengers\nin order of appearances')
+```
+]]
+.rightcol[
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-78-1.png" width="576" /&gt;
+]
+
+---
+### 3. What if there are _really_ too many levels?
+
+.leftcol[.code70[
+
+Keep top N, drop the rest
+
+
+```r
+avengers_top10 &lt;- avengers %&gt;%
+  mutate(name_alias =
+         fct_reorder(name_alias, appearances)) %&gt;%
+  arrange(desc(appearances)) %&gt;%
+  group_by(gender) %&gt;%
+  slice(1:10)
+```
+
+```r
+ggplot(avengers_top10) +
+  geom_col(aes(x = name_alias, y = appearances),
+           width = 0.7, alpha = 0.8) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+* facet_wrap(~gender, ncol = 1,
+*            scales = 'free_y',
+*            strip.position = 'right') +
+  coord_flip() +
+  theme_minimal_vgrid()
+```
+]]
+.rightcol[
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-80-1.png" width="576" /&gt;
+]
+
+---
+class: inverse
+
+.leftcol[
+## Your turn
+
+Use the `milk_production.csv` data to create the following plots
+
+&lt;img src="slides-4-amounts-proportions_files/figure-html/milk_state_summary-1.png" width="720" /&gt;
+]
+.rightcol[
+&lt;br&gt;
+
+**Hint**: You'll need to use `summarise()` to get the total milk production for each state between 1970 - 2017
+
+&lt;img src="slides-4-amounts-proportions_files/figure-html/milk_top10-1.png" width="576" /&gt;
+]
+
+
+
+---
+class: inverse, middle
+
+# Topics
+
+## 1. Making a (good) ggplot
+## 2. Using facets
+## 3. Manipulating factors
+## 4. .orange[Graphing proportions]
+
+---
+class: inverse, middle
+
+.cols3[
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/bar.png" width=350&gt;
+&lt;center&gt;
+]
+.cols3[
+&lt;center&gt;
+&lt;img src="images/pie.png" width=300&gt;
+&lt;center&gt;
+]
+.cols3[
+&lt;center&gt;
+&lt;img src="images/waffles.png"&gt;
+&lt;center&gt;
+]
+
+---
+## Stacked bars
+
+.leftcol55[.code70[
+Summarize data:
+
+```r
+milk_summary_2017 &lt;- milk_production %&gt;%
+* filter(year == 2017) %&gt;%
+  mutate(state = fct_other(state,
+    keep = c('California', 'Wisconsin'))) %&gt;%
+* group_by(state) %&gt;%
+* summarise(milk_produced = sum(milk_produced))
+```
+Make plot:
+
+```r
+ggplot(milk_summary_2017) +
+* geom_col(aes(x = "", y = milk_produced, fill = state),
+           width = 0.7, alpha = 0.8) +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  theme_minimal_hgrid() +
+  labs(x = NULL,
+       y = 'Milk produced (lbs)',
+       fill = 'State',
+       title = '2017 Milk Production\nby State')
+```
+]]
+.rightcol45[
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-82-1.png" width="288" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## Stacked bars
+
+Rotated also looks good
+
+.leftcol55[.code70[
+
+```r
+milk_summary_2017 &lt;- milk_production %&gt;%
+  filter(year == 2017) %&gt;%
+  mutate(state = fct_other(state,
+    keep = c('California', 'Wisconsin'))) %&gt;%
+  group_by(state) %&gt;%
+  summarise(milk_produced = sum(milk_produced))
+```
+
+```r
+ggplot(milk_summary_2017) +
+  geom_col(aes(x = "", y = milk_produced, fill = state),
+           width = 0.7, alpha = 0.8) +
+* coord_flip() +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+* theme_minimal_vgrid() +
+  labs(x = NULL,
+       y = 'Milk produced (lbs)',
+       fill = 'State',
+       title = '2017 Milk Production by State')
+```
+]]
+.rightcol45[
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-84-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## Stacked bars
+
+Not great for more than a few categories
+
+.leftcol55[.code70[
+
+```r
+milk_summary_2017 &lt;- milk_production %&gt;%
+  filter(year == 2017) %&gt;%
+  mutate(state = fct_other(state,
+*   keep = c('California', 'Wisconsin',
+*            'New York', 'Idaho'))) %&gt;%
+  group_by(state) %&gt;%
+  summarise(milk_produced = sum(milk_produced))
+```
+
+```r
+ggplot(milk_summary_2017) +
+  geom_col(aes(x = "", y = milk_produced, fill = state),
+           width = 0.7, alpha = 0.8) +
+  coord_flip() +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  theme_minimal_vgrid() +
+  labs(x = NULL,
+       y = 'Milk produced (lbs)',
+       fill = 'State',
+       title = '2017 Milk Production by State')
+```
+]]
+.rightcol45[
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-86-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## Where stacking is useful
+
+.leftcol[
+### - **2 - 3 groups**
+### - Proportions over time
+]
+.rightcol[
+&lt;center&gt;
+&lt;img src="images/bechdel-stacked.png" width="600"&gt;
+&lt;/center&gt;
+
+.font80[https://fivethirtyeight.com/features/the-dollar-and-cents-case-against-hollywoods-exclusion-of-women/]
+]
+
+---
+## Where stacking is useful
+
+.leftcol[
+### - 2 - 3 groups
+### - **Proportions over time**
+]
+.rightcol[
+&lt;center&gt;
+&lt;img src="images/Coles-Graph.png" width="600"&gt;
+&lt;/center&gt;
+
+.font80[https://www.perceptualedge.com/blog/?p=2239]
+]
+
+---
+.leftcol55[.code70[
+## Dodged bars
+
+Better for showing **single part-to-whole comparison**
+
+
+```r
+milk_summary_2017 &lt;- milk_production %&gt;%
+  filter(year == 2017) %&gt;%
+  mutate(state = fct_other(state,
+    keep = c('California', 'Wisconsin'))) %&gt;%
+  group_by(state) %&gt;%
+  summarise(milk_produced = sum(milk_produced)) %&gt;%
+  mutate(state = fct_reorder(state, milk_produced))
+```
+
+```r
+ggplot(milk_summary_2017) +
+* geom_col(aes(x = state, y = milk_produced),
+           width = 0.7, alpha = 0.8) +
+  coord_flip() +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  theme_minimal_vgrid() +
+  labs(x = 'State',
+       y = 'Milk produced (lbs)',
+       title = '2017 Milk Production by State')
+```
+]]
+.rightcol45[
+Okay:
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-88-1.png" width="504" style="display: block; margin: auto;" /&gt;
+
+Better:
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-89-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+.leftcol55[.code70[
+## Dodged bars
+
+Better for **comparing individual components**
+
+
+```r
+milk_summary_2017 &lt;- milk_production %&gt;%
+* filter(year %in% c(1970, 2017)) %&gt;%
+  mutate(state = fct_other(state,
+    keep = c('California', 'Wisconsin'))) %&gt;%
+* group_by(year, state) %&gt;%
+  summarise(milk_produced = sum(milk_produced))
+```
+
+
+```r
+ggplot(milk_summary_2017) +
+* geom_col(aes(x = as.factor(year),
+               y = milk_produced, fill = state),
+*          position = 'dodge',
+           width = 0.7, alpha = 0.8) +
+  coord_flip() +
+  scale_y_continuous(
+    expand = expand_scale(mult = c(0, 0.05))) +
+  theme_minimal_vgrid() +
+  labs(x = 'Year',
+       y = 'Milk produced (lbs)',
+       fill = 'State',
+       title = '1970 &amp; 2017 Milk Production by State')
+```
+]]
+.rightcol45[
+Better for comparing _total_:
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-91-1.png" width="504" style="display: block; margin: auto;" /&gt;
+
+Better for comparing _parts_:
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-92-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## The Notorious P-I-E
+
+Start with a bar chart
+
+.leftcol55[.code70[
+
+```r
+milk_summary_2017 &lt;- milk_production %&gt;%
+  filter(year == 2017) %&gt;%
+  mutate(state = fct_other(state,
+    keep = c('California', 'Wisconsin'))) %&gt;%
+  group_by(state) %&gt;%
+  summarise(milk_produced = sum(milk_produced))
+```
+
+```r
+ggplot(milk_summary_2017) +
+* geom_col(aes(x = "", y = milk_produced, fill = state),
+           width = 0.7, alpha = 0.8) +
+  theme_minimal_hgrid() +
+  labs(x = NULL,
+       y = 'Milk produced (lbs)',
+       fill = 'State',
+       title = '2017 Milk Production by State')
+```
+]]
+.rightcol45[
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-94-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## The Notorious P-I-E
+
+Convert bar to pie
+
+.leftcol55[.code70[
+
+```r
+milk_summary_2017 &lt;- milk_production %&gt;%
+  filter(year == 2017) %&gt;%
+  mutate(state = fct_other(state,
+    keep = c('California', 'Wisconsin'))) %&gt;%
+  group_by(state) %&gt;%
+  summarise(milk_produced = sum(milk_produced))
+```
+
+```r
+ggplot(milk_summary_2017) +
+  geom_col(aes(x = "", y = milk_produced, fill = state),
+           width = 0.7, alpha = 0.8) +
+* coord_polar(theta = "y") +
+  labs(x = NULL,
+       y = NULL,
+       fill = 'State',
+       title = '2017 Milk Production by State')
+```
+]]
+.rightcol45[
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-96-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+.leftcol55[.code70[
+## The Notorious P-I-E
+
+Add labels &amp; apply `theme_map()`
+
+```r
+milk_summary_2017 &lt;- milk_production %&gt;%
+  filter(year == 2017) %&gt;%
+  mutate(state = fct_other(state,
+    keep = c('California', 'Wisconsin'))) %&gt;%
+  group_by(state) %&gt;%
+  summarise(milk_produced = sum(milk_produced)) %&gt;%
+* arrange(desc(state)) %&gt;%
+* mutate(p = 100*(milk_produced / sum(milk_produced)),
+*        label = str_c(round(p), '%'))
+```
+
+```r
+ggplot(milk_summary_2017) +
+  geom_col(aes(x = "", y = milk_produced, fill = state),
+           width = 0.7, alpha = 0.8) +
+  coord_polar(theta = "y") +
+* geom_text(aes(x = "", y = milk_produced, label = label),
+*           color = "white", size = 6,
+*           position = position_stack(vjust = 0.5)) +
+* theme_map() +
+  labs(x = NULL,
+       y = NULL,
+       fill = 'State',
+       title = '2017 Milk Production by State')
+```
+]]
+.rightcol45[
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-98-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+class: center
+
+# Where pies are useful
+
+.cols3[
+&lt;center&gt;
+&lt;img src="images/bundestag-bars-stacked.png" width=250&gt;
+&lt;center&gt;
+]
+.cols3[
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/bundestag-bars-dodged.png"&gt;
+&lt;center&gt;
+]
+.cols3[
+&lt;br&gt;
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/bundestag-pie.png"&gt;
+&lt;center&gt;
+]
+
+---
+class: center
+
+## The best pies are **square pies**
+
+&lt;center&gt;
+&lt;img src="images/square-pies-rule.png" width="700"&gt;
+&lt;/center&gt;
+
+.font80[https://eagereyes.org/blog/2016/a-reanalysis-of-a-study-about-square-pie-charts-from-2009]
+]
+
+---
+.leftcol55[.code70[
+### Waffle plots
+
+Summarize data, then plot:
+
+```r
+milk_summary_2017 &lt;- milk_production %&gt;%
+  filter(year == 2017) %&gt;%
+  mutate(state = fct_other(state,
+    keep = c('California', 'Wisconsin'))) %&gt;%
+  group_by(state) %&gt;%
+  summarise(milk_produced = sum(milk_produced)) %&gt;%
+* mutate(milk_produced = milk_produced / 10^9)
+```
+
+
+```r
+*library(waffle)
+
+ggplot(milk_summary_2017) +
+* geom_waffle(aes(fill = state, values = milk_produced),
+*             color = "white", size = 1, n_rows = 15) +
+  scale_x_discrete(expand = c(0, 0)) +
+  scale_y_discrete(expand = c(0, 0)) +
+  theme_minimal() +
+  labs(fill = 'State',
+       x = NULL,
+       y = NULL,
+       title = str_c('2017 Milk Production by State\n',
+                     '(1 square = 1 billion lbs)'))
+```
+]]
+.rightcol45[
+Use values between 100 - 1,000
+
+(You don't want 1,000,000,000 boxes!)
+
+```
+## # A tibble: 3 x 2
+##   state      milk_produced
+##   &lt;fct&gt;              &lt;dbl&gt;
+## 1 California          39.8
+## 2 Wisconsin           30.3
+## 3 Other              145.
+```
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-101-1.png" width="360" style="display: block; margin: auto;" /&gt;
+]
+
+---
+.leftcol55[.code70[
+### Waffle plots
+
+Summarize data, then plot:
+
+```r
+milk_summary_2017 &lt;- milk_production %&gt;%
+  filter(year == 2017) %&gt;%
+  mutate(state = fct_other(state,
+    keep = c('California', 'Wisconsin'))) %&gt;%
+  group_by(state) %&gt;%
+  summarise(milk_produced = sum(milk_produced)) %&gt;%
+  mutate(milk_produced = milk_produced / 10^9)
+```
+
+
+```r
+library(waffle)
+
+ggplot(milk_summary_2017) +
+  geom_waffle(aes(fill = state, values = milk_produced),
+              color = "white", size = 1, n_rows = 15,
+*             flip = TRUE) +
+  scale_x_discrete(expand = c(0, 0)) +
+  scale_y_discrete(expand = c(0, 0)) +
+  theme_minimal() +
+  labs(fill = 'State',
+       x = NULL,
+       y = NULL,
+       title = str_c('2017 Milk Production by State\n',
+                     '(1 square = 1 billion lbs)'))
+```
+]]
+.rightcol45[
+Use values between 100 - 1,000
+
+(You don't want 1,000,000,000 boxes!)
+
+```
+## # A tibble: 3 x 2
+##   state      milk_produced
+##   &lt;fct&gt;              &lt;dbl&gt;
+## 1 California          39.8
+## 2 Wisconsin           30.3
+## 3 Other              145.
+```
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-104-1.png" width="360" style="display: block; margin: auto;" /&gt;
+]
+
+---
+.leftcol55[.code70[
+### Waffle comparison
+
+Summarize data, then plot:
+
+```r
+milk_summary_2017 &lt;- milk_production %&gt;%
+* filter(year %in% c(1970, 2017)) %&gt;%
+  mutate(state = fct_other(state,
+    keep = c('California', 'Wisconsin'))) %&gt;%
+* group_by(year, state) %&gt;%
+  summarise(milk_produced = sum(milk_produced)) %&gt;%
+  mutate(milk_produced = milk_produced / 10^9)
+```
+
+
+```r
+library(waffle)
+
+ggplot(milk_summary_2017) +
+  geom_waffle(aes(fill = state, values = milk_produced),
+              color = "white", size = 1, n_rows = 10,
+              flip = TRUE) +
+* facet_wrap(~year, strip.position = 'bottom') +
+  scale_x_discrete(expand = c(0, 0)) +
+  scale_y_discrete(expand = c(0, 0)) +
+  theme_minimal() +
+  labs(fill = 'State',
+       x = NULL,
+       y = NULL,
+       title = str_c('1970 &amp; 2017 Milk Production by State\n',
+                     '(1 square = 1 billion lbs)'))
+```
+]]
+.rightcol45[
+
+
+```
+## # A tibble: 6 x 3
+## # Groups:   year [2]
+##    year state      milk_produced
+##   &lt;dbl&gt; &lt;fct&gt;              &lt;dbl&gt;
+## 1  1970 California          9.46
+## 2  1970 Wisconsin          18.4 
+## 3  1970 Other              89.1 
+## 4  2017 California         39.8 
+## 5  2017 Wisconsin          30.3 
+## 6  2017 Other             145.
+```
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-107-1.png" width="360" style="display: block; margin: auto;" /&gt;
+]
+
+---
+class: center
+
+.leftcol[
+
+Stacked bars
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-108-1.png" width="504" style="display: block; margin: auto;" /&gt;
+
+Dodged bars
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-109-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+.rightcol[
+
+Pie chart
+&lt;img src="slides-4-amounts-proportions_files/figure-html/milk_compare_pie-1.png" width="360" style="display: block; margin: auto;" /&gt;
+
+Waffle chart
+&lt;img src="slides-4-amounts-proportions_files/figure-html/unnamed-chunk-110-1.png" width="360" style="display: block; margin: auto;" /&gt;
+]
+
+---
+class: inverse
+
+## Your turn
+
+.leftcol[
+Using the `wildlife_impacts` data, create plots that shows the proportion of incidents that occur at each different time of day.
+
+For this exercise, you can remove `NA` values.
+
+Try to create the following plots:
+
+- Stacked bars
+- Dodged bars
+- Pie chart
+- Waffle chart
+]
+.rightcol[
+To get started, you'll need to first summarize the data:
+
+```r
+wildlife_summary &lt;- wildlife_impacts %&gt;%
+  filter(!is.na(time_of_day)) %&gt;%
+  count(time_of_day)
+
+wildlife_summary
+```
+
+```
+## # A tibble: 4 x 2
+##   time_of_day     n
+##   &lt;chr&gt;       &lt;int&gt;
+## 1 Dawn         1270
+## 2 Day         25123
+## 3 Dusk         1717
+## 4 Night       12735
+```
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

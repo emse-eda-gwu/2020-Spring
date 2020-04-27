@@ -1,0 +1,83 @@
+
+---
+class: middle, inverse, center
+
+# Ask and you shall [receive](https://github.com/thomasp85/gganimate/issues/372)
+
+---
+class: inverse
+
+# R tip of the week:
+
+## Copy-paste magic with [`datapasta`](https://github.com/MilesMcBain/datapasta)
+
+<br>
+
+### **Useful for "small data"**: e.g., [U.S. State Abbreviations](https://www.50states.com/abbreviations.htm)
+
+---
+## Today's data
+
+"Clean" data
+```{r, eval=FALSE}
+wildlife_impacts <- read_csv(here::here('data', 'wildlife_impacts.csv'))
+milk_production  <- read_csv(here::here('data', 'milk_production.csv'))
+msleep           <- read_csv(here::here('data', 'msleep.csv'))
+```
+
+"Messy" data
+```{r, eval=FALSE}
+wind     <- read_excel(here::here('data', 'US_State_Wind_Energy_Facts_2018.xlsx'))
+hot_dogs <- read_excel(here::here('data', 'hot_dog_winners.xlsx'))
+pc_sales <- read_excel(here::here('data', 'pc_sales_2018.xlsx'), skip = 5)
+weather  <- readRDS(here::here('data', 'weather.Rds'))
+```
+
+## Plus two new packages:
+
+- **janitor**: for cleaning names
+- **lubridate**: for manipulating dates
+
+---
+# One more note
+
+`here()` != `here::here()`
+
+---
+# One more note
+
+`here()` != `here::here()`
+
+<br>
+
+Syntax:
+
+`library` + `::` + `function`
+
+---
+# One more note
+
+.leftcol[
+`here()` != `here::here()`
+
+<br>
+
+Syntax:
+
+`library` + `::` + `function`
+
+<br>
+]
+.rightcol[
+Example:
+
+```{r, eval=FALSE}
+milk_production %>%
+    filter(year == 2000)
+```
+
+```{r, eval=FALSE}
+milk_production %>%
+    dplyr::filter(year == 2000) #<<
+```
+]

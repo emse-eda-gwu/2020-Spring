@@ -1,0 +1,28 @@
+Other content ideas:
+
+Arctic sea ice - show variation over time:
+- https://data.world/makeovermonday/2018w15-arctic-sea-ice-extent
+- https://www.makeovermonday.co.uk/week15-2018/
+
+# ----------------------------------------------------------------------
+Planned outline:
+
+Quiz 2 (25 min)
+
+Intro (5 min)
+- R Tip of the day
+
+Single vars (20 min)
+
+Multi vars (30 min)
+
+Break (5 min)
+
+Animation (30 min)
+
+Assignment 4 (5 min)
+
+# ----------------------------------------------------------------------
+# Post-class notes
+
+Make sure libraries are installed!

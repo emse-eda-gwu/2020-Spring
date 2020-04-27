@@ -1,0 +1,63 @@
+Use example of change in top 10 milk producers between 1970 and 2017
+
+“At the heart of quantitative reasoning is a single question: Compared to what?”
+- Edward Tufte
+
+1. Intro
+
+2. Ranking things (bars, dots, lollipops)
+
+- One of the most fundamental ways to compare things is to rank them
+- We've been doing this
+- Here are a couple other ways.
+- Dots are good when ________
+- lollipops are good when ________
+
+3. Comparing two things (dodged bars, slope chart, dumbbell chart)
+
+- dodged comparisons are fine, but really no more than 2 things.
+- Using facets to break up 3-4 groups of 2 is okay.
+- A better approach for multiple categories is slope charts or dumbbell charts
+
+4. Comparing things to a benchmark (benchmark line, diverging bars / lollipops, overlapping bars)
+
+- In any of these plots, adding a benchmark can be really useful
+- examples: dumbbell with benchmark, bullet with benchmark
+- Another way is to compare things to a **computed** benchmark, like the mean - diverging bars / lollipops
+- Finally, overlapping bars are great when you want to show when something exceeds a threshold. E.g. going over your budget.
+
+5. Comparing distributions
+
+- Box plots
+- Transparent histograms & densities (good for maybe 2 categories)
+- Ridgeline plots (good for lots of categories)
+
+Ridgeline plots: https://wilkelab.org/ggridges/
+
+Helpful:
+https://datavizf17.classes.andrewheiss.com/class/05-class/
+
+
+
+# ----------------------------------------------------------------------
+Planned outline:
+
+Intro (5 min)
+- Updated site URLs
+- R Tip of the day
+
+Ranking things (20 min)
+
+Comparing things to a reference (20 min)
+
+Break (5 min)
+
+Comparing two things (30 min)
+
+Comparing distributions (30 min)
+
+Assignment 4 (5 min)
+
+# ----------------------------------------------------------------------
+# Post-class notes
+

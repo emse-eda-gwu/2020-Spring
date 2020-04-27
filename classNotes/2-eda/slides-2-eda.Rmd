@@ -1,0 +1,1180 @@
+---
+title: "Week 2: Exploring Data"
+author: "John Paul Helveston"
+date: January 22, 2020
+output:
+  xaringan::moon_reader:
+    css: ['default', 'https://emse-eda-gwu.github.io/2020-Spring/classNotes/classNotes.css']
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      beforeInit: "https://platform.twitter.com/widgets.js"
+    seal: false
+---
+
+```{r setup, include=FALSE}
+library(knitr)
+library(here)
+library(boot)
+library(ggrepel)
+library(tidyverse)
+library(cowplot)
+library(fontawesome) # from github: https://github.com/rstudio/fontawesome
+options(
+    htmltools.dir.version = FALSE,
+    knitr.table.format    = "html",
+    knitr.kable.NA        = '',
+    dplyr.width           = Inf,
+    width                 = 120)
+knitr::opts_chunk$set(
+    warning    = FALSE,
+    message    = FALSE,
+    fig.retina = 3)
+```
+
+name: xaringan-title
+class: title-slide, center, middle, inverse
+
+# Week 2: Exploring Data
+
+.large[EMSE 4197 | John Paul Helveston | January 22, 2020]
+
+---
+class: inverse, center
+
+# Thanks for the hero gifs :)
+
+.leftcol[
+<center>
+<img src="images/hero_ellinport.gif">
+</center>
+]
+.rightcol[
+<center>
+<img src="images/hero_stricklett.gif">
+</center>
+]
+
+---
+class: inverse, center, middle
+
+# 24,901
+
+---
+class:inverse, center, middle
+
+# 24,901 miles
+
+---
+class: inverse, center, middle
+
+# Earth's circumference at the equator: 24,901 miles
+
+---
+# Types of Data
+
+--
+.leftcol[
+### **Categorical**
+
+Subdivide things into useful groups
+
+- What type?
+- Which category?
+]
+--
+.rightcol[
+### **Numerical**
+
+Measure things with numbers
+
+- How many?
+- How much?
+]
+--
+.leftcol[
+Variable type:
+
+- Nominal
+- Ordinal
+]
+--
+.rightcol[
+Scale type:
+
+- Interval
+- Ratio
+]
+
+---
+## Categorical (discrete) variables
+
+--
+.leftcol[
+### **Nominal**
+
+- Order doesn't matter
+- Differ in "name" (nominal) only
+
+Example: `country` in _TB cases_
+
+```{r, echo=FALSE}
+table1
+```
+]
+--
+.rightcol[
+### **Ordinal**
+
+- Order matters
+- Distance between units not equal
+
+Example: `Placement` _2017 Boston marathon_
+
+```{r, echo=FALSE}
+marathon <- read_csv(here::here('data', 'marathon.csv'))
+marathon %>%
+  dplyr::select(Placement = Overall, `Official Time`, Name) %>%
+  head()
+```
+]
+
+---
+## Numerical data
+
+--
+.leftcol[
+### **Interval**
+
+- Numerical scale with arbitrary starting point
+- No "0" point
+- Can't say "x" is double "y"
+
+Example: `day`, `time`, & `temp` in _Beaver temperature_
+```{r, echo=FALSE}
+beaver1 %>%
+    sample_frac(0.05) %>%
+    arrange(day) %>%
+    head()
+```
+]
+--
+.rightcol[
+### **Ratio**
+
+- Has a "0" point
+- Can be described as percentages
+- Can say "x" is double "y"
+
+Example: `height` & `speed` in wildlife impacts
+```{r, echo=FALSE}
+wildlife_impacts <- read_csv(here('data','wildlife_impacts.csv'))
+wildlife_impacts %>%
+    filter(!is.na(height), ! is.na(speed)) %>%
+    dplyr::select(incident_date, height, speed) %>%
+    head()
+```
+]
+
+---
+# Be careful of how variables are encoded
+
+--
+- When numbers are categories
+    - "Dummy coding": "Has Graduated" = `1`, "Has not Graduated" = `0`)
+    - "North", "South", "East", "West" = `1`, `2`, `3`, `4`
+
+--
+- When ratio data are discrete (i.e. counts)
+    - Number of eggs in a carton, heart beats per minute, etc.
+    - Continuous variables measured discretely (e.g. age)
+
+--
+- Time:
+    - As _ordinal_ categories: "Jan.", "Feb.", "Mar.", etc.
+    - As _interval_ scale: "Jan.", "Feb.", "Mar.", etc.
+    - As _ratio_ scale: "Day 1", "Day 2", "Day 3", etc.
+
+---
+class: inverse
+
+# Practice with data types
+
+.leftcol60[
+1) Read in the following data sets:
+
+- `milk_production.csv`
+- `lotr_words.csv`
+
+2) For each variable in each data set, note the data type:
+
+Categorical | Numerical
+------------|-----------
+Nominal     | Interval
+Ordinal     | Ratio
+
+3) Share your results with your neighbor
+]
+
+```{r, include=FALSE, eval=FALSE}
+milk_production <- read_csv(here('data', 'milk_production.csv'))
+lotr_words <- read_csv(here('data', 'lotr_words.csv'))
+
+# milk_production:
+#     region:        Nominal
+#     state:         Nominal
+#     year:          Interval
+#     milk_produced: Ratio
+
+# lotr_words
+#     Film:   Ordinal
+#     Race:   Nominal
+#     Female: Ratio
+#     Male:   Ratio
+```
+
+---
+class: inverse, middle, center
+
+# Summary measures:
+
+.rightcol70[.left[
+# 1. Centrality
+# 2. Variability
+]]
+
+---
+# Centrality ("Average")
+
+--
+### A single number representing the _middle_ of a set of numbers
+<br>
+
+--
+### **Mean**: $\frac{\text{Sum of values}}{\text{# of values}}$
+<br>
+
+--
+### **Median**: Middle value (50% of data above & below)
+<br>
+
+--
+### **Mode**: Most frequent value (rarely use)
+
+---
+class: center
+
+# "Mean" isn't always the best choice
+
+.leftcol60[
+```{r, echo=FALSE, fig.width=9, fig.height=5, fig.align='center'}
+height <- wildlife_impacts %>%
+    filter(! is.na(height)) %>%
+    summarise(mean = round(mean(height)),
+              median = round(median(height))) %>%
+    gather(stat, value, mean:median) %>%
+    mutate(y = c(22000, 25000), stat = paste0(stat, ": ", value))
+wildlife_impacts %>%
+    ggplot() +
+    geom_histogram(aes(x = height), bins = 50) +
+    scale_y_continuous(expand = expand_scale(mult = c(0, 0.05))) +
+    theme_half_open() +
+    theme(text = element_text(size = 20),
+          axis.text = element_text(size = 20)) +
+    labs(title = 'Histogram of impact height',
+         x = 'Height (ft)', y = 'Count') +
+    geom_vline(xintercept = height$value, linetype = "dashed", color = "red",
+               size = 1) +
+    geom_label_repel(data = height, aes(x = value, y = y, label = stat),
+               hjust = 0, nudge_x = 3000, size = 6)
+```
+]
+.rightcol40[.left[
+```{r}
+wildlife_impacts %>%
+    filter(! is.na(height)) %>%
+    summarise(
+      mean = mean(height),
+      median = median(height))
+```
+Percent of data below mean:
+```{r, echo=FALSE}
+percentiles <- ecdf(wildlife_impacts$height)
+meanP <- percentiles(mean(wildlife_impacts$height, na.rm = TRUE))
+paste0(round(100*meanP, 1), '%')
+```
+]]
+
+---
+class: inverse
+
+# Beware the "flaw of averages"
+
+### What happened to the statistician that crossed a river with an average depth of 3 feet?
+
+--
+### ...he drowned
+
+<img src = "images/foa.jpg">
+
+---
+# Variability ("Spread")
+
+--
+### **Range**: max - min
+<br>
+
+--
+### **Standard deviation**: distribution of values relative to the mean
+<br>
+
+--
+### **Interquartile range (IQR)**: $Q_3 - Q_1$ (middle 50% of data)
+
+---
+# Example: Days to ship
+
+.leftcol40[
+Complaints are coming in about orders shipped from warehouse B, so you collect some data:
+
+```{r, echo=FALSE}
+daysToShip <- data.frame(
+    order = seq(12),
+    warehouseA = c(3,3,3,4,4,4,5,5,5,5,5,5),
+    warehouseB = c(1,1,1,3,3,4,5,5,5,6,7,10))
+daysToShip
+```
+]
+--
+.rightcol60[
+Here, **averages** are misleading:
+```{r}
+daysToShip %>%
+    gather(warehouse, days, warehouseA:warehouseB) %>%
+    group_by(warehouse) %>%
+    summarise(
+        mean   = mean(days),
+        median = median(days))
+```
+]
+
+---
+# Example: Days to ship
+
+.leftcol40[
+Complaints are coming in about orders shipped from warehouse B, so you collect some data:
+
+```{r, echo=FALSE}
+daysToShip <- data.frame(
+    order = seq(12),
+    warehouseA = c(3,3,3,4,4,4,5,5,5,5,5,5),
+    warehouseB = c(1,1,1,3,3,4,5,5,5,6,7,10))
+daysToShip
+```
+]
+.rightcol60[
+**Variability** reveals difference in days to ship:
+```{r}
+daysToShip %>%
+    gather(warehouse, days, warehouseA:warehouseB) %>%
+    group_by(warehouse) %>%
+    summarise(
+        mean   = mean(days),
+        median = median(days),
+        range = max(days) - min(days), #<<
+        sd    = sd(days)) #<<
+```
+]
+
+---
+# Example: Days to ship
+
+```{r, echo=FALSE, fig.width=12, fig.height=6, fig.align='center'}
+daysSummary <- daysToShip %>%
+    gather(warehouse, days, warehouseA:warehouseB) %>%
+    group_by(warehouse) %>%
+    summarise(
+        range = max(days) - min(days),
+        sd    = sd(days)) %>%
+    mutate(
+        x1 = 2, x2 =4.5, y = 4,
+        label1 = 'Range:\nSD:',
+        label2 = paste0(range, '\n', round(sd, 2)))
+daysToShip %>%
+    gather(warehouse, days, warehouseA:warehouseB) %>%
+    group_by(warehouse) %>%
+    mutate(days = days - mean(days)) %>%
+    ggplot() +
+    geom_col(aes(x = as.factor(order), y = days), width = 0.7) +
+    geom_text(data = daysSummary, aes(x = x1, y = y, label = label1),
+               hjust = 0, size = 8, fontface = "bold") +
+    geom_text(data = daysSummary, aes(x = x2, y = y, label = label2),
+               hjust = 0, size = 8) +
+    facet_wrap(~warehouse, nrow = 1) +
+    geom_hline(yintercept = 0, size = 1) +
+    theme_half_open() +
+    panel_border() +
+    theme(text = element_text(size = 20),
+          axis.text = element_text(size = 20)) +
+    labs(title = 'Difference from mean days to ship',
+         x = 'Order', y = 'Days to ship')
+```
+
+---
+class: center
+
+# Interpreting the standard deviation
+
+.leftcol[
+### $s = \sqrt{\frac{\sum_{i=1}^{N}(x_i - \bar{x})^2}{N - 1}}$
+
+```{r, echo=FALSE, fig.width=6, fig.height=5, fig.align='center'}
+daysToShip %>%
+    gather(warehouse, days, warehouseA:warehouseB) %>%
+    filter(warehouse == 'warehouseB') %>%
+    ggplot() +
+    geom_col(aes(x = as.factor(order), y = days), width = 0.7) +
+    geom_hline(yintercept = mean(daysToShip$warehouseB), size = 1) +
+    scale_y_continuous(expand = expand_scale(mult = c(0, 0.05))) +
+    theme_half_open() +
+    labs(title = 'Difference from mean days to ship',
+         x = 'Order', y = 'Days to ship')
+```
+]
+.rightcol[
+<img src='images/sd.png'>
+]
+
+---
+class: inverse
+
+# Practice with summary measurements
+
+1) Read in the following data sets:
+
+- `milk_production.csv`
+- `lotr_words.csv`
+
+2) For each variable in each data set, if possible, summarize its
+
+- _Centrality_
+- _Variability_
+
+3) Share your results with your neighbor
+
+```{r, include=FALSE, eval=FALSE}
+milk_production <- read_csv(here('data', 'milk_production.csv'))
+lotr_words <- read_csv(here('data', 'lotr_words.csv'))
+
+# milk_production:
+milk_production %>%
+    summarise(
+        median = median(year),
+        range  = max(year) - min(year))
+milk_production %>%
+    summarise(
+        mean   = mean(milk_produced),
+        median = median(milk_produced),
+        range  = max(milk_produced) - min(milk_produced),
+        sd     = sd(milk_produced),
+        IQR    = IQR(milk_produced))
+summary(milk_production$year)
+summary(milk_production$milk_produced)
+
+# lotr_words
+lotr_words %>%
+    summarise(
+        mean   = mean(Female),
+        median = median(Female),
+        range  = max(Female) - min(Female),
+        sd     = sd(Female),
+        IQR    = IQR(Female))
+summary(lotr_words$Female)
+summary(lotr_words$Male)
+```
+
+---
+
+class: center, middle
+
+# "Visualizing data helps us think"<sup>1</sup>
+
+<center>
+<img src = "images/anscombe_data.png" width = "700">
+</center>
+
+---
+class: center, middle
+
+# Anscombe's Quartet
+
+```{r, echo=FALSE, fig.height=6, fig.width=8, fig.align='center'}
+x       <- c(anscombe$x1, anscombe$x2, anscombe$x3, anscombe$x4)
+y       <- c(anscombe$y1, anscombe$y2, anscombe$y3, anscombe$y4)
+quartet <- rep(c('A', 'B', 'C', 'D'), each = nrow(anscombe))
+ansDf   <- tibble(x, y, quartet)
+ansDf %>%
+    ggplot(aes(x = x, y = y)) +
+    geom_point(alpha = 0.6, size = 2) +
+    stat_smooth(method = 'lm', se = F, size = 0.4, alpha = 0.6) +
+    facet_wrap(vars(quartet)) +
+    scale_x_continuous(breaks=seq(4, 18, 2), limits=c(4, 19)) +
+    scale_y_continuous(breaks=seq(4, 12, 2), limits=c(3, 13)) +
+    theme_bw() +
+    theme(
+        axis.ticks = element_blank(),
+        axis.ticks.length = unit(0, "cm"),
+        axis.text = element_blank(),
+        axis.title = element_blank(),
+        plot.margin = margin(0, 0, 0, 0, "cm"))
+```
+
+.left[.footer-small[Stephen Few (2009, pg. 6)]]
+
+---
+class: inverse, center, middle
+
+# The data type determines
+# how to summarize it
+
+---
+
+.cols3[
+### **Nominal**
+### **(Categorical)**
+
+**Measures**:
+- Frequency counts
+- Proportions
+<br>
+<br>
+<br>
+<br>
+
+**Charts**:
+- Bars
+]
+--
+.cols3[
+### **Ordinal**
+### **(Categorical)**
+
+**Measures**:
+- Frequency counts
+- Proportions
+- Centrality: Median, Mode
+- Variability: IQR
+<br>
+
+**Charts**:
+- Bars
+]
+--
+.cols3[
+### **Numerical**
+### **(Continuous)**
+
+**Measures**:
+- Centrality: Mean, median
+- Variability: Range, standard deviation, IQR
+<br>
+<br>
+<br>
+
+**Charts**:
+- Histogram
+- Boxplot
+]
+
+---
+## Summarizing **Nominal** data
+
+.leftcol[
+Summarize with counts / percentages
+
+```{r}
+wildlife_impacts %>%
+    count(operator) %>%
+    mutate(
+        p = n / sum(n),
+        percent = round(100*p, 2))
+```
+]
+--
+.rightcol[
+Visualize with bars
+
+.code70[
+```{r, eval=FALSE}
+wildlife_impacts %>%
+    ggplot() +
+    geom_bar(aes(x = operator), width = 0.7) + #<<
+    coord_flip() + 
+    theme_half_open()
+```
+```{r, echo=FALSE, fig.width=7, fig.height=4}
+wildlife_impacts %>%
+    ggplot() +
+    geom_bar(aes(x = operator), width = 0.7) + #<<
+    coord_flip() +
+    scale_y_continuous(expand = expand_scale(mult = c(0, 0.05))) +
+    theme_half_open()
+```
+]]
+
+---
+## Summarizing **Ordinal** data
+
+.leftcol[
+Summarize with counts / percentages
+
+.code70[
+```{r}
+wildlife_impacts %>%
+    count(incident_month) %>%
+    mutate(
+        p = n / sum(n),
+        percent = round(100*p, 2))
+```
+]]
+--
+.rightcol[
+Visualize with bars
+
+.code70[
+```{r, eval=FALSE}
+wildlife_impacts %>%
+    ggplot() +
+    geom_bar(aes(x = as.factor(incident_month)), #<<
+             width = 0.7) + #<<
+    theme_half_open() +
+    labs(x = 'Incident month')
+```
+```{r, echo=FALSE, fig.width=7, fig.height=4}
+wildlife_impacts %>%
+    ggplot() +
+    geom_bar(aes(x = as.factor(incident_month)), #<<
+             width = 0.7) + #<<
+    scale_y_continuous(expand = expand_scale(mult = c(0, 0.05))) +  
+    theme_half_open() +
+    labs(x = 'Incident month')
+```
+]]
+
+---
+## Summarizing **continuous** variables
+
+.leftcol30[
+**Histograms**:
+
+- Identifying skewness
+- Identifying # of modes
+<br>
+<br>
+
+**Boxplots**:
+
+- Identifying outliers
+- Comparing distributions across groups
+]
+.rightcol70[
+<img src = 'images/eda-boxplot.png'>
+]
+
+---
+
+.leftcol[
+## Continuous variables: **histogram**
+
+Summarise with mean, median, sd, range, & IQR:
+
+```{r, echo=FALSE}
+wildlife_summary <- wildlife_impacts %>%
+    filter(! is.na(height), ! is.na(speed)) %>%
+    gather(var, value, c(height, speed)) %>%
+    group_by(var) %>%
+    summarise(
+        mean   = round(mean(value)),
+        median = round(median(value)),
+        sd     = sd(value),
+        range  = max(value) - min(value),
+        IQR    = IQR(value))
+wildlife_summary
+```
+
+Visualize with **histogram** to:
+
+- Identify skewness
+- Identify # of modes
+
+```{r, eval=FALSE}
+wildlife_impacts %>%
+    ggplot() +
+    geom_histogram(aes(x = height), bins=50) + #<<
+    theme_half_open()
+```
+]
+.rightcol[
+```{r, echo=FALSE, fig.width=7, fig.height=4, fig.align='center'}
+wildlife_impacts %>%
+    ggplot() +
+    geom_histogram(aes(x = height), bins = 50) +
+    scale_y_continuous(expand = expand_scale(mult = c(0, 0.05))) +
+    theme_half_open() +
+    theme(text = element_text(size = 20),
+          axis.text = element_text(size = 20)) +
+    labs(title = 'Histogram of impact height',
+         x = 'Height (ft)', y = 'Count')
+```
+
+```{r, echo=FALSE, fig.width=7, fig.height=4, fig.align='center'}
+wildlife_impacts %>%
+    ggplot() +
+    geom_histogram(aes(x = speed), bins = 50) +
+    scale_y_continuous(expand = expand_scale(mult = c(0, 0.05))) +  
+    theme_half_open() +
+    theme(text = element_text(size = 20),
+          axis.text = element_text(size = 20)) +
+    labs(title = 'Histogram of impact speed',
+         x = 'Speed (mph)', y = 'Count')
+```
+]
+
+---
+## Continuous variables: **boxplot**
+
+.leftcol60[
+Summarise with mean, median, sd, range, & IQR:
+
+```{r, echo=FALSE}
+wildlife_summary
+```
+
+Visualize with **boxplot** to:
+
+- Identify outliers
+
+```{r, eval=FALSE}
+wildlife_impacts %>%
+    ggplot() +
+    geom_boxplot(aes(y = speed)) + #<<
+    theme_half_open()
+```
+]
+.rightcol40[
+```{r, echo=FALSE, fig.width=3, fig.height=6.5, fig.align='center'}
+wildlife_impacts %>%
+    ggplot() +
+    geom_boxplot(aes(y = speed)) +
+    theme_half_open() +
+    labs(title = 'Impact speed',
+         x = '', y = 'Speed (mph)')
+```
+]
+
+---
+class: inverse
+
+# Practice with visual summaries
+
+.font90[
+1) Read in the following data sets:
+
+- `faithful.csv`
+- `marathon.csv`
+
+2) Summarize the following variables using an appropriate chart (bar chart, histogram, and / or boxplot):
+
+- faithful: `eruptions`
+- faithful: `waiting`
+- marathon: `Age`
+- marathon: `State`
+- marathon: `Country`
+- marathon: `` `Official Time` ``
+
+3) Share what you learned about each variable with your neighbor.
+]
+
+```{r, include=FALSE, eval=FALSE}
+faithful <- read_csv(here('data', 'faithful.csv'))
+marathon <- read_csv(here('data', 'marathon.csv'))
+
+# faithful:
+faithful %>%
+    ggplot() +
+    geom_histogram(aes(x = eruptions))
+faithful %>%
+    ggplot() +
+    geom_histogram(aes(x = waiting))
+
+# marathon
+marathon %>%
+    ggplot() +
+    geom_histogram(aes(x = Age))
+marathon %>%
+    ggplot() +
+    geom_bar(aes(x = State)) +
+    coord_flip()
+marathon %>%
+    filter(Overall < 50) %>%
+    ggplot() +
+    geom_bar(aes(x = Country)) +
+    coord_flip()
+marathon %>%
+    ggplot() +
+    geom_histogram(aes(x = `Official Time`))
+marathon %>%
+    ggplot() +
+    geom_boxplot(aes(y = `Official Time`))
+```
+
+---
+class: inverse
+
+# [5 minute](https://www.youtube.com/watch?v=_W0bSen8Qjg) break!
+
+## Stand up
+
+## Move around
+
+## Stretch!
+
+---
+class: inverse, center, middle
+
+# Relationship between two variables
+
+---
+## Two categorical variables
+
+.leftcol[
+Summarize with a table of counts
+
+.code70[
+```{r}
+wildlife_impacts %>%
+    count(operator, time_of_day) %>%
+    spread(time_of_day, n)
+```
+]]
+--
+.rightcol[.code70[
+Map **color** aesthetic to denote 2nd categorical var
+
+```{r, eval=FALSE}
+wildlife_impacts %>%
+    ggplot() +
+    geom_bar(aes(x = operator, fill = time_of_day), #<<
+             width = 0.7, position = 'dodge') + #<<
+    coord_flip()
+```
+```{r, echo=FALSE, fig.width=7, fig.height=4.5}
+wildlife_impacts %>%
+    ggplot() +
+    geom_bar(aes(x = operator, fill = time_of_day), width = 0.7,
+        position = 'dodge') +
+    scale_y_continuous(expand = expand_scale(mult = c(0, 0.05))) +  
+    theme_half_open() +
+    coord_flip()
+```
+]]
+
+---
+## Two continuous variables
+
+.leftcol[
+Summarise with mean, median, sd, range, & IQR:
+
+.code70[
+```{r, echo=FALSE}
+wildlife_summary
+```
+]]
+.rightcol[
+Visualize with **scatterplot**
+
+```{r, eval=FALSE}
+wildlife_impacts %>%
+    ggplot() +
+    geom_point(aes(x = speed, y = height), #<<
+               size = 0.5) #<<
+```
+```{r, echo=FALSE, fig.width=7, fig.height=4, fig.align='center'}
+wildlife_impacts %>%
+    ggplot() +
+    geom_point(aes(x = speed, y = height), size = 0.5) +
+    theme_half_open() +
+    labs(title = 'Scatterplot of impact speed and height',
+         x = 'Speed (mph)', y = 'Height (f)')
+```
+]
+
+---
+## One continuous, one categorical
+
+.leftcol[
+Summarise with mean, median, sd, range, & IQR:
+
+.code70[
+```{r, echo=FALSE}
+wildlife_impacts %>%
+    filter(! is.na(speed)) %>%
+    group_by(operator) %>%
+    summarise(
+        mean   = round(mean(speed)),
+        median = round(median(speed)),
+        sd     = sd(speed),
+        range  = max(speed) - min(speed),
+        IQR    = IQR(speed))
+```
+]]
+.rightcol[
+Visualize with **boxplot**
+
+```{r, eval=FALSE}
+wildlife_impacts %>%
+    ggplot() +
+    geom_boxplot(aes(x=operator, y=speed)) + #<<
+    coord_flip()
+```
+```{r, echo=FALSE, fig.width=7, fig.height=4, fig.align='center'}
+wildlife_impacts %>%
+    ggplot() +
+    geom_boxplot(aes(x = operator, y = speed)) +
+    theme_half_open() +
+    labs(title = 'Boxplot of impact speed by airline',
+         x = 'Airline', y = 'Speed (mph)') +
+    coord_flip()
+```
+]
+
+---
+class: inverse
+
+# Practice with visualizing relationships
+
+.leftcol70[.font90[
+1) Read in the following data sets:
+
+- `marathon.csv`
+- `wildlife_impacts.csv`
+
+2) Visualize the _relationships_ between the following variables using an appropriate chart (bar plots, scatterplots, and / or box plots):
+
+- marathon: `Age` & `` `Official Time` ``
+- marathon: `` `M/F` `` & `` `Official Time` ``
+- wildlife_impacts: `state` & `operator`
+
+3) Share what you learned about each variable with your neighbor.
+]]
+```{r, include=FALSE, eval=FALSE}
+marathon <- read_csv(here('data', 'marathon.csv'))
+wildlife_impacts <- read_csv(here('data', 'wildlife_impacts.csv'))
+
+marathon %>%
+    ggplot() +
+    geom_point(aes(x = `Official Time`, y = Age),
+      size = 0.3)
+
+marathon %>%
+    ggplot() +
+    geom_boxplot(aes(x = `M/F`, y = `Official Time`))
+
+wildlife_impacts %>%
+    filter(state != "N/A") %>%
+    ggplot() +
+    geom_bar(aes(x = state, fill = operator)) +
+    coord_flip()
+```
+
+---
+class: inverse, middle, center
+
+# Outliers
+
+<center>
+<img src = "images/outliers.jpeg" width = "600">
+</center>
+
+---
+# Outliers (continuous data)
+
+**Outliers**: $Q_1 \pm 1.5 IQR$
+
+**Extreme values**: $Q_1 \pm 3.0 IQR$
+
+Outliers can have strong effect on the **mean** and **standard deviation**
+
+--
+.leftcol[
+```{r}
+data = c(7,4,6,5,6,5,3,3,8,9)
+```
+- Mean: `r mean(data)`
+- Standard Deviation: `r round(sd(data), 2)`
+- Median: `r median(data)`
+- IQR: `r IQR(data)`
+]
+--
+.rightcol[
+```{r}
+data = c(7,4,6,5,6,5,3,3,9,20)
+```
+- .red[Mean: `r mean(data)`]
+- .red[Standard Deviation: `r round(sd(data), 2)`]
+- .blue[Median: `r median(data)`]
+- .blue[IQR: `r IQR(data)`]
+]
+
+---
+class: inverse
+
+# Robust statistics for continuous data
+
+### **Centrality**: Use _median_ rather than _mean_
+
+### **Variability**: Use _IQR_ rather than _standard deviation_
+
+---
+# Doing EDA
+
+--
+EDA is an iterative process that helps you understand your data:
+
+1. Generate questions about your data
+2. Search for answers by visualising, transforming, and/or modelling your data
+3. Use what you learn to refine your questions and/or generate new questions
+
+<br>
+
+--
+EDA is a tool for _discovery_, not _confirmation_
+
+---
+## Visualizing variation
+
+.leftcol30[
+Ask yourself:
+
+- What type of **variation** occurs within my variables?
+- What type of **covariation** occurs between my variables?
+
+Check out [these guides](https://emse-eda-gwu.github.io/2020-Spring/ref-visualizing-data.html)
+]
+.rightcol70[
+<center>
+<img src = "images/plots-table.png" width = "800">
+</center>
+]
+
+---
+class: inverse, middle
+
+## "Far better an approximate answer to the right question, which is often vague, than an exact answer to the wrong question, which can always be made precise."
+## — John Tukey
+
+---
+class: inverse
+
+## Practice doing EDA: Groups of 3
+
+.leftcol[
+1) Read in the following data sets:
+
+- `avengers.csv`
+- `candy_rankings.csv`
+- `college_all_ages.csv`
+
+2) For each variable, note the data type:
+
+Categorical | Numerical
+------------|-----------
+Nominal     | Interval
+Ordinal     | Ratio
+
+3) For each variable, if possible, summarize its
+
+- _Centrality_
+- _Variability_
+
+]
+.rightcol[
+4) Summarize some of the variables using an appropriate chart:
+
+- Bar chart
+- Histogram
+- Boxplot
+
+5) Visualize a _relationship_ between two variables using an appropriate chart:
+
+- Bar chart
+- Scatterplot
+- Boxplot
+
+]
+
+```{r, include=FALSE, eval=FALSE}
+candy_rankings <- read_csv(here('data', 'candy_rankings.csv'))
+avengers <- read_csv(here('data', 'avengers.csv'))
+college_all_ages <- read_csv(here('data', 'college_all_ages.csv'))
+
+# candy_rankings
+candy_rankings %>%
+  ggplot() +
+  geom_col(aes(x=competitorname, y = winpercent)) +
+  coord_flip()
+
+candy_rankings %>%
+  ggplot() +
+  geom_point(aes(x=pricepercent, y = sugarpercent))
+
+candy_rankings %>%
+  ggplot() +
+  geom_point(aes(x=winpercent, y = sugarpercent))
+
+candy_rankings %>%
+  ggplot() +
+  geom_point(aes(x=winpercent, y = pricepercent))
+
+candy_rankings %>%
+  ggplot() +
+  geom_boxplot(aes(x = chocolate, y = winpercent))
+
+# avengers
+avengers %>%
+  ggplot() +
+  geom_bar(aes(x = death1))
+
+avengers %>%
+  ggplot() +
+  geom_col(aes(x = gender, y = appearances))
+
+avengers %>%
+  arrange(desc(appearances)) %>%
+  mutate(appearRank = seq(nrow(avengers))) %>%
+  filter(appearRank <= 10) %>%
+  mutate(name_alias = fct_reorder(name_alias, appearRank)) %>%
+  ggplot() +
+  geom_col(aes(x = name_alias, y = appearances, fill = gender)) +
+  coord_flip()
+
+avengers %>%
+  ggplot() +
+  geom_point(aes(x = year, y = appearances))
+
+# college_all_ages
+college_all_ages %>%
+  group_by(major_category) %>%
+  summarise(category_median = median(median)) %>%
+  mutate(major_category = fct_reorder(major_category, category_median)) %>%
+  ggplot() +
+  geom_col(aes(x = major_category, y = category_median)) +
+  coord_flip()
+
+college_all_ages %>%
+  ggplot() +
+  geom_boxplot(aes(x = major_category, y = median)) +
+  coord_flip()
+```

@@ -1,0 +1,436 @@
+
+---
+# Recoding with `if_else()`
+
+.leftcol40[
+Example: Create a variable, `cost_high`, that is `TRUE` if the repair costs were greater than the median costs and `FALSE` otherwise.
+]
+.rightcol60[.code70[
+```{r}
+wildlife_impacts1 <- wildlife_impacts %>%
+    rename(cost = cost_repairs_infl_adj) %>%
+    dplyr::filter(! is.na(cost)) %>%
+    mutate(cost_high = if_else(cost > median(cost), TRUE, FALSE)) #<<
+
+wildlife_impacts1 %>%
+    select(cost, cost_high) %>%
+    head()
+```
+]]
+
+---
+## Recoding with **nested** `if_else()`
+
+.leftcol40[
+Example:
+
+Create a variable, `season`, based on the `incident_month` variable.
+]
+.rightcol60[.code70[
+```{r}
+wildlife_impacts2 <- wildlife_impacts %>%
+    mutate(season = if_else( #<<
+        incident_month %in% c(3, 4, 5), 'spring', if_else( #<<
+        incident_month %in% c(6, 7, 8), 'summer', if_else( #<<
+        incident_month %in% c(9, 10, 11), 'fall', 'winter')))) #<<
+
+wildlife_impacts2 %>%
+    distinct(incident_month, season) %>%
+    head()
+```
+]]
+
+---
+## Recoding with `case_when()`
+
+.leftcol40[
+Example:
+
+Create a variable, `season`, based on the `incident_month` variable.
+]
+.rightcol60[.code70[
+```{r}
+wildlife_impacts2 <- wildlife_impacts %>%
+    mutate(season = case_when( #<<
+        incident_month %in% c(3, 4, 5) ~ 'spring', #<<
+        incident_month %in% c(6, 7, 8) ~ 'summer', #<<
+        incident_month %in% c(9, 10, 11) ~ 'fall', #<<
+        TRUE ~ 'winter')) #<<
+
+wildlife_impacts2 %>%
+    distinct(incident_month, season) %>%
+    head()
+```
+]]
+
+---
+## Recoding with `case_when()`
+
+.leftcol40[
+Example:
+
+Create a variable, `season`, based on the `incident_month` variable.
+]
+.rightcol60[.code70[
+```{r}
+wildlife_impacts2 <- wildlife_impacts %>%
+    mutate(season = case_when( #<<
+        between(incident_month, 3, 5) ~ 'spring', #<<
+        between(incident_month, 6, 8) ~ 'summer', #<<
+        between(incident_month, 9, 11) ~ 'fall', #<<
+        TRUE ~ 'winter')) #<<
+
+wildlife_impacts2 %>%
+    distinct(incident_month, season) %>%
+    head()
+```
+]]
+
+---
+## `case_when()` is a bit "cleaner" than `if_else()`
+
+Example:
+
+Convert the `num_engs` variable into a string of the number.
+
+--
+.leftcol55[.code70[
+`if_else()`
+```{r}
+wildlife_impacts3 <- wildlife_impacts %>%
+    mutate(num_engs = if_else(
+        num_engs == 1, 'one', if_else(
+        num_engs == 2, 'two', if_else(
+        num_engs == 3, 'three', if_else(
+        num_engs == 4, 'four', as.character(num_engs))))))
+
+unique(wildlife_impacts3$num_engs)
+```
+]]
+--
+.rightcol45[.code70[
+`case_when()`
+
+```{r}
+wildlife_impacts3 <- wildlife_impacts %>%
+    mutate(num_engs = case_when(
+        num_engs == 1 ~ 'one',
+        num_engs == 2 ~ 'two',
+        num_engs == 3 ~ 'three',
+        num_engs == 4 ~ 'four'))
+
+unique(wildlife_impacts3$num_engs)
+```
+]]
+
+---
+## Break a single variable into two with `separate()`
+
+.leftcol45[
+```{r}
+tuberculosis_rates
+```
+]
+--
+.rightcol55[
+```{r}
+tuberculosis_rates %>%
+  separate(rate, into = c("cases", "population")) #<<
+```
+]
+
+---
+## Break a single variable into two with `separate()`
+
+.leftcol45[
+```{r}
+tuberculosis_rates
+```
+]
+.rightcol55[
+```{r}
+tuberculosis_rates %>%
+  separate(rate, into = c("cases", "population"),
+           sep = "/") #<<
+```
+]
+
+---
+## Break a single variable into two with `separate()`
+
+.leftcol45[
+```{r}
+tuberculosis_rates
+```
+]
+.rightcol55[
+```{r}
+tuberculosis_rates %>%
+  separate(rate, into = c("cases", "population"),
+           sep = "/", convert = TRUE) #<<
+```
+]
+
+---
+## You can also break up a variable by an index
+
+.leftcol45[
+```{r}
+tuberculosis_rates
+```
+]
+.rightcol55[
+```{r}
+tuberculosis_rates %>%
+  separate(year, into = c("century", "year"),
+           sep = 1) #<<
+```
+]
+
+---
+## `unite()`: The opposite of `separate()`
+
+.leftcol45[
+```{r}
+tuberculosis_rates
+```
+]
+.rightcol55[
+```{r}
+tuberculosis_rates %>%
+  separate(year, into = c("century", "year"),
+           sep = 1) %>%
+  unite(year_new, century, year) #<<
+```
+]
+
+---
+## `unite()`: The opposite of `separate()`
+
+.leftcol45[
+```{r}
+tuberculosis_rates
+```
+]
+.rightcol55[
+```{r}
+tuberculosis_rates %>%
+  separate(year, into = c("century", "year"),
+           sep = 1) %>%
+  unite(year_new, century, year,
+        sep = "") #<<
+```
+]
+
+---
+class: inverse, middle, center
+
+# Dates
+
+---
+class: inverse, middle, center
+
+<center>
+<img src="images/dates.png" width=600>
+<center>
+
+---
+### Create dates from strings - **order is the ONLY thing that matters!**
+
+`library(lubridate)`
+
+--
+.cols3[
+.center[Year-Month-Day]
+```{r}
+ymd('2020-02-26')
+```
+]
+
+---
+### Create dates from strings - **order is the ONLY thing that matters!**
+
+`library(lubridate)`
+
+.cols3[
+.center[Year-Month-Day]
+```{r}
+ymd('2020-02-26')
+ymd('2020 Feb 26')
+```
+]
+
+---
+### Create dates from strings - **order is the ONLY thing that matters!**
+
+`library(lubridate)`
+
+.cols3[
+.center[Year-Month-Day]
+```{r}
+ymd('2020-02-26')
+ymd('2020 Feb 26')
+ymd('2020 Feb. 26')
+ymd('2020 february 26')
+```
+]
+--
+.cols3[
+.center[Month-Day-Year]
+```{r}
+mdy('February 26, 2020')
+mdy('Feb. 26, 2020')
+mdy('Feb 26 2020')
+```
+]
+--
+.cols3[
+.center[Day-Month-Year]
+```{r}
+dmy('26 February 2020')
+dmy('26 Feb. 2020')
+dmy('26 Feb, 2020')
+```
+]
+
+---
+## Manipulate dates
+
+```{r}
+date <- today()
+date
+```
+--
+.leftcol[.code70[
+```{r}
+# Get the year
+year(date)
+```
+]]
+
+---
+## Manipulate dates
+
+```{r}
+date <- today()
+date
+```
+.leftcol[.code70[
+```{r}
+# Get the year
+year(date)
+
+# Get the month
+month(date)
+
+# Get the month name
+month(date, label = TRUE, abbr = FALSE)
+```
+]]
+--
+.rightcol[.code70[
+
+```{r}
+# Get the day
+day(date)
+
+# Get the weekday
+wday(date)
+
+# Get the weekday name
+wday(date, label = TRUE, abbr = TRUE)
+```
+]]
+
+---
+class: inverse 
+
+# Quick practice 
+
+On what day of the week were you born?
+
+.leftcol60[
+```{r}
+wday("2020-02-26", label = TRUE)
+```
+]
+
+---
+## Modify elements of the date
+```{r}
+date <- today()
+date
+```
+--
+```{r}
+# Change the year
+year(date) <- 2016
+date
+```
+--
+```{r}
+# Change the day
+day(date) <- 30
+```
+--
+```{r}
+date
+```
+
+---
+class: inverse
+
+.leftcol[.font80[
+### Your turn
+
+1) Use `case_when()` to modify the `phase_of_flt` variable in the `wildlife_impacts` data:
+
+- The values `'approach'`, `'arrival'`, `'descent'`, and `'landing roll'` should be merged into a single value called `'arrival'`.
+- The values `'climb'`, `'departure'`,  and `'take-off run'` should be merged into a single value called `'departure'`.
+- All other values should be called `'other'`.
+
+Before:
+.code70[
+```{r, eval=FALSE}
+unique(str_to_lower(wildlife_impacts$phase_of_flt))
+```
+```{r, echo=FALSE}
+unique(str_to_lower(wildlife_impacts_orig$phase_of_flt))
+```
+After:
+```{r, echo=FALSE}
+unique(str_to_lower(wildlife_impacts$phase_of_flt))
+```
+]]]
+--
+.rightcol[.font80[
+```{r, echo=FALSE}
+countdown(minutes = 20,
+          warn_when = 30,
+          update_every = 15,
+          right = 0,
+          font_size = '1.5em',
+          style = "position: relative; width: min-content;
+                   display: block; margin-left: 300px;")
+```
+2) Use the **lubridate** package to create a new variable, `weekday_name`, from the `incident_date` variable in the `wildlife_impacts` data.
+
+3) Use `weekday_name` and `phase_of_flt` to make this plot of "arrival" and "departure" impacts from **Feb. 2016**.
+
+```{r, echo=FALSE, fig.width=7, fig.height=5, fig.align='center'}
+wildlife_impacts %>%
+    filter(incident_year == 2016,
+           incident_month == 2,
+           phase_of_flt %in% c('arrival', 'departure')) %>%
+    mutate(phase_of_flt = str_to_title(phase_of_flt)) %>%
+    count(weekday_name, phase_of_flt) %>%
+    ggplot() +
+    geom_col(aes(x = weekday_name, y = n), width = 0.8) +
+    facet_wrap(~phase_of_flt) +
+    theme_minimal_hgrid() +
+    labs(x = 'Day of the week',
+         y = 'Number of incidents',
+         title = 'Impacts in February, 2016')
+```
+]]
+

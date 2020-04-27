@@ -1,0 +1,2020 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Week 8: Polishing your charts</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="John Paul Helveston" />
+    <meta name="date" content="2020-03-04" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/countdown/countdown.css" rel="stylesheet" />
+    <script src="libs/countdown/countdown.js"></script>
+    <link rel="stylesheet" href="https://emse-eda-gwu.github.io/2020-Spring/classNotes/classNotes.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+
+
+
+name: xaringan-title
+class: title-slide, center, middle, inverse
+
+# Week 8: Polishing your charts
+
+.large[EMSE 4197 | John Paul Helveston | March 04, 2020]
+
+
+
+---
+class: inverse
+
+## R tip of the week
+
+### Ever wondered what colors look like _before_ you plot them?
+
+--
+Use `scales::show_col()` to preview them
+
+.leftcol60[.code70[
+Example:
+
+```r
+colors &lt;- c('lightblue', 'sienna', 'forestgreen', '#eae9ea')
+scales::show_col(colors)
+```
+]]
+--
+.rightcol40[
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-9-1.png" width="360" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## Today's data
+
+
+```r
+wildlife_impacts &lt;- read_csv(here::here('data', 'wildlife_impacts.csv'))
+lotr_words       &lt;- read_csv(here::here('data', 'lotr_words.csv'))
+federal_spending &lt;- read_csv(here::here('data', 'federal_spending_long.csv'))
+milk_production  &lt;- read_csv(here::here('data', 'milk_production.csv'))
+msleep           &lt;- read_csv(here::here('data', 'msleep.csv'))
+```
+
+## New package:
+
+```r
+install.packages('hrbrthemes')
+```
+
+---
+class: inverse, middle
+
+# Polishing your charts
+
+## 1. Scales
+## 2. Annotations
+## 3. Colors
+## 4. Fonts
+## 5. Rmd tricks
+
+---
+class: inverse, middle
+
+# Polishing your charts
+
+## 1. .orange[Scales]
+## 2. Annotations
+## 3. Colors
+## 4. Fonts
+## 5. Rmd tricks
+
+
+&lt;!--
+Much of the content on adjusting the y axis came from Andrew Heiss's 
+course slides: https://datavizf17.classes.andrewheiss.com/class/06-class/
+--&gt;
+
+
+
+
+
+
+
+---
+## When is it okay to to truncate an axis?
+
+--
+.leftcol[
+- When small movements matter
+]
+--
+.rightcol[
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-13-1.png" width="360" style="display: block; margin: auto;" /&gt;
+
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-14-1.png" width="360" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## When is it okay to to truncate an axis?
+
+.leftcol[
+- When small movements matter
+- When zero values are impossible
+]
+--
+.rightcol[
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-15-1.png" width="360" style="display: block; margin: auto;" /&gt;
+
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-16-1.png" width="360" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## When is it okay to to truncate an axis?
+
+.leftcol[
+- When small movements matter
+- When zero values are impossible
+- When it's normal / a convention
+]
+--
+.rightcol[
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/linkedin_stocks.png"&gt;
+&lt;/center&gt;
+]
+
+---
+## When is it okay to to truncate an axis?
+
+.leftcol[
+- When small movements matter
+- When zero values are impossible
+- When it's normal / a convention
+- .red[Never on a bar chart]
+]
+.rightcol[
+&lt;br&gt;
+&lt;center&gt;
+&lt;img src="images/fox_news_bars.jpeg"&gt;
+&lt;/center&gt;
+]
+
+---
+class: inverse, middle, center 
+
+# You are most sensitive to changes&lt;br&gt;in angle close to 45 degrees
+
+---
+class: center
+
+## You are most sensitive to changes&lt;br&gt;in angle close to 45 degrees
+
+.cols3[
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-17-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+.cols3[
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-18-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+.cols3[
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-19-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## You are most sensitive to changes&lt;br&gt;in angle close to 45 degrees
+
+.leftcol30[
+Bad
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-20-1.png" width="288" /&gt;
+]
+.rightcol70[
+Better
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-21-1.png" width="756" /&gt;
+
+Set image dimensions in R chunk header:
+
+` ```{r, fig.width = 5, fig.height = 3.1}`
+]
+
+---
+class: inverse
+
+### .center[Consider setting dimensions to "Golden Ratio" (1 : 1.618)]
+
+&lt;br&gt;
+
+.leftcol[
+
+&lt;center&gt;
+&lt;img src="images/golden_ratio.jpg"&gt;
+&lt;/center&gt;
+
+]
+--
+.rightcol[.center[
+
+Approx. to golden ratio:
+
+width  |  height 
+-------|---------
+5      | 3.1
+6      | 3.7
+7      | 4.3
+
+&lt;br&gt;
+
+[Also check out Donald Duck in Mathemagic Land](https://youtu.be/U_ZHsk0-eF0?t=512)
+]]
+
+---
+## Adjust axes with `scale_` functions
+
+.leftcol35[
+Continous variables
+
+```r
+scale_x_continuous()
+scale_y_continuous()
+```
+Discrete variables
+
+```r
+scale_x_discrete()
+scale_y_discrete()
+```
+Others
+
+```r
+scale_x_log10()
+scale_y_log10()
+scale_x_date()
+```
+]
+--
+.rightcol65[
+Common arguments for continuous variables
+
+```r
+scale_y_continuous(
+  # Set the lower &amp; upper boundaries
+  limits = c(lower, upper),
+  
+  # Explicitly set the break points
+  breaks = c(break1, break2, etc.) 
+  
+  # Adjust the axis so bars start at 0
+  expand = expand_scale(mult = c(0, 0.05)) 
+)
+```
+]
+
+---
+## Adjusting **continuous** scales
+
+.leftcol55[.code70[
+Summarise the data
+
+```r
+milk_top10states &lt;- milk_production %&gt;%
+    filter(year == 2017) %&gt;%
+    arrange(desc(milk_produced)) %&gt;%
+    slice(1:10) %&gt;% 
+    mutate(
+        milk_produced = milk_produced / 10^9,
+        state = fct_reorder(state, milk_produced))
+```
+Make the plot
+
+```r
+ggplot(milk_top10states) + 
+  geom_col(aes(x = state, y = milk_produced)) + 
+  coord_flip() +
+  theme_minimal_vgrid(font_size = 18) + 
+  labs(x = 'Milk produced (billions of lbs)',
+       y = 'State')
+```
+]]
+.rightcol45[
+&lt;br&gt;
+
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-27-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## Adjusting **continuous** scales
+
+.leftcol55[.code70[
+Summarise the data
+
+```r
+milk_top10states &lt;- milk_production %&gt;%
+    filter(year == 2017) %&gt;%
+    arrange(desc(milk_produced)) %&gt;%
+    slice(1:10) %&gt;% 
+    mutate(
+        milk_produced = milk_produced / 10^9,
+        state = fct_reorder(state, milk_produced))
+```
+Make the plot
+
+```r
+ggplot(milk_top10states) + 
+  geom_col(aes(x = state, y = milk_produced)) + 
+  coord_flip() +
+* scale_y_continuous(
+*   breaks = c(0, 15, 30, 45),
+*   limits = c(0 , 45),
+*   expand = expand_scale(mult = c(0, 0.05))) +
+  theme_minimal_vgrid(font_size = 18) + 
+  labs(x = 'Milk produced (billions of lbs)',
+       y = 'State')
+```
+]]
+.rightcol45[
+&lt;br&gt;
+
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-29-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## Adjusting **discrete** scales
+
+.leftcol55[.code70[
+Summarise the data
+
+```r
+milk_top10states &lt;- milk_production %&gt;%
+    filter(year == 2017) %&gt;%
+    arrange(desc(milk_produced)) %&gt;%
+    slice(1:10) %&gt;% 
+    mutate(
+        milk_produced = milk_produced / 10^9,
+        state = fct_reorder(state, milk_produced))
+```
+Make the plot
+
+```r
+ggplot(milk_top10states) + 
+  geom_col(aes(x = state, y = milk_produced)) + 
+  coord_flip() +
+* scale_x_discrete(
+*   breaks = c('California', 'Wisconsin', 'Idaho'),
+*   expand = expand_scale(mult = c(0, 0.05))) +
+  theme_minimal_vgrid(font_size = 18) + 
+  labs(x = 'Milk produced (billions of lbs)',
+       y = 'State')
+```
+]]
+.rightcol45[
+&lt;br&gt;
+
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-31-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+
+---
+.leftcol[.code70[
+## Adjusting **log** scales
+
+Regular scaling
+
+```r
+ggplot(msleep) + 
+    geom_point(aes(x = brainwt, y = bodywt)) +
+    theme_half_open() + 
+    labs(x = 'Brain weight (kg)',
+         y = 'Body weight (kg)')
+```
+]]
+.rightcol[
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-32-1.png" width="360" style="display: block; margin: auto;" /&gt;
+]
+
+---
+.leftcol[.code70[
+## Adjusting **log** scales
+
+Regular scaling
+
+```r
+ggplot(msleep) + 
+    geom_point(aes(x = brainwt, y = bodywt)) +
+    theme_half_open() + 
+    labs(x = 'Brain weight (kg)',
+         y = 'Body weight (kg)')
+```
+
+Log scaling
+
+```r
+ggplot(msleep) + 
+    geom_point(aes(x = brainwt, y = bodywt)) +
+*   scale_x_log10() +
+*   scale_y_log10() +
+    theme_half_open() + 
+    labs(x = 'Log brain weight (kg)',
+         y = 'Log body weight (kg)')
+```
+]]
+.rightcol[
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-34-1.png" width="360" style="display: block; margin: auto;" /&gt;
+
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-35-1.png" width="360" style="display: block; margin: auto;" /&gt;
+]
+
+---
+class: inverse, center, middle
+
+# Date scales can be confusing
+
+---
+class: center 
+
+# What's wrong with this chart?
+
+&lt;center&gt;
+&lt;img src="images/utility_bill_1.png" width=700&gt;
+&lt;/center&gt;
+
+---
+class: center 
+
+# What's wrong with this chart?
+
+&lt;center&gt;
+&lt;img src="images/utility_bill_3.png" width=700&gt;
+&lt;/center&gt;
+
+---
+class: center 
+
+# What's wrong with this chart?
+
+&lt;center&gt;
+&lt;img src="images/utility_bill_4.png" width=700&gt;
+&lt;/center&gt;
+
+---
+class: center 
+
+# What's wrong with this chart?
+
+&lt;center&gt;
+&lt;img src="images/utility_bill_5.png" width=700&gt;
+&lt;/center&gt;
+
+---
+.leftcol[.code70[
+## Adjusting **date** scales
+
+Summarise the data
+
+```r
+*library(lubridate)
+
+wildlife_summary &lt;- wildlife_impacts %&gt;% 
+    filter(incident_year == 2016) %&gt;% 
+    count(operator, incident_date) %&gt;% 
+*   mutate(incident_date = ymd(incident_date))
+```
+Make the plot
+
+```r
+ggplot(wildlife_summary) + 
+    geom_line(aes(x = incident_date, y = n, 
+                  color = operator)) + 
+    facet_wrap(~operator, ncol = 1) +
+    theme_minimal_grid(font_size = 16) +
+    panel_border() +
+    theme(legend.position = 'none') +
+    labs(x = 'Incident date (2016)', 
+         y = 'Number of incidents')
+```
+]]
+.rightcol[
+&lt;br&gt;
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-37-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+.leftcol[.code70[
+## Adjusting **date** scales
+
+Summarise the data
+
+```r
+*library(lubridate)
+
+wildlife_summary &lt;- wildlife_impacts %&gt;% 
+    filter(incident_year == 2016) %&gt;% 
+    count(operator, incident_date) %&gt;% 
+*   mutate(incident_date = ymd(incident_date))
+```
+Make the plot
+
+```r
+ggplot(wildlife_summary) + 
+  geom_line(aes(x = incident_date, y = n, 
+                color = operator, group = operator)) + 
+  facet_wrap(~operator, ncol = 1) +
+* scale_x_date(
+*     date_breaks = '1 month',
+*     date_labels = '%b') +
+  theme_minimal_grid(font_size = 16) +
+  panel_border() +
+  theme(legend.position = 'none') +
+  labs(x = 'Incident date (2016)', 
+       y = 'Number of incidents')
+```
+]]
+.rightcol[
+&lt;br&gt;
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-39-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## Adjusting **date** scales
+
+
+```r
+scale_x_date( 
+  date_breaks = '1 month', 
+  date_labels = '%b')
+```
+.leftcol[
+
+```r
+date_breaks = '1 month' 
+```
+
+- '1 day'
+- '10 days'
+- '1 month'
+- '3 months'
+- '1 year'
+- '3 years'
+
+]
+.rightcol[
+
+```r
+date_labels = '%b'
+```
+
+Example date: March 04, 2020
+
+- `%Y` = 2020
+- `%y` = 20
+- `%B` = March
+- `%b` = Mar
+- `%D` = 03/04/2020
+- `%d` = 03
+]
+
+---
+class: inverse, center, middle
+
+## Use **scales** library to modify scale **text**
+
+---
+## Use **scales** library to modify scale text
+
+.leftcol[.code70[
+Summarise the data
+
+```r
+federal_spending_2017 &lt;- federal_spending %&gt;%
+    filter(year == 2017) %&gt;% 
+    mutate(department = fct_reorder(
+        department, rd_budget))
+```
+Make the plot 
+
+```r
+ggplot(federal_spending_2017) + 
+    geom_col(aes(x = department, y = rd_budget)) + 
+    scale_y_continuous(
+      expand = expand_scale(mult = c(0, 0.05))) +
+    coord_flip() + 
+    theme_minimal_vgrid(font_size = 16) + 
+    labs(x = 'Department', 
+         y = 'R&amp;D spending ($ Millions)')
+```
+]]
+&lt;br&gt;
+
+.rightcol[
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-44-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## Use **scales** library to modify scale text
+
+.leftcol[.code70[
+Summarise the data
+
+```r
+federal_spending_2017 &lt;- federal_spending %&gt;%
+    filter(year == 2017) %&gt;% 
+    mutate(department = fct_reorder(
+        department, rd_budget))
+```
+Add comma separation in x-axis labels
+
+```r
+ggplot(federal_spending_2017) + 
+    geom_col(aes(x = department, y = rd_budget)) + 
+    scale_y_continuous(
+*     labels = scales::comma,
+      expand = expand_scale(mult = c(0, 0.05))) +
+    coord_flip() + 
+    theme_minimal_vgrid(font_size = 16) + 
+    labs(x = 'Department', 
+         y = 'R&amp;D spending ($ Millions)')
+```
+]]
+&lt;br&gt;
+
+.rightcol[
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-46-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## Use **scales** library to modify scale text
+
+.leftcol[.code70[
+Summarise the data
+
+```r
+federal_spending_2017 &lt;- federal_spending %&gt;%
+    filter(year == 2017) %&gt;% 
+    mutate(department = fct_reorder(
+        department, rd_budget))
+```
+Add $ sign in x-axis labels
+
+```r
+ggplot(federal_spending_2017) + 
+    geom_col(aes(x = department, y = rd_budget)) + 
+    scale_y_continuous(
+*     labels = scales::dollar,
+      expand = expand_scale(mult = c(0, 0.05))) +
+    coord_flip() + 
+    theme_minimal_vgrid(font_size = 16) + 
+    labs(x = 'Department', 
+         y = 'R&amp;D spending ($ Millions)')
+```
+]]
+&lt;br&gt;
+
+.rightcol[
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-48-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+
+---
+class: inverse
+
+## Your turn
+
+
+
+.leftcol[
+Use the `wildlife_costs` data frame to create the following chart. 
+
+Hints:
+
+- Note the x and y axis labels!
+
+<div class="countdown blink-colon noupdate-15" id="timer_5e5fa499" style="bottom:7;left:8;font-size:2em;" data-warnwhen="30">
+<code class="countdown-time"><span class="countdown-digits minutes">15</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+]
+.rightcol[
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-50-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+class: inverse, middle
+
+# Polishing your charts
+
+## 1. Scales
+## 2. .orange[Annotations]
+## 3. Colors
+## 4. Fonts
+## 5. Rmd tricks
+
+
+&lt;!--
+Most of this content came from this presentation:
+https://designing-ggplots.netlify.com/#1
+--&gt;
+
+
+
+
+
+
+
+---
+class: center, middle
+
+# Legends suck
+
+--
+.leftcol[
+### Legends require look-up task
+
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-51-1.png" width="540" style="display: block; margin: auto;" /&gt;
+]
+--
+.rightcol[
+### Direct labeling is much better
+
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-52-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+class: center, middle
+
+# Legends suck
+
+.leftcol[
+### Legends require look-up task
+
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-53-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+--
+.rightcol[
+### Direct labeling is much better
+
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-54-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## Use `annotate()` to add text to chart
+
+.leftcol60[.code70[
+
+```r
+dod_spending &lt;- ggplot(federal_spending_summary) +
+    geom_area(aes(x = year, y = rd_budget,
+                  fill = department)) +
+*   annotate(geom = 'text', x = 1995, y = 85,
+*            label = 'Other', size = 6, color = 'black') +
+*   annotate(geom = 'text', x = 1995, y = 25,
+*            label = 'DOD', size = 6, color = 'white') +
+    scale_y_continuous(
+        expand = expand_scale(mult = c(0, 0.05))) +
+    scale_fill_manual(values = c('grey', 'sienna')) +
+    theme_minimal_hgrid() +
+    theme(legend.position = 'none') +
+    labs(x = NULL,
+         y = 'R&amp;D Budget ($ Billions)',
+         title = 'Federal R&amp;D spending, 1976 - 2017',
+         subtitle = 'Data Source: AAAS Historical Trends')
+```
+]]
+.rightcol40[
+&lt;br&gt;
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-56-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## Use `geom_text()` to add text to chart
+
+.leftcol60[.code70[
+
+```r
+dod_spending &lt;- ggplot(federal_spending_summary) +
+    geom_area(aes(x = year, y = rd_budget,
+                  fill = department)) +
+*   geom_text(aes(x = 1995, y = 85, label = 'Other'),
+*             size = 6, color = 'black') +
+*   geom_text(aes(x = 1995, y = 25, label = 'DOD'),
+*             size = 6, color = 'white') +
+    scale_y_continuous(
+        expand = expand_scale(mult = c(0, 0.05))) +
+    scale_fill_manual(values = c('grey', 'sienna')) +
+    theme_minimal_hgrid() +
+    theme(legend.position = 'none') +
+    labs(x = NULL,
+         y = 'R&amp;D Budget ($ Billions)',
+         title = 'Federal R&amp;D spending, 1976 - 2017',
+         subtitle = 'Data Source: AAAS Historical Trends')
+```
+]]
+.rightcol40[
+&lt;br&gt;
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-58-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## Use `geom_label()` to add text to chart&lt;br&gt;**with a background**
+
+.leftcol60[.code70[
+
+```r
+dod_spending &lt;- ggplot(federal_spending_summary) +
+    geom_area(aes(x = year, y = rd_budget,
+                  fill = department)) +
+*   geom_label(aes(x = 1995, y = 85, label = 'Other'),
+*              size = 6) +
+*   geom_label(aes(x = 1995, y = 25, label = 'DOD'),
+*              size = 6) +
+    scale_y_continuous(
+        expand = expand_scale(mult = c(0, 0.05))) +
+    scale_fill_manual(values = c('grey', 'sienna')) +
+    theme_minimal_hgrid() +
+    theme(legend.position = 'none') +
+    labs(x = NULL,
+         y = 'R&amp;D Budget ($ Billions)',
+         title = 'Federal R&amp;D spending, 1976 - 2017',
+         subtitle = 'Data Source: AAAS Historical Trends')
+```
+]]
+.rightcol40[
+&lt;br&gt;
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-60-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+### Use `geom_curve()` + `geom_label()` to direct attention
+
+.leftcol60[.code70[
+Make the label
+
+```r
+label &lt;- "The Dept. of Defense R&amp;D Budget
+has made up nearly half of all
+federal R&amp;D spending"
+```
+Add label with curved arrow
+
+```r
+dod_spending +
+*   geom_curve(
+*       aes(x = 1981, xend = 1987,
+*           y = 160, yend = 25),
+        size = 0.5,
+        curvature = 0.1,
+*       arrow = arrow(length = unit(0.01, "npc"),
+*                     type = "closed")
+    ) +
+    geom_label(
+        aes(x = 1977, y = 160, label = label),
+        hjust = 0, lineheight = 0.8
+    )
+```
+]]
+.rightcol40[
+&lt;br&gt;
+
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-62-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## Use `annotate()` to direct attention
+
+.leftcol60[.code70[
+Use `geom = "rect"` for box, `geom = "text"` for label
+
+```r
+ggplot(mpg, aes(x = displ, y = hwy)) +
+    geom_point(aes(fill = as.factor(cyl)),
+               color = 'white', alpha = 0.8,
+               size = 3.5, shape = 21) +
+*   annotate(geom = "rect",
+*            xmin = 5, xmax = 7.5,
+*            ymin = 21, ymax = 28,
+*            fill = "grey55", alpha = 0.2) +
+    annotate(geom = "text",
+             x = 5, y = 29,
+             label = "Hybrid vehicles",
+             hjust = 0, size = 5) +
+    theme_half_open(font_size = 15) +
+    labs(x = "Engine displacement",
+         y = "Fuel efficiency (mpg)",
+         fill = '# cylinders',
+         title = "Vehicle fuel efficiency vs. engine displacement",
+         caption = "Data source: U.S. EPA.")
+```
+]]
+.rightcol40[
+&lt;br&gt;
+
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-63-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+class: inverse
+
+## Your turn
+
+
+
+.leftcol[
+Use the `wildlife_costs` data frame to create the following chart. 
+.font90[
+Hints:
+
+- Use the **lubridate** package to create dates.
+- For the `geom_label()`, use these points:
+    - `x = ymd('1995-01-01')`
+    - `y = 13`
+- For the `geom_curve()`, use these points:
+    - `x = ymd('2000-01-01')`
+    - `xend = ymd('2008-10-01')`
+    - `y = 13`
+    - `yend = 16.4`
+]]
+.rightcol[
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-64-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+class: inverse
+
+# 5 minute break!
+
+<div class="countdown" id="timer_5e5fa491" style="bottom:0;left:0;font-size:5em;" data-warnwhen="30">
+<code class="countdown-time"><span class="countdown-digits minutes">05</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+## Stand up
+
+## Move around
+
+## Stretch!
+
+---
+class: inverse, middle
+
+# Polishing your charts
+
+## 1. Scales
+## 2. Annotations
+## 3. .orange[Colors]
+## 4. Fonts
+## 5. Rmd tricks
+
+
+&lt;!-- 
+Source of a lot of the slide content:
+https://resources.rstudio.com/rstudio-conf-2020/the-glamour-of-graphics-william-chase 
+--&gt;
+
+---
+class: inverse, center, middle 
+
+# Color is hard
+
+---
+## How do I know what colors look good together?
+
+--
+### .red[Use the color wheel]
+.leftcol[
+]
+.rightcol[
+&lt;center&gt;
+&lt;img src="images/color_wheel.png"&gt;
+&lt;/center&gt;
+
+&lt;br&gt;
+
+.center[Image from [this color wheel tool](https://www.sessions.edu/color-calculator/)]
+]
+
+---
+## How do I know what colors look good together?
+
+### .red[Use the color wheel]
+.leftcol[
+### 1. **Complementary**: High contrast 
+]
+.rightcol[
+&lt;center&gt;
+&lt;img src="images/color_wheel_complementary.png"&gt;
+&lt;/center&gt;
+
+&lt;br&gt;
+
+.center[Image from [this color wheel tool](https://www.sessions.edu/color-calculator/)]
+]
+
+---
+## How do I know what colors look good together?
+
+### .red[Use the color wheel]
+.leftcol[
+### 1. Complementary: High contrast 
+### 2. **Analogous**: Calm, harmonious 
+]
+.rightcol[
+&lt;center&gt;
+&lt;img src="images/color_wheel_analogous.png"&gt;
+&lt;/center&gt;
+
+&lt;br&gt;
+
+.center[Image from [this color wheel tool](https://www.sessions.edu/color-calculator/)]
+]
+
+---
+## How do I know what colors look good together?
+
+### .red[Use the color wheel]
+.leftcol[
+### 1. Complementary: High contrast 
+### 2. Analogous: Calm, harmonious 
+### 3. **Triadic**: Vibrant, contrast
+]
+.rightcol[
+&lt;center&gt;
+&lt;img src="images/color_wheel_triadic.png"&gt;
+&lt;/center&gt;
+
+&lt;br&gt;
+
+.center[Image from [this color wheel tool](https://www.sessions.edu/color-calculator/)]
+]
+
+---
+class: center 
+
+# Steal colors with the [eye dropper tool](https://chrome.google.com/webstore/detail/eye-dropper/hmdcmlfkchdmnmnmheododdhjedfccka?hl=en)
+
+&lt;br&gt;
+
+.noborder[
+&lt;center&gt;
+&lt;img src="images/eye_dropper.png" width=242&gt;
+&lt;/center&gt;
+]
+
+---
+## Using your own colors
+
+.leftcol60[.code70[
+Map color to variable
+
+```r
+mpg_plot &lt;- ggplot(mtcars, aes(x = mpg, y = hp)) +
+*   geom_point(aes(color = as.factor(cyl)),
+               alpha = 0.8, size = 3) +
+    theme_half_open(font_size = 16) +
+    labs(x = "Fuel efficiency (mpg)", 
+         y = "Power (hp)",
+         color = '# cylinders',
+         title = "Vehicle fuel efficiency vs. power",
+         caption = "Source: 1974 Motor Trend U.S. magazine.")
+```
+]]
+
+&lt;br&gt;
+
+.rightcol40[
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-66-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## Using your own colors
+
+.leftcol60[.code70[
+Map color to variable
+
+```r
+mpg_plot &lt;- ggplot(mtcars, aes(x = mpg, y = hp)) +
+*   geom_point(aes(color = as.factor(cyl)),
+               alpha = 0.8, size = 3) +
+    theme_half_open(font_size = 16) +
+    labs(x = "Fuel efficiency (mpg)", 
+         y = "Power (hp)",
+         color = '# cylinders',
+         title = "Vehicle fuel efficiency vs. power",
+         caption = "Source: 1974 Motor Trend U.S. magazine.")
+```
+Manually change colors
+
+```r
+mpg_plot +
+*   scale_color_manual(values = c(
+*       '#a0522d', '#522da0', '#2da052'))
+```
+]]
+
+&lt;br&gt;
+
+.rightcol40[
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-68-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## Choose colors carefully
+
+.leftcol45[.code70[
+Manually change colors
+
+```r
+mpg_plot_mycolors &lt;- mpg_plot +
+    theme_half_open(font_size = 10) +
+*   scale_color_manual(values = c(
+*       '#a0522d', '#522da0', '#2da052'))
+```
+Simulate color blindness with [colorblindr](https://github.com/clauswilke/colorblindr)
+
+```r
+library(colorblindr)
+
+cvd_grid(mpg_plot_mycolors)
+```
+]]
+.rightcol55[
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-70-1.png" width="576" style="display: block; margin: auto;" /&gt;
+]
+
+---
+class:center 
+
+.leftcol[
+# Use palettes
+
+### [Viridis](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html)
+&lt;center&gt;
+&lt;img src="images/viridis.png"&gt;
+&lt;/center&gt;
+]
+.rightcol[
+### [ColorBrewer](https://www.datanovia.com/en/blog/the-a-z-of-rcolorbrewer-palette/)
+&lt;center&gt;
+&lt;img src="images/colorbrewer.png" width=370&gt;
+&lt;/center&gt;
+]
+
+---
+## **viridis** palettes
+
+.leftcol60[.code70[
+Map color to variable
+
+```r
+mpg_plot &lt;- ggplot(mtcars, aes(x = mpg, y = hp)) +
+*   geom_point(aes(color = as.factor(cyl)),
+               alpha = 0.8, size = 3) +
+    theme_half_open(font_size = 16) +
+    labs(x = "Fuel efficiency (mpg)", 
+         y = "Power (hp)",
+         color = '# cylinders',
+         title = "Vehicle fuel efficiency vs. power",
+         caption = "Source: 1974 Motor Trend U.S. magazine.")
+```
+Use viridis colors
+
+```r
+mpg_plot +
+*   scale_color_viridis(discrete = TRUE)
+```
+]]
+
+&lt;br&gt;
+
+.rightcol40[
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-72-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## **viridis** palettes
+
+.cols3[.code70[
+
+```r
+mpg_plot +
+    scale_color_viridis(
+        discrete = TRUE, 
+*       option = 'viridis')
+```
+
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-73-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]]
+.cols3[.code70[
+
+```r
+mpg_plot +
+    scale_color_viridis(
+        discrete = TRUE, 
+*       option = 'inferno')
+```
+
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-74-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]]
+.cols3[.code70[
+
+```r
+mpg_plot +
+    scale_color_viridis(
+        discrete = TRUE, 
+*       option = 'plasma')
+```
+
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-75-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]]
+
+---
+## **ColorBrewer** palettes
+
+.leftcol60[.code70[
+Map color to variable
+
+```r
+mpg_plot &lt;- ggplot(mtcars, aes(x = mpg, y = hp)) +
+*   geom_point(aes(color = as.factor(cyl)),
+               alpha = 0.8, size = 3) +
+    theme_half_open(font_size = 16) +
+    labs(x = "Fuel efficiency (mpg)", 
+         y = "Power (hp)",
+         color = '# cylinders',
+         title = "Vehicle fuel efficiency vs. power",
+         caption = "Source: 1974 Motor Trend U.S. magazine.")
+```
+Use "Dark2" palette
+
+```r
+mpg_plot +
+*   scale_color_brewer(palette = 'Dark2')
+```
+]]
+
+&lt;br&gt;
+
+.rightcol40[
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-77-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## **ColorBrewer** palettes
+
+.cols3[.code70[
+
+```r
+mpg_plot +
+    scale_color_brewer(
+*       palette = 'Set1')
+```
+
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-78-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]]
+.cols3[.code70[
+
+```r
+mpg_plot +
+    scale_color_brewer(
+*       palette = 'Set2')
+```
+
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-79-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]]
+.cols3[.code70[
+
+```r
+mpg_plot +
+    scale_color_brewer(
+*       palette = 'Accent')
+```
+
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-80-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]]
+
+---
+## Consider using both `color` and `fill`
+
+.leftcol60[.code70[
+- Map `fill` to variable
+- Add "white" line around points with `color`
+- Use `shape = 21` for filled points
+
+```r
+ggplot(mtcars, aes(x = mpg, y = hp)) +
+*   geom_point(aes(fill = as.factor(cyl)),
+*              color = 'white', shape = 21,
+               size = 3.5, alpha = 0.8) +
+    scale_color_brewer(palette = 'Dark2') +
+    theme_half_open(font_size = 15) +
+    labs(x = "Fuel efficiency (mpg)", 
+         y = "Power (hp)",
+         fill = '# cylinders',
+         title = "Vehicle fuel efficiency vs. power",
+         caption = "Source: 1974 Motor Trend U.S. magazine.")
+```
+]]
+.rightcol40[
+&lt;br&gt;
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-81-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+
+---
+.leftcol[.code70[
+Summarise data
+
+```r
+federal_spending_summary &lt;- federal_spending %&gt;%
+    mutate(department = fct_other(
+        department, keep = 'DOD')) %&gt;% 
+    group_by(department, year) %&gt;%
+    summarise(rd_budget = sum(rd_budget) / 10^3) %&gt;% 
+    ungroup() %&gt;% 
+    mutate(department = fct_relevel(
+        department, c('Other', 'DOD')))
+```
+Make plot
+
+```r
+dod_spending_plot &lt;- ggplot(federal_spending_summary) +
+    geom_area(aes(x = year, y = rd_budget, 
+                  fill = department)) +
+    scale_y_continuous(
+        expand = expand_scale(mult = c(0, 0.05))) +
+*   scale_fill_manual(values = c('grey', 'sienna')) +
+    theme_minimal_hgrid() + 
+    labs(x = NULL,
+         y = 'R&amp;D Budget ($ Billions)', 
+         fill = 'Department',
+         caption = 'Source: AAAS')
+```
+]]
+.rightcol[
+# .center[`grey` = "Other"]
+
+&lt;br&gt;
+
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-84-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+
+---
+# .center[`grey` = "Other"]
+
+.cols3[.code60[
+
+```r
+dod_spending_plot + 
+    scale_fill_manual(
+*       values = c('grey40', 'sienna'))
+```
+
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-85-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]]
+.cols3[.code60[
+
+```r
+dod_spending_plot + 
+    scale_fill_manual(
+*       values = c('grey60', 'sienna'))
+```
+
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-86-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]]
+.cols3[.code60[
+
+```r
+dod_spending_plot + 
+    scale_fill_manual(
+*       values = c('grey80', 'sienna'))
+```
+
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-87-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]]
+
+---
+class: inverse 
+
+# Your turn
+
+.leftcol[
+Follow these steps to make variations of this plot with different colors
+
+1. Change the colors to the `"RdYlBu"` ColorBrewer palette.
+2. Change the colors to the `"inferno"` palette from the **viridis** library.
+3. Use the ["eye dropper"](https://chrome.google.com/webstore/detail/eye-dropper/hmdcmlfkchdmnmnmheododdhjedfccka?hl=en) tool in Google Chrome to select a color from a website
+4. Use your chosen color and this [color wheel tool](https://www.sessions.edu/color-calculator/) to find a triadic color palette.
+5. Change the colors to your custom triadic palette.
+
+]
+.rightcol[
+<div class="countdown blink-colon noupdate-15" id="timer_5e5fa576" style="top:0;right:0;font-size:2em;" data-warnwhen="30">
+<code class="countdown-time"><span class="countdown-digits minutes">15</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-89-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+class: inverse, middle
+
+# Polishing your charts
+
+## 1. Scales
+## 2. Annotations
+## 3. Colors
+## 4. .orange[Fonts]
+## 5. Rmd tricks
+
+
+&lt;!--
+Source of the content on how to change fonts in ggplot2:
+
+https://www.andrewheiss.com/blog/2017/09/27/working-with-r-cairo-graphics-custom-fonts-and-ggplot/
+
+Source of a lot of the slide content on choosing good fonts:
+https://resources.rstudio.com/rstudio-conf-2020/the-glamour-of-graphics-william-chase
+--&gt;
+
+---
+class: inverse, center, middle
+
+.leftcol[
+&lt;center&gt;
+&lt;img src="images/fonts_matter_fast_taco.jpg" width=500&gt;
+&lt;/center&gt;
+
+"Fast Taco"
+]
+.rightcol[
+&lt;center&gt;
+&lt;img src="images/fonts_matter_megaflicks.jpg" width=500&gt;
+&lt;/center&gt;
+
+"Mega Flicks"
+]
+
+---
+class: inverse, center, middle
+
+&lt;center&gt;
+&lt;img src="images/fonts_matter.jpg" width=500&gt;
+&lt;/center&gt;
+
+---
+class: center, middle
+
+## Best resource on fonts:&lt;br&gt;&lt;br&gt;practicaltypography.com
+
+---
+## .center[Font families you should consider using]
+
+.leftcol20[&amp;zwj;]
+.cols3[.font120[
+&lt;p style="font-family: Roboto;"&gt;Roboto&lt;/p&gt;
+
+&lt;p style="font-family: Source;"&gt;Source&lt;/p&gt;
+
+&lt;p style="font-family: Fira;"&gt;Fira&lt;/p&gt;
+
+&lt;p style="font-family: Alegreya;"&gt;Alegreya&lt;/p&gt;
+
+&lt;p style="font-family: Lato;"&gt;Lato&lt;/p&gt;
+
+&lt;p style="font-family: Exo;"&gt;Exo&lt;/p&gt;
+]]
+.cols3[
+Download:
+
+- Individually from https://fonts.google.com/
+- All of these with [this zip file](https://github.com/emse-eda-gwu/2020-Spring/raw/master/content/fonts.zip)
+]
+
+---
+## Use fonts to create **hierarchy**
+
+.leftcol[
+```
+# Hierarchy
+
+## Hierarchy
+
+### Hierarchy
+
+#### Hierarchy
+```
+]
+.rightcol[
+# Hierarchy
+
+## Hierarchy
+
+### Hierarchy
+
+#### Hierarchy
+]
+
+---
+.leftcol[
+Title&lt;br&gt;This is some text that goes into detail and explains a lot more about the topic described in the title. Here's some random Latin words: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+]
+
+---
+.leftcol[
+# Size
+
+This is some text that goes into detail and explains a lot more about the topic described in the title. Here's some random Latin words: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+]
+
+---
+.leftcol[
+**Weight**
+
+This is some text that goes into detail and explains a lot more about the topic described in the title. Here's some random Latin words: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+]
+
+---
+.leftcol[
+.red[Color]
+
+This is some text that goes into detail and explains a lot more about the topic described in the title. Here's some random Latin words: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+]
+
+---
+.leftcol[
+Spacing
+
+&lt;br&gt;
+
+This is some text that goes into detail and explains a lot more about the topic described in the title. Here's some random Latin words: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+]
+
+---
+.leftcol[
+&lt;p style="font-family: Alegreya;"&gt;Typeface&lt;/p&gt;
+
+This is some text that goes into detail and explains a lot more about the topic described in the title. Here's some random Latin words: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+]
+
+---
+.leftcol[
+&lt;h2 style="font-family: Roboto; color: #a5442b;"&gt;Title&lt;/h2&gt;
+&lt;h3 style="font-family: Alegreya;"&gt;Subtitle&lt;/h3&gt;
+
+This is some text that goes into detail and explains a lot more about the topic described in the title. Here's some random Latin words: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+]
+
+---
+# .center[Use fonts with **same-height** numbers]
+&lt;br&gt;
+
+.leftcol35[.right[
+
+## "Oldstyle" (bad)
+
+&lt;br&gt;
+
+## Lining (good)
+]]
+.rightcol65[
+&lt;img src="images/font_oldstyle1.jpg" width=500&gt;
+]
+
+---
+# .center[Use fonts with **same-width** numbers]
+&lt;br&gt;
+
+.leftcol40[.right[
+
+## "Proportional" (bad)
+
+&lt;br&gt;
+
+## "Tabular" (good)
+]]
+.rightcol60[
+&lt;img src="images/font_oldstyle2.jpg" width=500&gt;
+]
+
+---
+class: inverse, center, middle
+
+# How to customize fonts in **ggplot**
+
+---
+## 1. Change the whole theme
+
+.leftcol[.code70[
+For "Base R" themes, use `base_family`:
+
+
+```r
+theme_minimal(base_family = "Roboto Condensed")
+```
+
+```r
+theme_bw(base_family = "Roboto Condensed")
+```
+]]
+.rightcol[.code70[
+For "cowplot" themes, use `font_family`:
+
+
+```r
+theme_half_open(font_family = "Roboto Condensed")
+```
+
+```r
+theme_minimal_grid(font_family = "Roboto Condensed")
+```
+]]
+
+---
+## 1. Change the whole theme font
+
+.leftcol60[.code70[
+Make the base plot
+
+```r
+mpg_plot &lt;- ggplot(mtcars) +
+  geom_point(aes(x = mpg, y = hp)) +
+* theme_minimal(base_size = 15) +
+  labs(x = "Fuel efficiency (mpg)",
+       y = "Power (hp)",
+       title = "Vehicle fuel efficiency vs. power",
+       caption = "Data source: 1974 Motor Trend U.S. magazine.")
+```
+]]
+
+&lt;br&gt;
+
+.rightcol40[
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-94-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## 1. Change the whole theme font
+
+.leftcol60[.code70[
+Use `base_family` with base themes
+
+```r
+mpg_plot &lt;- ggplot(mtcars) +
+  geom_point(aes(x = mpg, y = hp)) +
+* theme_minimal(base_family = 'Source Sans Pro',
+                base_size = 15) +
+  labs(x = "Fuel efficiency (mpg)",
+       y = "Power (hp)",
+       title = "Vehicle fuel efficiency vs. power",
+       caption = "Data source: 1974 Motor Trend U.S. magazine.")
+```
+]]
+
+&lt;br&gt;
+
+.rightcol40[
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-95-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## 1. Change the whole theme font
+
+.leftcol60[.code70[
+Use `font_family` with cowplot themes
+
+```r
+mpg_plot &lt;- ggplot(mtcars) +
+  geom_point(aes(x = mpg, y = hp)) +
+* theme_minimal_grid(font_family = 'Source Sans Pro',
+                      font_size = 15) +
+  labs(x = "Fuel efficiency (mpg)",
+       y = "Power (hp)",
+       title = "Vehicle fuel efficiency vs. power",
+       caption = "Data source: 1974 Motor Trend U.S. magazine.")
+```
+]]
+
+&lt;br&gt;
+
+.rightcol40[
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-96-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## 2. Adjust theme elements with `element_text()`
+
+.leftcol60[.code70[
+Use `font_family` with cowplot themes
+
+```r
+mpg_plot &lt;- ggplot(mtcars) +
+  geom_point(aes(x = mpg, y = hp)) +
+* theme_minimal_grid(font_family = 'Source Sans Pro',
+                      font_size = 15) +
+* theme(plot.title = element_text(family = "Roboto Condensed",
+                                  size = 20)) +
+  labs(x = "Fuel efficiency (mpg)",
+       y = "Power (hp)",
+       title = "Vehicle fuel efficiency vs. power",
+       caption = "Data source: 1974 Motor Trend U.S. magazine.")
+```
+]]
+
+&lt;br&gt;
+
+.rightcol40[
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-97-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+
+---
+### 3. Adjust annotations:
+
+### `geom_text()`, `geom_label()`, and `annotate()`
+
+.leftcol60[.code70[
+
+```r
+label &lt;- "Higher power engines,
+often come at the expense,
+of fuel economy."
+
+mpg_plot +
+    geom_label(aes(x = 17, y = 270, label = label),
+             lineheight = .8, hjust = 0,
+*            family = 'Roboto Condensed')
+```
+]]
+
+.rightcol40[
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-98-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## The [hrbrthemes](https://github.com/hrbrmstr/hrbrthemes) package:
+
+### Great themes + great fonts
+
+.leftcol60[
+
+```r
+*library(hrbrthemes)
+
+mpg_plot &lt;- ggplot(mtcars) +
+  geom_point(aes(x = mpg, y = hp)) +
+  labs(x = "Fuel efficiency (mpg)",
+       y = "Power (hp)",
+       title = "Vehicle fuel efficiency vs. power",
+       caption = "Data source: 1974 Motor Trend U.S. magazine.")
+
+mpg_plot +
+* theme_ipsum()
+```
+
+]
+.rightcol40[
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-99-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+
+---
+## The [hrbrthemes](https://github.com/hrbrmstr/hrbrthemes) package:
+
+### Great themes + great fonts
+
+.cols3[
+
+```r
+mpg_plot +
+  theme_ipsum()
+```
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-101-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+.cols3[
+
+```r
+mpg_plot +
+  theme_ipsum_rc()
+```
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-102-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+.cols3[
+
+```r
+mpg_plot +
+  theme_ft_rc()
+```
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-103-1.png" width="432" style="display: block; margin: auto;" /&gt;
+]
+
+---
+class: inverse
+
+## Your turn
+
+
+
+.leftcol[.font80[
+Use the `milk_summary_dumbbell` data frame to create the following chart.
+
+The main font is `'Roboto Condensed'`.
+
+Once you've recreated the plot, try other fonts and themes, such as:
+
+- The `'Source Sans Pro'` font.
+- The `'Lato'` font.
+- The `theme_ipsum()` theme from the `hrbrthemes` library.
+
+Hints:
+
+- Use `geom_text()` or `annotate()` to insert the year labels:
+    - 1970: `x = 9`, `y = 10.5`
+    - 2017: `x = 40`, `y = 10.5`
+]]
+.rightcol[
+
+<div class="countdown blink-colon noupdate-15" id="timer_5e5fa539" style="top:0;right:0;font-size:2em;" data-warnwhen="30">
+<code class="countdown-time"><span class="countdown-digits minutes">15</span><span class="countdown-digits colon">:</span><span class="countdown-digits seconds">00</span></code>
+</div>
+
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-105-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+
+---
+class: inverse, middle
+
+# Polishing your charts
+
+## 1. Scales
+## 2. Annotations
+## 3. Colors
+## 4. Fonts
+## 5. .orange[Rmd tricks]
+
+
+&lt;!--
+Most of this material comes from here:
+https://holtzy.github.io/Pimp-my-rmd/#equations
+--&gt;
+
+---
+## Use themes to change global "look"
+
+Check out [Pimp my RMD](https://holtzy.github.io/Pimp-my-rmd/), by Yan Holtz
+
+Change theme in YAML header:
+```
+title: "your title"
+output:
+    html_document:
+        theme: united
+        highlight: tango
+```
+
+[Preview themes here](https://bootswatch.com/)
+
+---
+class: inverse
+
+# Quick practice
+
+Try changing the theme of today's notes Rmd file:
+
+.leftcol[
+Themes:
+-
+]
+.rightcol[
+Highlighting styles:
+-
+]
+
+
+
+---
+class: inverse, middle, center
+
+# Extra practice
+
+---
+class: inverse
+
+## Your turn
+
+
+
+.leftcol[
+Use the `lotr_summary` data frame to create the following chart.
+
+Hints:
+- The main font is `"Fira Sans Condensed"`
+- For the `geom_label()`, use these points:
+    - `x = 0.6`
+    - `y = 2100`
+- For the `geom_curve()`, use these points:
+    - `x = 1.2`
+    - `xend = 1`
+    - `y = 1300`
+    - `yend = 200`
+]
+.rightcol[
+&lt;img src="slides-8-polish_files/figure-html/unnamed-chunk-106-1.png" width="504" style="display: block; margin: auto;" /&gt;
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="https://platform.twitter.com/widgets.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

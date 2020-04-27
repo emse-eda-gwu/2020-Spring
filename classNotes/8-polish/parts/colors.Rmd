@@ -1,0 +1,429 @@
+<!-- 
+Source of a lot of the slide content:
+https://resources.rstudio.com/rstudio-conf-2020/the-glamour-of-graphics-william-chase 
+-->
+
+---
+class: inverse, center, middle 
+
+# Color is hard
+
+---
+## How do I know what colors look good together?
+
+--
+### .red[Use the color wheel]
+.leftcol[
+]
+.rightcol[
+<center>
+<img src="images/color_wheel.png">
+</center>
+
+<br>
+
+.center[Image from [this color wheel tool](https://www.sessions.edu/color-calculator/)]
+]
+
+---
+## How do I know what colors look good together?
+
+### .red[Use the color wheel]
+.leftcol[
+### 1. **Complementary**: High contrast 
+]
+.rightcol[
+<center>
+<img src="images/color_wheel_complementary.png">
+</center>
+
+<br>
+
+.center[Image from [this color wheel tool](https://www.sessions.edu/color-calculator/)]
+]
+
+---
+## How do I know what colors look good together?
+
+### .red[Use the color wheel]
+.leftcol[
+### 1. Complementary: High contrast 
+### 2. **Analogous**: Calm, harmonious 
+]
+.rightcol[
+<center>
+<img src="images/color_wheel_analogous.png">
+</center>
+
+<br>
+
+.center[Image from [this color wheel tool](https://www.sessions.edu/color-calculator/)]
+]
+
+---
+## How do I know what colors look good together?
+
+### .red[Use the color wheel]
+.leftcol[
+### 1. Complementary: High contrast 
+### 2. Analogous: Calm, harmonious 
+### 3. **Triadic**: Vibrant, contrast
+]
+.rightcol[
+<center>
+<img src="images/color_wheel_triadic.png">
+</center>
+
+<br>
+
+.center[Image from [this color wheel tool](https://www.sessions.edu/color-calculator/)]
+]
+
+---
+class: center 
+
+# Steal colors with the [eye dropper tool](https://chrome.google.com/webstore/detail/eye-dropper/hmdcmlfkchdmnmnmheododdhjedfccka?hl=en)
+
+<br>
+
+.noborder[
+<center>
+<img src="images/eye_dropper.png" width=242>
+</center>
+]
+
+---
+## Using your own colors
+
+.leftcol60[.code70[
+Map color to variable
+```{r, fig.show='hide'}
+mpg_plot <- ggplot(mtcars, aes(x = mpg, y = hp)) +
+    geom_point(aes(color = as.factor(cyl)), #<<
+               alpha = 0.8, size = 3) +
+    theme_half_open(font_size = 16) +
+    labs(x = "Fuel efficiency (mpg)", 
+         y = "Power (hp)",
+         color = '# cylinders',
+         title = "Vehicle fuel efficiency vs. power",
+         caption = "Source: 1974 Motor Trend U.S. magazine.")
+```
+]]
+
+<br>
+
+.rightcol40[
+```{r, echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+mpg_plot
+```
+]
+
+---
+## Using your own colors
+
+.leftcol60[.code70[
+Map color to variable
+```{r, eval=FALSE}
+mpg_plot <- ggplot(mtcars, aes(x = mpg, y = hp)) +
+    geom_point(aes(color = as.factor(cyl)), #<<
+               alpha = 0.8, size = 3) +
+    theme_half_open(font_size = 16) +
+    labs(x = "Fuel efficiency (mpg)", 
+         y = "Power (hp)",
+         color = '# cylinders',
+         title = "Vehicle fuel efficiency vs. power",
+         caption = "Source: 1974 Motor Trend U.S. magazine.")
+```
+Manually change colors
+```{r, mpg_colors_manual, fig.show='hide'}
+mpg_plot +
+    scale_color_manual(values = c( #<<
+        '#a0522d', '#522da0', '#2da052')) #<<
+```
+]]
+
+<br>
+
+.rightcol40[
+```{r, ref.label='mpg_colors_manual', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+
+---
+## Choose colors carefully
+
+.leftcol45[.code70[
+Manually change colors
+```{r}
+mpg_plot_mycolors <- mpg_plot +
+    theme_half_open(font_size = 10) +
+    scale_color_manual(values = c( #<<
+        '#a0522d', '#522da0', '#2da052')) #<<
+```
+Simulate color blindness with [colorblindr](https://github.com/clauswilke/colorblindr)
+```{r, mpg_plot_mycolors, fig.show='hide'}
+library(colorblindr)
+
+cvd_grid(mpg_plot_mycolors)
+```
+]]
+.rightcol55[
+```{r, ref.label='mpg_plot_mycolors', echo=FALSE, fig.height=7, fig.width=8, fig.align='center'}
+```
+]
+
+---
+class:center 
+
+.leftcol[
+# Use palettes
+
+### [Viridis](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html)
+<center>
+<img src="images/viridis.png">
+</center>
+]
+.rightcol[
+### [ColorBrewer](https://www.datanovia.com/en/blog/the-a-z-of-rcolorbrewer-palette/)
+<center>
+<img src="images/colorbrewer.png" width=370>
+</center>
+]
+
+---
+## **viridis** palettes
+
+.leftcol60[.code70[
+Map color to variable
+```{r, eval=FALSE}
+mpg_plot <- ggplot(mtcars, aes(x = mpg, y = hp)) +
+    geom_point(aes(color = as.factor(cyl)), #<<
+               alpha = 0.8, size = 3) +
+    theme_half_open(font_size = 16) +
+    labs(x = "Fuel efficiency (mpg)", 
+         y = "Power (hp)",
+         color = '# cylinders',
+         title = "Vehicle fuel efficiency vs. power",
+         caption = "Source: 1974 Motor Trend U.S. magazine.")
+```
+Use viridis colors
+```{r, mpg_colors_viridis, fig.show='hide'}
+mpg_plot +
+    scale_color_viridis(discrete = TRUE) #<<
+```
+]]
+
+<br>
+
+.rightcol40[
+```{r, ref.label='mpg_colors_viridis', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+
+---
+## **viridis** palettes
+
+.cols3[.code70[
+```{r, fig.height=5, fig.width=6, fig.align='center'}
+mpg_plot +
+    scale_color_viridis(
+        discrete = TRUE, 
+        option = 'viridis') #<<
+```
+]]
+.cols3[.code70[
+```{r, fig.height=5, fig.width=6, fig.align='center'}
+mpg_plot +
+    scale_color_viridis(
+        discrete = TRUE, 
+        option = 'inferno') #<<
+```
+]]
+.cols3[.code70[
+```{r, fig.height=5, fig.width=6, fig.align='center'}
+mpg_plot +
+    scale_color_viridis(
+        discrete = TRUE, 
+        option = 'plasma') #<<
+```
+]]
+
+---
+## **ColorBrewer** palettes
+
+.leftcol60[.code70[
+Map color to variable
+```{r, eval=FALSE}
+mpg_plot <- ggplot(mtcars, aes(x = mpg, y = hp)) +
+    geom_point(aes(color = as.factor(cyl)), #<<
+               alpha = 0.8, size = 3) +
+    theme_half_open(font_size = 16) +
+    labs(x = "Fuel efficiency (mpg)", 
+         y = "Power (hp)",
+         color = '# cylinders',
+         title = "Vehicle fuel efficiency vs. power",
+         caption = "Source: 1974 Motor Trend U.S. magazine.")
+```
+Use "Dark2" palette
+```{r, mpg_colors_dark2, fig.show='hide'}
+mpg_plot +
+    scale_color_brewer(palette = 'Dark2') #<<
+```
+]]
+
+<br>
+
+.rightcol40[
+```{r, ref.label='mpg_colors_dark2', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+
+---
+## **ColorBrewer** palettes
+
+.cols3[.code70[
+```{r, fig.height=5, fig.width=6, fig.align='center'}
+mpg_plot +
+    scale_color_brewer(
+        palette = 'Set1') #<<
+```
+]]
+.cols3[.code70[
+```{r, fig.height=5, fig.width=6, fig.align='center'}
+mpg_plot +
+    scale_color_brewer(
+        palette = 'Set2') #<<
+```
+]]
+.cols3[.code70[
+```{r, fig.height=5, fig.width=6, fig.align='center'}
+mpg_plot +
+    scale_color_brewer(
+        palette = 'Accent') #<<
+```
+]]
+
+---
+## Consider using both `color` and `fill`
+
+.leftcol60[.code70[
+- Map `fill` to variable
+- Add "white" line around points with `color`
+- Use `shape = 21` for filled points
+```{r, mpg_colors_polished, fig.show='hide'}
+ggplot(mtcars, aes(x = mpg, y = hp)) +
+    geom_point(aes(fill = as.factor(cyl)), #<<
+               color = 'white', shape = 21, #<<
+               size = 3.5, alpha = 0.8) +
+    scale_color_brewer(palette = 'Dark2') +
+    theme_half_open(font_size = 15) +
+    labs(x = "Fuel efficiency (mpg)", 
+         y = "Power (hp)",
+         fill = '# cylinders',
+         title = "Vehicle fuel efficiency vs. power",
+         caption = "Source: 1974 Motor Trend U.S. magazine.")
+```
+]]
+.rightcol40[
+<br>
+```{r, ref.label='mpg_colors_polished', echo=FALSE, fig.height=5, fig.width=6, fig.align='center'}
+```
+]
+
+---
+.leftcol[.code70[
+Summarise data
+```{r}
+federal_spending_summary <- federal_spending %>%
+    mutate(department = fct_other(
+        department, keep = 'DOD')) %>% 
+    group_by(department, year) %>%
+    summarise(rd_budget = sum(rd_budget) / 10^3) %>% 
+    ungroup() %>% 
+    mutate(department = fct_relevel(
+        department, c('Other', 'DOD')))
+```
+Make plot
+```{r}
+dod_spending_plot <- ggplot(federal_spending_summary) +
+    geom_area(aes(x = year, y = rd_budget, 
+                  fill = department)) +
+    scale_y_continuous(
+        expand = expand_scale(mult = c(0, 0.05))) +
+    scale_fill_manual(values = c('grey', 'sienna')) + #<<
+    theme_minimal_hgrid() + 
+    labs(x = NULL,
+         y = 'R&D Budget ($ Billions)', 
+         fill = 'Department',
+         caption = 'Source: AAAS')
+```
+]]
+.rightcol[
+# .center[`grey` = "Other"]
+
+<br>
+
+```{r, echo=FALSE, fig.height=4, fig.width=6, fig.align='center'}
+dod_spending_plot
+```
+]
+
+---
+# .center[`grey` = "Other"]
+
+.cols3[.code60[
+```{r, fig.height=5, fig.width=6, fig.align='center'}
+dod_spending_plot + 
+    scale_fill_manual(
+        values = c('grey40', 'sienna')) #<<
+```
+]]
+.cols3[.code60[
+```{r, fig.height=5, fig.width=6, fig.align='center'}
+dod_spending_plot + 
+    scale_fill_manual(
+        values = c('grey60', 'sienna')) #<<
+```
+]]
+.cols3[.code60[
+```{r, fig.height=5, fig.width=6, fig.align='center'}
+dod_spending_plot + 
+    scale_fill_manual(
+        values = c('grey80', 'sienna')) #<<
+```
+]]
+
+---
+class: inverse 
+
+# Your turn
+
+.leftcol[
+Follow these steps to make variations of this plot with different colors
+
+1. Change the colors to the `"RdYlBu"` ColorBrewer palette.
+2. Change the colors to the `"inferno"` palette from the **viridis** library.
+3. Use the ["eye dropper"](https://chrome.google.com/webstore/detail/eye-dropper/hmdcmlfkchdmnmnmheododdhjedfccka?hl=en) tool in Google Chrome to select a color from a website
+4. Use your chosen color and this [color wheel tool](https://www.sessions.edu/color-calculator/) to find a triadic color palette.
+5. Change the colors to your custom triadic palette.
+
+]
+.rightcol[
+```{r, echo=FALSE}
+countdown(minutes = 15,
+          warn_when = 30,
+          update_every = 15,
+          top = 0,
+          font_size = '2em')
+```
+```{r, echo=FALSE, fig.width=7, fig.height=5, fig.align='center'}
+ggplot(wildlife_impacts_2016) +
+    geom_point(aes(x = speed, y = height, color = phase_of_flt),
+               alpha = 0.7, size = 1) +
+    theme_minimal_grid(font_size = 15) +
+    labs(x = 'Speed (mph)',
+         y = 'Height (ft)',
+         color = 'Phase of flight',
+         title = 'Wildlife impacts in 2016')
+```
+]

@@ -1,0 +1,133 @@
+---
+title: "Week 8: Polishing your charts"
+author: "John Paul Helveston"
+date: March 04, 2020
+output:
+  xaringan::moon_reader:
+    css: ['default', 'https://emse-eda-gwu.github.io/2020-Spring/classNotes/classNotes.css']
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      beforeInit: "https://platform.twitter.com/widgets.js"
+    seal: false
+---
+
+```{r setup, include=FALSE}
+library(here)
+source(here::here('setup.R'))
+```
+
+name: xaringan-title
+class: title-slide, center, middle, inverse
+
+# Week 8: Polishing your charts
+
+.large[EMSE 4197 | John Paul Helveston | March 04, 2020]
+
+```{r child = here::here('parts', 'intro.Rmd')}
+```
+
+---
+class: inverse, middle
+
+# Polishing your charts
+
+## 1. Scales
+## 2. Annotations
+## 3. Colors
+## 4. Fonts
+## 5. Rmd tricks
+
+---
+class: inverse, middle
+
+# Polishing your charts
+
+## 1. .orange[Scales]
+## 2. Annotations
+## 3. Colors
+## 4. Fonts
+## 5. Rmd tricks
+
+```{r child = here::here('parts', 'scales.Rmd')}
+```
+
+---
+class: inverse, middle
+
+# Polishing your charts
+
+## 1. Scales
+## 2. .orange[Annotations]
+## 3. Colors
+## 4. Fonts
+## 5. Rmd tricks
+
+```{r child = here::here('parts', 'annotations.Rmd')}
+```
+
+---
+class: inverse
+
+# 5 minute break!
+
+```{r, echo=FALSE}
+countdown(minutes = 5,
+          warn_when = 30,
+          left = 0,
+          font_size = '5em')
+```
+
+## Stand up
+
+## Move around
+
+## Stretch!
+
+---
+class: inverse, middle
+
+# Polishing your charts
+
+## 1. Scales
+## 2. Annotations
+## 3. .orange[Colors]
+## 4. Fonts
+## 5. Rmd tricks
+
+```{r child = here::here('parts', 'colors.Rmd')}
+```
+
+---
+class: inverse, middle
+
+# Polishing your charts
+
+## 1. Scales
+## 2. Annotations
+## 3. Colors
+## 4. .orange[Fonts]
+## 5. Rmd tricks
+
+```{r child = here::here('parts', 'fonts.Rmd')}
+```
+
+---
+class: inverse, middle
+
+# Polishing your charts
+
+## 1. Scales
+## 2. Annotations
+## 3. Colors
+## 4. Fonts
+## 5. .orange[Rmd tricks]
+
+```{r child = here::here('parts', 'rmd.Rmd')}
+```
+
+```{r child = here::here('parts', 'extra.Rmd')}
+```

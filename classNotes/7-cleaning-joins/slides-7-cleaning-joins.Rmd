@@ -1,0 +1,134 @@
+---
+title: "Week 7: Data cleaning & joins"
+author: "John Paul Helveston"
+date: February 26, 2020
+output:
+  xaringan::moon_reader:
+    css: ['default', 'https://emse-eda-gwu.github.io/2020-Spring/classNotes/classNotes.css']
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      beforeInit: "https://platform.twitter.com/widgets.js"
+    seal: false
+---
+
+```{r setup, include=FALSE}
+library(here)
+source(here::here('setup.R'))
+```
+
+name: xaringan-title
+class: title-slide, center, middle, inverse
+
+# Week 7: Data cleaning & joins
+
+.large[EMSE 4197 | John Paul Helveston | February 26, 2020]
+
+```{r child = here::here('parts', 'intro.Rmd')}
+```
+
+---
+class: inverse, middle
+
+# Data cleaning & joins
+
+## 1. Joins
+## 2. Re-typing variables
+## 3. Re-naming variables
+## 4. Re-coding variables
+## 5. Data cleaning strategies
+
+---
+class: inverse, middle
+
+# Data cleaning & joins
+
+## 1. .orange[Joins]
+## 2. Re-typing variables
+## 3. Re-naming variables
+## 4. Re-coding variables
+## 5. Data cleaning strategies
+
+```{r child = here::here('parts', 'joins.Rmd')}
+```
+
+---
+class: inverse, middle
+
+# Data cleaning & joins
+
+## 1. Joins
+## 2. .orange[Re-typing variables]
+## 3. Re-naming variables
+## 4. Re-coding variables
+## 5. Data cleaning strategies
+
+```{r child = here::here('parts', 'retyping.Rmd')}
+```
+
+---
+class: inverse, middle
+
+# Data cleaning & joins
+
+## 1. Joins
+## 2. Re-typing variables
+## 3. .orange[Re-naming variables]
+## 4. Re-coding variables
+## 5. Data cleaning strategies
+
+```{r child = here::here('parts', 'renaming.Rmd')}
+```
+
+---
+class: inverse
+
+# 5 minute break!
+
+```{r, echo=FALSE}
+countdown(minutes = 5,
+          warn_when = 30,
+          left = 0,
+          font_size = '5em')
+```
+
+## Stand up
+
+## Move around
+
+## Stretch!
+
+---
+class: inverse, middle
+
+# Data cleaning & joins
+
+## 1. Joins
+## 2. Re-typing variables
+## 3. Re-naming variables
+## 4. .orange[Re-coding variables]
+## 5. Data cleaning strategies
+
+```{r child = here::here('parts', 'recoding.Rmd')}
+```
+
+---
+class: inverse, middle
+
+# Data cleaning & joins
+
+## 1. Joins
+## 2. Re-typing variables
+## 3. Re-naming variables
+## 4. Re-coding variables
+## 5. .orange[Data cleaning strategies]
+
+```{r child = here::here('parts', 'strategies.Rmd')}
+```
+
+```{r child = here::here('parts', 'end.Rmd')}
+```
+

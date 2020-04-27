@@ -1,0 +1,92 @@
+---
+title: "Week 11: Correlation Analysis"
+author: "John Paul Helveston"
+date: March 25, 2020
+output:
+  xaringan::moon_reader:
+    css: ['default', 'https://emse-eda-gwu.github.io/2020-Spring/classNotes/classNotes.css']
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+      beforeInit: "https://platform.twitter.com/widgets.js"
+    seal: false
+---
+
+```{r setup, include=FALSE}
+source('setup.R')
+```
+
+name: xaringan-title
+class: title-slide, center, middle, inverse
+
+# Week 11: Correlation Analysis
+
+.large[EMSE 4197 | John Paul Helveston | March 25, 2020]
+
+```{r child = here('parts', 'intro.Rmd')}
+```
+
+---
+class: inverse, middle
+
+# Correlation Analysis
+
+## 1. What is correlation?
+## 2. Visualizing correlation
+## 3. Linear models 
+## 4. Visualizing linear models 
+
+---
+class: inverse, middle
+
+# Correlation Analysis
+
+## 1. .orange[What is correlation?]
+## 2. Visualizing correlation
+## 3. Linear models 
+## 4. Visualizing linear models 
+
+```{r child = here('parts', 'correlation.Rmd')}
+```
+
+---
+class: inverse, middle
+
+# Correlation Analysis
+
+## 1. What is correlation?
+## 2. .orange[Visualizing correlation]
+## 3. Linear models
+## 4. Visualizing linear models 
+
+```{r child = here('parts', 'correlation_viz.Rmd')}
+```
+
+---
+class: inverse, middle
+
+# Correlation Analysis
+
+## 1. What is correlation?
+## 2. Visualizing correlation
+## 3. .orange[Linear models]
+## 4. Visualizing linear models 
+
+```{r child = here('parts', 'regression.Rmd')}
+```
+
+---
+class: inverse, middle
+
+# Correlation Analysis
+
+## 1. What is correlation?
+## 2. Visualizing correlation
+## 3. Linear models
+## 4. .orange[Visualizing linear models]
+
+```{r child = here('parts', 'regression_viz.Rmd')}
+```

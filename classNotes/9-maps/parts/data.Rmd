@@ -1,0 +1,363 @@
+<!--
+Squirrels and dogs plots:
+https://designing-ggplots.netlify.com/#71
+
+Hexmaps:
+- Use https://www.r-graph-gallery.com/hexbin-map.html
+- https://www.r-graph-gallery.com/328-hexbin-map-of-the-usa.html
+- Practice with wind data?
+-->
+
+---
+class: inverse, center, middle
+
+## Choropleth maps
+
+<center>
+<img src="images/state_abbreviations.png" width=750>
+</center>
+
+---
+class: center, middle
+
+<center>
+<img src="images/xkcd_heatmap.png" width=600>
+</center>
+
+---
+class: center, middle
+
+## Number of events != Number of events **per capita**
+
+<center>
+<img src="images/choropleth_ca.png" width=800>
+</center>
+
+---
+# Choropleth maps are easily misleading
+
+<center>
+<img src="images/choropleth_hispanic.png">
+</center>
+
+---
+# Choropleth maps are easily misleading
+
+Election maps from: http://www-personal.umich.edu/~mejn/election/2016/
+
+.cols3[
+<center>
+<img src="images/election_2016_ec.png">
+</center>
+]
+.cols3[
+<center>
+<img src="images/election_2016_county.png">
+</center>
+]
+.cols3[
+<center>
+<img src="images/election_2016_proportion.png">
+</center>
+]
+
+---
+class: center
+
+## Actual fakenews in dumb memes
+
+<center>
+<img src="images/election_map_fakenews.png" width=480>
+</center>
+
+--
+Bottom map is actually [this map](http://www-personal.umich.edu/~mejn/election/2012/countymaprb1024.png) of the 2012 election
+
+---
+class: center, middle
+
+## (here is what actual crime rates look like)
+
+.leftcol[
+2016 Election map [[source]](http://www-personal.umich.edu/~mejn/election/2016/)
+<center>
+<img src="images/election_2016_county.png">
+</center>
+]
+.rightcol[
+2014 Crime map [[source]](https://www.washingtonpost.com/graphics/national/crime-rates-by-county/)
+<center>
+<img src="images/crime_map.jpeg">
+</center>
+]
+
+---
+class: center
+
+# Another alternative: hex maps
+
+.leftcol[
+1994 Simpson Diversity Index in US Schools
+<center>
+<img src="images/Hexagons_SchoolDiversity_hex_1994.png">
+</center>
+https://github.com/malcolmbarrett/designing_ggplots
+]
+.rightcol[
+2016 Electoral College
+<center>
+<img src="images/election_2016_chartograph.png" width=450>
+</center>
+https://fivethirtyeight.com/
+]
+
+---
+class: center
+
+# Another alternative: hex maps
+
+<center>
+<img src="images/map_obamacare.png" width=750>
+<center>
+
+---
+## How to make a choropleth map
+
+.leftcol60[.code70[
+Get the "fill" data
+```{r}
+milk_2017 <- milk_production %>%
+    filter(year == 2017) %>%
+    select(name = state, milk_produced) %>%
+    mutate(milk_produced = milk_produced / 10^9)
+```
+Get the "map" data
+```{r}
+us_states <- ne_states(
+    country = 'united states of america',
+    returnclass = 'sf') %>%
+    filter(! name %in% c('Alaska', 'Hawaii')) %>%
+    left_join(milk_2017, by = 'name') #<<
+```
+]]
+--
+.rightcol40[
+```{r}
+us_states %>%
+    select(name, milk_produced) %>%
+    head()
+```
+]
+
+---
+## How to make a choropleth map
+
+.leftcol60[.code70[
+```{r, eval=FALSE}
+milk_2017 <- milk_production %>%
+    filter(year == 2017) %>%
+    select(name = state, milk_produced) %>%
+    mutate(milk_produced = milk_produced / 10^9)
+
+us_states <- ne_states(
+    country = 'united states of america',
+    returnclass = 'sf') %>%
+    filter(! name %in% c('Alaska', 'Hawaii')) %>%
+    left_join(milk_2017, by = 'name') #<<
+```
+Make the plot
+```{r, eval=FALSE}
+ggplot(us_states) +
+    geom_sf(aes(fill = milk_produced)) + #<<
+    scale_fill_viridis(
+        option = "plasma",
+        limits = c(0, 40)) +
+    theme_void(base_size = 15) +
+    theme(legend.position = 'bottom') +
+    labs(fill = 'Milk produced\n(billions lbs)',
+         title = 'Milk Production by State in 2017')
+```
+]]
+.rightcol40[
+<br>
+<center>
+<img src="images/plots/sf_us_milk_2017.png">
+<center>
+]
+
+---
+## How to make a choropleth map
+
+.leftcol60[.code70[
+```{r, eval=FALSE}
+milk_2017 <- milk_production %>%
+    filter(year == 2017) %>%
+    select(name = state, milk_produced) %>%
+    mutate(milk_produced = milk_produced / 10^9)
+
+us_states <- ne_states(
+    country = 'united states of america',
+    returnclass = 'sf') %>%
+    filter(! name %in% c('Alaska', 'Hawaii')) %>%
+    left_join(milk_2017, by = 'name')
+```
+Make the plot
+```{r, eval=FALSE}
+ggplot(us_states) +
+    geom_sf(aes(fill = milk_produced)) +
+    scale_fill_viridis(
+        trans = 'sqrt', #<<
+        option = "plasma",
+        limits = c(0, 40)) +
+    theme_void(base_size = 15) +
+    theme(legend.position = 'bottom') +
+    labs(fill = 'Milk produced\n(billions lbs)',
+         title = 'Milk Production by State in 2017')
+```
+]]
+.rightcol40[
+<br>
+<center>
+<img src="images/plots/sf_us_milk_2017_quad.png">
+<center>
+]
+
+---
+class: inverse, center, middle
+
+# Points
+
+---
+class: center
+
+# Points as locations
+
+<center>
+<img src="images/plots/uk_cities.png" width=450>
+</center>
+
+---
+class: center
+
+# Points encoding a variable
+
+<center>
+<img src="images/plots/uk_pop_area.png" width=450>
+</center>
+
+---
+class: center
+
+# For point size, use **area**, not radius
+
+# $Area = \pi r^2$
+
+.leftcol[
+## Radius
+]
+.rightcol[
+## Area
+]
+<center>
+<img src="images/area.png" width=1000>
+</center>
+
+---
+class: center
+
+.leftcol[
+## Radius
+<center>
+<img src="images/plots/uk_pop_radius.png" width=500>
+</center>
+]
+.rightcol[
+## Area
+<center>
+<img src="images/plots/uk_pop_area.png" width=500>
+</center>
+]
+
+---
+## How to add points to a map
+
+.leftcol60[.code70[
+Load the continental US shape file
+```{r, eval=FALSE}
+us_states_cont <- ne_states(
+    country = 'united states of america',
+    returnclass = 'sf') %>%
+    filter(! name %in% c('Alaska', 'Hawaii'))
+```
+Read in the coffee shop data
+```{r, eval=FALSE}
+us_coffee_shops  <- read_csv(here::here(
+    'data', 'us_coffee_shops.csv'))
+
+# Only keep data in continental US
+us_coffee_shops <- us_coffee_shops %>%
+    filter(lat > 22,    lat < 50,
+           long > -150, long < -66)
+```
+]]
+
+---
+## How to add points to a map
+
+.leftcol60[.code70[
+Load the continental US shape file & coffee shop data
+```{r, eval=FALSE}
+us_states_cont <- ne_states(
+    country = 'united states of america',
+    returnclass = 'sf') %>%
+    filter(! name %in% c('Alaska', 'Hawaii'))
+
+us_coffee_shops <- us_coffee_shops %>%
+    filter(lat > 22,    lat < 50,
+           long > -150, long < -66)
+```
+Plot coffee shop locations over map
+```{r, eval=FALSE}
+ggplot() +
+    geom_sf(data = us_states_cont) +
+    geom_point(data = us_coffee_shops, #<<
+               aes(x = long, y = lat, color = name)) + #<<
+    theme_void(base_size = 15) +
+    theme(legend.position = 'bottom') +
+    guides(color = guide_legend(title.position = "top")) +
+    labs(color = 'Coffee shop',
+         title = 'Coffee Shops in the US')
+```
+]]
+.rightcol40[
+<br>
+<center>
+<img src="images/plots/sf_us_coffee.png">
+<center>
+]
+
+---
+class: inverse
+
+## Your turn
+
+```{r, echo=FALSE}
+countdown(minutes = 15,
+          warn_when = 30,
+          update_every = 15,
+          top = 0,
+          font_size = '2em')
+```
+
+.font90[
+Create the following map of squirrels in NYC's central park using the following data from the [Squirrel Census](https://www.thesquirrelcensus.com/):
+
+- The `CentralPark.shp` file in the `data/central_park` folder.
+- The `nyc_squirrels.csv` file in the `data` folder.
+
+Hint: color is the `primary_fur_color` variable
+]
+
+<center>
+<img src="images/plots/sf_central_park_squirrels_facet.png" width=850>
+<center>

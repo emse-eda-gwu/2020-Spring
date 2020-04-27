@@ -1,0 +1,30 @@
+Consider using memos for exercise assignments, and have the memos be .Rmd files that are compiled to different outputs (html, pdf, etc.).
+
+The memos should say three things they learned, and demonstrate one concept with actual data.
+
+Look up 200306-SEAS-faculty notes for data examples
+
+Add new Horst monster images
+
+Revise grading rubrics to look for effectiveness of design choices:
+- chart communicates key message
+- chart choice appropriate to show relationship / comparison
+- design elements are clear and not confusing
+- annotations are appropriate
+
+2-eda:
+Automated EDA:
+https://twitter.com/beeonaposy/status/1245824406783430660?s=19
+
+3-visualizing-information:
+- Add trump_covid.jpg image on directly labeling lines
+- "screaming cats?"
+
+6-trends:
+- Log scales - use them to show doubling rate? penny doubling example?
+- Index chart (Financial times log chart of COVID cases - all start at days after 100 cases)
+
+9-maps:
+- NYT misleading coronavirus map comparison: https://twitter.com/oliviacpaschal/status/1245711609890320386?s=20
+
+

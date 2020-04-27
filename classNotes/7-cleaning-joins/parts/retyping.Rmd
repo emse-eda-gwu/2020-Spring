@@ -1,0 +1,82 @@
+
+---
+## Using the `col_types` argument
+
+- You can change the column type when reading in data
+- Different syntax for [**readxl**](https://readxl.tidyverse.org/articles/cell-and-column-types.html) and [**readr**](https://readr.tidyverse.org/)
+
+---
+.leftcol40[
+## **readxl**
+
+`col_types` must be a vector describing each column type
+]
+.rightcol60[
+<br><br>
+```{r}
+wind <- read_excel(
+    here::here('data',
+               'US_State_Wind_Energy_Facts_2018.xlsx'))
+
+glimpse(wind)
+```
+]
+
+---
+.leftcol40[
+## **readxl**
+
+`col_types` must be a vector describing each column type
+
+<br>
+
+.font80[
+| How it is in Excel | How it will be in R | How to request in `col_types` |
+|:--------------------|:-----------------------|:--------------------|
+| *anything*          | *non-existent*         | `"skip"`            |
+| empty               | `logical`, but all `NA` | *you cannot request this* |
+| boolean            | `logical`               | `"logical"`         |
+| numeric            | `numeric`               | `"numeric"`         |
+| datetime           | `POSIXct`               | `"date"`            |
+| text               | `character`             | `"text"`            |
+| *anything*         | `list`                  | `"list"`            |
+]]
+
+.rightcol60[
+```{r}
+columns <- c('numeric', 'text', rep('numeric', 5))
+columns
+wind <- read_excel(
+    here::here('data',
+               'US_State_Wind_Energy_Facts_2018.xlsx'),
+    col_types = columns) #<<
+
+glimpse(wind)
+```
+]
+
+---
+## **readr**
+
+`col_types` describes individual variables by name using `cols()`
+
+.leftcol60[
+```{r}
+milk <- read_csv(
+    here::here('data', 'milk_production.csv'),
+    col_types = cols(year = col_character())) #<<
+
+glimpse(milk)
+```
+]
+
+---
+## **readr**
+
+`col_types` describes individual variables by name using `cols()`
+
+<br>
+
+<center>
+<img src="images/readr_parse_functions.png" width=800>
+</center>
