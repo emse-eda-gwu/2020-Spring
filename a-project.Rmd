@@ -192,9 +192,11 @@ Your final report should be a fully reproducible product and available online as
 
     - As the report will compile to a html webpage, there is no length requirement; your report should be sufficiently detailed to address the requirements listed below and sufficiently concise such that it is expressed in the fewest necessary words.
     - In your markdown YAML header, include the project title and the name(s) of student(s) involved in the project such that they appear at the top of the rendered html page.
+    - Your report should be **fully reproducible** - all data formatting and charts should be written in code chunks and rendered when you compile your .Rmd file to a html webpage.
     - Your report should be written in a narrative format (i.e. using coherent pargraphs rather than a series of bullet points). You may use headings where appropriate to break up your report into sections.
+    - Proofread your html webpage before you submit - double check for spelling and formatting errors, especially rendered charts and tables!
 
-2. State your research question and explain why we should care.
+2. State your research question and motivate why it is important / why the reader should care.
 
 3. Describe your data source(s) you used for your analysis:
 
@@ -205,14 +207,16 @@ Your final report should be a fully reproducible product and available online as
 4. Describe your data:
 
     - Articulate the main variables of interest in your project, and justify your choice of variables.
-    - Provide descriptive statistics for all your relevant variables. These can be a mix of graphs and summary tables.
+    - Provide descriptive statistics for your relevant variables. These can be a mix of graphs and summary tables.
+    - You don't have to summarize everything in every data set - just the variables that are relevant to your analysis.
 
 5. Describe your results:
 
     - Display charts that either support or oppose your research question or illustrate what else you might need to address your research question.
-    - Your plot type choices should highlight the point you want to make or clearly show the relationship you want to emphasize - basically, what do the data say about your research question?
+    - Write narrative text around your charts to explain what the charts show and their significance towards addressing your research question. This should read as a continuous story rather than as a reply to each of the requirements described here.
+    - Your plot type choices should highlight the main point(s) you want to make or clearly show the relationship you want to emphasize. Basically, they should answer the question "what do the data say about my research question?"
     - Your charts should be polished, following the design principles we have covered in class.
-    - You must include at least three polished charts / animations; alternatively, you can build an interactive shiny app with at least two dynamic charts. If you built a shiny app, include a link to your app and screenshots of your app in your final report.
+    - You must include at least three polished charts / animations; alternatively, you can build an interactive shiny app with at least two dynamic charts. If you build a shiny app, include a link to your app and screenshots of your app in your final report.
 
 6. **For students working in teams**: On Blackboard under the assignment titled `"Team Member Review [Final Report]"`, submit a short description of the specific contributions of each team member in your team. For example, "Student A identified the data source and wrote the documentation for it. Student B led the data cleaning process and did much of the initial data exploration. Student C helped write code for the main visualizations." These reviews will be kept confidential and compared to assess that the workload and grading for team members are equitable. Team members who do not make meaningful contributions to their projects will receive a lower grade than that of their team mates.
 
