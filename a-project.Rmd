@@ -230,7 +230,7 @@ Your final report should be a fully reproducible product and available online as
 
 **Submission Details**: Submit your slides as a PDF or .pptx file (whichever you feel most comfortable presenting with) on Blackboard by the due date.
 
-**Assessment**: We will use [this rubric](assignments/project/presentation.pdf) to grade your presentation.
+**Assessment**: We will use [this rubric](assignments/project/presentation_rubric.pdf) to grade your presentation.
 
 **Tasks**:
 
