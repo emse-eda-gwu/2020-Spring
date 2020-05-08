@@ -62,6 +62,8 @@ navbar:
           href: a7-redesign-trends.html
         - text: "Final project"
           href: a-project.html
+    - text: "Project Showcase"
+      href: project-showcase.html
     - text: "Resources"
       menu:
         - text: "Getting Help"

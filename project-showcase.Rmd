@@ -1,0 +1,21 @@
+---
+title: "Final Project Showcase"
+output:
+  html_document:
+    number_sections: false
+    toc: false
+---
+
+Students from the very first semester of "Exploratory Data Analysis" produced some impressive final project reports - you can read them here!
+
+- [World War...against COVID-19](content/showcase/covid_pandemic.html){target="_blank"}, by Javier Langarica
+- [An Exploration of Diversity & Inclusion in the U.S. Military](content/showcase/diversity_in_us_military.html){target="_blank"}, by William Stricklett [<i class="fas fa-video"></i>](https://youtu.be/2g75nCwCwQw){target="_blank"}
+- [Expectations in Air](content/showcase/expectations_in_air.html){target="_blank"}, by Bruna Janikian, Olivia O’Hearn, & Yumna Dahab [<i class="fas fa-video"></i>](https://www.youtube.com/watch?v=a9iGzrSEdf4){target="_blank"}
+- [FEMA Disaster Relief](content/showcase/fema_disaster_relief.html){target="_blank"}, by Derek Ripp, Blake Ripp, & Bugra Kardas
+- [Gender Representation in the Film Industry](content/showcase/gender_representation_in_film.html){target="_blank"}, by Sarah Cassway, Alexa Solomon, & Caroline Walton
+- [OPEC vs US: Who controls the narrative of global petroleum market](content/showcase/global_oil_markets.html){target="_blank"}, by Azamat Kulzhanov, Diing Manyang, & Alp Can
+- [Analysis of Home Mortgage Disclosure Act Data](content/showcase/home_mortages.html){target="_blank"}, by Alyssa Cristobal
+- [Game Attendance in Major League Baseball](content/showcase/mlb_attendance.html){target="_blank"}, by Saramarie Puzzanghera
+- [An Investigation on the Change in Electricity Generation Mix in the US over Time](content/showcase/us_electricity_generation_mix.html){target="_blank"}, by William Stein [<i class="fas fa-video"></i>](https://youtu.be/L5NOlVQx4A4){target="_blank"}
+- [Votings Trends in the 2016 Virginia Presidential Election](content/showcase/virginia_presidential_voting.html){target="_blank"}, by Jennifer J. Kim
+- [World Happiness Analysis](content/showcase/world_happiness.html){target="_blank"}, by Allison Forsyth, Beth Ellinport, & Emily Aprigliano [<i class="fas fa-video"></i>](https://youtu.be/0RNGeT_Qs9w){target="_blank"}
