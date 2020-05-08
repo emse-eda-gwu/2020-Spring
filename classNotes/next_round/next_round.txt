@@ -1,10 +1,15 @@
 Consider using memos for exercise assignments, and have the memos be .Rmd files that are compiled to different outputs (html, pdf, etc.).
 
+Consider adding in Github to the course at the start.
+If so, will publish reports to github account.
+
 The memos should say three things they learned, and demonstrate one concept with actual data.
 
 Look up 200306-SEAS-faculty notes for data examples
 
 Add new Horst monster images
+
+Move up cleaning data to earlier with dedicated data cleaning assignment
 
 Revise grading rubrics to look for effectiveness of design choices:
 - chart communicates key message
@@ -27,4 +32,6 @@ https://twitter.com/beeonaposy/status/1245824406783430660?s=19
 9-maps:
 - NYT misleading coronavirus map comparison: https://twitter.com/oliviacpaschal/status/1245711609890320386?s=20
 
-
+Projects:
+- Merge presentation in with final project report score.
+- Require publication of report to rpubs and video to youtube.
