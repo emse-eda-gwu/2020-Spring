@@ -39,3 +39,6 @@ https://twitter.com/beeonaposy/status/1245824406783430660?s=19
 Projects:
 - Merge presentation in with final project report score.
 - Require publication of report to rpubs and video to youtube.
+- Merge data sources and description into one criteria for final rubric.
+- Reduce weight of research question for final rubric.
+
