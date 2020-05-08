@@ -1,7 +1,11 @@
 Consider using memos for exercise assignments, and have the memos be .Rmd files that are compiled to different outputs (html, pdf, etc.).
 
+All projects must be in teams (2-3 students)
+
 Consider adding in Github to the course at the start.
-If so, will publish reports to github account.
+If so:
+- Teams should publish reports to github account.
+
 
 The memos should say three things they learned, and demonstrate one concept with actual data.
 
