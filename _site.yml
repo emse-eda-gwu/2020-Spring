@@ -7,8 +7,6 @@ new_session: true
 navbar:
   title: "EDA - Spring 2020"
   left:
-    - text: "Home"
-      href: index.html
     - text: Syllabus
       icon: fa-map-ok
       href: syllabus.html
@@ -63,7 +61,7 @@ navbar:
         - text: "Final project"
           href: a-project.html
     - text: "Project Showcase"
-      href: project-showcase.html
+      href: http://eda.seas.gwu.edu/showcase-2020-spring.html
     - text: "Resources"
       menu:
         - text: "Getting Help"
