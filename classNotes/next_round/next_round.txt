@@ -1,19 +1,14 @@
-Consider using memos for exercise assignments, and have the memos be .Rmd files that are compiled to different outputs (html, pdf, etc.).
-
-All projects must be in teams (2-3 students)
-
-Consider adding in Github to the course at the start.
-If so:
-- Teams should publish reports to github account.
-
-
-The memos should say three things they learned, and demonstrate one concept with actual data.
-
-Look up 200306-SEAS-faculty notes for data examples
-
-Add new Horst monster images
-
-Move up cleaning data to earlier with dedicated data cleaning assignment
+General:
+- Drop datacamp from the class - didn't add much.
+- Add at least one more redesign (maybe two).
+- Add link for assignment 0 to getting started with data in R bootcamp site.
+- Use memos for exercise assignments, and have the memos be .Rmd files that are compiled to different outputs (html, pdf, etc.) to practice compiling, publishing (including publishing a simple website to Github).
+The memos should say three things they learned, and demonstrate one concept with actual data?
+- Keep projects, but students must be in teams of 2-3 students (no more single person projects)
+- Add Github to the course at the start for team collaboration.
+- Look up 200306-SEAS-faculty notes for data examples
+- Add new Horst monster images
+- Move up cleaning data to earlier with dedicated data cleaning assignment / redesign.
 
 Revise grading rubrics to look for effectiveness of design choices:
 - chart communicates key message
@@ -38,7 +33,6 @@ https://twitter.com/beeonaposy/status/1245824406783430660?s=19
 
 Projects:
 - Merge presentation in with final project report score.
-- Require publication of report to rpubs and video to youtube.
-- Merge data sources and description into one criteria for final rubric.
-- Reduce weight of research question for final rubric.
-
+- Require publication of report to Github and video to youtube.
+- Merge data sources and description into one criteria for final rubric about data.
+- Reduce weight of research question for final rubric - just needs to be stated clearly.
