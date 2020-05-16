@@ -1,4 +1,3 @@
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ## EMSE 4197: Exploratory Data Analysis - Spring 2020 <img src="images/eda_hex_sticker.png" align="right" width="200"/>
