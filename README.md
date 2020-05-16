@@ -1,3 +1,4 @@
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ## EMSE 4197: Exploratory Data Analysis - Spring 2020 <img src="images/eda_hex_sticker.png" align="right" width="200"/>
@@ -5,7 +6,7 @@
 <!-- badges: start -->
 
 ![Render & Deploy
-Site](https://github.com/emse-eda-gwu/2020-Spring/workflows/Render%20&%20Deploy%20Site/badge.svg?event=deployment_status)
+Site](https://github.com/emse-eda-gwu/2020-Spring/workflows/Render%20&%20Deploy%20Site/badge.svg)
 [![License: CC
 BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![License:
