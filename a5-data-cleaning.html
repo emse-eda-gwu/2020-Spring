@@ -25,6 +25,7 @@
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <link rel="icon" href="images/favicon.ico">
+<script src="https://kit.fontawesome.com/1392a7030f.js" crossorigin="anonymous"></script>
 <style type="text/css">
 
 /* Text */
@@ -83,6 +84,15 @@ tr:last-child {
 
 </style>
 
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
   pre:not([class]) {
@@ -127,6 +137,7 @@ h6 {
   text-align: left;
 }
 </style>
+
 
 
 
@@ -333,7 +344,7 @@ $(document).ready(function () {
       <ul class="nav navbar-nav">
         <li>
   <a href="syllabus.html">
-    <span class="fa fa-map-ok"></span>
+    <span class="fas fa-map-ok"></span>
      
     Syllabus
   </a>
@@ -437,42 +448,42 @@ $(document).ready(function () {
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="ref-getting-help.html">
-        <span class="fa fa-question-circle"></span>
+        <span class="fas fa-question-circle"></span>
          
         Getting Help
       </a>
     </li>
     <li>
       <a href="ref-finding-data.html">
-        <span class="fa fa-database"></span>
+        <span class="fas fa-database"></span>
          
         Finding Data
       </a>
     </li>
     <li>
       <a href="ref-visualizing-data.html">
-        <span class="fa fa-chart-bar"></span>
+        <span class="fas fa-chart-bar"></span>
          
         Visualizing Data
       </a>
     </li>
     <li>
       <a href="ref-programming.html">
-        <span class="fa fa-terminal"></span>
+        <span class="fas fa-terminal"></span>
          
         Programming in R
       </a>
     </li>
     <li>
       <a href="ref-rmarkdown.html">
-        <span class="fa fa-feather-alt"></span>
+        <span class="fas fa-feather-alt"></span>
          
         R Markdown
       </a>
     </li>
     <li>
       <a href="ref-other.html">
-        <span class="fa fa-ellipsis-h"></span>
+        <span class="fas fa-ellipsis-h"></span>
          
         Other
       </a>
@@ -488,21 +499,21 @@ $(document).ready(function () {
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="about.html">
-        <span class="fa fa-info-circle"></span>
+        <span class="fas fa-info-circle"></span>
          
         About
       </a>
     </li>
     <li>
       <a href="LICENSE.html">
-        <span class="fa fa-gavel"></span>
+        <span class="fas fa-gavel"></span>
          
         License
       </a>
     </li>
     <li>
       <a href="datacamp.html">
-        <span class="fa fa-graduation-cap"></span>
+        <span class="fas fa-graduation-cap"></span>
          
         DataCamp
       </a>
@@ -511,7 +522,7 @@ $(document).ready(function () {
 </li>
 <li>
   <a href="https://emse-eda-s20.slack.com">
-    <span class="fa fa-slack"></span>
+    <span class="fas fa-slack"></span>
      
     Slack
   </a>
@@ -520,7 +531,7 @@ $(document).ready(function () {
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    <span class="fa fa-bars"></span>
+    <span class="fas fa-bars"></span>
      
      
     <span class="caret"></span>
@@ -528,14 +539,14 @@ $(document).ready(function () {
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="mailto:jph@gwu.edu">
-        <span class="fa fa-envelope"></span>
+        <span class="fas fa-envelope"></span>
          
         Contact
       </a>
     </li>
     <li>
       <a href="https://github.com/emse-eda-gwu/2020-Spring">
-        <span class="fa fa-github"></span>
+        <span class="fas fa-github"></span>
          
         GitHub
       </a>
@@ -615,7 +626,7 @@ $(document).ready(function () {
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
