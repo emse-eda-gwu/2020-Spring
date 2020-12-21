@@ -1,14 +1,16 @@
 Type: Website
 Package: emseeda
 Title: Exploratory Data Analysis
-Version: 1.0
-Maintainer: John Helveston <jph@gwu.edu>
-Author: John Helveston <jph@gwu.edu>
+Date: 2019-12-12
+Version: 0.1.0
 Authors@R: c(
-    person("John", "Helveston", email = "jph@gwu.edu", role = c("aut", "cre")),
-    )
+    person(given   = "John",
+           family  = "Helveston",
+           role    = c("aut", "cre", "cph"),
+           email   = "john.helveston@gmail.com",
+           comment = c(ORCID = "0000-0002-2657-9191")))
 Depends: R (>= 3.6.0)
-License: CC-BY
+License: CC-BY-SA
 Encoding: UTF-8
 Imports:
     rmarkdown,
@@ -21,13 +23,27 @@ Imports:
     here,
     kableExtra,
     wikifacts,
-    TurtleGraphics,
-    DAAG,
-    dslabs,
     gapminder,
     gsheet,
+    googlesheets4,
     kableExtra,
     cowplot,
     janitor,
+    HistData,
     GGally,
-    HistData
+    ggthemes,
+    hrbrthemes,
+    shiny,
+    shinythemes,
+    shinyjs,
+    remotes,
+    fontawesome,
+    palmerpenguins,
+    emo
+Remotes:
+    rstudio/fontawesome,
+    haozhu233/kableExtra,
+    hadley/emo,
+    hrbrmstr/hrbrthemes,
+    jrnold/ggthemes,
+    rstudio/rmarkdown
