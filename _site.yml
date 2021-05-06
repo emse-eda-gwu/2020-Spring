@@ -60,8 +60,6 @@ navbar:
           href: a7-redesign-trends.html
         - text: "Final project"
           href: a-project.html
-    - text: "Project Showcase"
-      href: http://eda.seas.gwu.edu/showcase-2020-spring.html
     - text: "Resources"
       menu:
         - text: "Getting Help"
@@ -96,6 +94,8 @@ navbar:
     - text: Slack
       icon: fa-slack
       href: https://emse-eda-s20.slack.com
+    - text: "Showcase"
+      href: http://eda.seas.gwu.edu/showcase-2020-spring.html
   right:
   - icon: fa-bars
     menu:
