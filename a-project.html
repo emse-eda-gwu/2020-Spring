@@ -13,7 +13,8 @@
 
 <title>Final Project</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -34,8 +35,8 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/v4-shims.min.css" rel="stylesheet" />
 <link rel="icon" href="images/favicon.ico">
 <script src="https://kit.fontawesome.com/1392a7030f.js" crossorigin="anonymous"></script>
 <style type="text/css">
@@ -123,6 +124,7 @@ if (window.hljs) {
 
 
 
+
 <style type = "text/css">
 .main-container {
   max-width: 940px;
@@ -143,6 +145,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -200,11 +205,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -233,8 +242,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -242,16 +251,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -374,7 +376,7 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -385,7 +387,7 @@ div.tocify {
       <ul class="nav navbar-nav">
         <li>
   <a href="syllabus.html">
-    <span class="fas fa-map-ok"></span>
+    <span class="fa fa-map-ok"></span>
      
     Syllabus
   </a>
@@ -394,7 +396,7 @@ div.tocify {
   <a href="schedule.html">Schedule</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Readings
      
     <span class="caret"></span>
@@ -442,7 +444,7 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Assignments
      
     <span class="caret"></span>
@@ -478,7 +480,7 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Resources
      
     <span class="caret"></span>
@@ -486,42 +488,42 @@ div.tocify {
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="ref-getting-help.html">
-        <span class="fas fa-question-circle"></span>
+        <span class="fa fa-question-circle"></span>
          
         Getting Help
       </a>
     </li>
     <li>
       <a href="ref-finding-data.html">
-        <span class="fas fa-database"></span>
+        <span class="fa fa-database"></span>
          
         Finding Data
       </a>
     </li>
     <li>
       <a href="ref-visualizing-data.html">
-        <span class="fas fa-chart-bar"></span>
+        <span class="fa fa-chart-bar"></span>
          
         Visualizing Data
       </a>
     </li>
     <li>
       <a href="ref-programming.html">
-        <span class="fas fa-terminal"></span>
+        <span class="fa fa-terminal"></span>
          
         Programming in R
       </a>
     </li>
     <li>
       <a href="ref-rmarkdown.html">
-        <span class="fas fa-feather-alt"></span>
+        <span class="fa fa-feather-alt"></span>
          
         R Markdown
       </a>
     </li>
     <li>
       <a href="ref-other.html">
-        <span class="fas fa-ellipsis-h"></span>
+        <span class="fa fa-ellipsis-h"></span>
          
         Other
       </a>
@@ -529,7 +531,7 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     About
      
     <span class="caret"></span>
@@ -537,21 +539,21 @@ div.tocify {
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="about.html">
-        <span class="fas fa-info-circle"></span>
+        <span class="fa fa-info-circle"></span>
          
         About
       </a>
     </li>
     <li>
       <a href="LICENSE.html">
-        <span class="fas fa-gavel"></span>
+        <span class="fa fa-gavel"></span>
          
         License
       </a>
     </li>
     <li>
       <a href="datacamp.html">
-        <span class="fas fa-graduation-cap"></span>
+        <span class="fa fa-graduation-cap"></span>
          
         DataCamp
       </a>
@@ -560,7 +562,7 @@ div.tocify {
 </li>
 <li>
   <a href="https://emse-eda-s20.slack.com">
-    <span class="fas fa-slack"></span>
+    <span class="fa fa-slack"></span>
      
     Slack
   </a>
@@ -571,8 +573,8 @@ div.tocify {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    <span class="fas fa-bars"></span>
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-bars"></span>
      
      
     <span class="caret"></span>
@@ -580,14 +582,14 @@ div.tocify {
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="mailto:jph@gwu.edu">
-        <span class="fas fa-envelope"></span>
+        <span class="fa fa-envelope"></span>
          
         Contact
       </a>
     </li>
     <li>
       <a href="https://github.com/emse-eda-gwu/2020-Spring">
-        <span class="fas fa-github"></span>
+        <span class="fa fa-github"></span>
          
         GitHub
       </a>
@@ -608,21 +610,40 @@ div.tocify {
 </div>
 
 
-<p>For your final project, you will take a dataset, explore it, tinker with it, and tell a nuanced story about it using at least three charts. I want this project to be as useful for you and your future career as possible - you’ll hopefully want to show off your final project in a portfolio or during job interviews. Accordingly, you get to choose what data you will use for your project. Choose whatever one you are most interested in or will have the most fun with.</p>
+<p>For your final project, you will take a dataset, explore it, tinker
+with it, and tell a nuanced story about it using at least three charts.
+I want this project to be as useful for you and your future career as
+possible - you’ll hopefully want to show off your final project in a
+portfolio or during job interviews. Accordingly, you get to choose what
+data you will use for your project. Choose whatever one you are most
+interested in or will have the most fun with.</p>
 <div id="overview" class="section level1">
 <h1>Overview</h1>
 <p>For the final project, you will:</p>
 <ul>
 <li>Write a research question.</li>
-<li>Conduct an exploratory data analysis of one or more data sources to address your research question.</li>
-<li>Create visualizations to effectively communicate the results of your analysis using the principles of information visualization covered in this course.</li>
-<li>Document your entire analysis in a reproducible format, including a detailed curation of the data used, analysis conducted, and results produced.</li>
+<li>Conduct an exploratory data analysis of one or more data sources to
+address your research question.</li>
+<li>Create visualizations to effectively communicate the results of your
+analysis using the principles of information visualization covered in
+this course.</li>
+<li>Document your entire analysis in a reproducible format, including a
+detailed curation of the data used, analysis conducted, and results
+produced.</li>
 </ul>
-<p><strong>Click <a href="a-project-template.html">here</a> for a template to use for your analysis</strong>.</p>
-<p>To make the overall project more manageable, it is broken down into separate “milestone” deliverables due throughout the semester, starting with a proposal due just before spring break.</p>
+<p><strong>Click <a href="a-project-template.html">here</a> for a
+template to use for your analysis</strong>.</p>
+<p>To make the overall project more manageable, it is broken down into
+separate “milestone” deliverables due throughout the semester, starting
+with a proposal due just before spring break.</p>
 <p><strong>Summary of Deliverables</strong>:</p>
 <div style="width:400px">
 <table>
+<colgroup>
+<col width="25%" />
+<col width="43%" />
+<col width="31%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th>Item</th>
@@ -659,46 +680,114 @@ div.tocify {
 </tbody>
 </table>
 </div>
-<p><strong>Purpose</strong>: The skills covered in this course are rooted in design rules and principles rather than formulas and equations. As such, the <em>application</em> of these principles to a real data problem is one of the best ways to learn and assess mastery of these skills. I guarantee you one day you will need to apply these principles to communicate an idea to colleagues, so let’s make sure you have at least one chance to practice before the <a href="https://emse6574-gwu.github.io/2019-Fall/challengerExplosion.html">stakes are higher</a>.</p>
-<p><strong>Skills &amp; Knowledge</strong>: Your final project should illustrate your ability to transform raw data into insights by making the non-visible visible, showing clear trends or patterns, and / or identifying outliers or missing information. The specific skills involved in achieving this goal include all of the course learning objectives listed on the course <a href="index.html">home page</a>.</p>
-<p><strong>Teams</strong>: You may work on an individual project or in teams of 2 to 3 students of your choosing. If you choose to work in a team, you must finalize your team members at the time of submitting your proposal.</p>
+<p><strong>Purpose</strong>: The skills covered in this course are
+rooted in design rules and principles rather than formulas and
+equations. As such, the <em>application</em> of these principles to a
+real data problem is one of the best ways to learn and assess mastery of
+these skills. I guarantee you one day you will need to apply these
+principles to communicate an idea to colleagues, so let’s make sure you
+have at least one chance to practice before the <a
+href="https://emse6574-gwu.github.io/2019-Fall/challengerExplosion.html">stakes
+are higher</a>.</p>
+<p><strong>Skills &amp; Knowledge</strong>: Your final project should
+illustrate your ability to transform raw data into insights by making
+the non-visible visible, showing clear trends or patterns, and / or
+identifying outliers or missing information. The specific skills
+involved in achieving this goal include all of the course learning
+objectives listed on the course <a href="index.html">home page</a>.</p>
+<p><strong>Teams</strong>: You may work on an individual project or in
+teams of 2 to 3 students of your choosing. If you choose to work in a
+team, you must finalize your team members at the time of submitting your
+proposal.</p>
 <hr />
 </div>
 <div id="proposal" class="section level1">
 <h1>Proposal</h1>
 <p><strong>Due</strong>: March 13 by 11:00 pm</p>
-<p><strong>Weight</strong>: This assignment is worth 6% of your final grade.</p>
-<p><strong>Submission Details</strong>: You may write your proposal using any tool you wish (e.g. Microsoft Word, RMarkdown), but you must submit your proposal as a <strong>PDF document</strong> on Blackboard by the due date.</p>
-<p><strong>Assessment</strong>: We will use <a href="assignments/project/proposal_rubric.pdf">this rubric</a> to grade your proposal.</p>
+<p><strong>Weight</strong>: This assignment is worth 6% of your final
+grade.</p>
+<p><strong>Submission Details</strong>: You may write your proposal
+using any tool you wish (e.g. Microsoft Word, RMarkdown), but you must
+submit your proposal as a <strong>PDF document</strong> on Blackboard by
+the due date.</p>
+<p><strong>Assessment</strong>: We will use <a
+href="assignments/project/proposal_rubric.pdf">this rubric</a> to grade
+your proposal.</p>
 <p><strong>Tasks</strong>:</p>
-<p>Write a 1-2 page proposal of an exploratory data analysis that you plan to conduct for your final project. The instructors will review and grade your proposal and provide feedback upon returning from spring break. If your proposal is approved, you’re done and can move on towards the next project task. Otherwise, the instructors may ask you to submit a revised proposal, most likely by focusing / adjusting the proposal scope and / or research question. Below is a list of specific items your proposal should include (check the rubric to see their relative weighting).</p>
+<p>Write a 1-2 page proposal of an exploratory data analysis that you
+plan to conduct for your final project. The instructors will review and
+grade your proposal and provide feedback upon returning from spring
+break. If your proposal is approved, you’re done and can move on towards
+the next project task. Otherwise, the instructors may ask you to submit
+a revised proposal, most likely by focusing / adjusting the proposal
+scope and / or research question. Below is a list of specific items your
+proposal should include (check the rubric to see their relative
+weighting).</p>
 <ol style="list-style-type: decimal">
 <li><p>Follow these formatting guidelines:</p>
 <ul>
 <li>Be between 1 and 2 pages in length.</li>
 <li>12 point font, 1 inch margins.</li>
-<li>Write your project title at the top of the document (e.g. <strong>Title</strong>: <code>&lt;insert title&gt;</code>).</li>
-<li>List the name(s) of student(s) involved in the project below the project title (e.g. <strong>Authors</strong>: <code>&lt;insert list of names&gt;</code>). You cannot change your teammates once you’ve submitted your proposal.</li>
+<li>Write your project title at the top of the document
+(e.g. <strong>Title</strong>: <code>&lt;insert title&gt;</code>).</li>
+<li>List the name(s) of student(s) involved in the project below the
+project title (e.g. <strong>Authors</strong>:
+<code>&lt;insert list of names&gt;</code>). You cannot change your
+teammates once you’ve submitted your proposal.</li>
 </ul></li>
-<li><p>State a clear research question. Follow <a href="https://writingcenter.gmu.edu/guides/how-to-write-a-research-question">these guidelines</a>. Your question should be:</p>
+<li><p>State a clear research question. Follow <a
+href="https://writingcenter.gmu.edu/guides/how-to-write-a-research-question">these
+guidelines</a>. Your question should be:</p>
 <ul>
-<li><strong>Clear</strong>: it provides enough specifics that your audience can easily understand its purpose without needing additional explanation.</li>
-<li><strong>Focused</strong>: it is narrow enough that it can be addressed thoroughly with the data available and within the limits of the final project report.</li>
-<li><strong>Concise</strong>: it is expressed in the fewest possible words.</li>
-<li><strong>Complex</strong>: it is not answerable with a simple “yes” or “no,” but rather requires synthesis and analysis of data.</li>
-<li><strong>Arguable</strong>: its potential answers are open to debate rather than accepted facts.</li>
+<li><strong>Clear</strong>: it provides enough specifics that your
+audience can easily understand its purpose without needing additional
+explanation.</li>
+<li><strong>Focused</strong>: it is narrow enough that it can be
+addressed thoroughly with the data available and within the limits of
+the final project report.</li>
+<li><strong>Concise</strong>: it is expressed in the fewest possible
+words.</li>
+<li><strong>Complex</strong>: it is not answerable with a simple “yes”
+or “no,” but rather requires synthesis and analysis of data.</li>
+<li><strong>Arguable</strong>: its potential answers are open to debate
+rather than accepted facts.</li>
 </ul></li>
 <li><p>Discuss the data source(s) you plan to use for your analysis:</p>
 <ul>
-<li>If you have already identified the source(s), describe them and include urls and / or references to the sources. If you have not identified a source yet, describe the data you hope to use, and give at least one plausible source that may have the data (regardless of whether the source makes it available or not).</li>
-<li>Discuss the validity of the source(s). For each data source, is the data available the <em>original</em> data, or has it been processed? How was the original data collected and by whom? If you do not yet have a source, discuss what concerns you have about a plausible source that might have the data.</li>
+<li>If you have already identified the source(s), describe them and
+include urls and / or references to the sources. If you have not
+identified a source yet, describe the data you hope to use, and give at
+least one plausible source that may have the data (regardless of whether
+the source makes it available or not).</li>
+<li>Discuss the validity of the source(s). For each data source, is the
+data available the <em>original</em> data, or has it been processed? How
+was the original data collected and by whom? If you do not yet have a
+source, discuss what concerns you have about a plausible source that
+might have the data.</li>
 </ul></li>
 <li><p>Describe some anticipated results:</p>
 <ul>
-<li>Choose two variables that you expect to find in your data and are relevant to your research question. Describe how you would expect each to be distributed (e.g. unimodal, multimodel, tightly-group, widely-spread, etc.), regardless of whether those variables actually exist. For example, you might expect the price of gasoline over a particular period to be rather tightly-grouped around a mean, whereas the stock price of a particular company might vary much more widely over the same period.</li>
-<li>Choose two or more variables that you expect to find in your data and are relevant to your research question. Describe two relationships you expect to find these variables, regardless of whether actually exist in your data. For example, you might expect sales of hybrid vehicles to increase when gas prices increase, or sales of SUVs to increase when gas prices decrease.</li>
-<li>Describe at least two charts that you expect will help you visualize the relationships that you expect to find. For example, a scatterplot of gasoline prices and SUV sales over a particular time period might be useful for visualizing the level of correlation between these two variables.</li>
-<li>Discuss how your expectations about the variables you chose will help inform you about your research question.</li>
+<li>Choose two variables that you expect to find in your data and are
+relevant to your research question. Describe how you would expect each
+to be distributed (e.g. unimodal, multimodel, tightly-group,
+widely-spread, etc.), regardless of whether those variables actually
+exist. For example, you might expect the price of gasoline over a
+particular period to be rather tightly-grouped around a mean, whereas
+the stock price of a particular company might vary much more widely over
+the same period.</li>
+<li>Choose two or more variables that you expect to find in your data
+and are relevant to your research question. Describe two relationships
+you expect to find these variables, regardless of whether actually exist
+in your data. For example, you might expect sales of hybrid vehicles to
+increase when gas prices increase, or sales of SUVs to increase when gas
+prices decrease.</li>
+<li>Describe at least two charts that you expect will help you visualize
+the relationships that you expect to find. For example, a scatterplot of
+gasoline prices and SUV sales over a particular time period might be
+useful for visualizing the level of correlation between these two
+variables.</li>
+<li>Discuss how your expectations about the variables you chose will
+help inform you about your research question.</li>
 </ul></li>
 </ol>
 <hr />
@@ -706,78 +795,168 @@ div.tocify {
 <div id="progress-report" class="section level1">
 <h1>Progress Report</h1>
 <p><strong>Due</strong>: April 22 by 11:00 pm</p>
-<p><strong>Weight</strong>: This assignment is worth 8% of your final grade.</p>
-<p><strong>Submission Details</strong>: <strong>Use <a href="a-project-template.html">this template</a> for your analysis and report.</strong> Your progress report should be written as a .Rmd file that compiles to a html webpage. Submit your entire project folder (including your .Rmd file, data files, .RProj file, etc.) as a single .zip file on Blackboard by the due date. For students in teams, <strong>only one person from your team should submit the report.</strong></p>
-<p><strong>Assessment</strong>: We will use <a href="assignments/project/progress_report_rubric.pdf">this rubric</a> to grade your progress report.</p>
+<p><strong>Weight</strong>: This assignment is worth 8% of your final
+grade.</p>
+<p><strong>Submission Details</strong>: <strong>Use <a
+href="a-project-template.html">this template</a> for your analysis and
+report.</strong> Your progress report should be written as a .Rmd file
+that compiles to a html webpage. Submit your entire project folder
+(including your .Rmd file, data files, .RProj file, etc.) as a single
+.zip file on Blackboard by the due date. For students in teams,
+<strong>only one person from your team should submit the
+report.</strong></p>
+<p><strong>Assessment</strong>: We will use <a
+href="assignments/project/progress_report_rubric.pdf">this rubric</a> to
+grade your progress report.</p>
 <p><strong>Tasks</strong>:</p>
-<p>Write a report summarizing progress you have made towards your project thus far, including summary statistics of your data and preliminary charts. You should have already identified data source(s) for your project and begun exploring the data. <strong>Students working in teams must submit individual short reviews of their teammates’ contributions</strong> to help ensure that the workload and grading for team members are equitable (see task 6 below). Below is a list of specific items your progress report should include (check the rubric to see their relative weighting).</p>
+<p>Write a report summarizing progress you have made towards your
+project thus far, including summary statistics of your data and
+preliminary charts. You should have already identified data source(s)
+for your project and begun exploring the data. <strong>Students working
+in teams must submit individual short reviews of their teammates’
+contributions</strong> to help ensure that the workload and grading for
+team members are equitable (see task 6 below). Below is a list of
+specific items your progress report should include (check the rubric to
+see their relative weighting).</p>
 <ol style="list-style-type: decimal">
 <li><p>Follow these formatting rules:</p>
 <ul>
-<li>As the report will compile to a html webpage, there is no length requirement; your report should be sufficiently detailed to address the requirements listed below and sufficiently concise such that it is expressed in the fewest necessary words.</li>
-<li>In your markdown YAML header, include the project title and the name(s) of student(s) involved in the project such that they appear at the top of the rendered html page.</li>
-<li>Your report should be written in a narrative format (i.e. using coherent pargraphs rather than a series of bullet points). You may use headings where appropriate to break up your report into sections.</li>
+<li>As the report will compile to a html webpage, there is no length
+requirement; your report should be sufficiently detailed to address the
+requirements listed below and sufficiently concise such that it is
+expressed in the fewest necessary words.</li>
+<li>In your markdown YAML header, include the project title and the
+name(s) of student(s) involved in the project such that they appear at
+the top of the rendered html page.</li>
+<li>Your report should be written in a narrative format (i.e. using
+coherent pargraphs rather than a series of bullet points). You may use
+headings where appropriate to break up your report into sections.</li>
 </ul></li>
-<li><p>State a clear research question. This can (and almost certainly should) be a revised question from your proposal. Again, follow <a href="https://writingcenter.gmu.edu/guides/how-to-write-a-research-question">these guidelines</a>.</p></li>
+<li><p>State a clear research question. This can (and almost certainly
+should) be a revised question from your proposal. Again, follow <a
+href="https://writingcenter.gmu.edu/guides/how-to-write-a-research-question">these
+guidelines</a>.</p></li>
 <li><p>Discuss the data source(s) you are using for your analysis:</p>
 <ul>
 <li>Describe them and include urls or references to the sources.</li>
-<li>Discuss the validity of the source(s) - for each data source, is the data available the <em>original</em> data, or has it been processed? If not, what is the original source? How was the data collected?</li>
-<li>For each dataset, provide a data dictionary in an appendix at the end of your report that contains a table of each the name, type, and description of each variable. The appendix does not count towards your page limit.</li>
+<li>Discuss the validity of the source(s) - for each data source, is the
+data available the <em>original</em> data, or has it been processed? If
+not, what is the original source? How was the data collected?</li>
+<li>For each dataset, provide a data dictionary in an appendix at the
+end of your report that contains a table of each the name, type, and
+description of each variable. The appendix does not count towards your
+page limit.</li>
 </ul></li>
 <li><p>Evaluate your proposal expectations:</p>
 <ul>
-<li>Do you find support for your original proposal expectation about how one variable might be distributed? Show it by looking at summaries of the variable. If that variable doesn’t exist in your data, discuss another key variable instead and how it is distributed.</li>
-<li>Do you find support for your original proposal expectation about how the variables you chose are related? Show it. If those variables don’t exist in your data, discuss one key relationship that you have identified between two or more variables.</li>
+<li>Do you find support for your original proposal expectation about how
+one variable might be distributed? Show it by looking at summaries of
+the variable. If that variable doesn’t exist in your data, discuss
+another key variable instead and how it is distributed.</li>
+<li>Do you find support for your original proposal expectation about how
+the variables you chose are related? Show it. If those variables don’t
+exist in your data, discuss one key relationship that you have
+identified between two or more variables.</li>
 </ul></li>
 <li><p>Include at least two preliminary charts:</p>
 <ul>
-<li>Your charts should either support or oppose your research question, or they should illustrate what else you might need to address your research question.</li>
-<li>You may choose whatever chart types you wish, but your choices should highlight the point you want to make or should clearly show the relationship you want to emphasize. Consider <a href="ref-visualizing-data.html">these resources</a> when choosing your charts.</li>
-<li>Your charts should follow the design principles we have covered in class. They do not have to be fully polished yet, but at a minimum they should be accurate (i.e. not misleading) and they should not include distracting non-data ink.</li>
+<li>Your charts should either support or oppose your research question,
+or they should illustrate what else you might need to address your
+research question.</li>
+<li>You may choose whatever chart types you wish, but your choices
+should highlight the point you want to make or should clearly show the
+relationship you want to emphasize. Consider <a
+href="ref-visualizing-data.html">these resources</a> when choosing your
+charts.</li>
+<li>Your charts should follow the design principles we have covered in
+class. They do not have to be fully polished yet, but at a minimum they
+should be accurate (i.e. not misleading) and they should not include
+distracting non-data ink.</li>
 </ul></li>
-<li><p><strong>For students working in teams</strong>: On Blackboard under the assignment titled <code>"Team Member Review [Progress Report]"</code>, submit a short description of the specific contributions of each team member in your team. For example, “Student A identified the data source and wrote the documentation for it. Student B led the data cleaning process and did much of the initial data exploration. Student C helped write code for the main visualizations.” These reviews will be kept confidential and compared to assess that the workload and grading for team members are equitable. Team members who do not make meaningful contributions to their projects will receive a lower grade than that of their team mates. <strong>If you are having any disputes amongst team members, please contact Professor Helveston so we can find a resolution.</strong></p></li>
+<li><p><strong>For students working in teams</strong>: On Blackboard
+under the assignment titled
+<code>"Team Member Review [Progress Report]"</code>, submit a short
+description of the specific contributions of each team member in your
+team. For example, “Student A identified the data source and wrote the
+documentation for it. Student B led the data cleaning process and did
+much of the initial data exploration. Student C helped write code for
+the main visualizations.” These reviews will be kept confidential and
+compared to assess that the workload and grading for team members are
+equitable. Team members who do not make meaningful contributions to
+their projects will receive a lower grade than that of their team mates.
+<strong>If you are having any disputes amongst team members, please
+contact Professor Helveston so we can find a
+resolution.</strong></p></li>
 </ol>
 <hr />
 </div>
 <div id="peer-review" class="section level1">
 <h1>Peer Review</h1>
 <p><strong>Due</strong>: April 29 by 11:00 pm</p>
-<p><strong>Weight</strong>: This assignment is worth 5% of your final grade.</p>
-<p><strong>Submission Details</strong>: Submit your peer reviews as a PDF document on Blackboard by the due date.</p>
-<p><strong>Assessment</strong>: Your peer review will be graded for completion.</p>
+<p><strong>Weight</strong>: This assignment is worth 5% of your final
+grade.</p>
+<p><strong>Submission Details</strong>: Submit your peer reviews as a
+PDF document on Blackboard by the due date.</p>
+<p><strong>Assessment</strong>: Your peer review will be graded for
+completion.</p>
 <p><strong>Tasks</strong>:</p>
-<p>Each student will be randomly assigned one progress report of their classmate’s projects to review. This is an <strong>individual assignment</strong>, so students in teams must individually write their own reviews. Students in teams will each be assigned different projects to review. The reviews will be returned to the project teams as further feedback to consider as they revise their analyses and prepare for their final report and presentation. Below is a list of specific items your peer review should include (check the rubric to see their relative weighting).</p>
+<p>Each student will be randomly assigned one progress report of their
+classmate’s projects to review. This is an <strong>individual
+assignment</strong>, so students in teams must individually write their
+own reviews. Students in teams will each be assigned different projects
+to review. The reviews will be returned to the project teams as further
+feedback to consider as they revise their analyses and prepare for their
+final report and presentation. Below is a list of specific items your
+peer review should include (check the rubric to see their relative
+weighting).</p>
 <ol style="list-style-type: decimal">
 <li><p>Follow these formatting rules:</p>
 <ul>
 <li>Be between 1 and 3 pages in length, including all images.</li>
 <li>12 point font, 1 inch margins.</li>
-<li>Write the title of the project being reviewed from the progress report (e.g. <strong>Review of</strong>: <code>&lt;insert project title&gt;</code>)</li>
-<li>Do <strong>not</strong> put your name on your review - these will be anonymous reviews returned to each team.</li>
+<li>Write the title of the project being reviewed from the progress
+report (e.g. <strong>Review of</strong>:
+<code>&lt;insert project title&gt;</code>)</li>
+<li>Do <strong>not</strong> put your name on your review - these will be
+anonymous reviews returned to each team.</li>
 </ul></li>
-<li><p>Evaluate their research question according to these qualities:</p>
+<li><p>Evaluate their research question according to these
+qualities:</p>
 <ul>
-<li><strong>Clear</strong>: it provides enough specifics that your audience can easily understand its purpose without needing additional explanation.</li>
-<li><strong>Focused</strong>: it is narrow enough that it can be addressed thoroughly with the data available and within the limits of the final project report.</li>
-<li><strong>Concise</strong>: it is expressed in the fewest possible words.</li>
-<li><strong>Complex</strong>: it is not answerable with a simple “yes” or “no,” but rather requires synthesis and analysis of data.</li>
-<li><strong>Arguable</strong>: its potential answers are open to debate rather than accepted facts.</li>
+<li><strong>Clear</strong>: it provides enough specifics that your
+audience can easily understand its purpose without needing additional
+explanation.</li>
+<li><strong>Focused</strong>: it is narrow enough that it can be
+addressed thoroughly with the data available and within the limits of
+the final project report.</li>
+<li><strong>Concise</strong>: it is expressed in the fewest possible
+words.</li>
+<li><strong>Complex</strong>: it is not answerable with a simple “yes”
+or “no,” but rather requires synthesis and analysis of data.</li>
+<li><strong>Arguable</strong>: its potential answers are open to debate
+rather than accepted facts.</li>
 </ul></li>
 <li><p>Evaluate the description of their data source(s):</p>
 <ul>
 <li>Are the data appropriate for the research question?</li>
-<li>Are the data sources well-described? Do you know the source and the original source?</li>
-<li>Can you follow the information in the report to obtain the data yourself?</li>
-<li>Is there a data dictionary available in an appendix for each data set?</li>
-<li>Provide one suggestion to help further clarify any questions you have about the data source(s).</li>
+<li>Are the data sources well-described? Do you know the source and the
+original source?</li>
+<li>Can you follow the information in the report to obtain the data
+yourself?</li>
+<li>Is there a data dictionary available in an appendix for each data
+set?</li>
+<li>Provide one suggestion to help further clarify any questions you
+have about the data source(s).</li>
 </ul></li>
 <li><p>Evaluate their preliminary results:</p>
 <ul>
 <li>Are there at least two charts provided in the analysis?</li>
 <li>Are the charts relevant to the research question posed?</li>
-<li>Do the charts support or oppose the research question or illustrate what else might be needed to address the research question?</li>
-<li>Do the charts follow the design principles (to a reasonable degree) that we have covered in class (i.e. they are not misleading, and they do not include distracting non-data ink)?</li>
+<li>Do the charts support or oppose the research question or illustrate
+what else might be needed to address the research question?</li>
+<li>Do the charts follow the design principles (to a reasonable degree)
+that we have covered in class (i.e. they are not misleading, and they do
+not include distracting non-data ink)?</li>
 <li>Provide at least two suggestions to improve the charts.</li>
 </ul></li>
 </ol>
@@ -786,78 +965,169 @@ div.tocify {
 <div id="final-report" class="section level1">
 <h1>Final Report</h1>
 <p><strong>Due</strong>: May 04 by 11:00 pm</p>
-<p><strong>Weight</strong>: This assignment is worth 16% of your final grade.</p>
-<p><strong>Submission Details</strong>: <strong>Use <a href="a-project-template.html">this template</a> for your final analysis and report.</strong> Your progress report should be written as a .Rmd file that compiles to a html webpage. Publish your compiled page online (e.g. via RPubs, Github, etc.), then submit your entire project folder (including your .Rmd file, data files, .RProj file, etc.) as a single .zip file on Blackboard by the due date. Also include a link to the published report page in your Blackboard submission. For students in teams, <strong>only one person from your team should submit the report.</strong></p>
-<p><strong>Assessment</strong>: We will use <a href="assignments/project/final_report_rubric.pdf">this rubric</a> to grade your report.</p>
+<p><strong>Weight</strong>: This assignment is worth 16% of your final
+grade.</p>
+<p><strong>Submission Details</strong>: <strong>Use <a
+href="a-project-template.html">this template</a> for your final analysis
+and report.</strong> Your progress report should be written as a .Rmd
+file that compiles to a html webpage. Publish your compiled page online
+(e.g. via RPubs, Github, etc.), then submit your entire project folder
+(including your .Rmd file, data files, .RProj file, etc.) as a single
+.zip file on Blackboard by the due date. Also include a link to the
+published report page in your Blackboard submission. For students in
+teams, <strong>only one person from your team should submit the
+report.</strong></p>
+<p><strong>Assessment</strong>: We will use <a
+href="assignments/project/final_report_rubric.pdf">this rubric</a> to
+grade your report.</p>
 <p><strong>Tasks</strong>:</p>
-<p>Your final report should be a fully reproducible product and available online as a html webpage. It should include text, data, code, and plots. <strong>Students working in teams must submit a short review of their teammates’ contributions</strong> to help ensure that the workload and grading for team members are equitable (see task 6 below). Below is a list of specific items your report should include (check the rubric to see their relative weighting).</p>
+<p>Your final report should be a fully reproducible product and
+available online as a html webpage. It should include text, data, code,
+and plots. <strong>Students working in teams must submit a short review
+of their teammates’ contributions</strong> to help ensure that the
+workload and grading for team members are equitable (see task 6 below).
+Below is a list of specific items your report should include (check the
+rubric to see their relative weighting).</p>
 <ol style="list-style-type: decimal">
 <li><p>Follow these formatting rules:</p>
 <ul>
-<li>As the report will compile to a html webpage, there is no length requirement; your report should be sufficiently detailed to address the requirements listed below and sufficiently concise such that it is expressed in the fewest necessary words.</li>
-<li>In your markdown YAML header, include the project title and the name(s) of student(s) involved in the project such that they appear at the top of the rendered html page.</li>
-<li>Your report should be <strong>fully reproducible</strong> - all data formatting and charts should be written in code chunks and rendered when you compile your .Rmd file to a html webpage.</li>
-<li>Your report should be written in a narrative format (i.e. using coherent pargraphs rather than a series of bullet points). You may use headings where appropriate to break up your report into sections.</li>
-<li>Proofread your html webpage before you submit - double check for spelling and formatting errors, especially rendered charts and tables!</li>
+<li>As the report will compile to a html webpage, there is no length
+requirement; your report should be sufficiently detailed to address the
+requirements listed below and sufficiently concise such that it is
+expressed in the fewest necessary words.</li>
+<li>In your markdown YAML header, include the project title and the
+name(s) of student(s) involved in the project such that they appear at
+the top of the rendered html page.</li>
+<li>Your report should be <strong>fully reproducible</strong> - all data
+formatting and charts should be written in code chunks and rendered when
+you compile your .Rmd file to a html webpage.</li>
+<li>Your report should be written in a narrative format (i.e. using
+coherent pargraphs rather than a series of bullet points). You may use
+headings where appropriate to break up your report into sections.</li>
+<li>Proofread your html webpage before you submit - double check for
+spelling and formatting errors, especially rendered charts and
+tables!</li>
 </ul></li>
-<li><p>State your research question and motivate why it is important / why the reader should care.</p></li>
+<li><p>State your research question and motivate why it is important /
+why the reader should care.</p></li>
 <li><p>Describe your data source(s) you used for your analysis:</p>
 <ul>
 <li>Describe them and include urls or references to the sources.</li>
-<li>Discuss the validity of the source(s) - for each data source, is the data available the <em>original</em> data, or has it been processed? If not, what is the original source? How was the data collected?</li>
-<li>Provide a data dictionary in an appendix at the end of your report that contains a table of each the name, type, and description of each variable in your data. Include a dictionary for each dataset used.</li>
+<li>Discuss the validity of the source(s) - for each data source, is the
+data available the <em>original</em> data, or has it been processed? If
+not, what is the original source? How was the data collected?</li>
+<li>Provide a data dictionary in an appendix at the end of your report
+that contains a table of each the name, type, and description of each
+variable in your data. Include a dictionary for each dataset used.</li>
 </ul></li>
 <li><p>Describe your data:</p>
 <ul>
-<li>Articulate the main variables of interest in your project, and justify your choice of variables.</li>
-<li>Provide descriptive statistics for your relevant variables. These can be a mix of graphs and summary tables.</li>
-<li>You don’t have to summarize everything in every data set - just the variables that are relevant to your analysis.</li>
+<li>Articulate the main variables of interest in your project, and
+justify your choice of variables.</li>
+<li>Provide descriptive statistics for your relevant variables. These
+can be a mix of graphs and summary tables.</li>
+<li>You don’t have to summarize everything in every data set - just the
+variables that are relevant to your analysis.</li>
 </ul></li>
 <li><p>Describe your results:</p>
 <ul>
-<li>Display charts that either support or oppose your research question or illustrate what else you might need to address your research question.</li>
-<li>Write narrative text around your charts to explain what the charts show and their significance towards addressing your research question. This should read as a continuous story rather than as a reply to each of the requirements described here.</li>
-<li>Your plot type choices should highlight the main point(s) you want to make or clearly show the relationship you want to emphasize. Basically, they should answer the question “what do the data say about my research question?”</li>
-<li>Your charts should be polished, following the design principles we have covered in class.</li>
-<li>You must include at least three polished charts / animations; alternatively, you can build an interactive shiny app with at least two dynamic charts. If you build a shiny app, include a link to your app and screenshots of your app in your final report.</li>
+<li>Display charts that either support or oppose your research question
+or illustrate what else you might need to address your research
+question.</li>
+<li>Write narrative text around your charts to explain what the charts
+show and their significance towards addressing your research question.
+This should read as a continuous story rather than as a reply to each of
+the requirements described here.</li>
+<li>Your plot type choices should highlight the main point(s) you want
+to make or clearly show the relationship you want to emphasize.
+Basically, they should answer the question “what do the data say about
+my research question?”</li>
+<li>Your charts should be polished, following the design principles we
+have covered in class.</li>
+<li>You must include at least three polished charts / animations;
+alternatively, you can build an interactive shiny app with at least two
+dynamic charts. If you build a shiny app, include a link to your app and
+screenshots of your app in your final report.</li>
 </ul></li>
-<li><p><strong>For students working in teams</strong>: On Blackboard under the assignment titled <code>"Team Member Review [Final Report]"</code>, submit a short description of the specific contributions of each team member in your team. For example, “Student A identified the data source and wrote the documentation for it. Student B led the data cleaning process and did much of the initial data exploration. Student C helped write code for the main visualizations.” These reviews will be kept confidential and compared to assess that the workload and grading for team members are equitable. Team members who do not make meaningful contributions to their projects will receive a lower grade than that of their team mates.</p></li>
+<li><p><strong>For students working in teams</strong>: On Blackboard
+under the assignment titled
+<code>"Team Member Review [Final Report]"</code>, submit a short
+description of the specific contributions of each team member in your
+team. For example, “Student A identified the data source and wrote the
+documentation for it. Student B led the data cleaning process and did
+much of the initial data exploration. Student C helped write code for
+the main visualizations.” These reviews will be kept confidential and
+compared to assess that the workload and grading for team members are
+equitable. Team members who do not make meaningful contributions to
+their projects will receive a lower grade than that of their team
+mates.</p></li>
 </ol>
 <hr />
 </div>
 <div id="presentation" class="section level1">
 <h1>Presentation</h1>
-<p><strong>Due</strong>: Slides due by May 05 by 11:00 pm; presentations will be in class on May 06.</p>
-<p><strong>Weight</strong>: This assignment is worth 8% of your final grade: 4% for your slides &amp; slide design, and 4% for effectively presenting them in class.</p>
-<p><strong>Submission Details</strong>: Submit your slides as a PDF or .pptx file (whichever you feel most comfortable presenting with) on Blackboard by the due date.</p>
-<p><strong>Assessment</strong>: We will use <a href="assignments/project/presentation_rubric.pdf">this rubric</a> to grade your presentation.</p>
+<p><strong>Due</strong>: Slides due by May 05 by 11:00 pm; presentations
+will be in class on May 06.</p>
+<p><strong>Weight</strong>: This assignment is worth 8% of your final
+grade: 4% for your slides &amp; slide design, and 4% for effectively
+presenting them in class.</p>
+<p><strong>Submission Details</strong>: Submit your slides as a PDF or
+.pptx file (whichever you feel most comfortable presenting with) on
+Blackboard by the due date.</p>
+<p><strong>Assessment</strong>: We will use <a
+href="assignments/project/presentation_rubric.pdf">this rubric</a> to
+grade your presentation.</p>
 <p><strong>Tasks</strong>:</p>
-<p>You will present your analysis with your teammates in class on May 06. Your slides do not need to include the code used to conduct your analysis (that should be able to be obtained from your report). Instead, your presentation should be a short explanation of 1) what you studied and why it matters, 2) what data you used, and 3) what you found. Below is a list of specific items your presentation should include (check the rubric to see their relative weighting).</p>
+<p>You will present your analysis with your teammates in class on May
+06. Your slides do not need to include the code used to conduct your
+analysis (that should be able to be obtained from your report). Instead,
+your presentation should be a short explanation of 1) what you studied
+and why it matters, 2) what data you used, and 3) what you found. Below
+is a list of specific items your presentation should include (check the
+rubric to see their relative weighting).</p>
 <ol style="list-style-type: decimal">
 <li><p>Follow these formatting rules:</p>
 <ul>
-<li>Your presentation should be no longer than 10 minutes in length (practice! time yourself!)</li>
+<li>Your presentation should be no longer than 10 minutes in length
+(practice! time yourself!)</li>
 <li>Each team member must present at least one slide.</li>
-<li>You should have between 6 and 8 slides total, including your title slide.</li>
-<li>Your title slide should include the project title, team member names, and the presentation date (May 06, 2020).</li>
-<li>All slides should be numbered in the bottom-left or bottom-right corners.</li>
+<li>You should have between 6 and 8 slides total, including your title
+slide.</li>
+<li>Your title slide should include the project title, team member
+names, and the presentation date (May 06, 2020).</li>
+<li>All slides should be numbered in the bottom-left or bottom-right
+corners.</li>
 </ul></li>
-<li><p>State your research question and explain why we should care (you don’t necessarily need a slide with the question written out on it).</p></li>
+<li><p>State your research question and explain why we should care (you
+don’t necessarily need a slide with the question written out on
+it).</p></li>
 <li><p>Discuss the data source(s) you used for your analysis:</p>
 <ul>
-<li>Describe them and display the names of the sources on your slide. You do not need the full urls to the raw data files, just the organization name (e.g. <code>"**Data source**: U.S. Centers for Disease Control and Prevention"</code>).</li>
-<li>Discuss the validity of your source(s) - for each data source, was the data available the <em>original</em> data, or has it been processed? If not, what is the original source? How was the data collected?</li>
+<li>Describe them and display the names of the sources on your slide.
+You do not need the full urls to the raw data files, just the
+organization name
+(e.g. <code>"**Data source**: U.S. Centers for Disease Control and Prevention"</code>).</li>
+<li>Discuss the validity of your source(s) - for each data source, was
+the data available the <em>original</em> data, or has it been processed?
+If not, what is the original source? How was the data collected?</li>
 </ul></li>
 <li><p>Describe your data:</p>
 <ul>
-<li>Articulate the main variables of interest in your project, and justify your choice of variables.</li>
-<li>Provide descriptive statistics for all your relevant variables. These can be a mix of graphs and summary tables.</li>
+<li>Articulate the main variables of interest in your project, and
+justify your choice of variables.</li>
+<li>Provide descriptive statistics for all your relevant variables.
+These can be a mix of graphs and summary tables.</li>
 </ul></li>
 <li><p>Describe your results:</p>
 <ul>
-<li>Display charts that either support or oppose your research question, or illustrate what else you might need to address your research question.</li>
-<li>Your plot type choices should highlight the point you want to make or clearly show the relationship you want to emphasize - basically, what do the data say about your research question?</li>
-<li>Your charts should be polished, following the design principles we have covered in class.</li>
+<li>Display charts that either support or oppose your research question,
+or illustrate what else you might need to address your research
+question.</li>
+<li>Your plot type choices should highlight the point you want to make
+or clearly show the relationship you want to emphasize - basically, what
+do the data say about your research question?</li>
+<li>Your charts should be polished, following the design principles we
+have covered in class.</li>
 </ul></li>
 </ol>
 <hr />
@@ -866,19 +1136,65 @@ div.tocify {
 <h1>Examples</h1>
 <p>Here are some examples of exploratory data analyses:</p>
 <ul>
-<li><a href="https://radmuzom.com/2019/05/18/fun-with-statistics-is-usain-bolt-really-the-fastest-man-on-earth/">Is Usain Bolt really the fastest man on earth?</a>, by <a href="https://radmuzom.com/about/">Anindya Mozumdar</a>. This analysis uses some statistical modeling (which won’t cover), but the use of visualizations alone are effective for addressing the research questions posed.</li>
-<li><a href="https://www.kaggle.com/jonathanbouchet/f1-data-analysis">F1 racing data analysis</a>, by Jonathan Bouchet. This is an extensive exploratory data analysis of a variety of data on races, drivers, and constructors across the history of <a href="https://www.formula1.com/">Formula 1</a> racing. This would probably be overkill for a course project, but sections of it (e.g. section 3 on the races, or sections 4 and 5 together on the drivers and constructors) would make a nice project. It involves mutliple data sets, some not-so-simple data cleaning, and a wide variety of nice visualizations.</li>
-<li><a href="http://myweb.fsu.edu/jelsner/stronger-hur.html">Increasing Intensity of Strong Atlantic Hurricanes</a>, by James B. Elsner. This is a short analysis with the goal of validating the predictions of <a href="https://www.nature.com/articles/nature07234">this study</a> published in Nature in 2008, which predicted that Atlantic tropical cyclones would continue to get stronger on average over time. While this analysis is too short to be considered adequate for a final project, it is still a good example of good data source documentation and one effective visualization. An expanded inquiry into the questions addressed here would make a good course project.</li>
-<li><a href="https://owenshen24.github.io/charting-death/">Death: Reality vs Reported</a>, by Owen Shen: This is an interesting original analysis in which the author collected the data himself. The analysis compares whether the proportion of actual causes of death is consistent with the proportion of death causes that the media reports. This analysis also uses some interactive graphics so that the reader can view different versions of the same plot, such as scrolling through the plot over time.</li>
-<li><a href="https://towardsdatascience.com/are-first-babies-more-likely-to-be-late-1b099b5796b6">Are first babies more likely to be late?</a>, by Allen Downey. This is another relatively short analysis, but the author does a good job of documenting his data sources, stating the assumptions he makes, and also describes what data were dropped from the analysis (i.e. babies born via C-section).</li>
+<li><a
+href="https://radmuzom.com/2019/05/18/fun-with-statistics-is-usain-bolt-really-the-fastest-man-on-earth/">Is
+Usain Bolt really the fastest man on earth?</a>, by <a
+href="https://radmuzom.com/about/">Anindya Mozumdar</a>. This analysis
+uses some statistical modeling (which won’t cover), but the use of
+visualizations alone are effective for addressing the research questions
+posed.</li>
+<li><a href="https://www.kaggle.com/jonathanbouchet/f1-data-analysis">F1
+racing data analysis</a>, by Jonathan Bouchet. This is an extensive
+exploratory data analysis of a variety of data on races, drivers, and
+constructors across the history of <a
+href="https://www.formula1.com/">Formula 1</a> racing. This would
+probably be overkill for a course project, but sections of it
+(e.g. section 3 on the races, or sections 4 and 5 together on the
+drivers and constructors) would make a nice project. It involves
+mutliple data sets, some not-so-simple data cleaning, and a wide variety
+of nice visualizations.</li>
+<li><a href="http://myweb.fsu.edu/jelsner/stronger-hur.html">Increasing
+Intensity of Strong Atlantic Hurricanes</a>, by James B. Elsner. This is
+a short analysis with the goal of validating the predictions of <a
+href="https://www.nature.com/articles/nature07234">this study</a>
+published in Nature in 2008, which predicted that Atlantic tropical
+cyclones would continue to get stronger on average over time. While this
+analysis is too short to be considered adequate for a final project, it
+is still a good example of good data source documentation and one
+effective visualization. An expanded inquiry into the questions
+addressed here would make a good course project.</li>
+<li><a href="https://owenshen24.github.io/charting-death/">Death:
+Reality vs Reported</a>, by Owen Shen: This is an interesting original
+analysis in which the author collected the data himself. The analysis
+compares whether the proportion of actual causes of death is consistent
+with the proportion of death causes that the media reports. This
+analysis also uses some interactive graphics so that the reader can view
+different versions of the same plot, such as scrolling through the plot
+over time.</li>
+<li><a
+href="https://towardsdatascience.com/are-first-babies-more-likely-to-be-late-1b099b5796b6">Are
+first babies more likely to be late?</a>, by Allen Downey. This is
+another relatively short analysis, but the author does a good job of
+documenting his data sources, stating the assumptions he makes, and also
+describes what data were dropped from the analysis (i.e. babies born via
+C-section).</li>
 </ul>
 <hr />
 <p><strong>Page sources</strong>:</p>
-<p>Some of the content on this page is inspired by and / or modified from other sources, including:</p>
+<p>Some of the content on this page is inspired by and / or modified
+from other sources, including:</p>
 <ul>
-<li>Prof. Marti Hearst’s Fall 2005 course <a href="http://courses.ischool.berkeley.edu/i247/f05/assignments/fp.html">SIMS 247: Information Visualization and Presentation</a></li>
-<li>The <a href="https://writingcenter.gmu.edu/guides/how-to-write-a-research-question">How to Write a Research Question</a> article by the GMU writing center.</li>
-<li>The <a href="https://datavizf17.classes.andrewheiss.com/assignment/final-project/">final project assignment</a> in Andrew Heiss’s course <a href="https://datavizf17.classes.andrewheiss.com/">MPA 635: Data Visualization</a>.</li>
+<li>Prof. Marti Hearst’s Fall 2005 course <a
+href="http://courses.ischool.berkeley.edu/i247/f05/assignments/fp.html">SIMS
+247: Information Visualization and Presentation</a></li>
+<li>The <a
+href="https://writingcenter.gmu.edu/guides/how-to-write-a-research-question">How
+to Write a Research Question</a> article by the GMU writing center.</li>
+<li>The <a
+href="https://datavizf17.classes.andrewheiss.com/assignment/final-project/">final
+project assignment</a> in Andrew Heiss’s course <a
+href="https://datavizf17.classes.andrewheiss.com/">MPA 635: Data
+Visualization</a>.</li>
 </ul>
 </div>
 
@@ -950,6 +1266,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')

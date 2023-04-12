@@ -13,7 +13,8 @@
 
 <title>R Markdown</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -34,8 +35,8 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/v4-shims.min.css" rel="stylesheet" />
 <link rel="icon" href="images/favicon.ico">
 <script src="https://kit.fontawesome.com/1392a7030f.js" crossorigin="anonymous"></script>
 <style type="text/css">
@@ -123,6 +124,7 @@ if (window.hljs) {
 
 
 
+
 <style type = "text/css">
 .main-container {
   max-width: 940px;
@@ -143,6 +145,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -200,11 +205,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -233,8 +242,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -242,16 +251,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -374,7 +376,7 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -385,7 +387,7 @@ div.tocify {
       <ul class="nav navbar-nav">
         <li>
   <a href="syllabus.html">
-    <span class="fas fa-map-ok"></span>
+    <span class="fa fa-map-ok"></span>
      
     Syllabus
   </a>
@@ -394,7 +396,7 @@ div.tocify {
   <a href="schedule.html">Schedule</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Readings
      
     <span class="caret"></span>
@@ -442,7 +444,7 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Assignments
      
     <span class="caret"></span>
@@ -478,7 +480,7 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Resources
      
     <span class="caret"></span>
@@ -486,42 +488,42 @@ div.tocify {
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="ref-getting-help.html">
-        <span class="fas fa-question-circle"></span>
+        <span class="fa fa-question-circle"></span>
          
         Getting Help
       </a>
     </li>
     <li>
       <a href="ref-finding-data.html">
-        <span class="fas fa-database"></span>
+        <span class="fa fa-database"></span>
          
         Finding Data
       </a>
     </li>
     <li>
       <a href="ref-visualizing-data.html">
-        <span class="fas fa-chart-bar"></span>
+        <span class="fa fa-chart-bar"></span>
          
         Visualizing Data
       </a>
     </li>
     <li>
       <a href="ref-programming.html">
-        <span class="fas fa-terminal"></span>
+        <span class="fa fa-terminal"></span>
          
         Programming in R
       </a>
     </li>
     <li>
       <a href="ref-rmarkdown.html">
-        <span class="fas fa-feather-alt"></span>
+        <span class="fa fa-feather-alt"></span>
          
         R Markdown
       </a>
     </li>
     <li>
       <a href="ref-other.html">
-        <span class="fas fa-ellipsis-h"></span>
+        <span class="fa fa-ellipsis-h"></span>
          
         Other
       </a>
@@ -529,7 +531,7 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     About
      
     <span class="caret"></span>
@@ -537,21 +539,21 @@ div.tocify {
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="about.html">
-        <span class="fas fa-info-circle"></span>
+        <span class="fa fa-info-circle"></span>
          
         About
       </a>
     </li>
     <li>
       <a href="LICENSE.html">
-        <span class="fas fa-gavel"></span>
+        <span class="fa fa-gavel"></span>
          
         License
       </a>
     </li>
     <li>
       <a href="datacamp.html">
-        <span class="fas fa-graduation-cap"></span>
+        <span class="fa fa-graduation-cap"></span>
          
         DataCamp
       </a>
@@ -560,7 +562,7 @@ div.tocify {
 </li>
 <li>
   <a href="https://emse-eda-s20.slack.com">
-    <span class="fas fa-slack"></span>
+    <span class="fa fa-slack"></span>
      
     Slack
   </a>
@@ -571,8 +573,8 @@ div.tocify {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    <span class="fas fa-bars"></span>
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-bars"></span>
      
      
     <span class="caret"></span>
@@ -580,14 +582,14 @@ div.tocify {
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="mailto:jph@gwu.edu">
-        <span class="fas fa-envelope"></span>
+        <span class="fa fa-envelope"></span>
          
         Contact
       </a>
     </li>
     <li>
       <a href="https://github.com/emse-eda-gwu/2020-Spring">
-        <span class="fas fa-github"></span>
+        <span class="fa fa-github"></span>
          
         GitHub
       </a>
@@ -608,22 +610,39 @@ div.tocify {
 </div>
 
 
-<p>The most comprehensive resource on working with R Markdown is the <a href="https://bookdown.org/yihui/rmarkdown/">Definitive Guide</a>.</p>
-<p>For a quick reference guide that you can print out, check out the <a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">Rstudio Rmarkdown cheatsheet</a>.</p>
-<p>Here are some useful tools for learning and working with R Markdown:</p>
+<p>The most comprehensive resource on working with R Markdown is the <a
+href="https://bookdown.org/yihui/rmarkdown/">Definitive Guide</a>.</p>
+<p>For a quick reference guide that you can print out, check out the <a
+href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">Rstudio
+Rmarkdown cheatsheet</a>.</p>
+<p>Here are some useful tools for learning and working with R
+Markdown:</p>
 <ul>
-<li><a href="https://commonmark.org/help/">60 second markdown guide</a></li>
-<li><a href="https://commonmark.org/help/tutorial/">10 minute markdown tutorial</a></li>
-<li><a href="https://markdown-it.github.io">Markdown It</a>: Quickly demo Markdown code</li>
-<li><a href="http://www.tablesgenerator.com/">Table generator</a>: Create tables and get export code for multiple formats</li>
-<li><a href="http://www.stat.cmu.edu/~cshalizi/rmarkdown/">CMU RMarkdown guide (detailed)</a></li>
+<li><a href="https://commonmark.org/help/">60 second markdown
+guide</a></li>
+<li><a href="https://commonmark.org/help/tutorial/">10 minute markdown
+tutorial</a></li>
+<li><a href="https://markdown-it.github.io">Markdown It</a>: Quickly
+demo Markdown code</li>
+<li><a href="http://www.tablesgenerator.com/">Table generator</a>:
+Create tables and get export code for multiple formats</li>
+<li><a href="http://www.stat.cmu.edu/~cshalizi/rmarkdown/">CMU RMarkdown
+guide (detailed)</a></li>
 </ul>
-<p>Finally, here are a few more links for help with specific issues / customization:</p>
+<p>Finally, here are a few more links for help with specific issues /
+customization:</p>
 <ul>
-<li><a href="http://zevross.com/blog/2017/06/19/tips-and-tricks-for-working-with-images-and-figures-in-r-markdown-documents/">Images and image sizing</a></li>
-<li><a href="https://holtzy.github.io/Pimp-my-rmd/">Pimp my RMD</a>: a guide for lots of cool features and customization options</li>
-<li><a href="http://rmarkdown.rstudio.com/">RStudio R Markdown documentation</a></li>
-<li><a href="http://deanattali.com/2015/03/24/knitrs-best-hidden-gem-spin/">Producing html documents from <code>.R</code> scripts using <code>knitr::spin</code></a></li>
+<li><a
+href="http://zevross.com/blog/2017/06/19/tips-and-tricks-for-working-with-images-and-figures-in-r-markdown-documents/">Images
+and image sizing</a></li>
+<li><a href="https://holtzy.github.io/Pimp-my-rmd/">Pimp my RMD</a>: a
+guide for lots of cool features and customization options</li>
+<li><a href="http://rmarkdown.rstudio.com/">RStudio R Markdown
+documentation</a></li>
+<li><a
+href="http://deanattali.com/2015/03/24/knitrs-best-hidden-gem-spin/">Producing
+html documents from <code>.R</code> scripts using
+<code>knitr::spin</code></a></li>
 </ul>
 
 
@@ -694,6 +713,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')

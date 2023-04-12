@@ -13,7 +13,8 @@
 
 <title>Week 1: Course Introduction</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -34,8 +35,8 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/v4-shims.min.css" rel="stylesheet" />
 <link rel="icon" href="images/favicon.ico">
 <script src="https://kit.fontawesome.com/1392a7030f.js" crossorigin="anonymous"></script>
 <style type="text/css">
@@ -123,6 +124,7 @@ if (window.hljs) {
 
 
 
+
 <style type = "text/css">
 .main-container {
   max-width: 940px;
@@ -143,6 +145,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -200,11 +205,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -233,8 +242,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -242,16 +251,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -374,7 +376,7 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -385,7 +387,7 @@ div.tocify {
       <ul class="nav navbar-nav">
         <li>
   <a href="syllabus.html">
-    <span class="fas fa-map-ok"></span>
+    <span class="fa fa-map-ok"></span>
      
     Syllabus
   </a>
@@ -394,7 +396,7 @@ div.tocify {
   <a href="schedule.html">Schedule</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Readings
      
     <span class="caret"></span>
@@ -442,7 +444,7 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Assignments
      
     <span class="caret"></span>
@@ -478,7 +480,7 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Resources
      
     <span class="caret"></span>
@@ -486,42 +488,42 @@ div.tocify {
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="ref-getting-help.html">
-        <span class="fas fa-question-circle"></span>
+        <span class="fa fa-question-circle"></span>
          
         Getting Help
       </a>
     </li>
     <li>
       <a href="ref-finding-data.html">
-        <span class="fas fa-database"></span>
+        <span class="fa fa-database"></span>
          
         Finding Data
       </a>
     </li>
     <li>
       <a href="ref-visualizing-data.html">
-        <span class="fas fa-chart-bar"></span>
+        <span class="fa fa-chart-bar"></span>
          
         Visualizing Data
       </a>
     </li>
     <li>
       <a href="ref-programming.html">
-        <span class="fas fa-terminal"></span>
+        <span class="fa fa-terminal"></span>
          
         Programming in R
       </a>
     </li>
     <li>
       <a href="ref-rmarkdown.html">
-        <span class="fas fa-feather-alt"></span>
+        <span class="fa fa-feather-alt"></span>
          
         R Markdown
       </a>
     </li>
     <li>
       <a href="ref-other.html">
-        <span class="fas fa-ellipsis-h"></span>
+        <span class="fa fa-ellipsis-h"></span>
          
         Other
       </a>
@@ -529,7 +531,7 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     About
      
     <span class="caret"></span>
@@ -537,21 +539,21 @@ div.tocify {
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="about.html">
-        <span class="fas fa-info-circle"></span>
+        <span class="fa fa-info-circle"></span>
          
         About
       </a>
     </li>
     <li>
       <a href="LICENSE.html">
-        <span class="fas fa-gavel"></span>
+        <span class="fa fa-gavel"></span>
          
         License
       </a>
     </li>
     <li>
       <a href="datacamp.html">
-        <span class="fas fa-graduation-cap"></span>
+        <span class="fa fa-graduation-cap"></span>
          
         DataCamp
       </a>
@@ -560,7 +562,7 @@ div.tocify {
 </li>
 <li>
   <a href="https://emse-eda-s20.slack.com">
-    <span class="fas fa-slack"></span>
+    <span class="fa fa-slack"></span>
      
     Slack
   </a>
@@ -571,8 +573,8 @@ div.tocify {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    <span class="fas fa-bars"></span>
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-bars"></span>
      
      
     <span class="caret"></span>
@@ -580,14 +582,14 @@ div.tocify {
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="mailto:jph@gwu.edu">
-        <span class="fas fa-envelope"></span>
+        <span class="fa fa-envelope"></span>
          
         Contact
       </a>
     </li>
     <li>
       <a href="https://github.com/emse-eda-gwu/2020-Spring">
-        <span class="fas fa-github"></span>
+        <span class="fa fa-github"></span>
          
         GitHub
       </a>
@@ -608,21 +610,26 @@ div.tocify {
 </div>
 
 
-<div id="teaching-team" class="section level1">
+<div id="teaching-team" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Teaching Team</h1>
-<div id="meet-your-instructor" class="section level2">
-<h2><span class="header-section-number">1.1</span> Meet your instructor!</h2>
-<p>Dr. John Helveston, Assistant Professor in Engineering Management &amp; Systems Engineering</p>
+<div id="meet-your-instructor" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Meet your
+instructor!</h2>
+<p>Dr. John Helveston, Assistant Professor in Engineering Management
+&amp; Systems Engineering</p>
 <p><img src="images/helveston.jpg" width="250" /></p>
 <p>Background:</p>
 <ul>
-<li>2016 PhD in Engineering &amp; Public Policy at Carnegie Mellon University</li>
-<li>2015 MS in Engineering &amp; Public Policy at Carnegie Mellon University</li>
+<li>2016 PhD in Engineering &amp; Public Policy at Carnegie Mellon
+University</li>
+<li>2015 MS in Engineering &amp; Public Policy at Carnegie Mellon
+University</li>
 <li>2010 BS in Engineering Science &amp; Mechanics at Virginia Tech</li>
 </ul>
 </div>
-<div id="meet-your-tutors" class="section level2">
-<h2><span class="header-section-number">1.2</span> Meet your tutors!</h2>
+<div id="meet-your-tutors" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Meet your
+tutors!</h2>
 <table>
 <colgroup>
 <col width="50%" />
@@ -643,68 +650,132 @@ div.tocify {
 </table>
 </div>
 </div>
-<div id="for-new-students" class="section level1">
+<div id="for-new-students" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> For new students</h1>
-<p>Students should have taken <a href="https://emse-p4a-gwu.github.io/">Programming for Analytics</a> or have experience with at least one programming language. If you’re not sure whether you have the necessary prerequisite skills, you can try and get up to speed by completing <a href="a0-course-prereqs.html">Assignment 0</a> <strong>before classes start</strong>. Once classes start, it may be difficult to keep up without this background, and it may be more beneficial to wait and take this course next year after taking Programming for Analytics in the coming Fall.</p>
+<p>Students should have taken <a
+href="https://emse-p4a-gwu.github.io/">Programming for Analytics</a> or
+have experience with at least one programming language. If you’re not
+sure whether you have the necessary prerequisite skills, you can try and
+get up to speed by completing <a
+href="a0-course-prereqs.html">Assignment 0</a> <strong>before classes
+start</strong>. Once classes start, it may be difficult to keep up
+without this background, and it may be more beneficial to wait and take
+this course next year after taking Programming for Analytics in the
+coming Fall.</p>
 </div>
-<div id="course-prep" class="section level1">
+<div id="course-prep" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> Course prep</h1>
-<p>For this class, you’ll need to install some software and register for some websites. Go to the <a href="L0-course-prep.html">course prep</a> page to get setup.</p>
+<p>For this class, you’ll need to install some software and register for
+some websites. Go to the <a href="L0-course-prep.html">course prep</a>
+page to get setup.</p>
 </div>
-<div id="whats-new" class="section level1">
+<div id="whats-new" class="section level1" number="4">
 <h1><span class="header-section-number">4</span> What’s new?</h1>
-<p>Students taking this course should have already taken <a href="https://emse-p4a-gwu.github.io/">Programming for Analytics</a>. If you haven’t, I <strong>strongly</strong> recommend you review the lessons and assignments on the <a href="https://emse6574-gwu.github.io/2019-Fall/">previous semester website</a>. You can also get up to speed by completing <a href="assignment0.html">Assignment 0</a>.</p>
-<p>While this course follows a similar structure as P4A, there will be several key distinctions:</p>
+<p>Students taking this course should have already taken <a
+href="https://emse-p4a-gwu.github.io/">Programming for Analytics</a>. If
+you haven’t, I <strong>strongly</strong> recommend you review the
+lessons and assignments on the <a
+href="https://emse6574-gwu.github.io/2019-Fall/">previous semester
+website</a>. You can also get up to speed by completing <a
+href="assignment0.html">Assignment 0</a>.</p>
+<p>While this course follows a similar structure as P4A, there will be
+several key distinctions:</p>
 <ol style="list-style-type: decimal">
-<li>Whereas in P4A we worked with nice, tidy data sets, in this course we will be working more with messier, “raw” data that often needs to be significantly processed before being able to explore it.</li>
-<li>Rather than solve puzzles (e.g. write the function <code>isPrime()</code>), assignments will involve more real-world data problems that often have multiple, subjective solutions.</li>
-<li>Style and aesthetics will matter - consider your assignments and your final project to be professional data products that you would want to show off to future employers.</li>
+<li>Whereas in P4A we worked with nice, tidy data sets, in this course
+we will be working more with messier, “raw” data that often needs to be
+significantly processed before being able to explore it.</li>
+<li>Rather than solve puzzles (e.g. write the function
+<code>isPrime()</code>), assignments will involve more real-world data
+problems that often have multiple, subjective solutions.</li>
+<li>Style and aesthetics will matter - consider your assignments and
+your final project to be professional data products that you would want
+to show off to future employers.</li>
 </ol>
 </div>
-<div id="course-mantras" class="section level1">
+<div id="course-mantras" class="section level1" number="5">
 <h1><span class="header-section-number">5</span> Course mantras</h1>
-<p>Here are some philosophies that will get you far in data analytic work. We will be revisiting these over and over again.</p>
+<p>Here are some philosophies that will get you far in data analytic
+work. We will be revisiting these over and over again.</p>
 <p><strong>1) Embrace plain text</strong></p>
-<p>You will write code to produce rich outputs that include text and graphics. While your output may have lots of different formatting, your code will be written in <a href="https://en.wikipedia.org/wiki/Plain_text"><strong>plain text</strong></a>.</p>
+<p>You will write code to produce rich outputs that include text and
+graphics. While your output may have lots of different formatting, your
+code will be written in <a
+href="https://en.wikipedia.org/wiki/Plain_text"><strong>plain
+text</strong></a>.</p>
 <p><strong>2) Embrace reproducibility</strong></p>
-<p>Everything you produce in this course will be a <a href="https://en.wikipedia.org/wiki/Reproducibility">reproducible</a> output. That is, you should be able to reproduce your output from the raw data and code. For example, This webpage was generated from <a href="https://raw.githubusercontent.com/emse-eda-gwu/2020-Spring/master/L1.1-course-introduction.Rmd">this markdown source file</a> on GitHub.</p>
-<p>If you want to generate this very HTML page, download the <code>.Rmd</code> file, then open it in RStudio and run the following code:</p>
+<p>Everything you produce in this course will be a <a
+href="https://en.wikipedia.org/wiki/Reproducibility">reproducible</a>
+output. That is, you should be able to reproduce your output from the
+raw data and code. For example, This webpage was generated from <a
+href="https://raw.githubusercontent.com/emse-eda-gwu/2020-Spring/master/L1.1-course-introduction.Rmd">this
+markdown source file</a> on GitHub.</p>
+<p>If you want to generate this very HTML page, download the
+<code>.Rmd</code> file, then open it in RStudio and run the following
+code:</p>
 <pre class="r"><code>rmarkdown::render(&#39;L1.1-course-introduction.Rmd&#39;)</code></pre>
 </div>
-<div id="the-syllabus" class="section level1">
+<div id="the-syllabus" class="section level1" number="6">
 <h1><span class="header-section-number">6</span> The syllabus</h1>
-<p>The <a href="syllabus.html">syllabus</a> is lengthy, but I do expect you to look through each section. If any changes need to be made, you’ll be notified through Slack.</p>
+<p>The <a href="syllabus.html">syllabus</a> is lengthy, but I do expect
+you to look through each section. If any changes need to be made, you’ll
+be notified through Slack.</p>
 </div>
-<div id="the-schedule" class="section level1">
+<div id="the-schedule" class="section level1" number="7">
 <h1><span class="header-section-number">7</span> The schedule</h1>
-<p>The course <a href="schedule.html">schedule</a> is your roadmap for the semester. Visit it often to make sure you are well-prepared for class and aware of upcoming assignment / quiz dates.</p>
+<p>The course <a href="schedule.html">schedule</a> is your roadmap for
+the semester. Visit it often to make sure you are well-prepared for
+class and aware of upcoming assignment / quiz dates.</p>
 </div>
-<div id="communication-help" class="section level1">
-<h1><span class="header-section-number">8</span> Communication &amp; Help</h1>
-<p>This can be a challenging class - don’t suffer in silence! Look at the <a href="ref-getting-help.html">“Getting Help”</a> page, come to office hours, send me a message on Slack.</p>
+<div id="communication-help" class="section level1" number="8">
+<h1><span class="header-section-number">8</span> Communication &amp;
+Help</h1>
+<p>This can be a challenging class - don’t suffer in silence! Look at
+the <a href="ref-getting-help.html">“Getting Help”</a> page, come to
+office hours, send me a message on Slack.</p>
 </div>
-<div id="readings" class="section level1">
+<div id="readings" class="section level1" number="9">
 <h1><span class="header-section-number">9</span> Readings!</h1>
-<div id="workflow" class="section level2">
+<div id="workflow" class="section level2" number="9.1">
 <h2><span class="header-section-number">9.1</span> Workflow</h2>
-<p>Now that you’ve got R and RStudio installed, read the <a href="http://socviz.co/gettingstarted.html">“Getting Started”</a> lesson in <a href="http://socviz.co/">Healy</a>. We will follow the conventions laid out in this chapter throughout the class, including:</p>
+<p>Now that you’ve got R and RStudio installed, read the <a
+href="http://socviz.co/gettingstarted.html">“Getting Started”</a> lesson
+in <a href="http://socviz.co/">Healy</a>. We will follow the conventions
+laid out in this chapter throughout the class, including:</p>
 <ul>
-<li>Using <a href="https://r4ds.had.co.nz/workflow-projects.html">RStudio Projects</a> to stay organized.</li>
+<li>Using <a
+href="https://r4ds.had.co.nz/workflow-projects.html">RStudio
+Projects</a> to stay organized.</li>
 <li>Working in plain text.</li>
 <li>Using RMarkdown to conduct and report on our analyses.</li>
 </ul>
 </div>
-<div id="reading-in-data" class="section level2">
+<div id="reading-in-data" class="section level2" number="9.2">
 <h2><span class="header-section-number">9.2</span> Reading in Data</h2>
-<p>Check out the <a href="https://readr.tidyverse.org/articles/readr.html"><strong>readr</strong></a> and <a href="https://readxl.tidyverse.org/"><strong>readxl</strong></a> packages - we’ll be using these throughout the semester to import data into R.</p>
+<p>Check out the <a
+href="https://readr.tidyverse.org/articles/readr.html"><strong>readr</strong></a>
+and <a href="https://readxl.tidyverse.org/"><strong>readxl</strong></a>
+packages - we’ll be using these throughout the semester to import data
+into R.</p>
 </div>
-<div id="tidy-data" class="section level2">
+<div id="tidy-data" class="section level2" number="9.3">
 <h2><span class="header-section-number">9.3</span> Tidy Data</h2>
-<p>We’ll cover the concept of “tidy” data in class on day 1. To get familiar with it, read <a href="https://r4ds.had.co.nz/tidy-data.html">Chapter 12</a> in R4DS, and take a look at these <a href="https://github.com/gadenbuie/tidyexplain#tidy-data">Tidy data explanations</a>.</p>
+<p>We’ll cover the concept of “tidy” data in class on day 1. To get
+familiar with it, read <a
+href="https://r4ds.had.co.nz/tidy-data.html">Chapter 12</a> in R4DS, and
+take a look at these <a
+href="https://github.com/gadenbuie/tidyexplain#tidy-data">Tidy data
+explanations</a>.</p>
 </div>
-<div id="writing-a-research-question" class="section level2">
-<h2><span class="header-section-number">9.4</span> Writing a research question</h2>
-<p>Read through <a href="https://writingcenter.gmu.edu/guides/how-to-write-a-research-question">this guide</a> from GMU on how to write a research question. We’ll come back to these ideas again later when you start working on your <a href="a-project.html">final projects</a>, but it’s a good idea to start thinking about your research question early.</p>
+<div id="writing-a-research-question" class="section level2"
+number="9.4">
+<h2><span class="header-section-number">9.4</span> Writing a research
+question</h2>
+<p>Read through <a
+href="https://writingcenter.gmu.edu/guides/how-to-write-a-research-question">this
+guide</a> from GMU on how to write a research question. We’ll come back
+to these ideas again later when you start working on your <a
+href="a-project.html">final projects</a>, but it’s a good idea to start
+thinking about your research question early.</p>
 </div>
 </div>
 
@@ -776,6 +847,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')

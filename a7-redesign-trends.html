@@ -13,7 +13,8 @@
 
 <title>Assignment 7: Hockey Trends Redesign</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -31,8 +32,8 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/v4-shims.min.css" rel="stylesheet" />
 <link rel="icon" href="images/favicon.ico">
 <script src="https://kit.fontawesome.com/1392a7030f.js" crossorigin="anonymous"></script>
 <style type="text/css">
@@ -120,6 +121,7 @@ if (window.hljs) {
 
 
 
+
 <style type = "text/css">
 .main-container {
   max-width: 940px;
@@ -140,6 +142,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -197,11 +202,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -230,8 +239,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -239,16 +248,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -292,7 +294,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -303,7 +305,7 @@ $(document).ready(function () {
       <ul class="nav navbar-nav">
         <li>
   <a href="syllabus.html">
-    <span class="fas fa-map-ok"></span>
+    <span class="fa fa-map-ok"></span>
      
     Syllabus
   </a>
@@ -312,7 +314,7 @@ $(document).ready(function () {
   <a href="schedule.html">Schedule</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Readings
      
     <span class="caret"></span>
@@ -360,7 +362,7 @@ $(document).ready(function () {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Assignments
      
     <span class="caret"></span>
@@ -396,7 +398,7 @@ $(document).ready(function () {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Resources
      
     <span class="caret"></span>
@@ -404,42 +406,42 @@ $(document).ready(function () {
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="ref-getting-help.html">
-        <span class="fas fa-question-circle"></span>
+        <span class="fa fa-question-circle"></span>
          
         Getting Help
       </a>
     </li>
     <li>
       <a href="ref-finding-data.html">
-        <span class="fas fa-database"></span>
+        <span class="fa fa-database"></span>
          
         Finding Data
       </a>
     </li>
     <li>
       <a href="ref-visualizing-data.html">
-        <span class="fas fa-chart-bar"></span>
+        <span class="fa fa-chart-bar"></span>
          
         Visualizing Data
       </a>
     </li>
     <li>
       <a href="ref-programming.html">
-        <span class="fas fa-terminal"></span>
+        <span class="fa fa-terminal"></span>
          
         Programming in R
       </a>
     </li>
     <li>
       <a href="ref-rmarkdown.html">
-        <span class="fas fa-feather-alt"></span>
+        <span class="fa fa-feather-alt"></span>
          
         R Markdown
       </a>
     </li>
     <li>
       <a href="ref-other.html">
-        <span class="fas fa-ellipsis-h"></span>
+        <span class="fa fa-ellipsis-h"></span>
          
         Other
       </a>
@@ -447,7 +449,7 @@ $(document).ready(function () {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     About
      
     <span class="caret"></span>
@@ -455,21 +457,21 @@ $(document).ready(function () {
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="about.html">
-        <span class="fas fa-info-circle"></span>
+        <span class="fa fa-info-circle"></span>
          
         About
       </a>
     </li>
     <li>
       <a href="LICENSE.html">
-        <span class="fas fa-gavel"></span>
+        <span class="fa fa-gavel"></span>
          
         License
       </a>
     </li>
     <li>
       <a href="datacamp.html">
-        <span class="fas fa-graduation-cap"></span>
+        <span class="fa fa-graduation-cap"></span>
          
         DataCamp
       </a>
@@ -478,7 +480,7 @@ $(document).ready(function () {
 </li>
 <li>
   <a href="https://emse-eda-s20.slack.com">
-    <span class="fas fa-slack"></span>
+    <span class="fa fa-slack"></span>
      
     Slack
   </a>
@@ -489,8 +491,8 @@ $(document).ready(function () {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    <span class="fas fa-bars"></span>
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-bars"></span>
      
      
     <span class="caret"></span>
@@ -498,14 +500,14 @@ $(document).ready(function () {
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="mailto:jph@gwu.edu">
-        <span class="fas fa-envelope"></span>
+        <span class="fa fa-envelope"></span>
          
         Contact
       </a>
     </li>
     <li>
       <a href="https://github.com/emse-eda-gwu/2020-Spring">
-        <span class="fas fa-github"></span>
+        <span class="fa fa-github"></span>
          
         GitHub
       </a>
@@ -527,25 +529,79 @@ $(document).ready(function () {
 
 
 <p><strong>Due</strong>: 27 March, 11:00 pm</p>
-<p><strong>Weight</strong>: This assignment is worth 8% of your final grade.</p>
-<p><strong>Purpose</strong>: This assignment is designed to be a final practice run before we will shift our focus towards the class projects. You will practice and further hone skills you have already developed to prepare you for similar challenges that you may run into in your projects.</p>
-<p><strong>Skills &amp; Knowledge</strong>: In this assignment, you will practice exploring data in which <em>time</em> in a central variable. Your analysis will involve writing text and code to create a reproducible document in the form of an html page.</p>
-<p><strong>Assessment</strong>: I will use <a href="assignments/a7/a7-rubric.pdf">this rubric</a> to grade the finished product.</p>
-<p><strong>Background</strong>: The author of <a href="https://nhltoseattle.com/2013/02/10/nhl-attendance-through-feb-9th/">this article</a> from 7 years ago wrote about how attendance at NHL games was climing. In an effort to communicate this message, the author created this, um…unfortunate chart:</p>
+<p><strong>Weight</strong>: This assignment is worth 8% of your final
+grade.</p>
+<p><strong>Purpose</strong>: This assignment is designed to be a final
+practice run before we will shift our focus towards the class projects.
+You will practice and further hone skills you have already developed to
+prepare you for similar challenges that you may run into in your
+projects.</p>
+<p><strong>Skills &amp; Knowledge</strong>: In this assignment, you will
+practice exploring data in which <em>time</em> in a central variable.
+Your analysis will involve writing text and code to create a
+reproducible document in the form of an html page.</p>
+<p><strong>Assessment</strong>: I will use <a
+href="assignments/a7/a7-rubric.pdf">this rubric</a> to grade the
+finished product.</p>
+<p><strong>Background</strong>: The author of <a
+href="https://nhltoseattle.com/2013/02/10/nhl-attendance-through-feb-9th/">this
+article</a> from 7 years ago wrote about how attendance at NHL games was
+climing. In an effort to communicate this message, the author created
+this, um…unfortunate chart:</p>
 <center>
-<br> <img src="assignments/a7/nhl-attendance-thru-feb-9th.png" width="700">
+<br>
+<img src="assignments/a7/nhl-attendance-thru-feb-9th.png" width="700">
 </center>
 <p><br></p>
 <p><strong>Tasks</strong>:</p>
-<p>For this assignment, you will use the <strong>ggplot2</strong> library in R and <a href="http://www.espn.com/nhl/attendance/_/year/2018">data from ESPN</a> to explore this question:</p>
-<p><strong>How has NHL game attendence changed over the past two decades?</strong></p>
+<p>For this assignment, you will use the <strong>ggplot2</strong>
+library in R and <a
+href="http://www.espn.com/nhl/attendance/_/year/2018">data from ESPN</a>
+to explore this question:</p>
+<p><strong>How has NHL game attendence changed over the past two
+decades?</strong></p>
 <p>Here’s what you need to do:</p>
 <ol style="list-style-type: decimal">
-<li><p><strong>Download</strong> <a href="assignments/a7/a7-template.zip">this .zip file</a>. It contains a <code>analysis.Rmd</code> file that you should use as a template to write your analysis in, a <code>data</code> folder with the relevant data needed for this assignment, and a <code>project.RProj</code> file to help you stay organized.</p></li>
-<li><p><strong>Clean</strong> the data. Read in the file <code>NHL_Attendance.xlsx</code> in the <code>data</code> folder. Write code to preview the data. Take note of the type of each variable and whether there are any missing values. Are all the variables encoded the way you would expect? Write code to modify variable types and names to get your data frame cleaned up for analysis. (<strong>Hint</strong>: The <code>janitor::clean_names()</code> function will come in handy). When you’re done cleaning your data, write a few sentences describing any modifications you made to the original data and why you did it.</p></li>
-<li><p><strong>Create</strong> some new variables. First, use the <code>SEASON</code> variable to create a new variable representing the year stored as a number. For example, for the season <code>"2017-18"</code>, the year should be the number <code>2017</code>. Also, remember that we are interested in assessing the <em>change</em> in NHL game attendance over time. To facilitate that, create a variable for the percentage change in attendance for each team in each season relative to the first season in the data (<code>"2000-01"</code>). For example, Tampa Bay’s attendance at home was 611,173 in the 2000-01 season and grew to 782,772 in the 2017-18 season. Thus, the percentage growth in home attendance between these two seasons was 100*(782,772 - 611,173) / 611,173 = 28%. You should end up with three new variables (growth in “home”, “road”, and “total” attendance) that store the percentage growth for each team and each season relative to the <code>"2000-01"</code> season.</p></li>
-<li><p><strong>Summarize</strong> the data. Examine measures of centrality and variability in the important variables relevant to our research question, including the new variables you created in step 3.</p></li>
-<li><p><strong>Visualize</strong> the data. The original chart is pretty terrible, so we’re going to just scratch that and start over. Create an appropriate visualization that highlights the <em>change</em> in NHL game attendance for each team in each season since the 2000-01 season. You are free to use whatever chart type you wish. Here are some of the options we covered in week 6:</p>
+<li><p><strong>Download</strong> <a
+href="assignments/a7/a7-template.zip">this .zip file</a>. It contains a
+<code>analysis.Rmd</code> file that you should use as a template to
+write your analysis in, a <code>data</code> folder with the relevant
+data needed for this assignment, and a <code>project.RProj</code> file
+to help you stay organized.</p></li>
+<li><p><strong>Clean</strong> the data. Read in the file
+<code>NHL_Attendance.xlsx</code> in the <code>data</code> folder. Write
+code to preview the data. Take note of the type of each variable and
+whether there are any missing values. Are all the variables encoded the
+way you would expect? Write code to modify variable types and names to
+get your data frame cleaned up for analysis. (<strong>Hint</strong>: The
+<code>janitor::clean_names()</code> function will come in handy). When
+you’re done cleaning your data, write a few sentences describing any
+modifications you made to the original data and why you did it.</p></li>
+<li><p><strong>Create</strong> some new variables. First, use the
+<code>SEASON</code> variable to create a new variable representing the
+year stored as a number. For example, for the season
+<code>"2017-18"</code>, the year should be the number <code>2017</code>.
+Also, remember that we are interested in assessing the <em>change</em>
+in NHL game attendance over time. To facilitate that, create a variable
+for the percentage change in attendance for each team in each season
+relative to the first season in the data (<code>"2000-01"</code>). For
+example, Tampa Bay’s attendance at home was 611,173 in the 2000-01
+season and grew to 782,772 in the 2017-18 season. Thus, the percentage
+growth in home attendance between these two seasons was 100*(782,772 -
+611,173) / 611,173 = 28%. You should end up with three new variables
+(growth in “home”, “road”, and “total” attendance) that store the
+percentage growth for each team and each season relative to the
+<code>"2000-01"</code> season.</p></li>
+<li><p><strong>Summarize</strong> the data. Examine measures of
+centrality and variability in the important variables relevant to our
+research question, including the new variables you created in step
+3.</p></li>
+<li><p><strong>Visualize</strong> the data. The original chart is pretty
+terrible, so we’re going to just scratch that and start over. Create an
+appropriate visualization that highlights the <em>change</em> in NHL
+game attendance for each team in each season since the 2000-01 season.
+You are free to use whatever chart type you wish. Here are some of the
+options we covered in week 6:</p>
 <ul>
 <li>Points</li>
 <li>Points + line</li>
@@ -559,15 +615,30 @@ $(document).ready(function () {
 <li>Sankey chart</li>
 <li>Animations (yes, you can totally do an animation if you want!)</li>
 </ul>
-<p>Your chart should follow the design principles we have covered in class, and it should be “polished” following the techniques we covered in week 8.</p></li>
-<li><p><strong>Visualize</strong> the data (again). While the first visualization highlights the change in NHL game attendance for <em>each team</em>, this second chart should highlight the overall trend across <em>all</em> teams. To do this, you will probably need to create a summary data frame from your original one. Again, you are free to use whatever chart type you wish, but your chart should follow the design principles we have covered in class and it should be “polished”.</p></li>
-<li><p><strong>Write</strong> a summary of your analysis. I’m specifically looking for a discussion of the following:</p>
+<p>Your chart should follow the design principles we have covered in
+class, and it should be “polished” following the techniques we covered
+in week 8.</p></li>
+<li><p><strong>Visualize</strong> the data (again). While the first
+visualization highlights the change in NHL game attendance for <em>each
+team</em>, this second chart should highlight the overall trend across
+<em>all</em> teams. To do this, you will probably need to create a
+summary data frame from your original one. Again, you are free to use
+whatever chart type you wish, but your chart should follow the design
+principles we have covered in class and it should be
+“polished”.</p></li>
+<li><p><strong>Write</strong> a summary of your analysis. I’m
+specifically looking for a discussion of the following:</p>
 <ul>
-<li>What was wrong with the original chart? Discuss specific design principles we have covered in class.</li>
-<li>Discuss the message you intended to convey with each of your charts and how your design choices draw attention to that message.</li>
+<li>What was wrong with the original chart? Discuss specific design
+principles we have covered in class.</li>
+<li>Discuss the message you intended to convey with each of your charts
+and how your design choices draw attention to that message.</li>
 </ul></li>
-<li><p><strong>Click</strong> the “knit” button to compile your <code>.Rmd</code> file into a html web page.</p></li>
-<li><p><strong>Create</strong> a zip file of your whole project (.Rmd, .html, .RProj, and the data folder), then go to the “Assignment Submission” page on Blackboard and submit your zip file.</p></li>
+<li><p><strong>Click</strong> the “knit” button to compile your
+<code>.Rmd</code> file into a html web page.</p></li>
+<li><p><strong>Create</strong> a zip file of your whole project (.Rmd,
+.html, .RProj, and the data folder), then go to the “Assignment
+Submission” page on Blackboard and submit your zip file.</p></li>
 </ol>
 
 

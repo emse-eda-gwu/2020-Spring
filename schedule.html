@@ -13,7 +13,8 @@
 
 <title>Course Schedule</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -33,8 +34,8 @@
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.2.1/css/v4-shims.min.css" rel="stylesheet" />
 <link rel="icon" href="images/favicon.ico">
 <script src="https://kit.fontawesome.com/1392a7030f.js" crossorigin="anonymous"></script>
 <style type="text/css">
@@ -122,6 +123,7 @@ if (window.hljs) {
 
 
 
+
 <style type = "text/css">
 .main-container {
   max-width: 940px;
@@ -142,6 +144,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -199,11 +204,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -232,8 +241,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -241,16 +250,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -294,7 +296,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -305,7 +307,7 @@ $(document).ready(function () {
       <ul class="nav navbar-nav">
         <li>
   <a href="syllabus.html">
-    <span class="fas fa-map-ok"></span>
+    <span class="fa fa-map-ok"></span>
      
     Syllabus
   </a>
@@ -314,7 +316,7 @@ $(document).ready(function () {
   <a href="schedule.html">Schedule</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Readings
      
     <span class="caret"></span>
@@ -362,7 +364,7 @@ $(document).ready(function () {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Assignments
      
     <span class="caret"></span>
@@ -398,7 +400,7 @@ $(document).ready(function () {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Resources
      
     <span class="caret"></span>
@@ -406,42 +408,42 @@ $(document).ready(function () {
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="ref-getting-help.html">
-        <span class="fas fa-question-circle"></span>
+        <span class="fa fa-question-circle"></span>
          
         Getting Help
       </a>
     </li>
     <li>
       <a href="ref-finding-data.html">
-        <span class="fas fa-database"></span>
+        <span class="fa fa-database"></span>
          
         Finding Data
       </a>
     </li>
     <li>
       <a href="ref-visualizing-data.html">
-        <span class="fas fa-chart-bar"></span>
+        <span class="fa fa-chart-bar"></span>
          
         Visualizing Data
       </a>
     </li>
     <li>
       <a href="ref-programming.html">
-        <span class="fas fa-terminal"></span>
+        <span class="fa fa-terminal"></span>
          
         Programming in R
       </a>
     </li>
     <li>
       <a href="ref-rmarkdown.html">
-        <span class="fas fa-feather-alt"></span>
+        <span class="fa fa-feather-alt"></span>
          
         R Markdown
       </a>
     </li>
     <li>
       <a href="ref-other.html">
-        <span class="fas fa-ellipsis-h"></span>
+        <span class="fa fa-ellipsis-h"></span>
          
         Other
       </a>
@@ -449,7 +451,7 @@ $(document).ready(function () {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     About
      
     <span class="caret"></span>
@@ -457,21 +459,21 @@ $(document).ready(function () {
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="about.html">
-        <span class="fas fa-info-circle"></span>
+        <span class="fa fa-info-circle"></span>
          
         About
       </a>
     </li>
     <li>
       <a href="LICENSE.html">
-        <span class="fas fa-gavel"></span>
+        <span class="fa fa-gavel"></span>
          
         License
       </a>
     </li>
     <li>
       <a href="datacamp.html">
-        <span class="fas fa-graduation-cap"></span>
+        <span class="fa fa-graduation-cap"></span>
          
         DataCamp
       </a>
@@ -480,7 +482,7 @@ $(document).ready(function () {
 </li>
 <li>
   <a href="https://emse-eda-s20.slack.com">
-    <span class="fas fa-slack"></span>
+    <span class="fa fa-slack"></span>
      
     Slack
   </a>
@@ -491,8 +493,8 @@ $(document).ready(function () {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    <span class="fas fa-bars"></span>
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <span class="fa fa-bars"></span>
      
      
     <span class="caret"></span>
@@ -500,14 +502,14 @@ $(document).ready(function () {
   <ul class="dropdown-menu" role="menu">
     <li>
       <a href="mailto:jph@gwu.edu">
-        <span class="fas fa-envelope"></span>
+        <span class="fa fa-envelope"></span>
          
         Contact
       </a>
     </li>
     <li>
       <a href="https://github.com/emse-eda-gwu/2020-Spring">
-        <span class="fas fa-github"></span>
+        <span class="fa fa-github"></span>
          
         GitHub
       </a>
@@ -531,9 +533,18 @@ $(document).ready(function () {
 <p>Here’s your roadmap for the semester!</p>
 <p>Readings legend:</p>
 <ul>
-<li>Healy == Healy, Kieran. “Data Visualization: A practical introduction” [<a href="http://socviz.co/">free online</a>], [<a href="https://www.amazon.com/Data-Visualization-Introduction-Kieran-Healy/dp/0691181624">buy on amazon</a>]</li>
-<li>R4DS == Grolemund, Garrett and Wickham, Hadley. “R for Data Science” [<a href="https://r4ds.had.co.nz/">free online</a>], [<a href="https://www.amazon.com/Data-Science-Transform-Visualize-Model/dp/1491910399">buy on amazon</a>]</li>
-<li>Wilke == Wilke, Claus O. “Fundamentals of Data Visualization” [<a href="https://serialmentor.com/dataviz/">free online</a>], [<a href="https://www.amazon.com/Fundamentals-Data-Visualization-Informative-Compelling/dp/1492031089">buy on amazon</a>]</li>
+<li>Healy == Healy, Kieran. “Data Visualization: A practical
+introduction” [<a href="http://socviz.co/">free online</a>], [<a
+href="https://www.amazon.com/Data-Visualization-Introduction-Kieran-Healy/dp/0691181624">buy
+on amazon</a>]</li>
+<li>R4DS == Grolemund, Garrett and Wickham, Hadley. “R for Data Science”
+[<a href="https://r4ds.had.co.nz/">free online</a>], [<a
+href="https://www.amazon.com/Data-Science-Transform-Visualize-Model/dp/1491910399">buy
+on amazon</a>]</li>
+<li>Wilke == Wilke, Claus O. “Fundamentals of Data Visualization” [<a
+href="https://serialmentor.com/dataviz/">free online</a>], [<a
+href="https://www.amazon.com/Fundamentals-Data-Visualization-Informative-Compelling/dp/1492031089">buy
+on amazon</a>]</li>
 </ul>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
@@ -570,18 +581,26 @@ Assignments
 01/15
 </td>
 <td style="text-align:left;width: 18em; ">
-<strong>Course introduction</strong>: <br> Orientation; workflow; importing data; data provenance; tidy data; writing a research question
+<strong>Course introduction</strong>: <br> Orientation; workflow;
+importing data; data provenance; tidy data; writing a research question
 </td>
 <td style="text-align:left;">
 <a href="r1-course-introduction.html"><i class="fas fa-book"></i></a>
 </td>
 <td style="text-align:left;width: 10em; ">
-<a href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/1-intro/slides-1-intro.pdf"><i class="fas fa-file-pdf"></i></a> slides <br> <a href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/1-intro/week1-notes-blank.zip"><i class="fas fa-file-archive"></i></a> notes-blank <br> <a href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/1-intro/week1-notes-complete.zip"><i class="fas fa-file-archive"></i></a> notes-complete
+<a
+href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/1-intro/slides-1-intro.pdf"><i class="fas fa-file-pdf"></i></a>
+slides <br> <a
+href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/1-intro/week1-notes-blank.zip"><i class="fas fa-file-archive"></i></a>
+notes-blank <br> <a
+href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/1-intro/week1-notes-complete.zip"><i class="fas fa-file-archive"></i></a>
+notes-complete
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;width: 10em; ">
-<a href="a1-exploring-data.html"><i class="fas fa-laptop"></i></a> Exercises <br> Due 1/21 by 11pm
+<a href="a1-exploring-data.html"><i class="fas fa-laptop"></i></a>
+Exercises <br> Due 1/21 by 11pm
 </td>
 </tr>
 <tr>
@@ -592,18 +611,26 @@ Assignments
 01/22
 </td>
 <td style="text-align:left;width: 18em; ">
-<strong>Exploring data</strong>: <br> Data types &amp; scales; centrality &amp; spread; variation &amp; covariation; plot types
+<strong>Exploring data</strong>: <br> Data types &amp; scales;
+centrality &amp; spread; variation &amp; covariation; plot types
 </td>
 <td style="text-align:left;">
 <a href="r2-exploring-data.html"><i class="fas fa-book"></i></a>
 </td>
 <td style="text-align:left;width: 10em; ">
-<a href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/2-eda/slides-2-eda.pdf"><i class="fas fa-file-pdf"></i></a> slides <br> <a href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/2-eda/week2-notes-blank.zip"><i class="fas fa-file-archive"></i></a> notes-blank <br> <a href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/2-eda/week2-notes-complete.zip"><i class="fas fa-file-archive"></i></a> notes-complete
+<a
+href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/2-eda/slides-2-eda.pdf"><i class="fas fa-file-pdf"></i></a>
+slides <br> <a
+href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/2-eda/week2-notes-blank.zip"><i class="fas fa-file-archive"></i></a>
+notes-blank <br> <a
+href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/2-eda/week2-notes-complete.zip"><i class="fas fa-file-archive"></i></a>
+notes-complete
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;width: 10em; ">
-<a href="a2-plotting.html"><i class="fas fa-laptop"></i></a> Exercises <br> Due 1/28 by 11pm
+<a href="a2-plotting.html"><i class="fas fa-laptop"></i></a> Exercises
+<br> Due 1/28 by 11pm
 </td>
 </tr>
 <tr>
@@ -614,19 +641,26 @@ Assignments
 01/29
 </td>
 <td style="text-align:left;width: 18em; ">
-<strong>Visualizing information</strong>: <br> Psychology of graphical perception; ugly, bad, &amp; wrong figures
+<strong>Visualizing information</strong>: <br> Psychology of graphical
+perception; ugly, bad, &amp; wrong figures
 </td>
 <td style="text-align:left;">
-<a href="r3-visualizing-information.html"><i class="fas fa-book"></i></a>
+<a
+href="r3-visualizing-information.html"><i class="fas fa-book"></i></a>
 </td>
 <td style="text-align:left;width: 10em; ">
-<a href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/3-visualizing-information/slides-3-visualizing-information.pdf"><i class="fas fa-file-pdf"></i></a> slides <br> <a href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/3-visualizing-information/dataviz_cheatsheet.pdf"><i class="fas fa-file-pdf"></i></a> dataviz-cheatsheet
+<a
+href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/3-visualizing-information/slides-3-visualizing-information.pdf"><i class="fas fa-file-pdf"></i></a>
+slides <br> <a
+href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/3-visualizing-information/dataviz_cheatsheet.pdf"><i class="fas fa-file-pdf"></i></a>
+dataviz-cheatsheet
 </td>
 <td style="text-align:left;">
 Quiz 1
 </td>
 <td style="text-align:left;width: 10em; ">
-<a href="a3-factors.html"><i class="fas fa-laptop"></i></a> Exercises <br> Due 2/04 by 11pm
+<a href="a3-factors.html"><i class="fas fa-laptop"></i></a> Exercises
+<br> Due 2/04 by 11pm
 </td>
 </tr>
 <tr>
@@ -637,18 +671,26 @@ Quiz 1
 02/05
 </td>
 <td style="text-align:left;width: 18em; ">
-<strong>Graphing Amounts &amp; Proportions</strong>: <br> Amounts, distributions, parts of whole, factors, facets
+<strong>Graphing Amounts &amp; Proportions</strong>: <br> Amounts,
+distributions, parts of whole, factors, facets
 </td>
 <td style="text-align:left;">
 <a href="r4-amounts-proportions.html"><i class="fas fa-book"></i></a>
 </td>
 <td style="text-align:left;width: 10em; ">
-<a href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/4-amounts-proportions/slides-4-amounts-proportions.pdf"><i class="fas fa-file-pdf"></i></a> slides <br> <a href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/4-amounts-proportions/week4-notes-blank.zip"><i class="fas fa-file-archive"></i></a> notes-blank <br> <a href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/4-amounts-proportions/week4-notes-complete.zip"><i class="fas fa-file-archive"></i></a> notes-complete
+<a
+href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/4-amounts-proportions/slides-4-amounts-proportions.pdf"><i class="fas fa-file-pdf"></i></a>
+slides <br> <a
+href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/4-amounts-proportions/week4-notes-blank.zip"><i class="fas fa-file-archive"></i></a>
+notes-blank <br> <a
+href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/4-amounts-proportions/week4-notes-complete.zip"><i class="fas fa-file-archive"></i></a>
+notes-complete
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;width: 10em; ">
-<a href="a4-redesign-amounts.html"><i class="fas fa-laptop"></i></a> Redesign 1 <br> Due 2/18 by 11pm
+<a href="a4-redesign-amounts.html"><i class="fas fa-laptop"></i></a>
+Redesign 1 <br> Due 2/18 by 11pm
 </td>
 </tr>
 <tr>
@@ -659,13 +701,20 @@ Quiz 1
 02/12
 </td>
 <td style="text-align:left;width: 18em; ">
-<strong>Graphing comparisons</strong>: <br> Bars, dots, lollipops, references, dumbbells, slopes, distributions
+<strong>Graphing comparisons</strong>: <br> Bars, dots, lollipops,
+references, dumbbells, slopes, distributions
 </td>
 <td style="text-align:left;">
 <a href="r5-comparisons.html"><i class="fas fa-book"></i></a>
 </td>
 <td style="text-align:left;width: 10em; ">
-<a href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/5-comparisons/slides-5-comparisons.pdf"><i class="fas fa-file-pdf"></i></a> slides <br> <a href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/5-comparisons/week5-notes-blank.zip"><i class="fas fa-file-archive"></i></a> notes-blank <br> <a href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/5-comparisons/week5-notes-complete.zip"><i class="fas fa-file-archive"></i></a> notes-complete
+<a
+href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/5-comparisons/slides-5-comparisons.pdf"><i class="fas fa-file-pdf"></i></a>
+slides <br> <a
+href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/5-comparisons/week5-notes-blank.zip"><i class="fas fa-file-archive"></i></a>
+notes-blank <br> <a
+href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/5-comparisons/week5-notes-complete.zip"><i class="fas fa-file-archive"></i></a>
+notes-complete
 </td>
 <td style="text-align:left;">
 </td>
@@ -686,13 +735,20 @@ Quiz 1
 <a href="r6-trends.html"><i class="fas fa-book"></i></a>
 </td>
 <td style="text-align:left;width: 10em; ">
-<a href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/6-trends/slides-6-trends.pdf"><i class="fas fa-file-pdf"></i></a> slides <br> <a href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/6-trends/week6-notes-blank.zip"><i class="fas fa-file-archive"></i></a> notes-blank <br> <a href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/6-trends/week6-notes-complete.zip"><i class="fas fa-file-archive"></i></a> notes-complete
+<a
+href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/6-trends/slides-6-trends.pdf"><i class="fas fa-file-pdf"></i></a>
+slides <br> <a
+href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/6-trends/week6-notes-blank.zip"><i class="fas fa-file-archive"></i></a>
+notes-blank <br> <a
+href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/6-trends/week6-notes-complete.zip"><i class="fas fa-file-archive"></i></a>
+notes-complete
 </td>
 <td style="text-align:left;">
 Quiz 2
 </td>
 <td style="text-align:left;width: 10em; ">
-<a href="a5-data-cleaning.html"><i class="fas fa-laptop"></i></a> Exercises <br> Due 2/25 by 11pm
+<a href="a5-data-cleaning.html"><i class="fas fa-laptop"></i></a>
+Exercises <br> Due 2/25 by 11pm
 </td>
 </tr>
 <tr>
@@ -703,18 +759,26 @@ Quiz 2
 02/26
 </td>
 <td style="text-align:left;width: 18em; ">
-<strong>Data cleaning</strong>: <br> Joins &amp; dealing with messy Excel files
+<strong>Data cleaning</strong>: <br> Joins &amp; dealing with messy
+Excel files
 </td>
 <td style="text-align:left;">
 <a href="r7-cleaning-joins.html"><i class="fas fa-book"></i></a>
 </td>
 <td style="text-align:left;width: 10em; ">
-<a href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/7-cleaning-joins/slides-7-cleaning-joins.pdf"><i class="fas fa-file-pdf"></i></a> slides <br> <a href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/7-cleaning-joins/week7-notes-blank.zip"><i class="fas fa-file-archive"></i></a> notes-blank <br> <a href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/7-cleaning-joins/week7-notes-complete.zip"><i class="fas fa-file-archive"></i></a> notes-complete
+<a
+href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/7-cleaning-joins/slides-7-cleaning-joins.pdf"><i class="fas fa-file-pdf"></i></a>
+slides <br> <a
+href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/7-cleaning-joins/week7-notes-blank.zip"><i class="fas fa-file-archive"></i></a>
+notes-blank <br> <a
+href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/7-cleaning-joins/week7-notes-complete.zip"><i class="fas fa-file-archive"></i></a>
+notes-complete
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;width: 10em; ">
-<a href="a-project.html#proposal"><i class="fas fa-laptop"></i></a> Project Proposals <br> Due 3/13 by 11pm
+<a href="a-project.html#proposal"><i class="fas fa-laptop"></i></a>
+Project Proposals <br> Due 3/13 by 11pm
 </td>
 </tr>
 <tr>
@@ -725,18 +789,26 @@ Quiz 2
 03/04
 </td>
 <td style="text-align:left;width: 18em; ">
-<strong>Polishing your charts</strong>: <br> Colors, annotations, scales, themes, multi-panel figures
+<strong>Polishing your charts</strong>: <br> Colors, annotations,
+scales, themes, multi-panel figures
 </td>
 <td style="text-align:left;">
 <a href="r8-polish.html"><i class="fas fa-book"></i></a>
 </td>
 <td style="text-align:left;width: 10em; ">
-<a href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/8-polish/slides-8-polish.pdf"><i class="fas fa-file-pdf"></i></a> slides <br> <a href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/8-polish/week8-notes-blank.zip"><i class="fas fa-file-archive"></i></a> notes-blank <br> <a href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/8-polish/week8-notes-complete.zip"><i class="fas fa-file-archive"></i></a> notes-complete
+<a
+href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/8-polish/slides-8-polish.pdf"><i class="fas fa-file-pdf"></i></a>
+slides <br> <a
+href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/8-polish/week8-notes-blank.zip"><i class="fas fa-file-archive"></i></a>
+notes-blank <br> <a
+href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/8-polish/week8-notes-complete.zip"><i class="fas fa-file-archive"></i></a>
+notes-complete
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;width: 10em; ">
-<a href="a6-geo-spatial.html"><i class="fas fa-laptop"></i></a> Exercises <br> Due 3/10 by 11pm
+<a href="a6-geo-spatial.html"><i class="fas fa-laptop"></i></a>
+Exercises <br> Due 3/10 by 11pm
 </td>
 </tr>
 <tr>
@@ -753,13 +825,20 @@ Quiz 2
 <a href="r9-maps.html"><i class="fas fa-book"></i></a>
 </td>
 <td style="text-align:left;width: 10em; ">
-<a href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/9-maps/slides-9-maps.pdf"><i class="fas fa-file-pdf"></i></a> slides <br> <a href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/9-maps/week9-notes-blank.zip"><i class="fas fa-file-archive"></i></a> notes-blank <br> <a href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/9-maps/week9-notes-complete.zip"><i class="fas fa-file-archive"></i></a> notes-complete
+<a
+href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/9-maps/slides-9-maps.pdf"><i class="fas fa-file-pdf"></i></a>
+slides <br> <a
+href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/9-maps/week9-notes-blank.zip"><i class="fas fa-file-archive"></i></a>
+notes-blank <br> <a
+href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/9-maps/week9-notes-complete.zip"><i class="fas fa-file-archive"></i></a>
+notes-complete
 </td>
 <td style="text-align:left;">
 Quiz 3
 </td>
 <td style="text-align:left;width: 10em; ">
-<a href="a7-redesign-trends.html"><i class="fas fa-laptop"></i></a> Redesign 2 <br> Due 3/27 by 11pm
+<a href="a7-redesign-trends.html"><i class="fas fa-laptop"></i></a>
+Redesign 2 <br> Due 3/27 by 11pm
 </td>
 </tr>
 <tr>
@@ -795,7 +874,13 @@ Correlation analysis
 <a href="r11-correlation.html"><i class="fas fa-book"></i></a>
 </td>
 <td style="text-align:left;width: 10em; ">
-<a href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/11-correlation/slides-11-correlation.pdf"><i class="fas fa-file-pdf"></i></a> slides <br> <a href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/11-correlation/week11-notes-blank.zip"><i class="fas fa-file-archive"></i></a> notes-blank <br> <a href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/11-correlation/week11-notes-complete.zip"><i class="fas fa-file-archive"></i></a> notes-complete
+<a
+href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/11-correlation/slides-11-correlation.pdf"><i class="fas fa-file-pdf"></i></a>
+slides <br> <a
+href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/11-correlation/week11-notes-blank.zip"><i class="fas fa-file-archive"></i></a>
+notes-blank <br> <a
+href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/11-correlation/week11-notes-complete.zip"><i class="fas fa-file-archive"></i></a>
+notes-complete
 </td>
 <td style="text-align:left;">
 </td>
@@ -816,7 +901,13 @@ Shiny apps
 <a href="r12-shiny-apps.html"><i class="fas fa-book"></i></a>
 </td>
 <td style="text-align:left;width: 10em; ">
-<a href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/12-shiny-apps/slides-12-shiny-apps.pdf"><i class="fas fa-file-pdf"></i></a> slides <br> <a href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/12-shiny-apps/week12-notes-blank.zip"><i class="fas fa-file-archive"></i></a> notes-blank <br> <a href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/12-shiny-apps/week12-notes-complete.zip"><i class="fas fa-file-archive"></i></a> notes-complete
+<a
+href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/12-shiny-apps/slides-12-shiny-apps.pdf"><i class="fas fa-file-pdf"></i></a>
+slides <br> <a
+href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/12-shiny-apps/week12-notes-blank.zip"><i class="fas fa-file-archive"></i></a>
+notes-blank <br> <a
+href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/12-shiny-apps/week12-notes-complete.zip"><i class="fas fa-file-archive"></i></a>
+notes-complete
 </td>
 <td style="text-align:left;">
 </td>
@@ -837,12 +928,16 @@ Communicating your results
 <a href="r13-communicating.html"><i class="fas fa-book"></i></a>
 </td>
 <td style="text-align:left;width: 10em; ">
-<a href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/13-communicating/slides-13-communicating.pdf"><i class="fas fa-file-pdf"></i></a> slides
+<a
+href="https://github.com/emse-eda-gwu/2020-Spring/raw/master/classNotes/13-communicating/slides-13-communicating.pdf"><i class="fas fa-file-pdf"></i></a>
+slides
 </td>
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;width: 10em; ">
-<a href="a-project.html#progress_report"><i class="fas fa-laptop"></i></a> Progress Report <br> Due 4/22 by 11pm
+<a
+href="a-project.html#progress_report"><i class="fas fa-laptop"></i></a>
+Progress Report <br> Due 4/22 by 11pm
 </td>
 </tr>
 <tr>
@@ -862,7 +957,8 @@ Communicating your results
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;width: 10em; ">
-<a href="a-project.html#peer_review"><i class="fas fa-laptop"></i></a> Peer Review <br> Due 4/29 by 11pm
+<a href="a-project.html#peer_review"><i class="fas fa-laptop"></i></a>
+Peer Review <br> Due 4/29 by 11pm
 </td>
 </tr>
 <tr>
@@ -882,7 +978,8 @@ Communicating your results
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;width: 10em; ">
-<a href="a-project.html#final_report"><i class="fas fa-laptop"></i></a> Final Report <br> Due 5/04 by 11pm
+<a href="a-project.html#final_report"><i class="fas fa-laptop"></i></a>
+Final Report <br> Due 5/04 by 11pm
 </td>
 </tr>
 <tr>
@@ -921,7 +1018,8 @@ Reading day
 <td style="text-align:left;">
 </td>
 <td style="text-align:left;width: 10em; ">
-<a href="a-project.html#presentation"><i class="fas fa-laptop"></i></a> Presentation <br> Slides due 5/05 by 11pm
+<a href="a-project.html#presentation"><i class="fas fa-laptop"></i></a>
+Presentation <br> Slides due 5/05 by 11pm
 </td>
 </tr>
 </tbody>
