@@ -41,7 +41,6 @@ Imports:
     palmerpenguins,
     emo
 Remotes:
-    rstudio/fontawesome,
     haozhu233/kableExtra,
     hadley/emo,
     hrbrmstr/hrbrthemes,
