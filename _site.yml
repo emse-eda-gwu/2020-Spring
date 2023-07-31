@@ -95,7 +95,7 @@ navbar:
       icon: fa-slack
       href: https://emse-eda-s20.slack.com
     - text: "Showcase"
-      href: http://eda.seas.gwu.edu/showcase-2020-spring.html
+      href: http://eda.seas.gwu.edu/showcase/2020-spring.html
   right:
   - icon: fa-bars
     menu:
